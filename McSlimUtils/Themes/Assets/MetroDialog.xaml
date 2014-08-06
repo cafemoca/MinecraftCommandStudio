@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro">
+
+    <Storyboard x:Key="DialogShownStoryboard">
+        <DoubleAnimation AccelerationRatio="0.9"
+                         BeginTime="0:0:0"
+                         Duration="0:0:0.15"
+                         Storyboard.TargetProperty="Opacity"
+                         To="1" />
+    </Storyboard>
+
+    <Storyboard x:Key="DialogCloseStoryboard">
+        <DoubleAnimation AccelerationRatio="0.9"
+                         BeginTime="0:0:0"
+                         Duration="0:0:0.15"
+                         Storyboard.TargetProperty="Opacity"
+                         To="0" />
+    </Storyboard>
+
+    <ControlTemplate x:Key="SimpleDialogTemplate" TargetType="{x:Type dialogs:BaseMetroDialog}">
+        <Grid Background="{TemplateBinding Background}">
+            <Border FocusVisualStyle="{x:Null}" Focusable="False">
+                <Grid>
+                    <ContentPresenter x:Name="PART_DialogBody_ContentPresenter"
+                                      Grid.Row="1"
+                                      Content="{TemplateBinding DialogBody}"
+                                      DataContext="{TemplateBinding DataContext}" />
+                </Grid>
+            </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard Storyboard="{StaticResource DialogShownStoryboard}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

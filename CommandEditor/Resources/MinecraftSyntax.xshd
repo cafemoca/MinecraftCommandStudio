@@ -1,0 +1,1162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SyntaxDefinition name="Minecraft Syntax Highlight" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+  <Color name="String" foreground="Chocolate" />
+  <Color name="Parenthesis" foreground="Brown" fontWeight="bold" />
+
+  <Color name="Boolean" foreground="DeepSkyBlue" />
+  <Color name="Numeric" foreground="Aquamarine" />
+  <Color name="Comment" foreground="Green" />
+  <Color name="Target" foreground="Orange" />
+  <Color name="Location" foreground="DarkSalmon" fontWeight="bold" />
+  <Color name="Minecraft" foreground="Gray" />
+
+  <Color name="TAG_Short" foreground="PeachPuff" />
+  <Color name="TAG_Byte" foreground="PeachPuff" />
+  <Color name="TAG_Int" foreground="PeachPuff" />
+  <Color name="TAG_Long" foreground="PeachPuff" />
+  <Color name="TAG_Float" foreground="PeachPuff" />
+  <Color name="TAG_Double" foreground="PeachPuff" />
+  <Color name="TAG_String" foreground="Pink" />
+  <Color name="TAG_List" foreground="Tomato" fontWeight="bold" />
+  <Color name="TAG_Compound" foreground="Red" fontWeight="bold" />
+  <Color name="TAG_Byte_Array" foreground="Tomato" fontWeight="bold" />
+  <Color name="TAG_Int_Array" foreground="Tomato" fontWeight="bold" />
+  <Color name="TAG_Boolean" foreground="PeachPuff" />
+
+  <Color name="Color" foreground="Aquamarine" />
+  <!--
+  <Color name="ColorBlack" foreground="Gray" />
+  <Color name="ColorDarkBlue" foreground="RoyalBlue" />
+  <Color name="ColorDarkGreen" foreground="DarkGreen" />
+  <Color name="ColorDarkAqua" foreground="CadetBlue" />
+  <Color name="ColorDarkRed" foreground="DarkRed" />
+  <Color name="ColorDarkPurple" foreground="DarkOrchid" />
+  <Color name="ColorGold" foreground="DarkOrange" />
+  <Color name="ColorGray" foreground="Silver" />
+  <Color name="ColorDarkGray" foreground="LightSlateGray" />
+  <Color name="ColorBlue" foreground="DeepSkyBlue" />
+  <Color name="ColorGreen" foreground="Green" />
+  <Color name="ColorAqua" foreground="Aqua" />
+  <Color name="ColorRed" foreground="Red" />
+  <Color name="ColorLightPurple" foreground="MediumPurple" />
+  <Color name="ColorYellow" foreground="Yellow" />
+  <Color name="ColorWhite" foreground="White" />
+  -->
+
+  <Color name="Command" foreground="Yellow" fontWeight="bold" />
+  <Color name="Entity" foreground="Lime" />
+  <Color name="Item" foreground="Cyan" />
+
+  <Color name="Attribute" foreground="LemonChiffon" />
+  <Color name="Args" foreground="Khaki" />
+
+  <RuleSet>
+
+    <!-- strings -->
+    <Span color="String" multiline="true">
+      <Begin>"</Begin>
+      <End>"</End>
+      <RuleSet>
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+    <Span color="String" multiline="true">
+      <Begin>@"</Begin>
+      <End>"@</End>
+    </Span>
+
+    <!-- parenthesis -->
+    <Keywords color="Parenthesis">
+      <Word>(</Word>
+      <Word>)</Word>
+    </Keywords>
+
+    <!-- bool -->
+    <Keywords color="Boolean">
+      <Word>true</Word>
+      <Word>false</Word>
+    </Keywords>
+
+    <!-- numeric -->
+    <Rule color="Numeric">
+      \.\d+[df]? |
+      \d+\.\d*[df]? |
+      \b\d+[bdfils]? |
+      \b\d
+    </Rule>
+
+    <!-- comment -->
+    <Span color="Comment" multiline="true">
+      <Begin>/\*</Begin>
+      <End>\*/</End>
+      <RuleSet>
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+    <Span color="Comment">
+      <Begin>//</Begin>
+    </Span>
+
+    <!-- targets -->
+    <Rule color="Target">
+      @[pear]
+    </Rule>
+
+    <!-- locations -->
+    <Rule color="Location">
+      \~\d+\.\d*[df]? |
+      \~\d*\.?\d+[df]? |
+      \~\d*
+    </Rule>
+
+    <Keywords color="Minecraft">
+      <Word>minecraft:</Word>
+    </Keywords>
+
+    <!-- tag short -->
+    <Keywords color="TAG_Short">
+      <Word>Fire</Word>
+      <Word>Air</Word>
+      <Word>Health</Word>
+      <Word>AttackTime</Word>
+      <Word>HurtTime</Word>
+      <Word>DeathTime</Word>
+      <Word>Fuse</Word>
+      <Word>carried</Word>
+      <Word>carriedData</Word>
+      <Word>Anger</Word>
+      <Word>xTile</Word>
+      <Word>yTile</Word>
+      <Word>zTile</Word>
+      <Word>life</Word>
+      <!--<Word>Age</Word>-->
+      <!-- int -->
+      <Word>PickupDelay</Word>
+      <Word>Value</Word>
+      <Word>Fuel</Word>
+      <Word>BurnTime</Word>
+      <Word>CookTime</Word>
+      <Word>CookTimeTotal</Word>
+      <Word>SpawnCount</Word>
+      <Word>SpawnRange</Word>
+      <Word>Delay</Word>
+      <Word>MinSpawnDelay</Word>
+      <Word>MaxSpawnDelay</Word>
+      <Word>MaxNearbyEntities</Word>
+      <Word>RequiredPlayerRange</Word>
+      <!--<Word>MaxExperience</Word>-->
+      <!-- removed -->
+      <!--<Word>RemainingExperience</Word>-->
+      <!-- removed -->
+      <!--<Word>ExperienceRegenTick</Word>-->
+      <!-- removed -->
+      <!--<Word>ExperienceRegenRate</Word>-->
+      <!-- removed -->
+      <!--<Word>ExperienceRegenAmount</Word>-->
+      <!-- removed -->
+      <Word>SleepTimer</Word>
+      <Word>Damage</Word>
+      <!--<Word>id</Word>-->
+      <!-- string -->
+      <Word>lvl</Word>
+    </Keywords>
+
+    <!-- tag byte -->
+    <Keywords color="TAG_Byte">
+      <Word>LightPopulated</Word>
+      <Word>TerrainPopulated</Word>
+      <Word>V</Word>
+      <!--<Word>Y</Word>-->
+      <!-- int -->
+      <Word>OnGround</Word>
+      <Word>Invulnerable</Word>
+      <Word>CustomNameVisible</Word>
+      <Word>Silent</Word>
+      <Word>Id</Word>
+      <Word>Amplifier</Word>
+      <Word>Ambient</Word>
+      <Word>ShowParticles</Word>
+      <Word>CanPickUpLoot</Word>
+      <Word>PersistenceRequired</Word>
+      <Word>Leashed</Word>
+      <Word>Sitting</Word>
+      <Word>BatFlags</Word>
+      <Word>IsChickenJockey </Word>
+      <Word>powered</Word>
+      <Word>ExplosionRadius</Word>
+      <Word>ignited</Word>
+      <Word>Bred</Word>
+      <Word>ChestedHorse</Word>
+      <Word>EatingHaystack</Word>
+      <Word>HasReproduced</Word>
+      <Word>Tame</Word>
+      <Word>Saddle</Word>
+      <Word>Elder</Word>
+      <Word>Sheared</Word>
+      <Word>Color</Word>
+      <Word>SkeletonType</Word>
+      <Word>Angry</Word>
+      <Word>CollarColor</Word>
+      <Word>Willing</Word>
+      <Word>rewardExp</Word>
+      <Word>PlayerCreated</Word>
+      <Word>IsVillager</Word>
+      <Word>IsBaby</Word>
+      <Word>CanBreakDoors</Word>
+      <Word>inGround</Word>
+      <Word>shake</Word>
+      <Word>inData</Word>
+      <Word>pickup</Word>
+      <Word>player</Word>
+      <!--<Word>Health</Word>-->
+      <!-- short -->
+      <Word>CustomDisplayTile</Word>
+      <Word>TrackOutput</Word>
+      <!--<Word>Fuse</Word>-->
+      <!-- short -->
+      <!--<Word>Tile</Word>-->
+      <!-- primedtnt deprecated-->
+      <Word>TileID</Word>
+      <Word>Data</Word>
+      <Word>Time</Word>
+      <Word>DropItem</Word>
+      <Word>HurtEntities</Word>
+      <Word>Facing</Word>
+      <!--<Word>Direction</Word>-->
+      <!-- paintings & item frames deprecated-->
+      <!--<Word>Dir</Word>-->
+      <!-- paintings & item frames deprecated -->
+      <Word>ItemRotation</Word>
+      <Word>note</Word>
+      <Word>extending</Word>
+      <Word>SkullType</Word>
+      <Word>Rot</Word>
+      <Word>SpawnForced</Word>
+      <Word>Sleeping</Word>
+      <Word>mayfly</Word>
+      <Word>flying</Word>
+      <Word>invulnerable</Word>
+      <Word>mayBuild</Word>
+      <Word>instabuild</Word>
+      <Word>Count</Word>
+      <Word>Slot</Word>
+      <Word>Unbreakable</Word>
+      <Word>Flicker</Word>
+      <Word>Trail</Word>
+      <!--<Word>Type</Word>-->
+      <!-- int -->
+      <Word>Flight</Word>
+      <Word>map_is_scaling</Word>
+      <Word>Locked</Word>
+      <Word>AllowFriendlyFire</Word>
+      <Word>SeeFriendlyInvisibles</Word>
+      <Word>NoGravity</Word>
+      <Word>ShowArms</Word>
+      <Word>Invisible</Word>
+      <Word>Small</Word>
+    </Keywords>
+
+    <!-- tag int -->
+    <Keywords color="TAG_Int">
+      <Word>xPos</Word>
+      <Word>zPos</Word>
+      <Word>Dimension</Word>
+      <Word>PortalCooldown</Word>
+      <Word>HurtByTimestamp</Word>
+      <Word>Operation</Word>
+      <Word>Duration</Word>
+      <Word>X</Word>
+      <Word>Y</Word>
+      <Word>Z</Word>
+      <Word>InLove</Word>
+      <Word>Age</Word>
+      <Word>ForcedAge</Word>
+      <Word>EndermiteCount</Word>
+      <Word>Lifetime</Word>
+      <Word>Temper</Word>
+      <Word>Type</Word>
+      <Word>Variant</Word>
+      <!--<Word>ArmorType</Word>-->
+      <!-- removed (horse) -->
+      <Word>ExplosionPower</Word>
+      <Word>CatType</Word>
+      <Word>RabbitType</Word>
+      <Word>MoreCarrotTicks</Word>
+      <Word>Size</Word>
+      <Word>Invul</Word>
+      <Word>Profession</Word>
+      <Word>Riches</Word>
+      <Word>Career</Word>
+      <Word>CareerLevel</Word>
+      <Word>maxUses</Word>
+      <Word>uses</Word>
+      <Word>ConversionTime</Word>
+      <Word>ExplosionPower</Word>
+      <Word>potionValue</Word>
+      <Word>DisplayData</Word>
+      <Word>DisplayOffset</Word>
+      <Word>TransferCooldown</Word>
+      <Word>TNTFuse</Word>
+      <Word>SuccessCount</Word>
+      <Word>FallHurtMax</Word>
+      <Word>Life</Word>
+      <Word>TileX</Word>
+      <Word>TileY</Word>
+      <Word>TileZ</Word>
+      <Word>x</Word>
+      <Word>y</Word>
+      <Word>z</Word>
+      <Word>Base</Word>
+      <Word>Color</Word>
+      <Word>Levels</Word>
+      <Word>Primary</Word>
+      <Word>Secondary</Word>
+      <Word>BrewTime</Word>
+      <Word>OutputSignal</Word>
+      <Word>Weight</Word>
+      <Word>blockId</Word>
+      <Word>blockData</Word>
+      <Word>facing</Word>
+      <Word>Record</Word>
+      <Word>i</Word>
+      <Word>t</Word>
+      <Word>p</Word>
+      <Word>playerGameType</Word>
+      <Word>Score</Word>
+      <Word>SelectedItemSlot</Word>
+      <Word>SpawnX</Word>
+      <Word>SpawnY</Word>
+      <Word>SpawnZ</Word>
+      <Word>foodLevel</Word>
+      <Word>foodTickTimer</Word>
+      <Word>XpLevel</Word>
+      <Word>XpTotal</Word>
+      <Word>XpSeed</Word>
+      <Word>RepairCost</Word>
+      <Word>color</Word>
+      <Word>HideFlags</Word>
+      <Word>generation</Word>
+      <Word>DisabledSlots</Word>
+    </Keywords>
+
+    <!-- tag long -->
+    <Keywords color="TAG_Long">
+      <Word>LastUpdate</Word>
+      <Word>InhabitedTime</Word>
+      <Word>UUIDMost</Word>
+      <Word>UUIDLeast</Word>
+    </Keywords>
+
+    <!-- tag float -->
+    <Keywords color="TAG_Float">
+      <Word>FallDistance</Word>
+      <Word>HealF</Word>
+      <Word>AbsorptionAmount</Word>
+      <!--<Word>GoldenAppleOverflow</Word>-->
+      <!-- removed (golden apple) -->
+      <Word>FallHurtAmount</Word>
+      <Word>ItemDropChance</Word>
+      <Word>progress</Word>
+      <Word>foodExhaustionLevel</Word>
+      <Word>foodSaturationLevel</Word>
+      <Word>XpP</Word>
+      <Word>walkSpeed</Word>
+      <Word>flySpeed</Word>
+    </Keywords>
+
+    <!-- tag double -->
+    <Keywords color="TAG_Double">
+      <Word>Base</Word>
+      <Word>Amount</Word>
+      <Word>damage</Word>
+      <Word>PushX</Word>
+      <Word>PushZ</Word>
+    </Keywords>
+
+    <!-- tag string -->
+    <Keywords color="TAG_String">
+      <Word>id</Word>
+      <Word>UUID</Word>
+      <Word>CustomName</Word>
+      <Word>SuccessCountName</Word>
+      <Word>SuccessCountObjective</Word>
+      <Word>AffectedBlocksName</Word>
+      <Word>AffectedBlocksObjective</Word>
+      <Word>AffectedEntitiesName</Word>
+      <Word>AffectedEntitiesObjective</Word>
+      <Word>AffectedItemsName</Word>
+      <Word>AffectedItemsObjective</Word>
+      <Word>Name</Word>
+      <Word>Owner</Word>
+      <Word>OwnerUUID</Word>
+      <Word>OwnerName</Word>
+      <Word>inTile</Word>
+      <Word>ownerName</Word>
+      <Word>Thrower</Word>
+      <Word>DisplayTile</Word>
+      <Word>CustomName</Word>
+      <Word>Command</Word>
+      <Word>LastOutput</Word>
+      <Word>Block</Word>
+      <Word>Motive</Word>
+      <Word>Lock</Word>
+      <Word>Pattern</Word>
+      <Word>EntityId</Word>
+      <Word>Text1</Word>
+      <Word>Text2</Word>
+      <Word>Text3</Word>
+      <Word>Text4</Word>
+      <Word>ExtraType</Word>
+      <Word>insertion</Word>
+      <Word>selector</Word>
+      <Word>text</Word>
+      <Word>action</Word>
+      <Word>name</Word>
+      <!--<Word>color</Word>-->
+      <!-- int -->
+      <Word>value</Word>
+      <Word>translate</Word>
+      <Word>objective</Word>
+      <Word>AttributeName</Word>
+      <Word>author</Word>
+      <Word>title</Word>
+      <!--<Word>Signature</Word>-->
+      <!-- list -->
+      <!--<Word>Value</Word>-->
+      <!-- short -->
+      <Word>CriteriaName</Word>
+      <Word>RenderType</Word>
+      <Word>Objective</Word>
+      <Word>NameTagVisibility</Word>
+      <Word>DeathMessageVisibility</Word>
+      <Word>Prefix</Word>
+      <Word>Suffix</Word>
+      <Word>TeamColor</Word>
+      <Word>slot_0</Word>
+      <Word>slot_1</Word>
+      <Word>slot_2</Word>
+      <Word>slot_3</Word>
+      <Word>slot_4</Word>
+      <Word>slot_5</Word>
+      <Word>slot_6</Word>
+      <Word>slot_7</Word>
+      <Word>slot_8</Word>
+      <Word>slot_9</Word>
+      <Word>slot_10</Word>
+      <Word>slot_11</Word>
+      <Word>slot_12</Word>
+      <Word>slot_13</Word>
+      <Word>slot_14</Word>
+      <Word>slot_15</Word>
+      <Word>slot_16</Word>
+      <Word>slot_17</Word>
+      <Word>slot_18</Word>
+    </Keywords>
+
+    <!-- tag list -->
+    <Keywords color="TAG_List">
+      <Word>Sections</Word>
+      <Word>Entities</Word>
+      <Word>TileEntities</Word>
+      <Word>TileTicks</Word>
+      <Word>Pos</Word>
+      <Word>Motion</Word>
+      <Word>Rotation</Word>
+      <Word>Attributes</Word>
+      <Word>Modifiers</Word>
+      <Word>ActiveEffects</Word>
+      <Word>Equipment</Word>
+      <Word>DropChances</Word>
+      <Word>Items</Word>
+      <Word>Inventory</Word>
+      <Word>Recipes</Word>
+      <Word>direction</Word>
+      <Word>Patterns</Word>
+      <Word>SpawnPotentials</Word>
+      <Word>textures</Word>
+      <Word>Signature</Word>
+      <!--<Word>Value</Word>-->
+      <!-- short -->
+      <Word>hoverEvent</Word>
+      <Word>clickEvent</Word>
+      <Word>with</Word>
+      <Word>extra</Word>
+      <Word>EnderItems</Word>
+      <Word>CanDestroy</Word>
+      <Word>CanPlaceOn</Word>
+      <Word>ench</Word>
+      <Word>StoredEnchantments</Word>
+      <Word>AttributeModifiers</Word>
+      <Word>CustomPotionEffects</Word>
+      <Word>Lore</Word>
+      <Word>pages</Word>
+      <Word>Explosions</Word>
+      <Word>Objectives</Word>
+      <Word>PlayerScores</Word>
+      <Word>Teams</Word>
+      <Word>Players</Word>
+    </Keywords>
+
+    <!-- tag compound -->
+    <Keywords color="TAG_Compound">
+      <Word>Riding</Word>
+      <Word>CommandStats</Word>
+      <Word>Leash</Word>
+      <Word>ArmorItem</Word>
+      <Word>SaddleItem</Word>
+      <Word>Offers</Word>
+      <Word>buy</Word>
+      <Word>buyB</Word>
+      <Word>sell</Word>
+      <Word>Potion</Word>
+      <Word>Item</Word>
+      <Word>TileEntityData</Word>
+      <Word>FireworksItem</Word>
+      <Word>Properties</Word>
+      <Word>SpawnData</Word>
+      <Word>RecordItem</Word>
+      <Word>score</Word>
+      <Word>abilities</Word>
+      <Word>tag</Word>
+      <Word>BlockEntityTag</Word>
+      <Word>display</Word>
+      <Word>Explosion</Word>
+      <Word>Fireworks</Word>
+      <Word>data</Word>
+      <Word>DisplaySlots</Word>
+      <Word>Pose</Word>
+    </Keywords>
+
+    <!-- tag byte array -->
+    <Keywords color="TAG_Byte_Array">
+      <Word>Biomes</Word>
+      <Word>Blocks</Word>
+      <Word>Add</Word>
+      <Word>Data</Word>
+      <Word>BlockLight</Word>
+      <Word>SkyLight</Word>
+    </Keywords>
+
+    <!-- tag int array -->
+    <Keywords color="TAG_Int_Array">
+      <Word>HeightMap</Word>
+      <Word>Colors</Word>
+      <Word>FadeColors</Word>
+    </Keywords>
+
+    <!-- tag boolean (?) -->
+    <Keywords color="TAG_Boolean">
+      <Word>bold</Word>
+      <Word>italic</Word>
+      <Word>underlined</Word>
+      <Word>strikethrough</Word>
+      <Word>obfuscated</Word>
+    </Keywords>
+
+    <!-- color -->
+    <Keywords color="Color">
+      <Word>black</Word>
+      <Word>dark_blue</Word>
+      <Word>dark_green</Word>
+      <Word>dark_aqua</Word>
+      <Word>dark_red</Word>
+      <Word>dark_purple</Word>
+      <Word>gold</Word>
+      <Word>gray</Word>
+      <Word>dark_gray</Word>
+      <Word>blue</Word>
+      <Word>green</Word>
+      <Word>aqua</Word>
+      <Word>red</Word>
+      <Word>light_purple</Word>
+      <Word>yellow</Word>
+      <Word>white</Word>
+    </Keywords>
+    <!--
+    <Rule color="ColorBlack">\bblack\b</Rule>
+    <Rule color="ColorDarkBlue">\bdark_blue\b</Rule>
+    <Rule color="ColorDarkGreen">\bdark_green\b</Rule>
+    <Rule color="ColorDarkAqua">\bdark_aqua\b</Rule>
+    <Rule color="ColorDarkRed">\bdark_red\b</Rule>
+    <Rule color="ColorDarkPurple">\bdark_purple\b</Rule>
+    <Rule color="ColorGold">\bgold\b</Rule>
+    <Rule color="ColorGray">\bgray\b</Rule>
+    <Rule color="ColorDarkGray">\bdark_gray\b</Rule>
+    <Rule color="ColorBlue">\bblue\b</Rule>
+    <Rule color="ColorGreen">\bgreen\b</Rule>
+    <Rule color="ColorAqua">\baqua\b</Rule>
+    <Rule color="ColorRed">\bred\b</Rule>
+    <Rule color="ColorLightPurple">\blight_purple\b</Rule>
+    <Rule color="ColorYellow">\byellow\b</Rule>
+    <Rule color="ColorWhite">\bwhite\b</Rule>
+    -->
+
+    <!-- attribute -->
+    <Keywords color="Attribute">
+      <Word>keep</Word>
+      <Word>replace</Word>
+      <Word>break</Word>
+      <Word>survival</Word>
+      <Word>creative</Word>
+      <Word>adventure</Word>
+      <Word>spectater</Word>
+      <Word>run_command</Word>
+      <Word>suggest_command</Word>
+      <Word>open_url</Word>
+      <Word>show_text</Word>
+      <Word>show_item</Word>
+      <Word>show_entity</Word>
+      <Word>show_achievement</Word>
+      <Word>title</Word>
+      <Word>subtitle</Word>
+      <Word>fadeIn</Word>
+      <Word>fadeOut</Word>
+      <Word>stay</Word>
+      <Word>clear</Word>
+      <Word>reset</Word>
+      <Word>objectives</Word>
+      <Word>players</Word>
+      <Word>teams</Word>
+      <Word>list</Word>
+      <Word>add</Word>
+      <Word>remove</Word>
+      <Word>setdisplay</Word>
+      <Word>reset</Word>
+      <Word>enable</Word>
+      <Word>test</Word>
+      <Word>operation</Word>
+      <Word>empty</Word>
+      <Word>join</Word>
+      <Word>leave</Word>
+      <Word>option</Word>
+      <!--<Word>color</Word>-->
+      <Word>friendlyfire</Word>
+      <Word>seeFriendlyInvisibles</Word>
+      <Word>nametagVisibility</Word>
+      <Word>deathMessageVisibility</Word>
+    </Keywords>
+
+    <Keywords color="Args">
+      <Word>never</Word>
+      <Word>hideForOtherTeams</Word>
+      <Word>hideForOwnTeam</Word>
+      <Word>always</Word>
+      <Word>bri</Word>
+      <Word>mc</Word>
+      <Word>cre</Word>
+      <Word>cr</Word>
+      <Word>ld</Word>
+      <Word>rd</Word>
+      <Word>flo</Word>
+      <Word>gra</Word>
+      <Word>gru</Word>
+      <Word>hh</Word>
+      <Word>hhb</Word>
+      <Word>vh</Word>
+      <Word>vhr</Word>
+      <Word>mr</Word>
+      <Word>sku</Word>
+      <Word>ss</Word>
+      <Word>bl</Word>
+      <Word>br</Word>
+      <Word>tl</Word>
+      <Word>tr</Word>
+      <Word>bs</Word>
+      <Word>cs</Word>
+      <Word>dls</Word>
+      <Word>drs</Word>
+      <Word>ls</Word>
+      <Word>ms</Word>
+      <Word>rs</Word>
+      <Word>ts</Word>
+      <Word>bt</Word>
+      <Word>tt</Word>
+      <Word>bts</Word>
+      <Word>tts</Word>
+      <Word>bo</Word>
+      <Word>cbo</Word>
+      <Word>moj</Word>
+    </Keywords>
+
+    <!-- minecraft entities -->
+    <Keywords color="Entity">
+      <Word>Item</Word>
+      <Word>XPOrb</Word>
+      <Word>ArmorStand</Word>
+      <Word>LeashKnot</Word>
+      <Word>Painting</Word>
+      <Word>ItemFrame</Word>
+      <Word>EnderCrystal</Word>
+      <Word>Arrow</Word>
+      <Word>Snowball</Word>
+      <Word>Fireball</Word>
+      <Word>SmallFireball</Word>
+      <Word>ThrownEnderpearl</Word>
+      <Word>EyeOfEnderSignal</Word>
+      <Word>ThrownPotion</Word>
+      <Word>ThrownExpBottle</Word>
+      <Word>WitherSkull</Word>
+      <Word>FireworksRocketEntity</Word>
+      <Word>PrimedTnt</Word>
+      <Word>FallingSand</Word>
+      <Word>MinecartCommandBlock</Word>
+      <Word>Boat</Word>
+      <Word>MinecartRideable</Word>
+      <Word>MinecartChest</Word>
+      <Word>MinecartFurnace</Word>
+      <Word>MinecartTNT</Word>
+      <Word>MinecartHopper</Word>
+      <Word>MinecartSpawner</Word>
+      <Word>Mob</Word>
+      <Word>Monster</Word>
+      <Word>Creeper</Word>
+      <Word>Skeleton</Word>
+      <Word>Spider</Word>
+      <Word>Giant</Word>
+      <Word>Zombie</Word>
+      <Word>Slime</Word>
+      <Word>Ghast</Word>
+      <Word>PigZombie</Word>
+      <Word>Enderman</Word>
+      <Word>CaveSpider</Word>
+      <Word>Silverfish</Word>
+      <Word>Blaze</Word>
+      <Word>LavaSlime</Word>
+      <Word>EnderDragon</Word>
+      <Word>WitherBoss</Word>
+      <Word>Witch</Word>
+      <Word>Endermite</Word>
+      <Word>Guardian</Word>
+      <Word>Bat</Word>
+      <Word>Pig</Word>
+      <Word>Sheep</Word>
+      <Word>Cow</Word>
+      <Word>Chicken</Word>
+      <Word>Squid</Word>
+      <Word>Wolf</Word>
+      <Word>MushroomCow</Word>
+      <Word>SnowMan</Word>
+      <Word>Ozelot</Word>
+      <Word>VillagerGolem</Word>
+      <Word>EntityHorse</Word>
+      <Word>Rabbit</Word>
+      <Word>Villager</Word>
+    </Keywords>
+
+    <!-- minecraft items -->
+    <Keywords color="Item">
+      <Word>air</Word>
+      <Word>stone</Word>
+      <Word>grass</Word>
+      <Word>dirt</Word>
+      <Word>cobblestone</Word>
+      <Word>planks</Word>
+      <Word>sapling</Word>
+      <Word>bedrock</Word>
+      <Word>flowing_water</Word>
+      <Word>water</Word>
+      <Word>flowing_lava</Word>
+      <Word>lava</Word>
+      <Word>sand</Word>
+      <Word>gravel</Word>
+      <Word>gold_ore</Word>
+      <Word>iron_ore</Word>
+      <Word>coal_ore</Word>
+      <Word>log</Word>
+      <Word>leaves</Word>
+      <Word>sponge</Word>
+      <Word>glass</Word>
+      <Word>lapis_ore</Word>
+      <Word>lapis_block</Word>
+      <Word>dispenser</Word>
+      <Word>sandstone</Word>
+      <Word>noteblock</Word>
+      <Word>golden_rail</Word>
+      <Word>detector_rail</Word>
+      <Word>sticky_piston</Word>
+      <Word>web</Word>
+      <Word>tallgrass</Word>
+      <Word>deadbush</Word>
+      <Word>piston</Word>
+      <Word>piston_head</Word>
+      <Word>wool</Word>
+      <Word>piston_extension</Word>
+      <Word>yellow_flower</Word>
+      <Word>red_flower</Word>
+      <Word>brown_mushroom</Word>
+      <Word>red_mushroom</Word>
+      <Word>gold_block</Word>
+      <Word>iron_block</Word>
+      <Word>double_stone_slab</Word>
+      <Word>stone_slab</Word>
+      <Word>brick_block</Word>
+      <Word>tnt</Word>
+      <Word>bookshelf</Word>
+      <Word>mossy_cobblestone</Word>
+      <Word>obsidian</Word>
+      <Word>torch</Word>
+      <Word>fire</Word>
+      <Word>mob_spawner</Word>
+      <Word>oak_stairs</Word>
+      <Word>chest</Word>
+      <Word>redstone_wire</Word>
+      <Word>diamond_ore</Word>
+      <Word>diamond_block</Word>
+      <Word>crafting_table</Word>
+      <Word>farmland</Word>
+      <Word>furnace</Word>
+      <Word>lit_furnace</Word>
+      <Word>standing_sign</Word>
+      <Word>ladder</Word>
+      <Word>rail</Word>
+      <Word>stone_stairs</Word>
+      <Word>wall_sign</Word>
+      <Word>lever</Word>
+      <Word>stone_pressure_plate</Word>
+      <Word>wooden_pressure_plate</Word>
+      <Word>redstone_ore</Word>
+      <Word>lit_redstone_ore</Word>
+      <Word>unlit_redstone_torch</Word>
+      <Word>redstone_torch</Word>
+      <Word>stone_button</Word>
+      <Word>snow_layer</Word>
+      <Word>ice</Word>
+      <Word>snow</Word>
+      <Word>cactus</Word>
+      <Word>clay</Word>
+      <Word>jukebox</Word>
+      <Word>fence</Word>
+      <Word>pumpkin</Word>
+      <Word>netherrack</Word>
+      <Word>soul_sand</Word>
+      <Word>glowstone</Word>
+      <Word>portal</Word>
+      <Word>lit_pumpkin</Word>
+      <Word>unpowered_repeater</Word>
+      <Word>powered_repeater</Word>
+      <Word>stained_glass</Word>
+      <Word>trapdoor</Word>
+      <Word>monster_egg</Word>
+      <Word>stonebrick</Word>
+      <Word>brown_mushroom_block</Word>
+      <Word>red_mushroom_block</Word>
+      <Word>iron_bars</Word>
+      <Word>glass_pane</Word>
+      <Word>melon_block</Word>
+      <Word>pumpkin_stem</Word>
+      <Word>melon_stem</Word>
+      <Word>vine</Word>
+      <Word>fence_gate</Word>
+      <Word>brick_stairs</Word>
+      <Word>stone_brick_stairs</Word>
+      <Word>mycelium</Word>
+      <Word>waterlily</Word>
+      <Word>nether_brick</Word>
+      <Word>nether_brick_fence</Word>
+      <Word>nether_brick_stairs</Word>
+      <Word>enchanting_table</Word>
+      <Word>end_portal</Word>
+      <Word>end_portal_frame</Word>
+      <Word>end_stone</Word>
+      <Word>dragon_egg</Word>
+      <Word>redstone_lamp</Word>
+      <Word>lit_redstone_lamp</Word>
+      <Word>double_wooden_slab</Word>
+      <Word>wooden_slab</Word>
+      <Word>cocoa</Word>
+      <Word>sandstone_stairs</Word>
+      <Word>emerald_ore</Word>
+      <Word>ender_chest</Word>
+      <Word>tripwire_hook</Word>
+      <Word>tripwire</Word>
+      <Word>emerald_block</Word>
+      <Word>spruce_stairs</Word>
+      <Word>birch_stairs</Word>
+      <Word>jungle_stairs</Word>
+      <Word>command_block</Word>
+      <Word>beacon</Word>
+      <Word>cobblestone_wall</Word>
+      <Word>wooden_button</Word>
+      <Word>anvil</Word>
+      <Word>trapped_chest</Word>
+      <Word>light_weighted_pressure_plate</Word>
+      <Word>heavy_weighted_pressure_plate</Word>
+      <Word>unpowered_comparator</Word>
+      <Word>powered_comparator</Word>
+      <Word>daylight_detector</Word>
+      <Word>redstone_block</Word>
+      <Word>quartz_ore</Word>
+      <Word>hopper</Word>
+      <Word>quartz_block</Word>
+      <Word>quartz_stairs</Word>
+      <Word>activator_rail</Word>
+      <Word>dropper</Word>
+      <Word>stained_hardened_clay</Word>
+      <Word>stained_glass_pane</Word>
+      <Word>log2</Word>
+      <Word>acacia_stairs</Word>
+      <Word>dark_oak_stairs</Word>
+      <Word>slime</Word>
+      <Word>barrier</Word>
+      <Word>iron_trapdoor</Word>
+      <Word>prismarine</Word>
+      <Word>sea_lantern</Word>
+      <Word>hay_block</Word>
+      <Word>carpet</Word>
+      <Word>hardened_clay</Word>
+      <Word>coal_block</Word>
+      <Word>packed_ice</Word>
+      <Word>double_plant</Word>
+      <Word>iron_shovel</Word>
+      <Word>iron_pickaxe</Word>
+      <Word>iron_axe</Word>
+      <Word>flint_and_steel</Word>
+      <Word>apple</Word>
+      <Word>bow</Word>
+      <Word>arrow</Word>
+      <Word>coal</Word>
+      <Word>diamond</Word>
+      <Word>iron_ingot</Word>
+      <Word>gold_ingot</Word>
+      <Word>iron_sword</Word>
+      <Word>wooden_sword</Word>
+      <Word>wooden_shovel</Word>
+      <Word>wooden_pickaxe</Word>
+      <Word>wooden_axe</Word>
+      <Word>stone_sword</Word>
+      <Word>stone_shovel</Word>
+      <Word>stone_pickaxe</Word>
+      <Word>stone_axe</Word>
+      <Word>diamond_sword</Word>
+      <Word>diamond_shovel</Word>
+      <Word>diamond_pickaxe</Word>
+      <Word>diamond_axe</Word>
+      <Word>stick</Word>
+      <Word>bowl</Word>
+      <Word>mushroom_stew</Word>
+      <Word>golden_sword</Word>
+      <Word>golden_shovel</Word>
+      <Word>golden_pickaxe</Word>
+      <Word>golden_axe</Word>
+      <Word>string</Word>
+      <Word>feather</Word>
+      <Word>gunpowder</Word>
+      <Word>wooden_hoe</Word>
+      <Word>stone_hoe</Word>
+      <Word>iron_hoe</Word>
+      <Word>diamond_hoe</Word>
+      <Word>golden_hoe</Word>
+      <Word>wheat_seeds</Word>
+      <Word>wheat</Word>
+      <Word>bread</Word>
+      <Word>leather_helmet</Word>
+      <Word>leather_chestplate</Word>
+      <Word>leather_leggings</Word>
+      <Word>leather_boots</Word>
+      <Word>chainmail_helmet</Word>
+      <Word>chainmail_chestplate</Word>
+      <Word>chainmail_leggings</Word>
+      <Word>chainmail_boots</Word>
+      <Word>iron_helmet</Word>
+      <Word>iron_chestplate</Word>
+      <Word>iron_leggings</Word>
+      <Word>iron_boots</Word>
+      <Word>diamond_helmet</Word>
+      <Word>diamond_chestplate</Word>
+      <Word>diamond_leggings</Word>
+      <Word>diamond_boots</Word>
+      <Word>golden_helmet</Word>
+      <Word>golden_chestplate</Word>
+      <Word>golden_leggings</Word>
+      <Word>golden_boots</Word>
+      <Word>flint</Word>
+      <Word>porkchop</Word>
+      <Word>cooked_porkchop</Word>
+      <Word>painting</Word>
+      <Word>golden_apple</Word>
+      <Word>sign</Word>
+      <Word>wooden_door</Word>
+      <Word>bucket</Word>
+      <Word>water_bucket</Word>
+      <Word>lava_bucket</Word>
+      <Word>minecart</Word>
+      <Word>saddle</Word>
+      <Word>iron_door</Word>
+      <Word>redstone</Word>
+      <Word>snowball</Word>
+      <Word>boat</Word>
+      <Word>leather</Word>
+      <Word>milk_bucket</Word>
+      <Word>brick</Word>
+      <Word>clay_ball</Word>
+      <Word>reeds</Word>
+      <Word>paper</Word>
+      <Word>book</Word>
+      <Word>slimeball</Word>
+      <Word>chest_minecart</Word>
+      <Word>furnace_minecart</Word>
+      <Word>egg</Word>
+      <Word>compass</Word>
+      <Word>fishing_rod</Word>
+      <Word>clock</Word>
+      <Word>glowstone_dust</Word>
+      <Word>fish</Word>
+      <Word>cooked_fished</Word>
+      <Word>dye</Word>
+      <Word>bone</Word>
+      <Word>sugar</Word>
+      <Word>cake</Word>
+      <Word>bed</Word>
+      <Word>repeater</Word>
+      <Word>cookie</Word>
+      <Word>filled_map</Word>
+      <Word>shears</Word>
+      <Word>melon</Word>
+      <Word>pumpkin_seeds</Word>
+      <Word>melon_seeds</Word>
+      <Word>beef</Word>
+      <Word>cooked_beef</Word>
+      <Word>chicken</Word>
+      <Word>cooked_chicken</Word>
+      <Word>rotten_flesh</Word>
+      <Word>ender_pearl</Word>
+      <Word>blaze_rod</Word>
+      <Word>ghast_tear</Word>
+      <Word>gold_nugget</Word>
+      <Word>nether_wart</Word>
+      <Word>potion</Word>
+      <Word>glass_bottle</Word>
+      <Word>spider_eye</Word>
+      <Word>fermented_spider_eye</Word>
+      <Word>blaze_powder</Word>
+      <Word>magma_cream</Word>
+      <Word>brewing_stand</Word>
+      <Word>cauldron</Word>
+      <Word>ender_eye</Word>
+      <Word>speckled_melon</Word>
+      <Word>spawn_egg</Word>
+      <Word>experience_bottle</Word>
+      <Word>fire_charge</Word>
+      <Word>writable_book</Word>
+      <Word>written_book</Word>
+      <Word>emerald</Word>
+      <Word>item_frame</Word>
+      <Word>flower_pot</Word>
+      <Word>carrot</Word>
+      <Word>potato</Word>
+      <Word>baked_potato</Word>
+      <Word>poisonous_potato</Word>
+      <Word>map</Word>
+      <Word>golden_carrot</Word>
+      <Word>skull</Word>
+      <Word>carrot_on_a_stick</Word>
+      <Word>nether_star</Word>
+      <Word>pumpkin_pie</Word>
+      <Word>fireworks</Word>
+      <Word>firework_charge</Word>
+      <Word>enchanted_book</Word>
+      <Word>comparator</Word>
+      <Word>netherbrick</Word>
+      <Word>quartz</Word>
+      <Word>tnt_minecart</Word>
+      <Word>hopper_minecart</Word>
+      <Word>prismarine_shard</Word>
+      <Word>prismarine_crystals</Word>
+      <Word>iron_horse_armor</Word>
+      <Word>golden_horse_armor</Word>
+      <Word>diamond_horse_armor</Word>
+      <Word>lead</Word>
+      <Word>name_tag</Word>
+      <Word>command_block_minecart</Word>
+      <Word>record_13</Word>
+      <Word>record_cat</Word>
+      <Word>record_blocks</Word>
+      <Word>record_chirp</Word>
+      <Word>record_far</Word>
+      <Word>record_mall</Word>
+      <Word>record_mellohi</Word>
+      <Word>record_stal</Word>
+      <Word>record_strad</Word>
+      <Word>record_ward</Word>
+      <Word>record_11</Word>
+      <Word>record_wait</Word>
+      <Word>banner</Word>
+      <Word>standing_banner</Word>
+      <Word>wall_banner</Word>
+    </Keywords>
+
+    <!-- minecraft commands -->
+    <Span>
+      <Begin>/</Begin>
+      <End>\s</End>
+      <RuleSet>
+        <Keywords color="Command">
+          <Word>help</Word>
+          <Word>?</Word>
+          <Word>me</Word>
+          <Word>tell</Word>
+          <Word>msg</Word>
+          <Word>w</Word>
+          <Word>trigger</Word>
+          <Word>achievement</Word>
+          <Word>blockdata</Word>
+          <Word>clear</Word>
+          <Word>clone</Word>
+          <Word>debug</Word>
+          <Word>defaultgamemode</Word>
+          <Word>difficulty</Word>
+          <Word>effect</Word>
+          <Word>execute</Word>
+          <Word>fill</Word>
+          <Word>gamemode</Word>
+          <Word>gamerule</Word>
+          <Word>give</Word>
+          <Word>kill</Word>
+          <Word>particle</Word>
+          <Word>playsound</Word>
+          <Word>publish</Word>
+          <Word>replaceitem</Word>
+          <Word>say</Word>
+          <Word>scoreboard</Word>
+          <Word>seed</Word>
+          <Word>setblock</Word>
+          <Word>setworldspawn</Word>
+          <Word>spawnpoint</Word>
+          <Word>spreadplayers</Word>
+          <Word>stats</Word>
+          <Word>summon</Word>
+          <Word>tellraw</Word>
+          <Word>testfor</Word>
+          <Word>testforblock</Word>
+          <Word>testforblocks</Word>
+          <Word>time</Word>
+          <Word>title</Word>
+          <Word>toggledownfall</Word>
+          <Word>tp</Word>
+          <Word>weather</Word>
+          <Word>worldborder</Word>
+          <Word>xp</Word>
+          <Word>ban</Word>
+          <Word>ban-ip</Word>
+          <Word>banlist</Word>
+          <Word>deop</Word>
+          <Word>kick</Word>
+          <Word>list</Word>
+          <Word>op</Word>
+          <Word>pardon</Word>
+          <Word>pardon-ip</Word>
+          <Word>save-all</Word>
+          <Word>save-off</Word>
+          <Word>save-on</Word>
+          <Word>setidletimeout</Word>
+          <Word>stop</Word>
+          <Word>whitelist</Word>
+        </Keywords>
+      </RuleSet>
+    </Span>
+    
+    
+
+  </RuleSet>
+</SyntaxDefinition>

@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Cafemoca.McSlimUtils.Views.Flips.SettingFlip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Cafemoca.McSlimUtils.ViewModels.Flips"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Cafemoca.McSlimUtils.Internals.Controls"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+
+    <Grid>
+        <TabControl>
+            <TabItem Header="テスト用設定">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Margin="5"
+                                Orientation="Horizontal">
+                        <Label Width="150"
+                               Content="エスケープモード"
+                               ToolTip="次に生成コマンドが更新されるときに反映されます"/>
+                        <ComboBox Width="200"
+                                  DisplayMemberPath="Value"
+                                  ItemsSource="{Binding EscapeModeList}"
+                                  SelectedValue="{Binding EscapeMode}"
+                                  SelectedValuePath="Key" />
+                    </StackPanel>
+                    <StackPanel Margin="5"
+                                Orientation="Horizontal">
+                        <Label Width="150"
+                               Content="使用するクォーテーション"
+                               ToolTip="文字列が多く非常に長く複雑なコマンドの場合、シングルクォーテーションを使用しないと文字列オーバーすることがあります"/>
+                        <ComboBox Width="200"
+                                  DisplayMemberPath="Value"
+                                  ItemsSource="{Binding QuoteModeList}"
+                                  SelectedValue="{Binding QuoteMode}"
+                                  SelectedValuePath="Key" />
+                    </StackPanel>
+                    <StackPanel Margin="12,30,0,0">
+                        <TextBlock>
+                            Minecraft のコマンドを独自フォーマットで記述するためのエディタです。
+                            <LineBreak />
+                            <LineBreak />
+                            開発版です。多くの機能が未実装です。
+                            <LineBreak />
+                            開発・調整中なので、正式にリリースするときに実装される予定です。
+                            <LineBreak />
+                            <LineBreak />
+                            <TextBlock Foreground="{DynamicResource GrayBrush3}">
+                                (開発途中: 入力中のコンプリーションウィンドウ, メニュー, 設定の保存, オートアップデート, など)
+                            </TextBlock>
+                            <LineBreak />
+                            <LineBreak />
+                            Author / Developer: <controls:HyperlinkText Uri="https://twitter.com/yuri_v3v">@yuri_v3v</controls:HyperlinkText>
+                            <LineBreak />
+                            Copyright © 2014 yuri (Cafemoca)
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+
+</UserControl>

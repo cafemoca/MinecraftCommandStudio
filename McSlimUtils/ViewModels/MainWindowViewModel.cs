@@ -67,22 +67,19 @@ namespace Cafemoca.McSlimUtils.ViewModels
             });
 
             this.SaveCommand = this.ActiveDocument
-                .Where(f => f != null)
-                .Select(f => f.SaveCommand.CanExecute())
+                .Select(f => f != null ? f.IsModified.Value : false)
                 .ToReactiveCommand(false);
             this.SaveCommand.Subscribe(_ =>
                 this.Save(this.ActiveDocument.Value, false));
 
             this.SaveAsCommand = this.ActiveDocument
-                .Where(f => f != null)
-                .Select(f => f.SaveAsCommand.CanExecute())
+                .Select(f => f != null)
                 .ToReactiveCommand(false);
             this.SaveAsCommand.Subscribe(_ =>
                 this.Save(this.ActiveDocument.Value, true));
 
             this.CloseCommand = this.ActiveDocument
-                .Where(f => f != null)
-                .Select(f => f.CloseCommand.CanExecute())
+                .Select(f => f != null)
                 .ToReactiveCommand(false);
             this.CloseCommand.Subscribe(async _ =>
                 await this.CloseAsync(this.ActiveDocument.Value));
@@ -167,7 +164,10 @@ namespace Cafemoca.McSlimUtils.ViewModels
             }
 
             this.Files.Remove(fileToClose);
-            this.ActiveDocument.Value = null;
+            if (this.ActiveDocument.Value == fileToClose)
+            {
+                this.ActiveDocument.Value = this.Files.FirstOrDefault();
+            }
         }
 
         public void Exit()

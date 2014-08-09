@@ -2,7 +2,6 @@
 using Cafemoca.McSlimUtils.Settings;
 using Livet;
 using System.Collections.Generic;
-using System.Windows.Documents;
 
 namespace Cafemoca.McSlimUtils.ViewModels.Flips
 {

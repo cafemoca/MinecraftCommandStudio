@@ -121,6 +121,7 @@
     <Compile Include="Internals\Controls\HyperlinkText.cs" />
     <Compile Include="Internals\Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Internals\Utils\Commands\AppCommand.cs" />
+    <Compile Include="Models\FileManager.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Settings\Setting.cs" />
     <Compile Include="ViewModels\Flips\SettingFlipViewModel.cs" />
@@ -194,7 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Internals\Extensions\" />
-    <Folder Include="Models\" />
     <Folder Include="ViewModels\Dialogs\" />
   </ItemGroup>
   <ItemGroup>

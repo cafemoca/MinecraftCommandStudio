@@ -1,24 +1,16 @@
-﻿using Cafemoca.McSlimUtils.Services;
+﻿using Cafemoca.McSlimUtils.Models;
+using Cafemoca.McSlimUtils.ViewModels.Flips;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Bases;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Documents;
-using Cafemoca.McSlimUtils.ViewModels.Layouts.Tools;
 using Codeplex.Reactive;
-using System.Reactive.Linq;
-using Codeplex.Reactive.Extensions;
-using System.Linq;
 using Livet;
-using MahApps.Metro.Controls.Dialogs;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Reflection;
+using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
-using ICSharpCode.AvalonEdit;
 using System.Windows;
-using Cafemoca.McSlimUtils.ViewModels.Flips;
-using System.Diagnostics;
 
 namespace Cafemoca.McSlimUtils.ViewModels
 {
@@ -29,16 +21,16 @@ namespace Cafemoca.McSlimUtils.ViewModels
         public ReactiveCollection<ToolViewModel> Tools { get; private set; }
         public ReactiveCollection<FileViewModel> Files { get; private set; }
 
+        public SettingFlipViewModel SettingFlipViewModel { get; private set; }
+        public ReactiveProperty<bool> IsSettingFlipOpen { get; private set; }
+        public ReactiveCommand SettingCommand { get; private set; }
+
         public ReactiveCommand NewCommand { get; private set; }
         public ReactiveCommand OpenCommand { get; private set; }
         public ReactiveCommand SaveCommand { get; private set; }
         public ReactiveCommand SaveAsCommand { get; private set; }
         public ReactiveCommand CloseCommand { get; private set; }
         public ReactiveCommand ExitCommand { get; private set; }
-
-        public SettingFlipViewModel SettingFlipViewModel { get; private set; }
-        public ReactiveProperty<bool> IsSettingFlipOpen { get; private set; }
-        public ReactiveCommand SettingCommand { get; private set; }
 
         public MainWindowViewModel()
         {
@@ -62,8 +54,8 @@ namespace Cafemoca.McSlimUtils.ViewModels
             this.OpenCommand.Subscribe(_ =>
             {
                 var dialog = new CommonOpenFileDialog();
-                dialog.Filters.Add(new CommonFileDialogFilter("Text (*.txt)", "*.txt"));
-                dialog.Filters.Add(new CommonFileDialogFilter("All Files (*.*)", "*.*"));
+                dialog.Filters.Add(new CommonFileDialogFilter("テキスト ファイル (*.txt)", "*.txt"));
+                dialog.Filters.Add(new CommonFileDialogFilter("すべてのファイル (*.*)", "*.*"));
                 dialog.EnsurePathExists = true;
                 dialog.IsFolderPicker = false;
 
@@ -74,22 +66,36 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 }
             });
 
-            this.SaveCommand = new ReactiveCommand();
-            this.SaveCommand.Subscribe(_ => this.Save(this.ActiveDocument.Value, false));
+            this.SaveCommand = this.ActiveDocument
+                .Where(f => f != null)
+                .Select(f => f.SaveCommand.CanExecute())
+                .ToReactiveCommand(false);
+            this.SaveCommand.Subscribe(_ =>
+                this.Save(this.ActiveDocument.Value, false));
 
-            this.SaveAsCommand = new ReactiveCommand();
-            this.SaveAsCommand.Subscribe(_ => this.Save(this.ActiveDocument.Value, true));
+            this.SaveAsCommand = this.ActiveDocument
+                .Where(f => f != null)
+                .Select(f => f.SaveAsCommand.CanExecute())
+                .ToReactiveCommand(false);
+            this.SaveAsCommand.Subscribe(_ =>
+                this.Save(this.ActiveDocument.Value, true));
 
-            this.CloseCommand = this.ObserveProperty(x => x.Files).Select(f => f.Any()).ToReactiveCommand();
-            this.CloseCommand.Subscribe(async _ => await this.CloseAsync(this.ActiveDocument.Value));
+            this.CloseCommand = this.ActiveDocument
+                .Where(f => f != null)
+                .Select(f => f.CloseCommand.CanExecute())
+                .ToReactiveCommand(false);
+            this.CloseCommand.Subscribe(async _ =>
+                await this.CloseAsync(this.ActiveDocument.Value));
 
-            //this.ExitCommand = new ReactiveCommand();
-            //this.ExitCommand.Subscribe(_ => this.Exit());
+            this.ExitCommand = new ReactiveCommand();
+            this.ExitCommand.Subscribe(_ =>
+                this.Exit());
 
             this.SettingFlipViewModel = new SettingFlipViewModel();
             this.IsSettingFlipOpen = new ReactiveProperty<bool>(false);
             this.SettingCommand = new ReactiveCommand();
-            this.SettingCommand.Subscribe(_ => this.IsSettingFlipOpen.Value = !this.IsSettingFlipOpen.Value);
+            this.SettingCommand.Subscribe(_ =>
+                this.IsSettingFlipOpen.Value = !this.IsSettingFlipOpen.Value);
         }
 
         public FileViewModel Open(string filePath)
@@ -110,9 +116,10 @@ namespace Cafemoca.McSlimUtils.ViewModels
             if (fileToSave.FilePath.Value == null || saveAsFlag)
             {
                 var dialog = new CommonSaveFileDialog();
-                dialog.Filters.Add(new CommonFileDialogFilter("Text (*.txt)", "*.txt"));
-                dialog.Filters.Add(new CommonFileDialogFilter("All Files", "*.*"));
+                dialog.Filters.Add(new CommonFileDialogFilter("テキスト ファイル (*.txt)", "*.txt"));
+                dialog.Filters.Add(new CommonFileDialogFilter("すべてのファイル (*.*)", "*.*"));
                 dialog.DefaultExtension = "txt";
+
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     fileToSave.FilePath.Value = dialog.FileName;
@@ -123,7 +130,7 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 }
             }
 
-            File.WriteAllText(fileToSave.FilePath.Value, fileToSave.Text.Value);
+            FileManager.SaveTextFile(fileToSave.FilePath.Value, fileToSave.Text.Value);
             this.ActiveDocument.Value.IsModified.Value = false;
         }
 
@@ -144,8 +151,8 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 }
                 /*
                 var result = await DialogService.ShowMessageAsync(
-                    "SAVE",
-                    fileToClose.FileName.Value + "を保存しますか？",
+                    "保存",
+                    "ドキュメントを閉じる前に " + fileToClose.FileName.Value + " を保存しますか？",
                     MessageDialogStyle.AffirmativeAndNegativeAndDoubleAuxiliary);
 
                 if (result == MessageDialogResult.Affirmative)
@@ -160,6 +167,11 @@ namespace Cafemoca.McSlimUtils.ViewModels
             }
 
             this.Files.Remove(fileToClose);
+            this.ActiveDocument.Value = null;
+        }
+
+        public void Exit()
+        {
         }
     }
 }

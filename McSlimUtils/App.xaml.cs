@@ -4,10 +4,7 @@ using Cafemoca.McSlimUtils.Views;
 using Livet;
 using MahApps.Metro;
 using System;
-using System.Diagnostics;
-using System.Globalization;
 using System.Reactive.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -26,7 +23,6 @@ namespace Cafemoca.McSlimUtils
             base.OnStartup(e);
 
             DispatcherHelper.UIDispatcher = this.Dispatcher;
-            //Setting.Load();
             Setting.Initialize();
 
             var accent = ThemeManager.GetAccent("Yellow");
@@ -46,20 +42,6 @@ namespace Cafemoca.McSlimUtils
                 .Subscribe(_ => this.MainWindow.DragMove());
 
             this.MainWindow.Show();
-        }
-
-        protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
-        {
-            base.OnSessionEnding(e);
-
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
         }
     }
 }

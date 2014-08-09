@@ -42,7 +42,7 @@ namespace Cafemoca.McSlimUtils.Settings
                     WordWrapIndentation = 0,
                 },
                 EscapeMode = EscapeModeValue.New,
-                QuoteMode = QuoteModeValue.UseSingleQuote,
+                QuoteMode = QuoteModeValue.DoubleQuoteOnly,
             };
         }
 

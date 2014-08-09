@@ -1,5 +1,4 @@
 ﻿using Cafemoca.McSlimUtils.ViewModels.Layouts.Bases;
-using System;
 
 namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Tools
 {

@@ -64,6 +64,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <Menu Grid.Row="0"
               Style="{DynamicResource MetroMenu}">
             <MenuItem Header="ファイル(_F)">
@@ -81,18 +82,17 @@
                           Header="名前を付けて保存(_A)" />
                 <Separator />
                 <MenuItem Command="{Binding ExitCommand}"
-                          Header="// 終了(_X)"
-                          IsEnabled="False" />
+                          Header="終了(_X)" />
             </MenuItem>
         </Menu>
+
         <dock:DockingManager Grid.Row="1"
                              ActiveContent="{Binding ActiveDocument.Value, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                              AllowDrop="True"
                              AllowMixedOrientation="True"
                              AnchorablesSource="{Binding Tools}"
                              DocumentsSource="{Binding Files}"
-                             SnapsToDevicePixels="True"
-                             behaviors:DropFileBehavior.DropFile="commands:AppCommand.LoadFile">
+                             SnapsToDevicePixels="True">
             <dock:DockingManager.Theme>
                 <themes:MahAppsMetroTheme />
             </dock:DockingManager.Theme>

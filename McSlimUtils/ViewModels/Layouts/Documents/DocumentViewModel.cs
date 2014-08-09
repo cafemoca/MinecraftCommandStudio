@@ -4,8 +4,6 @@ using Cafemoca.McSlimUtils.Settings;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Bases;
 using Codeplex.Reactive;
 using System;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
@@ -40,14 +38,15 @@ namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Documents
         {
             this.CompiledText = this.Text
                 .Throttle(TimeSpan.FromSeconds(1))
-                .Select(s => s.IsEmpty() ? "" : s.Tokenize().Compile(this.EscapeMode, this.QuoteMode))
+                .Select(s => s.IsEmpty() ? "": s.Tokenize().Compile(this.EscapeMode, this.QuoteMode))
                 .ToReactiveProperty<string>("");
 
             this.Line = new ReactiveProperty<int>(0);
             this.Column = new ReactiveProperty<int>(0);
 
             this.CopyCommand = new ReactiveCommand();
-            this.CopyCommand.Subscribe(_ => Clipboard.SetText(this.CompiledText.Value));
+            this.CopyCommand.Subscribe(_ =>
+                Clipboard.SetText(this.CompiledText.Value));
         }
 
         public void JumpToLine(int line)

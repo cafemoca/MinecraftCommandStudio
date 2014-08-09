@@ -1,11 +1,10 @@
-﻿using Codeplex.Reactive;
+﻿using Cafemoca.McSlimUtils.Models;
+using Codeplex.Reactive;
 using Codeplex.Reactive.Extensions;
 using System;
-using System.Linq;
 using System.IO;
 using System.Reactive.Linq;
 using System.Windows.Media;
-using System.Diagnostics;
 
 namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Bases
 {
@@ -33,23 +32,12 @@ namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Bases
         public FileViewModel(string filePath)
             : base()
         {
-
             this.Title = new ReactiveProperty<string>();
 
             this.FilePath = new ReactiveProperty<string>(filePath);
-            this.Text = new ReactiveProperty<string>(string.Empty);
-
-            if (filePath != null && File.Exists(filePath))
-            {
-                try
-                {
-                    this.Text.Value = File.ReadAllText(filePath);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                }
-            }
+            this.Text = new ReactiveProperty<string>((filePath != null)
+                ? FileManager.LoadTextFile(filePath)
+                : string.Empty);
 
             this.IsModified = new ReactiveProperty<bool>(false);
             this.FileName = this.FilePath

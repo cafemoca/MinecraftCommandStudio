@@ -21,7 +21,7 @@ namespace Cafemoca.McSlimUtils.Views.Behaviors
 
         private static void OnDropFileChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            UIElement element = obj as UIElement;
+            var element = obj as UIElement;
             element.Drop -= UIElement_Drop;
 
             var command = e.NewValue as ICommand;

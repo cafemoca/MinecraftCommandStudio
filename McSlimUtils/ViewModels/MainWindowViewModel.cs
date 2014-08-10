@@ -40,7 +40,8 @@ namespace Cafemoca.McSlimUtils.ViewModels
             //this.Tools.Add(new RecentFilesViewModel());
 
             this.Files = new ReactiveCollection<FileViewModel>();
-            this.Files.Add(new DocumentViewModel());
+            //this.Files.Add(new DocumentViewModel());
+            this.Files.Add(new StartPageViewModel());
 
             this.NewCommand = new ReactiveCommand();
             this.NewCommand.Subscribe(_ =>
@@ -73,7 +74,7 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 this.Save(this.ActiveDocument.Value, false));
 
             this.SaveAsCommand = this.ActiveDocument
-                .Select(f => f != null)
+                .Select(f => f != null && !(f is StartPageViewModel))
                 .ToReactiveCommand(false);
             this.SaveAsCommand.Subscribe(_ =>
                 this.Save(this.ActiveDocument.Value, true));

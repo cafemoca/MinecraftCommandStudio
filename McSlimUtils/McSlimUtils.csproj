@@ -129,6 +129,7 @@
     <Compile Include="ViewModels\Layouts\Bases\PaneViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Bases\ToolViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Documents\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Documents\StartPageViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Tools\RecentFilesViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Behaviors\DropFileBehavior.cs" />
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="Views\Layouts\Documents\Document.xaml.cs">
       <DependentUpon>Document.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layouts\Documents\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Layouts\Tools\RecentFiles.xaml.cs">
       <DependentUpon>RecentFiles.xaml</DependentUpon>
@@ -251,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Layouts\Documents\Document.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layouts\Documents\StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -98,6 +98,11 @@
             </dock:DockingManager.Theme>
             <dock:DockingManager.LayoutItemTemplateSelector>
                 <panes:PanesTemplateSelector>
+                    <panes:PanesTemplateSelector.StartPageTemplate>
+                        <DataTemplate>
+                            <documents:StartPage />
+                        </DataTemplate>
+                    </panes:PanesTemplateSelector.StartPageTemplate>
                     <panes:PanesTemplateSelector.DocumentTemplate>
                         <DataTemplate>
                             <documents:Document />

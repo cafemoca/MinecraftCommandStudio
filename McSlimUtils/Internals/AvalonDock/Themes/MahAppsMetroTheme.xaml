@@ -943,6 +943,7 @@
     </Style>
 
     <Style TargetType="{x:Type controls:LayoutDocumentControl}">
+        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutDocumentControl}">
@@ -1079,14 +1080,6 @@
                                               Content="{Binding Model.Content, RelativeSource={RelativeSource TemplatedParent}}"
                                               ContentTemplateSelector="{Binding LayoutItemTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
                                               FlowDirection="{TemplateBinding FlowDirection}" />
-
-                            <!--
-                                <ContentPresenter
-                                Content="{Binding Model.Content, RelativeSource={RelativeSource TemplatedParent}}"
-                                ContentTemplate="{Binding LayoutItemTemplate, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
-                                ContentTemplateSelector="{Binding LayoutItemTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
-                                Grid.Row="1"/>
-                            -->
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -1104,8 +1097,8 @@
     </Style>
 
     <Style x:Key="{x:Type controls:LayoutDocumentFloatingWindowControl}" TargetType="{x:Type controls:LayoutDocumentFloatingWindowControl}">
-        <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}" />
-        <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
         <Setter Property="shell:WindowChrome.WindowChrome">
             <Setter.Value>
@@ -1123,7 +1116,7 @@
                         <Border x:Name="WindowBorder"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="4">
+                                BorderThickness="1">
                             <Grid Margin="3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="18" />
@@ -1433,7 +1426,6 @@
     <Style x:Key="{x:Type controls:LayoutAutoHideWindowControl}" TargetType="{x:Type controls:LayoutAutoHideWindowControl}">
         <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
     </Style>
-
 
     <Style x:Key="MetroNavigatorWindowListBoxItemFocusVisual">
         <Setter Property="Control.Template">

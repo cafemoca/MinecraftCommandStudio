@@ -11,11 +11,16 @@ namespace Cafemoca.McSlimUtils.Views.Panes
         {
         }
 
+        public DataTemplate StartPageTemplate { get; set; }
         public DataTemplate DocumentTemplate { get; set; }
         public DataTemplate RecentFilesTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
+            if (item is StartPageViewModel)
+            {
+                return this.StartPageTemplate;
+            }
             if (item is DocumentViewModel)
             {
                 return this.DocumentTemplate;

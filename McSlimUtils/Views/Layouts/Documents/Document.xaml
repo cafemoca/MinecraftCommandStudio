@@ -52,7 +52,7 @@
                     Foreground="{DynamicResource IdealForegroundColorBrush}"
                     Background="{DynamicResource AccentColorBrush2}"
                     Command="{Binding CopyCommand}"
-                    Content="COMMAND COPY" />
+                    Content="COPY COMMAND" />
         </Grid>
     </Grid>
 

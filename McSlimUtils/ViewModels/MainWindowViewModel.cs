@@ -2,6 +2,7 @@
 using Cafemoca.McSlimUtils.ViewModels.Flips;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Bases;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Documents;
+using Cafemoca.McSlimUtils.ViewModels.Layouts.Tools;
 using Codeplex.Reactive;
 using Livet;
 using Microsoft.WindowsAPICodePack.Dialogs;
@@ -37,10 +38,9 @@ namespace Cafemoca.McSlimUtils.ViewModels
             this.ActiveDocument = new ReactiveProperty<FileViewModel>();
 
             this.Tools = new ReactiveCollection<ToolViewModel>();
-            //this.Tools.Add(new RecentFilesViewModel());
+            this.Tools.Add(new RecentFilesViewModel());
 
             this.Files = new ReactiveCollection<FileViewModel>();
-            //this.Files.Add(new DocumentViewModel());
             this.Files.Add(new StartPageViewModel());
 
             this.NewCommand = new ReactiveCommand();

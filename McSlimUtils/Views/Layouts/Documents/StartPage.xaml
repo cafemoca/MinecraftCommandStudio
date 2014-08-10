@@ -26,6 +26,7 @@
                            FontFamily="Segoe UI Light"
                            FontSize="24"
                            Foreground="{DynamicResource GrayBrush1}"
+                           Padding="0,0,0,4"
                            Text="McSlimUtils" />
             </StackPanel>
             <StackPanel Margin="30">

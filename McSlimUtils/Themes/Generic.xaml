@@ -5,9 +5,10 @@
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/CommandEditor.xaml" />
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/ContextMenu.xaml" />
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/Flyout.xaml" />
+        <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/Hyperlink.xaml" />
+        <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/Menu.xaml" />
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/MetroDialog.xaml" />
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/ScrollBar.xaml" />
-        <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/Menu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

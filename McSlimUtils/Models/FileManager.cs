@@ -14,13 +14,13 @@ namespace Cafemoca.McSlimUtils.Models
             }
             try
             {
-                File.ReadAllText(filePath);
+                return File.ReadAllText(filePath);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                return string.Empty;
             }
-            return string.Empty;
         }
 
         public static void SaveTextFile(string filePath, string text)

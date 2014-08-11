@@ -5,6 +5,9 @@ using System.Windows.Media;
 
 namespace Cafemoca.CommandEditor.Renderings
 {
+    /// <summary>
+    /// Source: http://stackoverflow.com/questions/5072761/avalonedit-highlight-current-line-even-when-not-focused
+    /// </summary>
     public class HighlightCurrentLineBackgroundRenderer : IBackgroundRenderer
     {
         public SolidColorBrush BackgroundColorBrush { get; set; }

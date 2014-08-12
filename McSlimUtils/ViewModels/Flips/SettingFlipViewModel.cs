@@ -31,8 +31,8 @@ namespace Cafemoca.McSlimUtils.ViewModels.Flips
             };
             this.QuoteModeList = new Dictionary<QuoteModeValue, string>()
             {
-                { QuoteModeValue.DoubleQuoteOnly, "ダブルクォーテーションのみ" },
-                { QuoteModeValue.UseSingleQuote, "文字列にシングルクォーテーションを使う" },
+                { QuoteModeValue.DoubleQuoteOnly, "常にダブルクォーテーションを使用する" },
+                { QuoteModeValue.UseSingleQuote, "ダブルクォーテーションをシングルクォーテーションに変換する" },
             };
         }
     }

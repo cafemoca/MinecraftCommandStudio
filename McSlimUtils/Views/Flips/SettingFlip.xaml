@@ -16,8 +16,8 @@
                     <StackPanel Margin="5"
                                 Orientation="Horizontal">
                         <Label Width="150"
-                               Content="エスケープモード"
-                               ToolTip="次に生成コマンドが更新されるときに反映されます"/>
+                               Content="エスケープ文字の生成モード"
+                               ToolTip="コマンド生成時のエスケープ文字の自動補完の際に、そのバージョンに対応した数が生成されます"/>
                         <ComboBox Width="200"
                                   DisplayMemberPath="Value"
                                   ItemsSource="{Binding EscapeModeList}"
@@ -27,8 +27,18 @@
                     <StackPanel Margin="5"
                                 Orientation="Horizontal">
                         <Label Width="150"
-                               Content="使用するクォーテーション"
-                               ToolTip="文字列が多く非常に長く複雑なコマンドの場合、シングルクォーテーションを使用しないと文字列オーバーすることがあります"/>
+                               Content="使用するクォーテーション">
+                            <Label.ToolTip>
+                                <TextBlock>
+                                    通常、すべてのクォーテーションおよび ( ... ) はダブルクォーテーションに変換されて出力されます
+                                    <LineBreak />
+                                    <LineBreak />
+                                    文字列が多く非常に長く複雑なコマンドの場合に、コマンドブロックの文字数オーバーを避けるため
+                                    <LineBreak />
+                                    ダブルクォーテーションで囲んで記述された部分をシングルクォーテーションに変換することができます
+                                </TextBlock>
+                            </Label.ToolTip>
+                        </Label>
                         <ComboBox Width="200"
                                   DisplayMemberPath="Value"
                                   ItemsSource="{Binding QuoteModeList}"

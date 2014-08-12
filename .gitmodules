@@ -1,3 +1,6 @@
 [submodule "MahApps.Metro"]
 	path = MahApps.Metro
 	url = git://github.com/cafemoca/MahApps.Metro.git
+[submodule "AvalonEdit"]
+	path = AvalonEdit
+	url = git://github.com/cafemoca/AvalonEdit.git

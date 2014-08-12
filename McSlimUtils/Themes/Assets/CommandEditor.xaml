@@ -3,7 +3,8 @@
                     xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
                     xmlns:completion="clr-namespace:ICSharpCode.AvalonEdit.CodeCompletion;assembly=ICSharpCode.AvalonEdit"
                     xmlns:editor="clr-namespace:Cafemoca.CommandEditor;assembly=CommandEditor"
-                    xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit">
+                    xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit"
+                    xmlns:search="clr-namespace:ICSharpCode.AvalonEdit.Search;assembly=ICSharpCode.AvalonEdit">
 
     <Style TargetType="{x:Type editor:CommandEditor}">
         <Setter Property="Template">
@@ -108,6 +109,316 @@
                             <Setter Property="BorderBrush" Value="{x:Null}" />
                             <Setter Property="WindowStyle" Value="None" />
                             <Setter Property="AllowsTransparency" Value="True" />
+                        </Style>
+
+                        <Style TargetType="{x:Type search:SearchPanel}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type search:SearchPanel}">
+                                        <Border Width="300"
+                                                MinWidth="150"
+                                                MaxWidth="300"
+                                                Margin="0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Background="{DynamicResource GrayBrush10}"
+                                                BorderBrush="{DynamicResource GrayBrush8}"
+                                                BorderThickness="0,0,0,2"
+                                                Cursor="Arrow"
+                                                Padding="2">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+
+                                                <ToggleButton Grid.Row="0"
+                                                              Grid.Column="0"
+                                                              Width="18"
+                                                              Height="18"
+                                                              Margin="0,0,2,0"
+                                                              BorderThickness="0"
+                                                              IsChecked="{Binding ReplaceMode, RelativeSource={RelativeSource TemplatedParent}}"
+                                                              Style="{DynamicResource RotateToggleButtonStyle}">
+                                                    <Rectangle Width="8"
+                                                               Height="6"
+                                                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                                                        <Rectangle.OpacityMask>
+                                                            <VisualBrush Stretch="Fill"
+                                                                         Visual="{DynamicResource appbar_chevron_down}" />
+                                                        </Rectangle.OpacityMask>
+                                                    </Rectangle>
+                                                </ToggleButton>
+
+                                                <Grid Grid.Row="0"
+                                                      Grid.Column="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="66" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox Name="PART_searchTextBox"
+                                                             Grid.Column="0"
+                                                             Height="22"
+                                                             Margin="0,0,2,0"
+                                                             HorizontalAlignment="Stretch"
+                                                             VerticalContentAlignment="Center"
+                                                             Background="{DynamicResource GrayBrush8}"
+                                                             BorderThickness="0"
+                                                             Cursor="IBeam"
+                                                             Focusable="True">
+                                                        <TextBox.Text>
+                                                            <Binding Path="SearchPattern"
+                                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                                     UpdateSourceTrigger="PropertyChanged">
+                                                                <Binding.ValidationRules>
+                                                                    <ExceptionValidationRule />
+                                                                </Binding.ValidationRules>
+                                                            </Binding>
+                                                        </TextBox.Text>
+                                                        <TextBox.Template>
+                                                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                                                <Grid Height="{TemplateBinding Height}"
+                                                                      Margin="{TemplateBinding Margin}"
+                                                                      Background="{TemplateBinding Background}">
+                                                                    <ScrollViewer x:Name="PART_ContentHost"
+                                                                                  Margin="4,0,0,0"
+                                                                                  VerticalAlignment="Center" />
+                                                                    <Label x:Name="WaterMark"
+                                                                           Margin="4,0,0,0"
+                                                                           VerticalAlignment="Center"
+                                                                           Content="検索..."
+                                                                           Foreground="{DynamicResource GrayBrush5}"
+                                                                           Padding="0"
+                                                                           Visibility="Collapsed" />
+                                                                </Grid>
+                                                                <ControlTemplate.Triggers>
+                                                                    <MultiTrigger>
+                                                                        <MultiTrigger.Conditions>
+                                                                            <Condition Property="Text" Value="" />
+                                                                            <Condition Property="IsFocused" Value="False" />
+                                                                        </MultiTrigger.Conditions>
+                                                                        <Setter TargetName="WaterMark" Property="Visibility" Value="Visible" />
+                                                                    </MultiTrigger>
+                                                                    <Trigger Property="IsEnabled" Value="False">
+                                                                        <Setter Property="Foreground" Value="{DynamicResource GrayBrush10}" />
+                                                                        <Setter Property="Opacity" Value="0.6" />
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </TextBox.Template>
+                                                    </TextBox>
+                                                    <StackPanel Grid.Column="1"
+                                                                Orientation="Horizontal">
+                                                        <Button Width="22"
+                                                                Height="22"
+                                                                Command="search:SearchCommands.FindPrevious"
+                                                                Foreground="{DynamicResource GrayBrush1}"
+                                                                Padding="0"
+                                                                Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                ToolTip="{Binding Localization.FindPreviousText, RelativeSource={RelativeSource TemplatedParent}}">
+                                                            <Rectangle Width="10"
+                                                                       Height="8"
+                                                                       Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                                                                <Rectangle.OpacityMask>
+                                                                    <VisualBrush Stretch="Fill"
+                                                                                 Visual="{DynamicResource appbar_arrow_left}" />
+                                                                </Rectangle.OpacityMask>
+                                                            </Rectangle>
+                                                        </Button>
+                                                        <Button Width="22"
+                                                                Height="22"
+                                                                Command="search:SearchCommands.FindNext"
+                                                                Foreground="{DynamicResource GrayBrush1}"
+                                                                Padding="0"
+                                                                Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                ToolTip="{Binding Localization.FindNextText, RelativeSource={RelativeSource TemplatedParent}}">
+                                                            <Rectangle Width="10"
+                                                                       Height="8"
+                                                                       Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                                                                <Rectangle.OpacityMask>
+                                                                    <VisualBrush Stretch="Fill"
+                                                                                 Visual="{DynamicResource appbar_arrow_right}" />
+                                                                </Rectangle.OpacityMask>
+                                                            </Rectangle>
+                                                        </Button>
+                                                        <Button Width="22"
+                                                                Height="22"
+                                                                Command="search:SearchCommands.CloseSearchPanel"
+                                                                Padding="0"
+                                                                Style="{DynamicResource SimpleFlatButtonStyle}">
+                                                            <Rectangle Width="10"
+                                                                       Height="10"
+                                                                       Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                                                                <Rectangle.OpacityMask>
+                                                                    <VisualBrush Stretch="Fill"
+                                                                                 Visual="{DynamicResource appbar_close}" />
+                                                                </Rectangle.OpacityMask>
+                                                            </Rectangle>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                                <Grid Grid.Row="1"
+                                                      Grid.Column="1"
+                                                      Visibility="{Binding ReplaceMode, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="66" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox Name="PART_replaceTextBox"
+                                                             Grid.Column="0"
+                                                             Height="22"
+                                                             Margin="0,0,2,0"
+                                                             HorizontalAlignment="Stretch"
+                                                             VerticalContentAlignment="Center"
+                                                             Background="{DynamicResource GrayBrush8}"
+                                                             BorderThickness="0"
+                                                             Cursor="IBeam"
+                                                             Focusable="True">
+                                                        <TextBox.Text>
+                                                            <Binding Path="ReplacePattern"
+                                                                     RelativeSource="{RelativeSource TemplatedParent}"
+                                                                     UpdateSourceTrigger="PropertyChanged">
+                                                                <Binding.ValidationRules>
+                                                                    <ExceptionValidationRule />
+                                                                </Binding.ValidationRules>
+                                                            </Binding>
+                                                        </TextBox.Text>
+                                                        <TextBox.Template>
+                                                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                                                <Grid Height="{TemplateBinding Height}"
+                                                                      Margin="{TemplateBinding Margin}"
+                                                                      Background="{TemplateBinding Background}">
+                                                                    <ScrollViewer x:Name="PART_ContentHost"
+                                                                                  Margin="4,0,0,0"
+                                                                                  VerticalAlignment="Center" />
+                                                                    <Label x:Name="WaterMark"
+                                                                           Margin="4,0,0,0"
+                                                                           VerticalAlignment="Center"
+                                                                           Content="置換..."
+                                                                           Foreground="{DynamicResource GrayBrush5}"
+                                                                           Padding="0"
+                                                                           Visibility="Collapsed" />
+                                                                </Grid>
+                                                                <ControlTemplate.Triggers>
+                                                                    <MultiTrigger>
+                                                                        <MultiTrigger.Conditions>
+                                                                            <Condition Property="Text" Value="" />
+                                                                            <Condition Property="IsFocused" Value="False" />
+                                                                        </MultiTrigger.Conditions>
+                                                                        <Setter TargetName="WaterMark" Property="Visibility" Value="Visible" />
+                                                                    </MultiTrigger>
+                                                                    <Trigger Property="IsEnabled" Value="False">
+                                                                        <Setter Property="Foreground" Value="{DynamicResource GrayBrush10}" />
+                                                                        <Setter Property="Opacity" Value="0.6" />
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </TextBox.Template>
+                                                    </TextBox>
+                                                    <StackPanel Grid.Column="1"
+                                                                Orientation="Horizontal">
+                                                        <Button Width="20"
+                                                                Height="20"
+                                                                Margin="1"
+                                                                Command="search:SearchCommands.ReplaceNext"
+                                                                Foreground="{DynamicResource GrayBrush1}"
+                                                                Padding="0"
+                                                                Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                ToolTip="{Binding Localization.ReplaceNextText, RelativeSource={RelativeSource TemplatedParent}}">
+                                                            <Rectangle Width="15"
+                                                                       Height="18"
+                                                                       Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                                                                <Rectangle.OpacityMask>
+                                                                    <VisualBrush Stretch="Fill"
+                                                                                 Visual="{DynamicResource appbar_replace}" />
+                                                                </Rectangle.OpacityMask>
+                                                            </Rectangle>
+                                                        </Button>
+                                                        <Button Width="20"
+                                                                Height="20"
+                                                                Margin="1"
+                                                                Command="search:SearchCommands.ReplaceAll"
+                                                                Foreground="{DynamicResource GrayBrush1}"
+                                                                Padding="0"
+                                                                Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                ToolTip="{Binding Localization.ReplaceAllText, RelativeSource={RelativeSource TemplatedParent}}">
+                                                            <Rectangle Width="17"
+                                                                       Height="18.5"
+                                                                       Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                                                                <Rectangle.OpacityMask>
+                                                                    <VisualBrush Stretch="Fill"
+                                                                                 Visual="{DynamicResource appbar_replace_all}" />
+                                                                </Rectangle.OpacityMask>
+                                                            </Rectangle>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                                <StackPanel Grid.Row="2"
+                                                            Grid.Column="1"
+                                                            Margin="0,2,0,1"
+                                                            Orientation="Horizontal">
+                                                    <ToggleButton Width="20"
+                                                                  Height="20"
+                                                                  Margin="0,0,2,0"
+                                                                  IsChecked="{Binding MatchCase, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                  Style="{DynamicResource BorderAccentToggleButtonStyle}"
+                                                                  ToolTip="{Binding Localization.MatchCaseText, RelativeSource={RelativeSource TemplatedParent}}">
+                                                        <Rectangle Width="14"
+                                                                   Height="10"
+                                                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                                                            <Rectangle.OpacityMask>
+                                                                <VisualBrush Stretch="Fill"
+                                                                             Visual="{DynamicResource appbar_match_case}" />
+                                                            </Rectangle.OpacityMask>
+                                                        </Rectangle>
+                                                    </ToggleButton>
+                                                    <ToggleButton Width="20"
+                                                                  Height="20"
+                                                                  Margin="0,0,2,0"
+                                                                  IsChecked="{Binding WholeWords, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                  Style="{DynamicResource BorderAccentToggleButtonStyle}"
+                                                                  ToolTip="{Binding Localization.MatchWholeWordsText, RelativeSource={RelativeSource TemplatedParent}}">
+                                                        <Rectangle Width="16"
+                                                                   Height="11"
+                                                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                                                            <Rectangle.OpacityMask>
+                                                                <VisualBrush Stretch="Fill"
+                                                                             Visual="{DynamicResource appbar_whole_words}" />
+                                                            </Rectangle.OpacityMask>
+                                                        </Rectangle>
+                                                    </ToggleButton>
+                                                    <ToggleButton Width="20"
+                                                                  Height="20"
+                                                                  Margin="0,0,2,0"
+                                                                  IsChecked="{Binding UseRegex, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                  Style="{DynamicResource BorderAccentToggleButtonStyle}"
+                                                                  ToolTip="{Binding Localization.UseRegexText, RelativeSource={RelativeSource TemplatedParent}}">
+                                                        <Rectangle Width="12"
+                                                                   Height="11"
+                                                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                                                            <Rectangle.OpacityMask>
+                                                                <VisualBrush Stretch="Fill"
+                                                                             Visual="{DynamicResource appbar_regex}" />
+                                                            </Rectangle.OpacityMask>
+                                                        </Rectangle>
+                                                    </ToggleButton>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
                         </Style>
                     </ControlTemplate.Resources>
 

@@ -38,7 +38,7 @@ namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Documents
         {
             this.CompiledText = this.Text
                 .Throttle(TimeSpan.FromSeconds(1))
-                .Select(s => s.IsEmpty() ? "": s.Tokenize().Compile(this.EscapeMode, this.QuoteMode))
+                .Select(s => s.IsEmpty() ? "" : s.Tokenize().Compile(this.EscapeMode, this.QuoteMode))
                 .ToReactiveProperty<string>("");
 
             this.Line = new ReactiveProperty<int>(0);
@@ -57,6 +57,11 @@ namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Documents
         public void JumpToColumn(int column)
         {
             this.Column.Value = column;
+        }
+
+        public void UpdateCommand()
+        {
+            this.CompiledText.Value = this.Text.Value.Tokenize().Compile(this.EscapeMode, this.QuoteMode);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Cafemoca.CommandEditor;
+using Cafemoca.McSlimUtils.ViewModels.Layouts.Documents;
 using ICSharpCode.AvalonEdit;
 using Livet;
+using System.Linq;
 
 namespace Cafemoca.McSlimUtils.Settings
 {
@@ -71,6 +73,7 @@ namespace Cafemoca.McSlimUtils.Settings
             {
                 this._escapeMode = value;
                 this.RaisePropertyChanged();
+                this.ApplySettingsForDocuments();
             }
         }
 
@@ -86,9 +89,20 @@ namespace Cafemoca.McSlimUtils.Settings
             {
                 this._quoteMode = value;
                 this.RaisePropertyChanged();
+                this.ApplySettingsForDocuments();
             }
         }
 
         #endregion
+
+        public void ApplySettingsForDocuments()
+        {
+            if (App.MainViewModel != null && App.MainViewModel.Files.Any())
+            {
+                App.MainViewModel.Files
+                    .Where(x => x is DocumentViewModel)
+                    .ForEach(x => (x as DocumentViewModel).UpdateCommand());
+            }
+        }
     }
 }

@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandEditor", "CommandEdi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MahApps.Metro", "MahApps.Metro\MahApps.Metro\MahApps.Metro.csproj", "{5B1710D2-5DC8-4754-91B2-19165DE49B3D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AvalonEdit", "AvalonEdit", "{08E63C76-FEE2-4B10-B0C5-A7AC2984C368}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.AvalonEdit", "AvalonEdit\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj", "{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +109,26 @@ Global
 		{5B1710D2-5DC8-4754-91B2-19165DE49B3D}.Release|Net40.ActiveCfg = Release|Any CPU
 		{5B1710D2-5DC8-4754-91B2-19165DE49B3D}.Release|WithNRefactory.ActiveCfg = Release|Any CPU
 		{5B1710D2-5DC8-4754-91B2-19165DE49B3D}.Release|x86.ActiveCfg = Release|Any CPU
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Any CPU.ActiveCfg = Debug|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Mixed Platforms.ActiveCfg = Debug|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Mixed Platforms.Build.0 = Debug|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net35.ActiveCfg = Debug|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net35.Build.0 = Debug|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net40.ActiveCfg = Debug|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net40.Build.0 = Debug|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|WithNRefactory.ActiveCfg = Debug|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|WithNRefactory.Build.0 = Debug|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|x86.ActiveCfg = Debug|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Any CPU.ActiveCfg = Release|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Mixed Platforms.ActiveCfg = Release|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Mixed Platforms.Build.0 = Release|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net35.ActiveCfg = Release|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net35.Build.0 = Release|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net40.ActiveCfg = Release|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net40.Build.0 = Release|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|WithNRefactory.ActiveCfg = Release|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|WithNRefactory.Build.0 = Release|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|x86.ActiveCfg = Release|WithNRefactory
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,5 +137,6 @@ Global
 		{942D11C4-29F5-46C4-8C14-4B976D56C637} = {54C3C64D-3EC0-4ECC-866A-A8B5F482FF48}
 		{E708AC99-605B-42A0-8D20-ABCA8FE42DD2} = {54C3C64D-3EC0-4ECC-866A-A8B5F482FF48}
 		{5B1710D2-5DC8-4754-91B2-19165DE49B3D} = {54C3C64D-3EC0-4ECC-866A-A8B5F482FF48}
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1} = {08E63C76-FEE2-4B10-B0C5-A7AC2984C368}
 	EndGlobalSection
 EndGlobal

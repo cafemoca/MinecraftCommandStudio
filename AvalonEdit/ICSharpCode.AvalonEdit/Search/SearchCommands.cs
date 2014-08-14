@@ -50,6 +50,22 @@ namespace ICSharpCode.AvalonEdit.Search
 			"FindPrevious", typeof(SearchPanel),
 			new InputGestureCollection { new KeyGesture(Key.F3, ModifierKeys.Shift) }
 		);
+
+		/// <summary>
+		/// Replaces the next occurrence in the file.
+		/// </summary>
+		public static readonly RoutedCommand ReplaceNext = new RoutedCommand(
+			"ReplaceNext", typeof(SearchPanel),
+			new InputGestureCollection { new KeyGesture(Key.R, ModifierKeys.Alt) }
+		);
+
+		/// <summary>
+		/// Replaces all occurrences in the file.
+		/// </summary>
+		public static readonly RoutedCommand ReplaceAll = new RoutedCommand(
+			"ReplaceAll", typeof(SearchPanel),
+			new InputGestureCollection { new KeyGesture(Key.A, ModifierKeys.Alt) }
+		);
 		
 		/// <summary>
 		/// Closes the SearchPanel.
@@ -88,6 +104,8 @@ namespace ICSharpCode.AvalonEdit.Search
 			commandBindings.Add(new CommandBinding(ApplicationCommands.Find, ExecuteFind));
 			commandBindings.Add(new CommandBinding(SearchCommands.FindNext, ExecuteFindNext, CanExecuteWithOpenSearchPanel));
 			commandBindings.Add(new CommandBinding(SearchCommands.FindPrevious, ExecuteFindPrevious, CanExecuteWithOpenSearchPanel));
+			commandBindings.Add(new CommandBinding(SearchCommands.ReplaceNext, ExecuteReplaceNext, CanExecuteWithOpenSearchPanel));
+			commandBindings.Add(new CommandBinding(SearchCommands.ReplaceAll, ExecuteReplaceAll, CanExecuteWithOpenSearchPanel));
 			commandBindings.Add(new CommandBinding(SearchCommands.CloseSearchPanel, ExecuteCloseSearchPanel, CanExecuteWithOpenSearchPanel));
 		}
 		
@@ -125,6 +143,24 @@ namespace ICSharpCode.AvalonEdit.Search
 		{
 			if (!panel.IsClosed) {
 				panel.FindPrevious();
+				e.Handled = true;
+			}
+		}
+
+		void ExecuteReplaceNext(object sender, ExecutedRoutedEventArgs e)
+		{
+			if (!panel.IsClosed && panel.ReplaceMode)
+			{
+				panel.ReplaceNext();
+				e.Handled = true;
+			}
+		}
+
+		void ExecuteReplaceAll(object sender, ExecutedRoutedEventArgs e)
+		{
+			if (!panel.IsClosed && panel.ReplaceMode)
+			{
+				panel.ReplaceAll();
 				e.Handled = true;
 			}
 		}

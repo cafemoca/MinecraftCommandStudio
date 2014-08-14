@@ -93,6 +93,22 @@ namespace ICSharpCode.AvalonEdit.Search
 			get { return (bool)GetValue(WholeWordsProperty); }
 			set { SetValue(WholeWordsProperty, value); }
 		}
+
+		/// <summary>
+		/// Dependency property for <see cref="ReplaceMode"/>.
+		/// </summary>
+		public static readonly DependencyProperty ReplaceModeProperty =
+			DependencyProperty.Register("ReplaceMode", typeof(bool), typeof(SearchPanel),
+										new FrameworkPropertyMetadata(false));
+
+		/// <summary>
+		/// Gets/sets whether the replace mode.
+		/// </summary>
+		public bool ReplaceMode
+		{
+			get { return (bool)GetValue(ReplaceModeProperty); }
+			set { SetValue(ReplaceModeProperty, value); }
+		}
 		
 		/// <summary>
 		/// Dependency property for <see cref="SearchPattern"/>.
@@ -107,6 +123,22 @@ namespace ICSharpCode.AvalonEdit.Search
 		public string SearchPattern {
 			get { return (string)GetValue(SearchPatternProperty); }
 			set { SetValue(SearchPatternProperty, value); }
+		}
+
+		/// <summary>
+		/// Dependency property for <see cref="ReplacePattern"/>.
+		/// </summary>
+		public static readonly DependencyProperty ReplacePatternProperty =
+			DependencyProperty.Register("ReplacePattern", typeof(string), typeof(SearchPanel),
+										new FrameworkPropertyMetadata(""));
+
+		/// <summary>
+		/// Gets/sets the replace pattern.
+		/// </summary>
+		public string ReplacePattern
+		{
+			get { return (string)GetValue(ReplacePatternProperty); }
+			set { SetValue(ReplacePatternProperty, value); }
 		}
 		
 		/// <summary>
@@ -245,6 +277,8 @@ namespace ICSharpCode.AvalonEdit.Search
 			
 			this.CommandBindings.Add(new CommandBinding(SearchCommands.FindNext, (sender, e) => FindNext()));
 			this.CommandBindings.Add(new CommandBinding(SearchCommands.FindPrevious, (sender, e) => FindPrevious()));
+			this.CommandBindings.Add(new CommandBinding(SearchCommands.ReplaceNext, (sender, e) => ReplaceNext()));
+			this.CommandBindings.Add(new CommandBinding(SearchCommands.ReplaceAll, (sender, e) => ReplaceAll()));
 			this.CommandBindings.Add(new CommandBinding(SearchCommands.CloseSearchPanel, (sender, e) => Close()));
 			IsClosed = true;
 		}
@@ -324,6 +358,50 @@ namespace ICSharpCode.AvalonEdit.Search
 				SelectResult(result);
 			}
 		}
+
+		/// <summary>
+		/// Replaces the next occurrence in the file.
+		/// </summary>
+		public void ReplaceNext()
+		{
+			if (!this.ReplaceMode)
+				return;
+			SearchResult result = renderer.CurrentResults.FindFirstSegmentWithStartAfter(textArea.Caret.Offset + 1);
+			if (result == null)
+				result = renderer.CurrentResults.FirstSegment;
+			if (result != null)
+			{
+				string replacePattern = this.ReplacePattern;
+				textArea.Document.Replace(result.StartOffset, result.segmentLength, replacePattern);
+				ReplaceResult(result, replacePattern);
+			}
+		}
+
+		/// <summary>
+		/// Replaces all occurrences in the file.
+		/// </summary>
+		public void ReplaceAll()
+		{
+			if (!this.ReplaceMode)
+				return;
+			var results = renderer.CurrentResults.FindOverlappingSegments(0, textArea.Document.TextLength).Reverse();
+			if (results == null)
+				return;
+			string replacePattern = this.ReplacePattern;
+			textArea.Document.BeginUpdate();
+			try
+			{
+				foreach (var res in results)
+				{
+					textArea.Document.Replace(res, replacePattern);
+				}
+			}
+			finally
+			{
+				textArea.Document.EndUpdate();
+			}
+			textArea.Caret.Show();
+		}
 		
 		ToolTip messageView = new ToolTip { Placement = PlacementMode.Bottom, StaysOpen = false };
 
@@ -362,6 +440,14 @@ namespace ICSharpCode.AvalonEdit.Search
 			textArea.Selection = Selection.Create(textArea, result.StartOffset, result.EndOffset);
 			textArea.Caret.BringCaretToView();
 			// show caret even if the editor does not have the Keyboard Focus
+			textArea.Caret.Show();
+		}
+
+		void ReplaceResult(SearchResult result, string replacePattern)
+		{
+			textArea.Caret.Offset = result.StartOffset;
+			textArea.Selection = Selection.Create(textArea, result.StartOffset, result.StartOffset + replacePattern.Length);
+			textArea.Caret.BringCaretToView();
 			textArea.Caret.Show();
 		}
 		

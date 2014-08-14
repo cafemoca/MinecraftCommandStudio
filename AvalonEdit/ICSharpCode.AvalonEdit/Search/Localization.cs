@@ -47,6 +47,14 @@ namespace ICSharpCode.AvalonEdit.Search
 		public virtual string UseRegexText {
 			get { return "Use regular expressions"; }
 		}
+
+		/// <summary>
+		/// Default: 'Enable replace mode'
+		/// </summary>
+		public virtual string ReplaceModeText
+		{
+			get { return "Enable replace mode"; }
+		}
 		
 		/// <summary>
 		/// Default: 'Find next (F3)'
@@ -60,6 +68,22 @@ namespace ICSharpCode.AvalonEdit.Search
 		/// </summary>
 		public virtual string FindPreviousText {
 			get { return "Find previous (Shift+F3)"; }
+		}
+
+		/// <summary>
+		/// Default: 'Replace next (Alt + R)'
+		/// </summary>
+		public virtual string ReplaceNextText
+		{
+			get { return "Replace next (Alt + R)"; }
+		}
+
+		/// <summary>
+		/// Default: 'Replace all (Alt + A)'
+		/// </summary>
+		public virtual string ReplaceAllText
+		{
+			get { return "Replace all (Alt + A)"; }
 		}
 		
 		/// <summary>

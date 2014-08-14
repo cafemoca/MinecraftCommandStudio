@@ -182,10 +182,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AvalonEdit\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
-      <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
-      <Name>ICSharpCode.AvalonEdit</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MahApps.Metro\MahApps.Metro.Resources\MahApps.Metro.Resources.csproj">
       <Project>{e708ac99-605b-42a0-8d20-abca8fe42dd2}</Project>
       <Name>MahApps.Metro.Resources</Name>

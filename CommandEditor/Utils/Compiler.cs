@@ -33,6 +33,7 @@ namespace Cafemoca.CommandEditor.Utils
             TokenType.OperatorLocation,
             TokenType.OperatorTarget,
             TokenType.OpenCurlyBrace,
+			TokenType.OpenSquareBracket,
             TokenType.String,
             TokenType.ScoreAdd,
             TokenType.ScoreDivide,
@@ -49,7 +50,7 @@ namespace Cafemoca.CommandEditor.Utils
         #endregion
 
         public static string Compile(this IEnumerable<Token> tokens,
-            EscapeModeValue escapeMode = EscapeModeValue.New, QuoteModeValue quoteMode = QuoteModeValue.DoubleQuoteOnly)
+            EscapeModeValue escapeMode = EscapeModeValue.New)
         {
             var result = string.Empty;
 
@@ -62,14 +63,12 @@ namespace Cafemoca.CommandEditor.Utils
             var stackCurlyBracket = new Stack<bool>();
             var stackParenthesis = new Stack<bool>();
 
-            var quote = (quoteMode == QuoteModeValue.DoubleQuoteOnly) ? '"' : '\'';
-
             foreach (var token in tokens)
             {
                 var value = token.Value;
                 if (spaceAfter.Contains(token.Type) && spaceBefore.Contains(lastToken.Type))
                 {
-                    value = " " + value;
+                    result += " ";
                 }
 
                 switch (token.Type)
@@ -85,8 +84,6 @@ namespace Cafemoca.CommandEditor.Utils
                                 case "Text3":
                                 case "Text4":
                                 case "value":
-                                case "extra":
-                                case "with":
                                     stackCurlyBracket.Push(true);
                                     value = GetRepeatedEscape(escapeLevel, escapeMode) + "\"" + value;
                                     escapeLevel++;
@@ -102,13 +99,9 @@ namespace Cafemoca.CommandEditor.Utils
                         }
                         break;
                     case TokenType.String:
-                            value = value.Quote(quote);
-                        if (quoteMode == QuoteModeValue.DoubleQuoteOnly)
+                        for (int i = 0; i < escapeLevel; i++)
                         {
-                            for (int i = 0; i < escapeLevel; i++)
-                            {
-                                value = value.Escape(quote);
-                            }
+                            value = value.Escape('"');
                         }
                         break;
                     case TokenType.CloseCurlyBrace:

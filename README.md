@@ -11,21 +11,18 @@ Minecraft のコマンドの記述に特化した IDE ライクなテキスト�
 今後ほかにも新しい機能が追加される可能性があります。逆もあるかもしれません。  
 "なんでもいいから作ろう" と開発されたものなので McSlimUtils という名称自体変更される可能性があります。  
 
-
 ### コマンドエディタの機能
----
-
+--
 * シンタックスハイライト (特定のキーワードに色が付く)
 * 行番号、半角スペース、タブなどの表示
 * 改行に対応
 * コメントアウト (//, /**/) に対応
 * 複数行にわたる括弧やコメントの折りたたみ
 * 1 コマンドにつき 1 テキストファイルベースでの管理
-* リアルタイムなコマンド生成
+* ドキュメントタブのドッキング、フローティング
+* リアルタイムなコマンド生成とコピー
 * 自動エスケープ  
 クォーテーションのエスケープ方法の新旧対応 ([14w31a[MC-37661]](https://bugs.mojang.com/browse/MC-37661))
-* 文字列をダブルクォーテーションではなくシングルクォーテーションで囲むモード  
-長く複雑なコマンドなどで、エスケープの量が多すぎて文字数オーバーする場合に有効かもしれません
 
 #####独自フォーマット
 …といってもほぼコマンドと同じの形式ですが、下記の特徴があります。  
@@ -64,8 +61,7 @@ clickEvent の value 値など、コマンド文の文字列を書く際 (特に
 ```
 
 ### 動作条件・環境
----
-
+--
 * Windows 7 以降
 * [.NET Framework 4.5](http://www.microsoft.com/ja-jp/download/details.aspx?id=30653)
 
@@ -74,8 +70,7 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 何らかの不具合が起きた場合、お使いの環境を添えてご報告いただけると嬉しいです。  
 
 ### 使用ライブラリ
----
-
+--
 下記のライブラリを使用しています。  
 
 * [Reactive Extensions](http://rx.codeplex.com/)
@@ -87,10 +82,12 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 * [AvalonDock](https://avalondock.codeplex.com/)
 * [Windows API Code Pack](http://archive.msdn.microsoft.com/WindowsAPICodePack)
 
+また下記のアプリケーションの一部ソースコードを参考にさせていただきました。
+
+* [Krile StaryEyes](http://krile.starwing.net/)
 
 ### ライセンス
----
-
+--
 [MIT License](http://opensource.org/licenses/mit-license.php) の下で公開しています。  
 
 Copyright © 2014 [yuri (Cafemoca)](https://twitter.com/yuri_v3v)  

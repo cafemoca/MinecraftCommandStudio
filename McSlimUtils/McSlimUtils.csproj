@@ -190,6 +190,10 @@
       <Project>{162b4cd3-9388-4444-887d-81022ca0ed67}</Project>
       <Name>CommandEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FileSystemControls\FileListView\FileListView.csproj">
+      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
+      <Name>FileListView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MahApps.Metro\MahApps.Metro.Resources\MahApps.Metro.Resources.csproj">
       <Project>{e708ac99-605b-42a0-8d20-abca8fe42dd2}</Project>
       <Name>MahApps.Metro.Resources</Name>

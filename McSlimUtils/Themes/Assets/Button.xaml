@@ -57,9 +57,6 @@
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
             </Trigger>
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Background" Value="{DynamicResource GrayBrush9}" />
-            </Trigger>
         </Style.Triggers>
     </Style>
 

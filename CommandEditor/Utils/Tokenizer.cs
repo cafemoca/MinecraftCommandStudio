@@ -23,8 +23,8 @@ namespace Cafemoca.CommandEditor.Utils
                         break;
                     case '>':
                         yield return (text.CheckNext(cursor, '<'))
-							? new Token(TokenType.ScoreSwaps, "><", cursor++)
-							: new Token(TokenType.ScoreMax, ">", cursor);
+                            ? new Token(TokenType.ScoreSwaps, "><", cursor++)
+                            : new Token(TokenType.ScoreMax, ">", cursor);
                         break;
                     case '+':
                         yield return (text.CheckNext(cursor, '='))
@@ -33,31 +33,31 @@ namespace Cafemoca.CommandEditor.Utils
                         break;
                     case '-':
                         yield return (text.CheckNext(cursor, '='))
-							? new Token(TokenType.ScoreSubtract, "-=", cursor++)
+                            ? new Token(TokenType.ScoreSubtract, "-=", cursor++)
                             : new Token(TokenType.Minus, "-", cursor);
                         break;
                     case '*':
                          yield return (text.CheckNext(cursor, '='))
                             ? new Token(TokenType.ScoreMultiple, "*=", cursor++)
-							: new Token(TokenType.Asterisk, "*", cursor);
+                            : new Token(TokenType.Asterisk, "*", cursor);
                         break;
                     case '/':
                         if (text.CheckNext(cursor, '='))
                         {
                             yield return new Token(TokenType.ScoreDivide, "/=", cursor++);
                         }
-						else if (text.CheckNext(cursor, "/*"))
-						{
-							yield return new Token(TokenType.Comment, text.GetComments(ref cursor), cursor);
-						}
-						else
-						{
-							yield return new Token(TokenType.Slash, "/", cursor);
-						}
+                        else if (text.CheckNext(cursor, "/*"))
+                        {
+                            yield return new Token(TokenType.Comment, text.GetComments(ref cursor), cursor);
+                        }
+                        else
+                        {
+                            yield return new Token(TokenType.Slash, "/", cursor);
+                        }
                         break;
                     case '%':
                         yield return (text.CheckNext(cursor, '='))
-							? new Token(TokenType.ScoreModulo, "%=", cursor++)
+                            ? new Token(TokenType.ScoreModulo, "%=", cursor++)
                             : new Token(TokenType.Percent, "%", cursor);
                         break;
                     case '=':
@@ -242,7 +242,7 @@ namespace Cafemoca.CommandEditor.Utils
         public static string GetInQuoteString(this string text, ref int cursor)
         {
             var begin = cursor++;
-			var result = string.Empty;
+            var result = string.Empty;
 
             while (cursor < text.Length)
             {
@@ -251,7 +251,7 @@ namespace Cafemoca.CommandEditor.Utils
                     if (cursor + 1 == text.Length)
                     {
                         result = text.Substring(begin + 1).Unescape('"');
-						break;
+                        break;
                     }
                     if (text[cursor + 1] == '"' || text[cursor + 1] == '\\')
                     {
@@ -261,45 +261,45 @@ namespace Cafemoca.CommandEditor.Utils
                 else if (text[cursor] == '"')
                 {
                     result = text.Substring(begin + 1, cursor - begin - 1).Unescape('"');
-					break;
+                    break;
                 }
                 cursor++;
             }
-			return (cursor == text.Length)
-				? text.Substring(begin + 1).Unescape('"')
-				: result;
+            return (cursor == text.Length)
+                ? text.Substring(begin + 1).Unescape('"')
+                : result;
         }
 
-		public static string GetString(this string text, ref int cursor)
-		{
-			var begin = cursor++;
-			var result = string.Empty;
+        public static string GetString(this string text, ref int cursor)
+        {
+            var begin = cursor++;
+            var result = string.Empty;
 
-			while (cursor < text.Length)
-			{
-				if (text[cursor] == '\\')
-				{
-					if (cursor + 1 == text.Length)
-					{
-						result = text.Substring(begin);
-						break;
-					}
-					if (text[cursor + 1] == '"' || text[cursor + 1] == '\\')
-					{
-						cursor++;
-					}
-				}
-				else if (text[cursor] == '"')
-				{
-					result = text.Substring(begin, cursor - begin + 1);
-					break;
-				}
-				cursor++;
-			}
-			return (cursor == text.Length)
-				? text.Substring(begin)
-				: result;
-		}
+            while (cursor < text.Length)
+            {
+                if (text[cursor] == '\\')
+                {
+                    if (cursor + 1 == text.Length)
+                    {
+                        result = text.Substring(begin);
+                        break;
+                    }
+                    if (text[cursor + 1] == '"' || text[cursor + 1] == '\\')
+                    {
+                        cursor++;
+                    }
+                }
+                else if (text[cursor] == '"')
+                {
+                    result = text.Substring(begin, cursor - begin + 1);
+                    break;
+                }
+                cursor++;
+            }
+            return (cursor == text.Length)
+                ? text.Substring(begin)
+                : result;
+        }
 
         /*
         [Obsolete]

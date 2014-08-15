@@ -14,6 +14,7 @@ namespace Cafemoca.McSlimUtils.Views.Panes
         public DataTemplate StartPageTemplate { get; set; }
         public DataTemplate DocumentTemplate { get; set; }
         public DataTemplate RecentFilesTemplate { get; set; }
+        public DataTemplate FileExplorerTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -28,6 +29,10 @@ namespace Cafemoca.McSlimUtils.Views.Panes
             if (item is RecentFilesViewModel)
             {
                 return this.RecentFilesTemplate;
+            }
+            if (item is FileExplorerViewModel)
+            {
+                return this.FileExplorerTemplate;
             }
 
             return base.SelectTemplate(item, container);

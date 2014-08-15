@@ -33,15 +33,18 @@ namespace Cafemoca.McSlimUtils.ViewModels
         public ReactiveCommand CloseCommand { get; private set; }
         public ReactiveCommand ExitCommand { get; private set; }
 
+        private readonly StartPageViewModel startPageViewModel = new StartPageViewModel();
+
         public MainWindowViewModel()
         {
             this.ActiveDocument = new ReactiveProperty<FileViewModel>();
 
             this.Tools = new ReactiveCollection<ToolViewModel>();
-            this.Tools.Add(new RecentFilesViewModel());
+            //this.Tools.Add(new RecentFilesViewModel());
+            this.Tools.Add(new FileExplorerViewModel());
 
             this.Files = new ReactiveCollection<FileViewModel>();
-            this.Files.Add(new StartPageViewModel());
+            this.Files.Add(startPageViewModel);
 
             this.NewCommand = new ReactiveCommand();
             this.NewCommand.Subscribe(_ =>
@@ -63,7 +66,10 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     var fileViewModel = this.Open(dialog.FileName);
-                    this.ActiveDocument.Value = fileViewModel;
+                    if (fileViewModel != null)
+                    {
+                        this.ActiveDocument.Value = fileViewModel;
+                    }
                 }
             });
 
@@ -102,6 +108,11 @@ namespace Cafemoca.McSlimUtils.ViewModels
             if (fileViewModel != null)
             {
                 return fileViewModel;
+            }
+            var supportExt = new[] { ".txt" };
+            if (!supportExt.Contains(Path.GetExtension(filePath)))
+            {
+                return null;
             }
 
             fileViewModel = new DocumentViewModel(filePath);

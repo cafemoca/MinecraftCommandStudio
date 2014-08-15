@@ -115,6 +115,11 @@
                             <tools:RecentFiles />
                         </DataTemplate>
                     </panes:PanesTemplateSelector.RecentFilesTemplate>
+                    <panes:PanesTemplateSelector.FileExplorerTemplate>
+                        <DataTemplate>
+                            <tools:FileExplorer />
+                        </DataTemplate>
+                    </panes:PanesTemplateSelector.FileExplorerTemplate>
                 </panes:PanesTemplateSelector>
             </dock:DockingManager.LayoutItemTemplateSelector>
             <dock:DockingManager.LayoutItemContainerStyleSelector>

@@ -10,12 +10,14 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Cafemoca.McSlimUtils.ViewModels
 {
-    public class MainWindowViewModel : ViewModel
+    public partial class MainWindowViewModel : ViewModel
     {
         public ReactiveProperty<FileViewModel> ActiveDocument { get; private set; }
 
@@ -31,7 +33,6 @@ namespace Cafemoca.McSlimUtils.ViewModels
         public ReactiveCommand SaveCommand { get; private set; }
         public ReactiveCommand SaveAsCommand { get; private set; }
         public ReactiveCommand CloseCommand { get; private set; }
-        public ReactiveCommand ExitCommand { get; private set; }
 
         private readonly StartPageViewModel startPageViewModel = new StartPageViewModel();
 
@@ -91,15 +92,16 @@ namespace Cafemoca.McSlimUtils.ViewModels
             this.CloseCommand.Subscribe(async _ =>
                 await this.CloseAsync(this.ActiveDocument.Value));
 
-            this.ExitCommand = new ReactiveCommand();
-            this.ExitCommand.Subscribe(_ =>
-                this.Exit());
-
             this.SettingFlipViewModel = new SettingFlipViewModel();
             this.IsSettingFlipOpen = new ReactiveProperty<bool>(false);
             this.SettingCommand = new ReactiveCommand();
             this.SettingCommand.Subscribe(_ =>
                 this.IsSettingFlipOpen.Value = !this.IsSettingFlipOpen.Value);
+
+
+            this.ExitCommand = new ReactiveCommand();
+            this.ExitCommand.Subscribe(_ =>
+                this.WindowClose = true);
         }
 
         public FileViewModel Open(string filePath)
@@ -180,10 +182,6 @@ namespace Cafemoca.McSlimUtils.ViewModels
             {
                 this.ActiveDocument.Value = this.Files.FirstOrDefault();
             }
-        }
-
-        public void Exit()
-        {
         }
     }
 }

@@ -1,10 +1,14 @@
-﻿using Cafemoca.McSlimUtils.Settings;
+﻿using Cafemoca.McSlimUtils.Services;
+using Cafemoca.McSlimUtils.Settings;
 using Cafemoca.McSlimUtils.ViewModels;
 using Cafemoca.McSlimUtils.Views;
 using Livet;
 using MahApps.Metro;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 

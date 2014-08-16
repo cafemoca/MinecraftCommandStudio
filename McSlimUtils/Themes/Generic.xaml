@@ -10,6 +10,7 @@
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/Menu.xaml" />
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/MetroDialog.xaml" />
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/ScrollBar.xaml" />
+        <ResourceDictionary Source="/McSlimUtils;component/Themes/Assets/TaskDialog.xaml" />
 
         <ResourceDictionary Source="/McSlimUtils;component/Themes/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>

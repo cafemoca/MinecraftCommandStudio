@@ -3,5 +3,6 @@
                     xmlns:converters="clr-namespace:Cafemoca.McSlimUtils.Internals.Converters">
 
     <converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
 </ResourceDictionary>

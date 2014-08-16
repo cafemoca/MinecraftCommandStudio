@@ -91,6 +91,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TaskDialog">
+      <HintPath>..\packages\WPFTaskDialog.1.7.1\lib\net40-Client\TaskDialog.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -122,6 +125,7 @@
     <Compile Include="Internals\AvalonDock\Themes\MahAppsMetroTheme.cs" />
     <Compile Include="Internals\Controls\HyperlinkText.cs" />
     <Compile Include="Internals\Converters\ActiveDocumentConverter.cs" />
+    <Compile Include="Internals\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Internals\Utils\Commands\AppCommand.cs" />
     <Compile Include="Models\FileManager.cs" />
     <Compile Include="Services\DialogService.cs" />
@@ -134,8 +138,16 @@
     <Compile Include="ViewModels\Layouts\Documents\StartPageViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Tools\FileExplorerViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Tools\RecentFilesViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel_Exit.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\Behaviors\Actions\CloseMode.cs" />
+    <Compile Include="Views\Behaviors\Actions\WindowCloseAction.cs" />
+    <Compile Include="Views\Behaviors\Actions\WindowClosingAction.cs" />
     <Compile Include="Views\Behaviors\DropFileBehavior.cs" />
+    <Compile Include="Views\Behaviors\IStateQueryableViewModel.cs" />
+    <Compile Include="Views\Dialogs\AskExitDialog.xaml.cs">
+      <DependentUpon>AskExitDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\AskSaveDialog.xaml.cs">
       <DependentUpon>AskSaveDialog.xaml</DependentUpon>
     </Compile>
@@ -264,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Assets\TaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Converters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -273,6 +289,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\AskExitDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

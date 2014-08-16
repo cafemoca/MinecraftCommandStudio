@@ -23,10 +23,6 @@
                     <MenuItem Header="すべて選択 (_A)" Command="ApplicationCommands.SelectAll" />
                     <Separator />
                     <MenuItem Header="検索 (_F)" Command="ApplicationCommands.Find" />
-                    <Separator />
-                    <MenuItem Header="保存 (_S)" Command="commands:AppCommand.Save" />
-                    <MenuItem Header="名前を付けて保存" Command="commands:AppCommand.SaveAs" />
-                    <MenuItem Header="すべて保存" Command="commands:AppCommand.SaveAll" />
                 </ContextMenu>
             </Setter.Value>
         </Setter>

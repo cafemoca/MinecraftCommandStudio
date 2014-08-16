@@ -10,10 +10,9 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
+using TaskDialog = TaskDialogInterop;
 
 namespace Cafemoca.McSlimUtils.ViewModels
 {
@@ -53,6 +52,7 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 var newFile = new DocumentViewModel();
                 this.Files.Add(newFile);
                 this.ActiveDocument.Value = newFile;
+                this.CloseStartPage();
             });
 
             this.OpenCommand = new ReactiveCommand();
@@ -70,6 +70,7 @@ namespace Cafemoca.McSlimUtils.ViewModels
                     if (fileViewModel != null)
                     {
                         this.ActiveDocument.Value = fileViewModel;
+                        this.CloseStartPage();
                     }
                 }
             });
@@ -89,8 +90,8 @@ namespace Cafemoca.McSlimUtils.ViewModels
             this.CloseCommand = this.ActiveDocument
                 .Select(f => f != null)
                 .ToReactiveCommand(false);
-            this.CloseCommand.Subscribe(async _ =>
-                await this.CloseAsync(this.ActiveDocument.Value));
+            this.CloseCommand.Subscribe(_ =>
+                this.Close(this.ActiveDocument.Value));
 
             this.SettingFlipViewModel = new SettingFlipViewModel();
             this.IsSettingFlipOpen = new ReactiveProperty<bool>(false);
@@ -102,6 +103,14 @@ namespace Cafemoca.McSlimUtils.ViewModels
             this.ExitCommand = new ReactiveCommand();
             this.ExitCommand.Subscribe(_ =>
                 this.WindowClose = true);
+        }
+
+        private void CloseStartPage()
+        {
+            if (this.Files.Contains(this.startPageViewModel))
+            {
+                this.Files.Remove(this.startPageViewModel);
+            }
         }
 
         public FileViewModel Open(string filePath)
@@ -145,36 +154,32 @@ namespace Cafemoca.McSlimUtils.ViewModels
             this.ActiveDocument.Value.IsModified.Value = false;
         }
 
-        public async Task CloseAsync(FileViewModel fileToClose)
+        public void Close(FileViewModel fileToClose)
         {
             if (fileToClose.IsModified.Value)
             {
-                var result = MessageBox.Show("ドキュメントを閉じる前に " + fileToClose.FileName.Value + " を保存しますか？",
-                                             "保存", MessageBoxButton.YesNoCancel);
+                var dialog = new TaskDialog.TaskDialogOptions();
+                dialog.Owner = App.MainView;
+                dialog.Title = "保存の確認";
+                dialog.MainInstruction = "ドキュメントを保存しますか？";
+                dialog.Content = "保存しない場合、現在の変更は失われます";
+                dialog.CustomButtons = new[] { "保存 (&S)", "保存しない (&N)", "キャンセル (&C)" };
 
-                if (result == MessageBoxResult.Cancel)
+                var result = TaskDialog.TaskDialog.Show(dialog);
+                switch (result.CustomButtonResult)
                 {
-                    return;
+                    case 0:
+                        this.Save(fileToClose);
+                        if (fileToClose.IsModified.Value)
+                        {
+                            return;
+                        }
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        return;
                 }
-                if (result == MessageBoxResult.Yes)
-                {
-                    this.Save(fileToClose);
-                }
-                /*
-                var result = await DialogService.ShowMessageAsync(
-                    "保存",
-                    "ドキュメントを閉じる前に " + fileToClose.FileName.Value + " を保存しますか？",
-                    MessageDialogStyle.AffirmativeAndNegativeAndDoubleAuxiliary);
-
-                if (result == MessageDialogResult.Affirmative)
-                {
-                    this.Save(fileToClose);
-                }
-                if (result == MessageDialogResult.Negative)
-                {
-                    return;
-                }
-                */
             }
 
             this.Files.Remove(fileToClose);

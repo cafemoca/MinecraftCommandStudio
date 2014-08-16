@@ -101,7 +101,8 @@ namespace ICSharpCode.AvalonEdit.Search
 		
 		void RegisterCommands(ICollection<CommandBinding> commandBindings)
 		{
-			commandBindings.Add(new CommandBinding(ApplicationCommands.Find, ExecuteFind));
+            commandBindings.Add(new CommandBinding(ApplicationCommands.Find, ExecuteFind));
+            commandBindings.Add(new CommandBinding(ApplicationCommands.Replace, ExecuteReplace));
 			commandBindings.Add(new CommandBinding(SearchCommands.FindNext, ExecuteFindNext, CanExecuteWithOpenSearchPanel));
 			commandBindings.Add(new CommandBinding(SearchCommands.FindPrevious, ExecuteFindPrevious, CanExecuteWithOpenSearchPanel));
 			commandBindings.Add(new CommandBinding(SearchCommands.ReplaceNext, ExecuteReplaceNext, CanExecuteWithOpenSearchPanel));
@@ -113,11 +114,20 @@ namespace ICSharpCode.AvalonEdit.Search
 		
 		void ExecuteFind(object sender, ExecutedRoutedEventArgs e)
 		{
-			panel.Open();
+            panel.Open();
 			if (!(TextArea.Selection.IsEmpty || TextArea.Selection.IsMultiline))
 				panel.SearchPattern = TextArea.Selection.GetText();
 			Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Input, (Action)delegate { panel.Reactivate(); });
 		}
+
+        void ExecuteReplace(object sender, ExecutedRoutedEventArgs e)
+        {
+            panel.Open();
+            panel.ReplaceMode = true;
+            if (!(TextArea.Selection.IsEmpty || TextArea.Selection.IsMultiline))
+                panel.SearchPattern = TextArea.Selection.GetText();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Input, (Action)delegate { panel.Reactivate(); });
+        }
 
 		void CanExecuteWithOpenSearchPanel(object sender, CanExecuteRoutedEventArgs e)
 		{

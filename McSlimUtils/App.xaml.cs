@@ -27,7 +27,7 @@ namespace Cafemoca.McSlimUtils
             base.OnStartup(e);
 
             DispatcherHelper.UIDispatcher = this.Dispatcher;
-            Setting.Initialize();
+            Setting.Load();
 
             var accent = ThemeManager.GetAccent("Yellow");
             var theme = ThemeManager.GetAppTheme("BaseDark");
@@ -47,6 +47,13 @@ namespace Cafemoca.McSlimUtils
                 .Subscribe(_ => this.MainWindow.DragMove());
 
             this.MainWindow.Show();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            Setting.Save();
         }
     }
 }

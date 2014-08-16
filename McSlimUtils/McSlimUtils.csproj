@@ -130,6 +130,9 @@
     <Compile Include="Models\FileManager.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Settings\Setting.cs" />
+    <Compile Include="Settings\Xml\XmlFileReader.cs" />
+    <Compile Include="Settings\Xml\XmlSerializableDictionary.cs" />
+    <Compile Include="Settings\Xml\XmlFileWriter.cs" />
     <Compile Include="ViewModels\Flips\SettingFlipViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Bases\FileViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Bases\PaneViewModel.cs" />

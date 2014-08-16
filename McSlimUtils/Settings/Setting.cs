@@ -2,19 +2,55 @@
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Documents;
 using ICSharpCode.AvalonEdit;
 using Livet;
+using System;
+using System.Diagnostics;
+using Cafemoca.McSlimUtils.Settings.Xml;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace Cafemoca.McSlimUtils.Settings
 {
     public class Setting : NotificationObject
     {
-        public static Setting Current { get; set; }
+        private const string filePath = "Settings.xml";
 
-        public Setting()
+        public static Setting Current { get; private set; }
+
+        public static void Load()
         {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    Current = filePath.ReadXml<Setting>();
+                }
+                else
+                {
+                    Initialize();
+                }
+            }
+            catch (Exception ex)
+            {
+                Initialize();
+                Debug.WriteLine(ex);
+            }
         }
 
-        public static void Initialize()
+        public static void Save()
+        {
+            try
+            {
+                Current.WriteXml(filePath);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        private static void Initialize()
         {
             Current = new Setting()
             {
@@ -51,6 +87,7 @@ namespace Cafemoca.McSlimUtils.Settings
         #region EditorOptions 変更通知プロパティ
 
         private TextEditorOptions _editorOptions;
+        [XmlIgnoreAttribute]
         public TextEditorOptions EditorOptions
         {
             get { return this._editorOptions; }

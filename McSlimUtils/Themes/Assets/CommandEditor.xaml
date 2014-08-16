@@ -4,9 +4,27 @@
                     xmlns:completion="clr-namespace:ICSharpCode.AvalonEdit.CodeCompletion;assembly=ICSharpCode.AvalonEdit"
                     xmlns:editor="clr-namespace:Cafemoca.CommandEditor;assembly=CommandEditor"
                     xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit"
-                    xmlns:search="clr-namespace:ICSharpCode.AvalonEdit.Search;assembly=ICSharpCode.AvalonEdit">
+                    xmlns:search="clr-namespace:ICSharpCode.AvalonEdit.Search;assembly=ICSharpCode.AvalonEdit"
+                    xmlns:app="clr-namespace:System.Windows.Input;assembly=System">
 
     <Style TargetType="{x:Type editor:CommandEditor}">
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Header="元に戻す (_Z)" Command="ApplicationCommands.Undo" />
+                    <MenuItem Header="やり直し (_Y)" Command="ApplicationCommands.Redo" />
+                    <Separator />
+                    <MenuItem Header="カット (_X)" Command="ApplicationCommands.Cut" />
+                    <MenuItem Header="コピー (_C)" Command="ApplicationCommands.Copy" />
+                    <MenuItem Header="貼り付け (_V)" Command="ApplicationCommands.Paste" />
+                    <MenuItem Header="削除 (_D)" Command="ApplicationCommands.Delete" />
+                    <Separator />
+                    <MenuItem Header="すべて選択 (_A)" Command="ApplicationCommands.SelectAll" />
+                    <Separator />
+                    <MenuItem Header="検索 (_F)" Command="ApplicationCommands.Find" />
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type editor:CommandEditor}">

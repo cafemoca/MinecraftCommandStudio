@@ -54,51 +54,10 @@ namespace Cafemoca.McSlimUtils.Settings
         {
             Current = new Setting()
             {
-                EditorOptions = new TextEditorOptions()
-                {
-                    AllowScrollBelowDocument = true,
-                    AllowToggleOverstrikeMode = true,
-                    ColumnRulerPosition = 80,
-                    ConvertTabsToSpaces = false,
-                    CutCopyWholeLine = true,
-                    EnableEmailHyperlinks = false,
-                    EnableHyperlinks = false,
-                    EnableImeSupport = true,
-                    EnableRectangularSelection = true,
-                    EnableTextDragDrop = true,
-                    EnableVirtualSpace = false,
-                    HideCursorWhileTyping = false,
-                    HighlightCurrentLine = false,
-                    IndentationSize = 4,
-                    InheritWordWrapIndentation = false,
-                    RequireControlModifierForHyperlinkClick = false,
-                    ShowBoxForControlCharacters = false,
-                    ShowColumnRuler = false,
-                    ShowEndOfLine = false,
-                    ShowSpaces = true,
-                    ShowTabs = true,
-                    WordWrapIndentation = 0,
-                },
                 EscapeMode = EscapeModeValue.New,
                 QuoteMode = QuoteModeValue.DoubleQuoteOnly,
             };
         }
-
-        #region EditorOptions 変更通知プロパティ
-
-        private TextEditorOptions _editorOptions;
-        [XmlIgnoreAttribute]
-        public TextEditorOptions EditorOptions
-        {
-            get { return this._editorOptions; }
-            set
-            {
-                this._editorOptions = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
 
         #region EscapeMode 変更通知プロパティ
 

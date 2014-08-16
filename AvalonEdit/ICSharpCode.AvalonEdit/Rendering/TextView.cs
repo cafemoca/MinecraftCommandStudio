@@ -196,7 +196,7 @@ namespace ICSharpCode.AvalonEdit.Rendering
 		/// </summary>
 		public static readonly DependencyProperty OptionsProperty =
 			DependencyProperty.Register("Options", typeof(TextEditorOptions), typeof(TextView),
-			                            new FrameworkPropertyMetadata(OnOptionsChanged));
+			                            new FrameworkPropertyMetadata(new TextEditorOptions(), OnOptionsChanged));
 		
 		/// <summary>
 		/// Gets/Sets the options used by the text editor.

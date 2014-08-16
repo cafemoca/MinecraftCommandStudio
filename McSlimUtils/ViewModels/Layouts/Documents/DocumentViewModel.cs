@@ -3,6 +3,7 @@ using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McSlimUtils.Settings;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Bases;
 using Codeplex.Reactive;
+using ICSharpCode.AvalonEdit;
 using System;
 using System.Linq;
 using System.Reactive.Linq;
@@ -12,6 +13,7 @@ namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Documents
 {
     public class DocumentViewModel : FileViewModel
     {
+        public ReactiveProperty<TextEditorOptions> Options { get; private set; }
         public ReactiveProperty<string> CompiledText { get; private set; }
         public ReactiveProperty<int> Line { get; private set; }
         public ReactiveProperty<int> Column { get; private set; }
@@ -36,6 +38,33 @@ namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Documents
         public DocumentViewModel(string filePath)
             : base(filePath)
         {
+            var options = new TextEditorOptions()
+            {
+                AllowScrollBelowDocument = true,
+                AllowToggleOverstrikeMode = true,
+                ColumnRulerPosition = 80,
+                ConvertTabsToSpaces = false,
+                CutCopyWholeLine = true,
+                EnableEmailHyperlinks = false,
+                EnableHyperlinks = false,
+                EnableImeSupport = true,
+                EnableRectangularSelection = true,
+                EnableTextDragDrop = true,
+                EnableVirtualSpace = false,
+                HideCursorWhileTyping = false,
+                HighlightCurrentLine = false,
+                IndentationSize = 4,
+                InheritWordWrapIndentation = false,
+                RequireControlModifierForHyperlinkClick = false,
+                ShowBoxForControlCharacters = false,
+                ShowColumnRuler = false,
+                ShowEndOfLine = false,
+                ShowSpaces = true,
+                ShowTabs = true,
+                WordWrapIndentation = 0,
+            };
+            this.Options = new ReactiveProperty<TextEditorOptions>(options);
+
             this.CompiledText = this.Text
                 .Throttle(TimeSpan.FromSeconds(1))
                 .Select(s => s.IsEmpty() ? "" : s.Tokenize().Compile(this.EscapeMode))

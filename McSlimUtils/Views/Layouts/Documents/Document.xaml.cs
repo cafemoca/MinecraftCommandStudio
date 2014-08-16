@@ -1,5 +1,4 @@
-﻿using Cafemoca.McSlimUtils.Settings;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Cafemoca.McSlimUtils.Views.Layouts.Documents
 {
@@ -11,7 +10,6 @@ namespace Cafemoca.McSlimUtils.Views.Layouts.Documents
         public Document()
         {
             InitializeComponent();
-            this.Editor.Options = Setting.Current.EditorOptions;
         }
     }
 }

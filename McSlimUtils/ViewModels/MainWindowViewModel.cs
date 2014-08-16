@@ -4,6 +4,7 @@ using Cafemoca.McSlimUtils.ViewModels.Layouts.Bases;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Documents;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Tools;
 using Codeplex.Reactive;
+using Codeplex.Reactive.Extensions;
 using Livet;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
@@ -31,6 +32,7 @@ namespace Cafemoca.McSlimUtils.ViewModels
         public ReactiveCommand OpenCommand { get; private set; }
         public ReactiveCommand SaveCommand { get; private set; }
         public ReactiveCommand SaveAsCommand { get; private set; }
+        public ReactiveCommand SaveAllCommand { get; private set; }
         public ReactiveCommand CloseCommand { get; private set; }
 
         private readonly StartPageViewModel startPageViewModel = new StartPageViewModel();
@@ -81,6 +83,14 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 .ToReactiveCommand(false);
             this.SaveAsCommand.Subscribe(_ =>
                 this.Save(this.ActiveDocument.Value, true));
+
+            this.SaveAllCommand = this.ObserveProperty(x => x.Files)
+                .Any()
+                .ToReactiveCommand();
+            this.SaveAllCommand.Subscribe(_ =>
+            {
+                this.SaveAll();
+            });
 
             this.CloseCommand = this.ActiveDocument
                 .Select(f => f != null)

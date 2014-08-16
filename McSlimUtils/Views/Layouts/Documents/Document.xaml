@@ -18,6 +18,7 @@
                               BindableText="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               FontFamily="Consolas"
                               FontSize="12"
+                              Options="{Binding Options.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               QuoteMode="{Binding QuoteMode, UpdateSourceTrigger=PropertyChanged}"
                               EscapeMode="{Binding EscapeMode, UpdateSourceTrigger=PropertyChanged}"
                               Line="{Binding Line.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"

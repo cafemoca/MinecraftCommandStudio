@@ -153,6 +153,14 @@ namespace Cafemoca.McSlimUtils.ViewModels
             this.ActiveDocument.Value.IsModified.Value = false;
         }
 
+        public void SaveAll()
+        {
+            if (this.Files != null)
+            {
+                this.Files.Where(x => x.IsModified.Value).ForEach(x => x.SaveCommand.Execute());
+            }
+        }
+
         public void Close(FileViewModel fileToClose)
         {
             if (fileToClose.IsModified.Value)

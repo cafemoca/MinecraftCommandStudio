@@ -92,6 +92,8 @@
                           Header="保存(_S)" />
                 <MenuItem Command="{Binding SaveAsCommand}"
                           Header="名前を付けて保存(_A)" />
+                <MenuItem Command="{Binding SaveAllCommand}"
+                          Header="すべて保存(_L)" />
                 <Separator />
                 <MenuItem Command="{Binding ExitCommand}"
                           Header="終了(_X)" />

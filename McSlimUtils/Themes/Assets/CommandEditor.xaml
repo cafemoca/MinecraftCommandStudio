@@ -5,7 +5,8 @@
                     xmlns:editor="clr-namespace:Cafemoca.CommandEditor;assembly=CommandEditor"
                     xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit"
                     xmlns:search="clr-namespace:ICSharpCode.AvalonEdit.Search;assembly=ICSharpCode.AvalonEdit"
-                    xmlns:app="clr-namespace:System.Windows.Input;assembly=System">
+                    xmlns:app="clr-namespace:System.Windows.Input;assembly=System"
+                    xmlns:commands="clr-namespace:Cafemoca.McSlimUtils.Internals.Utils.Commands">
 
     <Style TargetType="{x:Type editor:CommandEditor}">
         <Setter Property="ContextMenu">
@@ -22,6 +23,10 @@
                     <MenuItem Header="すべて選択 (_A)" Command="ApplicationCommands.SelectAll" />
                     <Separator />
                     <MenuItem Header="検索 (_F)" Command="ApplicationCommands.Find" />
+                    <Separator />
+                    <MenuItem Header="保存 (_S)" Command="commands:AppCommand.Save" />
+                    <MenuItem Header="名前を付けて保存" Command="commands:AppCommand.SaveAs" />
+                    <MenuItem Header="すべて保存" Command="commands:AppCommand.SaveAll" />
                 </ContextMenu>
             </Setter.Value>
         </Setter>

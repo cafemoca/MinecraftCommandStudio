@@ -75,7 +75,7 @@ namespace Cafemoca.McSlimUtils.Views.Behaviors.Actions
                 dialog.Owner = App.MainView;
                 dialog.Title = "終了";
                 dialog.MainInstruction = "終了しますか？";
-                dialog.Content = "未保存のドキュメントがあります\n保存しない場合、現在の変更は失われます";
+                dialog.Content = "現在のドキュメントが未保存です。\n保存しない場合、現在の変更は失われます。";
                 dialog.CustomButtons = new[] { "破棄して終了 (&E)", "保存して終了 (&S)", "キャンセル (&C)" };
 
                 var result = TaskDialog.Show(dialog);
@@ -103,11 +103,12 @@ namespace Cafemoca.McSlimUtils.Views.Behaviors.Actions
             }
             else if (condition == CloseCondition.AskExit)
             {
+                var count = inquiryViewModel.GetModifiedDocumentCount();
                 var dialog = new TaskDialogOptions();
                 dialog.Owner = App.MainView;
                 dialog.Title = "終了";
                 dialog.MainInstruction = "終了しますか？";
-                dialog.Content = "未保存のドキュメントがあります\n保存しない場合、現在の変更は失われます";
+                dialog.Content = "未保存のドキュメントが " + count + " 個あります。\n保存しない場合、現在の変更は失われます。";
                 dialog.CustomButtons = new[] { "破棄して終了 (&E)", "キャンセル (&C)" };
 
                 var result = TaskDialog.Show(dialog);

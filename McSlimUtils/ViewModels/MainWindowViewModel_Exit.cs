@@ -38,16 +38,28 @@ namespace Cafemoca.McSlimUtils.ViewModels
 
         public ReactiveCommand ExitCommand { get; private set; }
 
+        public int GetModifiedDocumentCount()
+        {
+            if (this.Files != null)
+            {
+                return this.Files.Where(x => x.IsModified.Value).Count();
+            }
+            return 0;
+        }
+
         public CloseCondition GetCondition()
         {
             if (this.Files != null)
             {
                 var files = this.Files.Where(x => !(x is StartPageViewModel));
-                if (files.Where(x => x.IsModified.Value).Any())
+                var count = this.GetModifiedDocumentCount();
+                if (count > 0)
                 {
-                    return files.Count() > 1
+                    return count > 1
                         ? CloseCondition.AskExit
-                        : CloseCondition.AskSave;
+                        : this.ActiveDocument.Value.IsModified.Value
+                            ? CloseCondition.AskSave
+                            : CloseCondition.AskExit;
                 }
                 return files.Count() > 1
                     ? CloseCondition.AskCloseTab

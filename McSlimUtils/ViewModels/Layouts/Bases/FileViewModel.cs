@@ -58,7 +58,7 @@ namespace Cafemoca.McSlimUtils.ViewModels.Layouts.Bases
             this.SaveAsCommand.Subscribe(_ => App.MainViewModel.Save(this, true));
 
             this.CloseCommand = new ReactiveCommand();
-            this.CloseCommand.Subscribe(async _ => await App.MainViewModel.CloseAsync(this));
+            this.CloseCommand.Subscribe(_ => App.MainViewModel.Close(this));
         }
     }
 }

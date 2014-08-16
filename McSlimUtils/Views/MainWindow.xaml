@@ -104,7 +104,8 @@
                              AllowMixedOrientation="True"
                              AnchorablesSource="{Binding Tools}"
                              DocumentsSource="{Binding Files}"
-                             SnapsToDevicePixels="True">
+                             SnapsToDevicePixels="True"
+                             behaviors:DropFileBehavior.DropFile="commands:AppCommand.LoadFile">
             <dock:DockingManager.Theme>
                 <themes:MahAppsMetroTheme />
             </dock:DockingManager.Theme>

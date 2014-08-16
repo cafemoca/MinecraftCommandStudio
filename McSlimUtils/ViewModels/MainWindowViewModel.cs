@@ -67,11 +67,6 @@ namespace Cafemoca.McSlimUtils.ViewModels
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     var fileViewModel = this.Open(dialog.FileName);
-                    if (fileViewModel != null)
-                    {
-                        this.ActiveDocument.Value = fileViewModel;
-                        this.CloseStartPage();
-                    }
                 }
             });
 
@@ -128,6 +123,10 @@ namespace Cafemoca.McSlimUtils.ViewModels
 
             fileViewModel = new DocumentViewModel(filePath);
             this.Files.Add(fileViewModel);
+
+            this.ActiveDocument.Value = fileViewModel;
+            this.CloseStartPage();
+
             return fileViewModel;
         }
 

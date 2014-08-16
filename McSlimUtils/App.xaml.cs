@@ -37,6 +37,7 @@ namespace Cafemoca.McSlimUtils
             this.MainWindow = new MainWindow() { DataContext = MainViewModel };
 
             MainView = this.MainWindow as MainWindow;
+            MainViewModel.InitializeCommandBinding(MainView);
 
             Observable.FromEvent<MouseButtonEventHandler, MouseButtonEventArgs>(
                     h => (sender, args) => h(args),

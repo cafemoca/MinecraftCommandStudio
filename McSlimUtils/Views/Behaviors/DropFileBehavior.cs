@@ -52,7 +52,7 @@ namespace Cafemoca.McSlimUtils.Views.Behaviors
                 {
                     if (dropCommand is RoutedCommand)
                     {
-                        (dropCommand as RoutedCommand).Execute(paths, element);
+                        (dropCommand as RoutedCommand).Execute(path, element);
                     }
                     else
                     {

@@ -97,8 +97,7 @@ namespace Cafemoca.CommandEditor.Utils
                         if (text.CheckNext(cursor, "pear"))
                         {
                             var next = text.GetNext(cursor);
-                            yield return new Token(TokenType.OperatorTarget, "@" + next, cursor);
-                            cursor++;
+                            yield return new Token(TokenType.OperatorTarget, "@" + next, cursor++);
                             break;
                         }
                         yield return new Token(TokenType.AtMark, "@", cursor);
@@ -109,9 +108,9 @@ namespace Cafemoca.CommandEditor.Utils
                             var begin = ++cursor;
                             var location = text.GetLiteral(ref begin, ref cursor);
                             yield return new Token(TokenType.OperatorLocation, "~" + location, begin - 1);
-                            cursor += location.Length;
                             break;
                         }
+                        yield return new Token(TokenType.OperatorLocation, "~", cursor);
                         break;
                     case '#':
                         if (cursor + 1 < text.Length)
@@ -121,7 +120,6 @@ namespace Cafemoca.CommandEditor.Utils
                             if (!command.IsEmpty())
                             {
                                 yield return new Token(TokenType.ExternalCommand, command, begin - 1);
-                                cursor += command.Length;
                                 break;
                             }
                         }

@@ -80,10 +80,10 @@
 
     <!-- numeric -->
     <Rule color="Numeric">
-      \.\d+[df]? |
-      \d+\.\d*[df]? |
-      \b\d+[bdfils]? |
-      \b\d
+      -?\.\d+[df]? |
+      -?\d+\.\d*[df]? |
+      -?\b\d+[bdfils]? |
+      -?\b\d
     </Rule>
 
     <!-- comment -->
@@ -105,9 +105,9 @@
 
     <!-- locations -->
     <Rule color="Location">
-      \~\d+\.\d*[df]? |
-      \~\d*\.?\d+[df]? |
-      \~\d*
+      \~-?\d+\.\d*[df]? |
+      \~-?\d*\.?\d+[df]? |
+      \~-?\d*
     </Rule>
 
     <Keywords color="Minecraft">

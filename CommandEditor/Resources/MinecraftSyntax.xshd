@@ -4,6 +4,7 @@
   <Color name="String" foreground="Chocolate" />
   <Color name="Parenthesis" foreground="Brown" fontWeight="bold" />
 
+  <Color name="Null" foreground="MediumAquamarine" />
   <Color name="Boolean" foreground="DeepSkyBlue" />
   <Color name="Numeric" foreground="Aquamarine" />
   <Color name="Comment" foreground="Green" />
@@ -70,6 +71,11 @@
     <Keywords color="Parenthesis">
       <Word>(</Word>
       <Word>)</Word>
+    </Keywords>
+    
+    <!-- bool -->
+    <Keywords color="Null">
+      <Word>null</Word>
     </Keywords>
 
     <!-- bool -->
@@ -255,6 +261,8 @@
       <Word>ShowArms</Word>
       <Word>Invisible</Word>
       <Word>Small</Word>
+      <Word>NoAI</Word>
+      <Word>NoBasePlate</Word>
     </Keywords>
 
     <!-- tag int -->
@@ -338,6 +346,7 @@
       <Word>HideFlags</Word>
       <Word>generation</Word>
       <Word>DisabledSlots</Word>
+      <Word>LifeTime</Word>
     </Keywords>
 
     <!-- tag long -->
@@ -496,6 +505,12 @@
       <Word>PlayerScores</Word>
       <Word>Teams</Word>
       <Word>Players</Word>
+      <Word>Body</Word>
+      <Word>LeftArm</Word>
+      <Word>RightArm</Word>
+      <Word>LeftLeg</Word>
+      <Word>RightLeg</Word>
+      <Word>Head</Word>
     </Keywords>
 
     <!-- tag compound -->
@@ -596,6 +611,17 @@
     <Keywords color="Attribute">
       <Word>keep</Word>
       <Word>replace</Word>
+      <Word>filterd</Word>
+      <Word>masked</Word>
+      <Word>force</Word>
+      <Word>move</Word>
+      <Word>normal</Word>
+      <Word>start</Word>
+      <Word>stop</Word>
+      <Word>chunk</Word>
+      <Word>peaceful</Word>
+      <Word>easy</Word>
+      <Word>hard</Word>
       <Word>break</Word>
       <Word>survival</Word>
       <Word>creative</Word>
@@ -635,6 +661,25 @@
       <Word>seeFriendlyInvisibles</Word>
       <Word>nametagVisibility</Word>
       <Word>deathMessageVisibility</Word>
+      <Word>destroy</Word>
+      <Word>hollow</Word>
+      <Word>keep</Word>
+      <Word>outline</Word>
+      <Word>commandBlockOutput</Word>
+      <Word>doDaylightCycle</Word>
+      <Word>doFireTick</Word>
+      <Word>doMobLoot</Word>
+      <Word>doMobSpawning</Word>
+      <Word>doTileDrops</Word>
+      <Word>keepInventory</Word>
+      <Word>mobGriefing</Word>
+      <Word>naturalRegeneration</Word>
+      <Word>logAdminCommands</Word>
+      <Word>randomTickSpeed</Word>
+      <Word>reducedDebugInfo</Word>
+      <Word>sendCommandFeedback</Word>
+      <Word>showDeathMessages</Word>
+      <Word>query</Word>
     </Keywords>
 
     <Keywords color="Args">
@@ -742,6 +787,7 @@
       <Word>EntityHorse</Word>
       <Word>Rabbit</Word>
       <Word>Villager</Word>
+      <Word>LightningBolt</Word>
     </Keywords>
 
     <!-- minecraft items -->
@@ -1002,7 +1048,7 @@
       <Word>clock</Word>
       <Word>glowstone_dust</Word>
       <Word>fish</Word>
-      <Word>cooked_fished</Word>
+      <Word>cooked_fish</Word>
       <Word>dye</Word>
       <Word>bone</Word>
       <Word>sugar</Word>
@@ -1107,6 +1153,7 @@
           <Word>defaultgamemode</Word>
           <Word>difficulty</Word>
           <Word>effect</Word>
+          <Word>entitydata</Word>
           <Word>execute</Word>
           <Word>fill</Word>
           <Word>gamemode</Word>

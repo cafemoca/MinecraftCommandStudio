@@ -61,6 +61,12 @@ namespace Cafemoca.McSlimUtils.ViewModels.Flips
             set { Setting.Current.ConvertTabsToSpaces = value; }
         }
 
+        public int IndentationSize
+        {
+            get { return Setting.Current.IndentationSize; }
+            set { Setting.Current.IndentationSize = value; }
+        }
+
         public int ColumnRulerPosition
         {
             get { return Setting.Current.ColumnRulerPosition; }

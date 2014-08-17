@@ -85,20 +85,6 @@ namespace Cafemoca.CommandEditor
 
         #endregion
 
-        #region QuoteMode 依存関係プロパティ
-
-
-        private static readonly DependencyProperty QuoteModeProperty =
-            DependencyProperty.Register("QuoteMode", typeof(QuoteModeValue), typeof(CommandEditor), new PropertyMetadata(QuoteModeValue.DoubleQuoteOnly));
-
-        public QuoteModeValue QuoteMode
-        {
-            get { return (QuoteModeValue)this.GetValue(QuoteModeProperty); }
-            set { this.SetValue(QuoteModeProperty, value); }
-        }
-
-        #endregion
-
         #region CurrentLineBackgroundProperty 依存関係プロパティ
 
         private static readonly DependencyProperty CurrentLineBackgroundProperty =
@@ -130,11 +116,5 @@ namespace Cafemoca.CommandEditor
     {
         New,
         Old,
-    }
-
-    public enum QuoteModeValue
-    {
-        DoubleQuoteOnly,
-        UseSingleQuote,
     }
 }

@@ -16,18 +16,17 @@
         <editor:CommandEditor x:Name="Editor"
                               Grid.Row="0"
                               BindableText="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              FontFamily="Consolas"
-                              FontSize="12"
-                              Options="{Binding Options.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              QuoteMode="{Binding QuoteMode, UpdateSourceTrigger=PropertyChanged}"
+                              FontFamily="{Binding FontFamily, UpdateSourceTrigger=PropertyChanged}"
+                              FontSize="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}"
+                              Options="{Binding Options, UpdateSourceTrigger=PropertyChanged}"
                               EscapeMode="{Binding EscapeMode, UpdateSourceTrigger=PropertyChanged}"
                               Line="{Binding Line.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               Column="{Binding Column.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               CurrentLineBackground="{DynamicResource GrayBrush10}"
                               Foreground="{DynamicResource BlackBrush}"
                               HorizontalScrollBarVisibility="Auto"
-                              ShowLineNumbers="True"
-                              WordWrap="False" />
+                              ShowLineNumbers="{Binding ShowLineNumbers, UpdateSourceTrigger=PropertyChanged}"
+                              WordWrap="{Binding TextWrapping, UpdateSourceTrigger=PropertyChanged}" />
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

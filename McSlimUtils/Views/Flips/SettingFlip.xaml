@@ -1,48 +1,80 @@
 ﻿<UserControl x:Class="Cafemoca.McSlimUtils.Views.Flips.SettingFlip"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Cafemoca.McSlimUtils.Internals.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Cafemoca.McSlimUtils.ViewModels.Flips"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Cafemoca.McSlimUtils.Internals.Controls"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
+             xmlns:behaviors="clr-namespace:Cafemoca.McSlimUtils.Views.Behaviors"
+             d:DesignHeight="480"
+             d:DesignWidth="640"
              mc:Ignorable="d">
 
     <Grid>
         <TabControl>
-            <TabItem Header="テスト用設定">
-                <StackPanel Orientation="Vertical">
+            <TabItem Header="エディタ設定">
+                <StackPanel Orientation="Vertical"
+                            Margin="20">
+                    <CheckBox Margin="0,5"
+                              IsChecked="{Binding AllowScrollBelowDocument}"
+                              Content="テキストの終わりより下までスクロール可能にする"/>
+                    <CheckBox Margin="0,5"
+                              IsChecked="{Binding CutCopyWholeLine}"
+                              Content="行単位のカットを有効にする"
+                              ToolTip="有効にすると、テキストを選択せずに切り取り (Ctrl + X) をした際にカーソルのある行全体を切り取ります"/>
+                    <CheckBox Margin="0,5"
+                              IsChecked="{Binding ConvertTabsToSpaces}"
+                              Content="タブをスペースに変換する"/>
+                    <CheckBox Margin="0,5"
+                              IsChecked="{Binding HideCursorWhileTyping}"
+                              Content="文字の入力中にカーソルを非表示にする"/>
+                    <CheckBox Margin="0,5"
+                              IsChecked="{Binding EnableTextDragDrop}"
+                              Content="文字列をドラッグ＆ドロップで追加できるようにする"/>
+                    <CheckBox Margin="0,5"
+                              IsChecked="{Binding TextWrapping}"
+                              Content="画面端で折り返す"/>
+                    <GroupBox Header="表示"
+                              Margin="0,10,0,0">
+                        <StackPanel Margin="5"
+                                    Orientation="Vertical">
+                            <CheckBox Margin="0,5"
+                                      Content="行番号"
+                                      IsChecked="{Binding ShowLineNumbers}"
+                                      ToolTip="行番号を表示するかどうかを設定します" />
+                            <CheckBox Margin="0,5"
+                                      Content="ルーラ"
+                                      IsChecked="{Binding ShowColumnRuler}"
+                                      ToolTip="ルーラを表示するかどうかを設定します" />
+                            <Separator Margin="0,5,0,3" />
+                            <CheckBox Margin="0,5"
+                                      Content="半角スペース"
+                                      IsChecked="{Binding ShowSpaces}"
+                                      ToolTip="半角スペースを可視化するかどうかを設定します" />
+                            <CheckBox Margin="0,5"
+                                      Content="タブ"
+                                      IsChecked="{Binding ShowTabs}"
+                                      ToolTip="タブを可視化するかどうかを設定します" />
+                            <CheckBox Margin="0,5"
+                                      Content="行の終わり"
+                                      IsChecked="{Binding ShowEndOfLine}"
+                                      ToolTip="行末文字を可視化するかどうかを設定します" />
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="コマンド生成">
+                <StackPanel Orientation="Vertical"
+                            Margin="20">
                     <StackPanel Margin="5"
                                 Orientation="Horizontal">
                         <Label Width="150"
                                Content="エスケープ文字の生成モード"
-                               ToolTip="コマンド生成時のエスケープ文字の自動補完の際に、そのバージョンに対応した数が生成されます"/>
+                               ToolTip="コマンド生成時のエスケープ文字の自動補完の際に、そのバージョンに対応した数が生成されます" />
                         <ComboBox Width="200"
                                   DisplayMemberPath="Value"
                                   ItemsSource="{Binding EscapeModeList}"
                                   SelectedValue="{Binding EscapeMode}"
-                                  SelectedValuePath="Key" />
-                    </StackPanel>
-                    <StackPanel Margin="5"
-                                Orientation="Horizontal">
-                        <Label Width="150"
-                               Content="使用するクォーテーション">
-                            <Label.ToolTip>
-                                <TextBlock>
-                                    通常、すべてのクォーテーションおよび ( ... ) はダブルクォーテーションに変換されて出力されます
-                                    <LineBreak />
-                                    <LineBreak />
-                                    文字列が多く非常に長く複雑なコマンドの場合に、コマンドブロックの文字数オーバーを避けるため
-                                    <LineBreak />
-                                    ダブルクォーテーションで囲んで記述された部分をシングルクォーテーションに変換することができます
-                                </TextBlock>
-                            </Label.ToolTip>
-                        </Label>
-                        <ComboBox Width="200"
-                                  DisplayMemberPath="Value"
-                                  ItemsSource="{Binding QuoteModeList}"
-                                  SelectedValue="{Binding QuoteMode}"
                                   SelectedValuePath="Key" />
                     </StackPanel>
                     <StackPanel Margin="12,30,0,0">
@@ -55,12 +87,11 @@
                             開発・調整中なので、正式にリリースするときに実装される予定です。
                             <LineBreak />
                             <LineBreak />
-                            <TextBlock Foreground="{DynamicResource GrayBrush3}">
-                                (開発途中: 入力中のコンプリーションウィンドウ, メニュー, 設定の保存, オートアップデート, など)
-                            </TextBlock>
+                            <TextBlock Foreground="{DynamicResource GrayBrush3}">(開発途中: 入力中のコンプリーションウィンドウ, メニュー, 設定の保存, オートアップデート, など)</TextBlock>
                             <LineBreak />
                             <LineBreak />
-                            Author / Developer: <controls:HyperlinkText Uri="https://twitter.com/yuri_v3v">@yuri_v3v</controls:HyperlinkText>
+                            Author / Developer:
+                            <controls:HyperlinkText Uri="https://twitter.com/yuri_v3v">@yuri_v3v</controls:HyperlinkText>
                             <LineBreak />
                             Copyright © 2014 yuri (Cafemoca)
                         </TextBlock>

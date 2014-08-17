@@ -56,7 +56,7 @@
         <Setter Property="Background" Value="{DynamicResource GrayBrush10}" />
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="Width" Value="10" />
+        <Setter Property="Width" Value="13" />
         <Setter Property="MinWidth" Value="0" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="MinHeight" Value="0" />
@@ -95,7 +95,7 @@
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto" />
                 <Setter Property="MinWidth" Value="0" />
-                <Setter Property="Height" Value="10" />
+                <Setter Property="Height" Value="13" />
                 <Setter Property="MinHeight" Value="0" />
                 <Setter Property="Margin" Value="0,0,0,-1" />
                 <Setter Property="Template">

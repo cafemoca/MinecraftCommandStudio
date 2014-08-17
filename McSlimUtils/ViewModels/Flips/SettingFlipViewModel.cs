@@ -1,4 +1,4 @@
-﻿using Cafemoca.CommandEditor;
+﻿using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McSlimUtils.Settings;
 using Livet;
 using System.Collections.Generic;

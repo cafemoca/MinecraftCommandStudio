@@ -19,7 +19,6 @@
                               FontFamily="{Binding FontFamily, UpdateSourceTrigger=PropertyChanged}"
                               FontSize="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}"
                               Options="{Binding Options, UpdateSourceTrigger=PropertyChanged}"
-                              EscapeMode="{Binding EscapeMode, UpdateSourceTrigger=PropertyChanged}"
                               Line="{Binding Line.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               Column="{Binding Column.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               CurrentLineBackground="{DynamicResource GrayBrush10}"

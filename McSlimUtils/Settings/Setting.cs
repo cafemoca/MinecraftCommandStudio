@@ -1,4 +1,4 @@
-﻿using Cafemoca.CommandEditor;
+﻿using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McSlimUtils.Settings.Xml;
 using Cafemoca.McSlimUtils.ViewModels.Layouts.Documents;
 using ICSharpCode.AvalonEdit;

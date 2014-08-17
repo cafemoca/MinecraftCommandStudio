@@ -71,20 +71,6 @@ namespace Cafemoca.CommandEditor
 
         #endregion
 
-        #region EscapeMode 依存関係プロパティ
-
-
-        private static readonly DependencyProperty EscapeModeProperty =
-            DependencyProperty.Register("EscapeMode", typeof(EscapeModeValue), typeof(CommandEditor), new PropertyMetadata(EscapeModeValue.New));
-
-        public EscapeModeValue EscapeMode
-        {
-            get { return (EscapeModeValue)this.GetValue(EscapeModeProperty); }
-            set { this.SetValue(EscapeModeProperty, value); }
-        }
-
-        #endregion
-
         #region CurrentLineBackgroundProperty 依存関係プロパティ
 
         private static readonly DependencyProperty CurrentLineBackgroundProperty =
@@ -110,11 +96,5 @@ namespace Cafemoca.CommandEditor
         }
 
         #endregion
-    }
-
-    public enum EscapeModeValue
-    {
-        New,
-        Old,
     }
 }

@@ -99,9 +99,18 @@ namespace Cafemoca.CommandEditor.Utils
                         }
                         break;
                     case TokenType.String:
-                        for (int i = 0; i < escapeLevel; i++)
+                        if (escapeMode == EscapeModeValue.New)
                         {
-                            value = value.Escape('"');
+                            for (int i = 0; i < escapeLevel; i++)
+                            {
+                                value = value.Escape('"');
+                            }
+                        }
+                        else if (escapeMode == EscapeModeValue.Old)
+                        {
+                            value = value
+                                .Replace("\\", GetRepeatedEscape(escapeLevel, escapeMode))
+                                .Replace("\"", GetRepeatedEscape(escapeLevel, escapeMode) + "\"");
                         }
                         break;
                     case TokenType.CloseCurlyBrace:
@@ -173,5 +182,11 @@ namespace Cafemoca.CommandEditor.Utils
             Enumerable.Range(1, count).ForEach(_ => b.Append("\\"));
             return b.ToString();
         }
+    }
+
+    public enum EscapeModeValue
+    {
+        New,
+        Old,
     }
 }

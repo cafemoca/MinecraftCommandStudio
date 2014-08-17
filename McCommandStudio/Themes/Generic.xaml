@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Button.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/CommandEditor.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/ContextMenu.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Flyout.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Hyperlink.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Menu.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/MetroDialog.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/ScrollBar.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/TaskDialog.xaml" />
+
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Icons.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

@@ -1,0 +1,175 @@
+﻿<metro:MetroWindow x:Class="Cafemoca.McCommandStudio.Views.MainWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:actions="clr-namespace:Cafemoca.McCommandStudio.Views.Behaviors.Actions"
+                   xmlns:behaviors="clr-namespace:Cafemoca.McCommandStudio.Views.Behaviors"
+                   xmlns:commands="clr-namespace:Cafemoca.McCommandStudio.Internals.Utils.Commands"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
+                   xmlns:documents="clr-namespace:Cafemoca.McCommandStudio.Views.Layouts.Documents"
+                   xmlns:editor="clr-namespace:Cafemoca.CommandEditor;assembly=CommandEditor"
+                   xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                   xmlns:flips="clr-namespace:Cafemoca.McCommandStudio.Views.Flips"
+                   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                   xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+                   xmlns:metro_dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+                   xmlns:panes="clr-namespace:Cafemoca.McCommandStudio.Views.Panes"
+                   xmlns:themes="clr-namespace:Cafemoca.McCommandStudio.Internals.AvalonDock.Themes"
+                   xmlns:tools="clr-namespace:Cafemoca.McCommandStudio.Views.Layouts.Tools"
+                   xmlns:viewmodels="clr-namespace:Cafemoca.McCommandStudio.ViewModels"
+                   xmlns:views="clr-namespace:Cafemoca.McCommandStudio.Views"
+                   xmlns:vm_documents="clr-namespace:Cafemoca.McCommandStudio.ViewModels.Layouts.Documents"
+                   Title="McCommandStudio (ALPHA)"
+                   Width="1024"
+                   Height="768"
+                   GlowBrush="{DynamicResource AccentColorBrush}"
+                   IconBitmapScalingMode="HighQuality"
+                   IconEdgeMode="Unspecified"
+                   InputMethod.IsInputMethodEnabled="False"
+                   NonActiveWindowTitleBrush="{DynamicResource WhiteBrush}"
+                   ResizeMode="CanResize"
+                   ShowIconOnTitleBar="True"
+                   ShowTitleBar="True"
+                   SnapsToDevicePixels="True"
+                   TitleCaps="False"
+                   TitleForeground="{DynamicResource GrayBrush5}"
+                   TitlebarHeight="26"
+                   UseLayoutRounding="False"
+                   WindowStartupLocation="CenterScreen"
+                   WindowTitleBrush="{DynamicResource WhiteBrush}"
+                   d:DataContext="{d:DesignInstance viewmodels:MainWindowViewModel}"
+                   mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <ei:PropertyChangedTrigger Binding="{Binding WindowClose}">
+            <actions:WindowCloseAction WindowClose="{Binding WindowClose}" />
+        </ei:PropertyChangedTrigger>
+        <i:EventTrigger EventName="Closing">
+            <actions:WindowClosingAction />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <metro:MetroWindow.RightWindowCommands>
+        <metro:WindowCommands>
+            <Button Command="{Binding SettingCommand}"
+                    Content="settings" />
+        </metro:WindowCommands>
+    </metro:MetroWindow.RightWindowCommands>
+
+    <metro:MetroWindow.Flyouts>
+        <metro:FlyoutsControl>
+            <metro:Flyout Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=metro:MetroWindow}, Mode=OneWay}"
+                          Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=metro:MetroWindow}, Mode=OneWay}"
+                          IsOpen="{Binding IsSettingFlipOpen.Value}"
+                          Position="Right"
+                          Style="{StaticResource NoneTitleFlyout}"
+                          Theme="Adapt">
+                <flips:SettingFlip DataContext="{Binding SettingFlipViewModel}" />
+            </metro:Flyout>
+        </metro:FlyoutsControl>
+    </metro:MetroWindow.Flyouts>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0"
+              Style="{DynamicResource MetroMenu}">
+            <MenuItem Header="ファイル(_F)">
+                <MenuItem Command="{Binding NewCommand}"
+                          Header="新規作成(_N)" />
+                <MenuItem Command="{Binding OpenCommand}"
+                          Header="開く(_O)" />
+                <Separator />
+                <MenuItem Command="{Binding CloseCommand}"
+                          Header="閉じる(_C)" />
+                <Separator />
+                <MenuItem Command="{Binding SaveCommand}"
+                          Header="保存(_S)" />
+                <MenuItem Command="{Binding SaveAsCommand}"
+                          Header="名前を付けて保存(_A)" />
+                <MenuItem Command="{Binding SaveAllCommand}"
+                          Header="すべて保存(_L)" />
+                <Separator />
+                <MenuItem Command="{Binding ExitCommand}"
+                          Header="終了(_X)" />
+            </MenuItem>
+        </Menu>
+
+        <dock:DockingManager Grid.Row="1"
+                             ActiveContent="{Binding ActiveDocument.Value, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+                             AllowDrop="True"
+                             AllowMixedOrientation="True"
+                             AnchorablesSource="{Binding Tools}"
+                             DocumentsSource="{Binding Files}"
+                             SnapsToDevicePixels="True"
+                             behaviors:DropFileBehavior.DropFile="commands:AppCommand.LoadFile">
+            <dock:DockingManager.Theme>
+                <themes:MahAppsMetroTheme />
+            </dock:DockingManager.Theme>
+            <dock:DockingManager.LayoutItemTemplateSelector>
+                <panes:PanesTemplateSelector>
+                    <panes:PanesTemplateSelector.StartPageTemplate>
+                        <DataTemplate>
+                            <documents:StartPage />
+                        </DataTemplate>
+                    </panes:PanesTemplateSelector.StartPageTemplate>
+                    <panes:PanesTemplateSelector.DocumentTemplate>
+                        <DataTemplate>
+                            <documents:Document />
+                        </DataTemplate>
+                    </panes:PanesTemplateSelector.DocumentTemplate>
+                    <panes:PanesTemplateSelector.RecentFilesTemplate>
+                        <DataTemplate>
+                            <tools:RecentFiles />
+                        </DataTemplate>
+                    </panes:PanesTemplateSelector.RecentFilesTemplate>
+                    <panes:PanesTemplateSelector.FileExplorerTemplate>
+                        <DataTemplate>
+                            <tools:FileExplorer />
+                        </DataTemplate>
+                    </panes:PanesTemplateSelector.FileExplorerTemplate>
+                </panes:PanesTemplateSelector>
+            </dock:DockingManager.LayoutItemTemplateSelector>
+            <dock:DockingManager.LayoutItemContainerStyleSelector>
+                <panes:PanesStyleSelector>
+                    <panes:PanesStyleSelector.FileStyle>
+                        <Style TargetType="{x:Type dock:LayoutItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title.Value}" />
+                            <Setter Property="IconSource" Value="{Binding Model.IconSource.Value}" />
+                            <Setter Property="ToolTip" Value="{Binding Model.FilePath.Value}" />
+                            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId.Value}" />
+                        </Style>
+                    </panes:PanesStyleSelector.FileStyle>
+                    <panes:PanesStyleSelector.ToolStyle>
+                        <Style TargetType="{x:Type dock:LayoutItem}">
+                            <Setter Property="Title" Value="{Binding Model.Title.Value}" />
+                            <Setter Property="IconSource" Value="{Binding Model.IconSource.Value}" />
+                            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId.Value}" />
+                            <Setter Property="Visibility" Value="{Binding Model.IsVisible.Value, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected.Value, Mode=TwoWay}" />
+                            <Setter Property="IsActive" Value="{Binding Model.IsActive.Value, Mode=TwoWay}" />
+                        </Style>
+                    </panes:PanesStyleSelector.ToolStyle>
+                </panes:PanesStyleSelector>
+            </dock:DockingManager.LayoutItemContainerStyleSelector>
+            <dock:DockingManager.LayoutUpdateStrategy>
+                <panes:LayoutInitializer />
+            </dock:DockingManager.LayoutUpdateStrategy>
+            <dock:LayoutRoot>
+                <dock:LayoutPanel Orientation="Horizontal">
+                    <dock:LayoutDocumentPane />
+                    <dock:LayoutAnchorablePane DockMinWidth="150"
+                                               DockWidth="250" />
+                </dock:LayoutPanel>
+            </dock:LayoutRoot>
+        </dock:DockingManager>
+    </Grid>
+
+</metro:MetroWindow>

@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3943DF40-D158-43F6-B6A3-994C5F9AC7D0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cafemoca.McCommandStudio</RootNamespace>
+    <AssemblyName>McCommandStudio</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.50429.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Livet">
+      <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Controls" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\packages\Windows7APICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty">
+      <HintPath>..\packages\ReactiveProperty.0.4.5.1\lib\net45\ReactiveProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.DataAnnotations">
+      <HintPath>..\packages\ReactiveProperty.0.4.5.1\lib\net45\ReactiveProperty.DataAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.NET45">
+      <HintPath>..\packages\ReactiveProperty.0.4.5.1\lib\net45\ReactiveProperty.NET45.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Interactive">
+      <HintPath>..\packages\Ix-Main.1.2.2\lib\net45\System.Interactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TaskDialog">
+      <HintPath>..\packages\WPFTaskDialog.1.7.1\lib\net40-Client\TaskDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Internals\AvalonDock\Themes\MahAppsMetroTheme.cs" />
+    <Compile Include="Internals\Controls\HyperlinkText.cs" />
+    <Compile Include="Internals\Converters\ActiveDocumentConverter.cs" />
+    <Compile Include="Internals\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Internals\Utils\Commands\AppCommand.cs" />
+    <Compile Include="Models\FileManager.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Settings\Setting.cs" />
+    <Compile Include="Settings\Xml\XmlFileReader.cs" />
+    <Compile Include="Settings\Xml\XmlSerializableDictionary.cs" />
+    <Compile Include="Settings\Xml\XmlFileWriter.cs" />
+    <Compile Include="ViewModels\Flips\SettingFlipViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Bases\FileViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Bases\PaneViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Bases\ToolViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Documents\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Documents\StartPageViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Tools\FileExplorerViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Tools\RecentFilesViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel_Commands.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel_Exit.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\Behaviors\Actions\CloseMode.cs" />
+    <Compile Include="Views\Behaviors\Actions\WindowCloseAction.cs" />
+    <Compile Include="Views\Behaviors\Actions\WindowClosingAction.cs" />
+    <Compile Include="Views\Behaviors\DropFileBehavior.cs" />
+    <Compile Include="Views\Behaviors\IStateQueryableViewModel.cs" />
+    <Compile Include="Views\Dialogs\AskExitDialog.xaml.cs">
+      <DependentUpon>AskExitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\AskSaveDialog.xaml.cs">
+      <DependentUpon>AskSaveDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flips\SettingFlip.xaml.cs">
+      <DependentUpon>SettingFlip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layouts\Documents\Document.xaml.cs">
+      <DependentUpon>Document.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layouts\Documents\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layouts\Tools\FileExplorer.xaml.cs">
+      <DependentUpon>FileExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layouts\Tools\RecentFiles.xaml.cs">
+      <DependentUpon>RecentFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Panes\LayoutInitializer.cs" />
+    <Compile Include="Views\Panes\PanesStyleSelector.cs" />
+    <Compile Include="Views\Panes\PanesTemplateSelector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AvalonEdit\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
+      <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandEditor\CommandEditor.csproj">
+      <Project>{162b4cd3-9388-4444-887d-81022ca0ed67}</Project>
+      <Name>CommandEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileSystemControls\FileListView\FileListView.csproj">
+      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
+      <Name>FileListView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileSystemControls\FileSystemModels\FileSystemModels.csproj">
+      <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
+      <Name>FileSystemModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MahApps.Metro\MahApps.Metro.Resources\MahApps.Metro.Resources.csproj">
+      <Project>{e708ac99-605b-42a0-8d20-abca8fe42dd2}</Project>
+      <Name>MahApps.Metro.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MahApps.Metro\MahApps.Metro\MahApps.Metro.NET45.csproj">
+      <Project>{942d11c4-29f5-46c4-8c14-4b976d56c637}</Project>
+      <Name>MahApps.Metro.NET45</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Internals\Extensions\" />
+    <Folder Include="ViewModels\Dialogs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Internals\AvalonDock\Themes\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Internals\AvalonDock\Themes\MetroColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Internals\AvalonDock\Themes\MahAppsMetroTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Assets\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Assets\CommandEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Assets\Flyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Assets\ContextMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Assets\Hyperlink.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Assets\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Assets\MetroDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Assets\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Assets\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Assets\TaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\AskExitDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\AskSaveDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flips\SettingFlip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layouts\Documents\Document.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layouts\Documents\StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layouts\Tools\FileExplorer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layouts\Tools\RecentFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\document.png" />
+    <Resource Include="Resources\property-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableBottom.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableLeft.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableRight.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableTop.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableBottom.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableLeft.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableRight.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableTop.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentBottom.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentInside.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentLeft.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentRight.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentTop.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockPaneEmpty.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\DockPaneLargeEmpty.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\HTabGroup.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\Locked.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinAutoHide.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinAutoHide_Black.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinAutoHide_Dark.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinClose.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinClose_Black.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinClose_Dark.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinDocMenu.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinDocMenu_Black.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinMaximize.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinMaximize_Black.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinMaximize_Dark.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinMenu.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinMenu_Black.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinMenu_Dark.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore_Black.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore_Dark.png" />
+    <Resource Include="Internals\AvalonDock\Themes\Images\VTabGroup.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

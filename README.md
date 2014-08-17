@@ -9,15 +9,17 @@ Minecraft のコマンドの記述に特化した IDE ライクなテキスト�
 あくまでテキストエディタベースなので、いわゆるジェネレータ的な機能 (GUI で値を選択できる機能) は備えていません。  
 
 今後ほかにも新しい機能が追加される可能性があります。逆もあるかもしれません。  
+現在 ALPHA 版です。限定的に公開しています。
 
-### コマンドエディタの機能
+コマンドエディタの機能
 --
 * シンタックスハイライト (特定のキーワードに色が付く)
 * 行番号、半角スペース、タブなどの表示
 * 改行に対応
 * コメントアウト (//, /**/) に対応
 * 複数行にわたる括弧やコメントの折りたたみ
-* 1 コマンドにつき 1 テキストファイルベースでの管理
+* 1 コマンドにつき 1 テキストファイルベースでの管理  
+複数コマンド対応予定です
 * ドキュメントタブのドッキング、フローティング
 * リアルタイムなコマンド生成とコピー
 * 自動エスケープ  
@@ -59,7 +61,7 @@ clickEvent の value 値など、コマンド文の文字列を書く際 (特に
 }
 ```
 
-### 動作条件・環境
+動作条件・環境
 --
 * Windows 7 以降
 * [.NET Framework 4.5](http://www.microsoft.com/ja-jp/download/details.aspx?id=30653)
@@ -68,7 +70,7 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 開発者は Windows 8.1 で動作確認を行っています。  
 何らかの不具合が起きた場合、お使いの環境を添えてご報告いただけると嬉しいです。  
 
-### 使用ライブラリ
+使用ライブラリ
 --
 下記のライブラリを使用しています。  
 
@@ -80,12 +82,19 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 * [AvalonEdit](http://avalonedit.net/)
 * [AvalonDock](https://avalondock.codeplex.com/)
 * [Windows API Code Pack](http://archive.msdn.microsoft.com/WindowsAPICodePack)
+* [WPF Toolkit](https://www.nuget.org/packages/WPFToolkit/)
+* [Extended WPF Toolkit](https://wpftoolkit.codeplex.com/)
+* [WPF File System Controls](http://fsc.codeplex.com/)
 
 また下記のアプリケーションの一部ソースコードを参考にさせていただきました。
 
-* [Krile StaryEyes](http://krile.starwing.net/)
+* [Krile StaryEyes](http://krile.starwing.net/) (Tokenizer, QueryEditor, etc)
+* [提督業も忙しい！](http://grabacr.net/kancolleviewer) (Settings, Xml-related)
+* [Edi](http://edi.codeplex.com/) (AppCommands, how to use AvalonEdit and AvalonDock)
 
-### ライセンス
+この場を借りて様々な有益なライブラリやソースコードを公開してくださっている方々に感謝いたします。
+
+ライセンス
 --
 [MIT License](http://opensource.org/licenses/mit-license.php) の下で公開しています。  
 

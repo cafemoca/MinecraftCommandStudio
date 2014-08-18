@@ -15,43 +15,44 @@
         </Grid.RowDefinitions>
         <editor:CommandEditor x:Name="Editor"
                               Grid.Row="0"
+                              Background="{DynamicResource ExtremeWhiteBrush}"
                               BindableText="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              FontFamily="{Binding FontFamily, UpdateSourceTrigger=PropertyChanged}"
-                              FontSize="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}"
-                              Options="{Binding Options, UpdateSourceTrigger=PropertyChanged}"
-                              Line="{Binding Line.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               Column="{Binding Column.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               CurrentLineBackground="{DynamicResource GrayBrush10}"
+                              FontFamily="{Binding FontFamily, UpdateSourceTrigger=PropertyChanged}"
+                              FontSize="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}"
                               Foreground="{DynamicResource BlackBrush}"
                               HorizontalScrollBarVisibility="Auto"
+                              Line="{Binding Line.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              Options="{Binding Options, UpdateSourceTrigger=PropertyChanged}"
                               ShowLineNumbers="{Binding ShowLineNumbers, UpdateSourceTrigger=PropertyChanged}"
                               WordWrap="{Binding TextWrapping, UpdateSourceTrigger=PropertyChanged}" />
-        <Grid Grid.Row="1" >
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
+                     Height="24"
+                     Margin="0"
                      AcceptsReturn="False"
                      Background="{DynamicResource GrayBrush10}"
                      BorderThickness="0"
                      IsReadOnly="True"
                      MaxLines="1"
-                     Height="24"
                      Padding="4,0,4,0"
-                     Margin="0"
                      Text="{Binding CompiledText.Value, UpdateSourceTrigger=PropertyChanged}"
                      TextWrapping="NoWrap" />
             <Button Grid.Column="1"
                     Width="120"
-                    VerticalAlignment="Stretch"
-                    FontSize="12"
-                    Padding="0"
                     HorizontalAlignment="Right"
-                    Foreground="{DynamicResource IdealForegroundColorBrush}"
+                    VerticalAlignment="Stretch"
                     Background="{DynamicResource AccentColorBrush2}"
                     Command="{Binding CopyCommand}"
-                    Content="COPY COMMAND" />
+                    Content="COPY COMMAND"
+                    FontSize="12"
+                    Foreground="{DynamicResource IdealForegroundColorBrush}"
+                    Padding="0" />
         </Grid>
     </Grid>
 

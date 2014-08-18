@@ -2,6 +2,9 @@
 
 namespace Cafemoca.McCommandStudio.Internals.Utils.Commands
 {
+    /// <summary>
+    /// Original: http://edi.codeplex.com/SourceControl/latest#Util/Command/AppCommand.cs
+    /// </summary>
     public class AppCommand
     {
         static AppCommand()

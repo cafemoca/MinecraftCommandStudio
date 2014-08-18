@@ -3,6 +3,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Button.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/ComboBox.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/CommandEditor.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/ContextMenu.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Flyout.xaml" />

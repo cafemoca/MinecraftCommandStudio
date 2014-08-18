@@ -98,6 +98,33 @@
                 <MenuItem Command="{Binding ExitCommand}"
                           Header="終了(_X)" />
             </MenuItem>
+            <MenuItem Header="編集 (_E)">
+                <MenuItem Command="ApplicationCommands.Undo"
+                          Header="元に戻す (_U)" />
+                <MenuItem Command="ApplicationCommands.Redo"
+                          Header="やり直し(_R)" />
+                <Separator />
+                <MenuItem Command="ApplicationCommands.Cut"
+                          Header="切り取り (_T)" />
+                <MenuItem Command="ApplicationCommands.Copy"
+                          Header="コピー (_C)" />
+                <MenuItem Command="ApplicationCommands.Paste"
+                          Header="貼り付け (_P)" />
+                <MenuItem Command="ApplicationCommands.Delete"
+                          Header="削除 (_D)" />
+                <Separator />
+                <MenuItem Command="ApplicationCommands.SelectAll"
+                          Header="すべて選択 (_A)" />
+                <Separator />
+                <MenuItem Command="ApplicationCommands.Find"
+                          Header="検索 (_F)" />
+                <MenuItem Command="ApplicationCommands.Replace"
+                          Header="置換 (_H)" />
+            </MenuItem>
+            <MenuItem Header="ツール (_T)">
+                <MenuItem Header="設定 (_S)"
+                          Command="{Binding SettingCommand}" />
+            </MenuItem>
         </Menu>
 
         <dock:DockingManager Grid.Row="1"
@@ -165,7 +192,7 @@
             <dock:LayoutRoot>
                 <dock:LayoutPanel Orientation="Horizontal">
                     <dock:LayoutDocumentPane />
-                    <dock:LayoutAnchorablePane DockMinWidth="150"
+                    <dock:LayoutAnchorablePane DockMinWidth="100"
                                                DockWidth="250" />
                 </dock:LayoutPanel>
             </dock:LayoutRoot>

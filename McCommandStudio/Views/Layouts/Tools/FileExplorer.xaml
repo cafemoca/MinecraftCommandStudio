@@ -20,6 +20,7 @@
                                   Margin="1"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Top"
+                                  BorderBrush="{DynamicResource GrayBrush8}"
                                   DataContext="{Binding FolderListViewModel.FolderTextPath}"
                                   ItemsSource="{Binding CurrentItems}"
                                   SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
@@ -144,22 +145,23 @@
             </ToolBar>
         </ToolBarTray>
         <!--
-        <fsc_views:FilterComboBox Grid.Row="2"
-                                  Margin="1"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Top"
-                                  DataContext="{Binding FolderListViewModel.Filters}"
-                                  ItemsSource="{Binding CurrentItems}"
-                                  SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                                  Text="{Binding CurrentFilter, UpdateSourceTrigger=PropertyChanged}"
-                                  TextSearch.TextPath="FilterText"
-                                  fsc_behaviors:SelectionChangedCommand.ChangedCommand="{Binding SelectionChanged}">
+            <fsc_views:FilterComboBox Grid.Row="2"
+            Margin="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            DataContext="{Binding FolderListViewModel.Filters}"
+            ItemsSource="{Binding CurrentItems}"
+            SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding CurrentFilter, UpdateSourceTrigger=PropertyChanged}"
+            TextSearch.TextPath="FilterText"
+            fsc_behaviors:SelectionChangedCommand.ChangedCommand="{Binding SelectionChanged}">
             <fsc_views:FilterComboBox.Style>
-                <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type fsc_views:FilterComboBox}" />
+            <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type fsc_views:FilterComboBox}" />
             </fsc_views:FilterComboBox.Style>
-        </fsc_views:FilterComboBox>
+            </fsc_views:FilterComboBox>
         -->
         <ListBox Grid.Row="3"
+                 Background="{DynamicResource ExtremeWhiteBrush}"
                  DataContext="{Binding FolderListViewModel.FolderItemsView}"
                  ItemsSource="{Binding CurrentItems}"
                  fsc_behaviors:DoubleClickSelectorItem.DoubleClickItemCommand="{Binding NavigateDownCommand}">

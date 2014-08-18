@@ -1,28 +1,38 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:app="clr-namespace:System.Windows.Input;assembly=System"
                     xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+                    xmlns:commands="clr-namespace:Cafemoca.McCommandStudio.Internals.Utils.Commands"
                     xmlns:completion="clr-namespace:ICSharpCode.AvalonEdit.CodeCompletion;assembly=ICSharpCode.AvalonEdit"
                     xmlns:editor="clr-namespace:Cafemoca.CommandEditor;assembly=CommandEditor"
                     xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit"
-                    xmlns:search="clr-namespace:ICSharpCode.AvalonEdit.Search;assembly=ICSharpCode.AvalonEdit"
-                    xmlns:app="clr-namespace:System.Windows.Input;assembly=System"
-                    xmlns:commands="clr-namespace:Cafemoca.McCommandStudio.Internals.Utils.Commands">
+                    xmlns:search="clr-namespace:ICSharpCode.AvalonEdit.Search;assembly=ICSharpCode.AvalonEdit">
 
     <Style TargetType="{x:Type editor:CommandEditor}">
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu>
-                    <MenuItem Header="元に戻す (_Z)" Command="ApplicationCommands.Undo" />
-                    <MenuItem Header="やり直し (_Y)" Command="ApplicationCommands.Redo" />
+                    <MenuItem Command="ApplicationCommands.Undo"
+                              Header="元に戻す (_U)" />
+                    <MenuItem Command="ApplicationCommands.Redo"
+                              Header="やり直し (_R)" />
                     <Separator />
-                    <MenuItem Header="カット (_X)" Command="ApplicationCommands.Cut" />
-                    <MenuItem Header="コピー (_C)" Command="ApplicationCommands.Copy" />
-                    <MenuItem Header="貼り付け (_V)" Command="ApplicationCommands.Paste" />
-                    <MenuItem Header="削除 (_D)" Command="ApplicationCommands.Delete" />
+                    <MenuItem Command="ApplicationCommands.Cut"
+                              Header="切り取り (_T)" />
+                    <MenuItem Command="ApplicationCommands.Copy"
+                              Header="コピー (_C)" />
+                    <MenuItem Command="ApplicationCommands.Paste"
+                              Header="貼り付け (_P)" />
+                    <MenuItem Command="ApplicationCommands.Delete"
+                              Header="削除 (_D)" />
                     <Separator />
-                    <MenuItem Header="すべて選択 (_A)" Command="ApplicationCommands.SelectAll" />
+                    <MenuItem Command="ApplicationCommands.SelectAll"
+                              Header="すべて選択 (_A)" />
                     <Separator />
-                    <MenuItem Header="検索 (_F)" Command="ApplicationCommands.Find" />
+                    <MenuItem Command="ApplicationCommands.Find"
+                              Header="検索 (_F)" />
+                    <MenuItem Command="ApplicationCommands.Replace"
+                              Header="置換 (_H)" />
                 </ContextMenu>
             </Setter.Value>
         </Setter>

@@ -11,8 +11,9 @@
              mc:Ignorable="d">
 
     <Grid>
-        <TabControl TabStripPlacement="Left">
-            <TabItem Header="エディタ設定">
+        <metro:MetroTabControl TabStripPlacement="Left">
+            <metro:MetroTabItem Header="テキスト エディター"
+                                metro:ControlsHelper.HeaderFontSize="14">
                 <StackPanel Margin="20"
                             Orientation="Vertical">
                     <CheckBox Margin="0,5"
@@ -83,8 +84,9 @@
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
-            </TabItem>
-            <TabItem Header="コマンド生成">
+            </metro:MetroTabItem>
+            <metro:MetroTabItem Header="コマンド生成ルール"
+                                metro:ControlsHelper.HeaderFontSize="14">
                 <StackPanel Margin="20"
                             Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
@@ -98,8 +100,9 @@
                                   SelectedValuePath="Key" />
                     </StackPanel>
                 </StackPanel>
-            </TabItem>
-            <TabItem Header="McCommandStudioについて">
+            </metro:MetroTabItem>
+            <metro:MetroTabItem Header="Mc Command Studio について"
+                                metro:ControlsHelper.HeaderFontSize="14">
                 <StackPanel Margin="20">
                     <TextBlock>
                         Minecraft のコマンドを独自フォーマットで記述するためのエディタです。
@@ -119,8 +122,8 @@
                         Copyright © 2014 yuri (Cafemoca)
                     </TextBlock>
                 </StackPanel>
-            </TabItem>
-        </TabControl>
+            </metro:MetroTabItem>
+        </metro:MetroTabControl>
     </Grid>
 
 </UserControl>

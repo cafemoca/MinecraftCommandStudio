@@ -93,13 +93,13 @@
     </Style>
 
     <Style x:Key="AnchorableTabItemStyle" TargetType="{x:Type TabItem}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0,0,0,4" />
+        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
+        <Setter Property="BorderThickness" Value="1,0,1,1" />
         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
         <Setter Property="ToolTip" Value="{Binding ToolTip}" />
-        <Setter Property="Padding" Value="3" />
-        <Setter Property="Margin" Value="0,0,2,0" />
+        <Setter Property="Padding" Value="4,3,3,3" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -120,35 +120,20 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Selector.IsSelected" Value="True">
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource ExtremeWhiteBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
                         </Trigger>
                         <Trigger Property="Selector.IsSelected" Value="False">
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
+                            <Setter Property="BorderThickness" Value="0,1,0,0" />
+                            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
                         </Trigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsActive}" Value="True" />
-                                <Condition Binding="{Binding IsLastFocusedDocument}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsActive}" Value="False" />
-                                <Condition Binding="{Binding IsLastFocusedDocument}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
-                        </MultiDataTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="Selector.IsSelected" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource GrayBrush7}" />
                         </MultiTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush10}" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -342,9 +327,10 @@
     <Style x:Key="MetroAnchorablePaneControlStyle" TargetType="{x:Type controls:LayoutAnchorablePaneControl}">
         <Setter Property="TabStripPlacement" Value="Bottom" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
+        <Setter Property="BorderThickness" Value="1,1,1,0" />
         <Setter Property="Foreground" Value="{Binding Model.Root.Manager.Foreground, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="Background" Value="{Binding Model.Root.Manager.Background, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Background" Value="{DynamicResource ExtremeWhiteBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutAnchorablePaneControl}">
@@ -359,7 +345,6 @@
                                 Background="Transparent" />
                         <Border x:Name="ContentPanel"
                                 Grid.Row="0"
-                                Grid.Column="0"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -376,6 +361,12 @@
                                                          Panel.ZIndex="1"
                                                          IsItemsHost="True"
                                                          KeyboardNavigation.TabIndex="1" />
+                        <Border Grid.Row="1"
+                                Height="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Top"
+                                BorderBrush="{DynamicResource GrayBrush8}"
+                                BorderThickness="1" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
@@ -522,8 +513,8 @@
         <ItemsControl ItemsSource="{Binding Children, RelativeSource={RelativeSource TemplatedParent}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel MinWidth="0"
-                                MinHeight="0"
+                    <StackPanel MinWidth="4"
+                                MinHeight="4"
                                 Orientation="{Binding Model.Side, RelativeSource={RelativeSource AncestorType={x:Type controls:LayoutAnchorSideControl}, Mode=FindAncestor}, Converter={StaticResource AnchorSideToOrientationConverter}}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
@@ -654,20 +645,6 @@
                                     <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
                                            Stretch="None" />
                                 </Border>
-                                <Border Name="PART_AnchorablePaneDropTargetRight"
-                                        Grid.Row="1"
-                                        Grid.Column="2"
-                                        Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
-                                           Stretch="None" />
-                                </Border>
-                                <Border Name="PART_AnchorablePaneDropTargetBottom"
-                                        Grid.Row="2"
-                                        Grid.Column="1"
-                                        Margin="0,-0.5,0,0">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
-                                           Stretch="None" />
-                                </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetLeft"
                                         Grid.Row="1"
                                         Grid.Column="0"
@@ -680,6 +657,20 @@
                                         Grid.Column="1"
                                         Margin="0,0.5,0,0">
                                     <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                           Stretch="None" />
+                                </Border>
+                                <Border Name="PART_AnchorablePaneDropTargetRight"
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Margin="2">
+                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
+                                           Stretch="None" />
+                                </Border>
+                                <Border Name="PART_AnchorablePaneDropTargetBottom"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Margin="0,-0.5,0,0">
+                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -710,6 +701,19 @@
                                     <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
                                            Stretch="None" />
                                 </Border>
+                                <Border Name="PART_DocumentPaneDropTargetLeft"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Margin="2">
+                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
+                                           Stretch="None" />
+                                </Border>
+                                <Border Name="PART_DocumentPaneDropTargetInto"
+                                        Grid.Row="1"
+                                        Grid.Column="1">
+                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                           Stretch="None" />
+                                </Border>
                                 <Border Name="PART_DocumentPaneDropTargetRight"
                                         Grid.Row="1"
                                         Grid.Column="2"
@@ -722,19 +726,6 @@
                                         Grid.Column="1"
                                         Margin="2">
                                     <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
-                                           Stretch="None" />
-                                </Border>
-                                <Border Name="PART_DocumentPaneDropTargetLeft"
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
-                                           Stretch="None" />
-                                </Border>
-                                <Border Name="PART_DocumentPaneDropTargetInto"
-                                        Grid.Row="1"
-                                        Grid.Column="1">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -763,6 +754,13 @@
                                        Grid.ColumnSpan="5"
                                        Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneLargeEmpty.png"
                                        Stretch="None" />
+                                <Border Name="PART_DocumentPaneDropTargetTopAsAnchorablePane"
+                                        Grid.Row="0"
+                                        Grid.Column="2">
+                                    <Image Margin="2"
+                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
+                                           Stretch="None" />
+                                </Border>
                                 <Border Name="PART_DocumentPaneFullDropTargetTop"
                                         Grid.Row="1"
                                         Grid.Column="2">
@@ -770,20 +768,14 @@
                                            Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
                                            Stretch="None" />
                                 </Border>
-                                <Border Name="PART_DocumentPaneFullDropTargetRight"
+                                <Border Name="PART_DocumentPaneDropTargetLeftAsAnchorablePane"
                                         Grid.Row="2"
-                                        Grid.Column="3">
+                                        Grid.Column="0">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
+                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
                                            Stretch="None" />
                                 </Border>
-                                <Border Name="PART_DocumentPaneFullDropTargetBottom"
-                                        Grid.Row="3"
-                                        Grid.Column="2">
-                                    <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
-                                           Stretch="None" />
-                                </Border>
+
                                 <Border Name="PART_DocumentPaneFullDropTargetLeft"
                                         Grid.Row="2"
                                         Grid.Column="1">
@@ -798,11 +790,11 @@
                                            Stretch="None" />
                                 </Border>
 
-                                <Border Name="PART_DocumentPaneDropTargetTopAsAnchorablePane"
-                                        Grid.Row="0"
-                                        Grid.Column="2">
+                                <Border Name="PART_DocumentPaneFullDropTargetRight"
+                                        Grid.Row="2"
+                                        Grid.Column="3">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
+                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetRightAsAnchorablePane"
@@ -812,6 +804,13 @@
                                            Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
                                            Stretch="None" />
                                 </Border>
+                                <Border Name="PART_DocumentPaneFullDropTargetBottom"
+                                        Grid.Row="3"
+                                        Grid.Column="2">
+                                    <Image Margin="2"
+                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
+                                           Stretch="None" />
+                                </Border>
                                 <Border Name="PART_DocumentPaneDropTargetBottomAsAnchorablePane"
                                         Grid.Row="4"
                                         Grid.Column="2">
@@ -819,14 +818,6 @@
                                            Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
                                            Stretch="None" />
                                 </Border>
-                                <Border Name="PART_DocumentPaneDropTargetLeftAsAnchorablePane"
-                                        Grid.Row="2"
-                                        Grid.Column="0">
-                                    <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
-                                           Stretch="None" />
-                                </Border>
-
                             </Grid>
                         </Grid>
 
@@ -963,27 +954,27 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter Grid.Row="1"
-                                              Grid.Column="1"
-                                              Content="{TemplateBinding LayoutRootPanel}" />
-                            <ContentPresenter Grid.Row="1"
-                                              Grid.Column="2"
-                                              Content="{TemplateBinding RightSidePanel}" />
-                            <ContentPresenter Grid.Row="1"
-                                              Grid.Column="0"
-                                              Content="{TemplateBinding LeftSidePanel}" />
                             <ContentPresenter Grid.Row="0"
                                               Grid.Column="1"
                                               Content="{TemplateBinding TopSidePanel}" />
-                            <ContentPresenter Grid.Row="2"
+                            <ContentPresenter Grid.Row="1"
+                                              Grid.Column="0"
+                                              Content="{TemplateBinding LeftSidePanel}" />
+                            <ContentPresenter Grid.Row="1"
                                               Grid.Column="1"
-                                              Content="{TemplateBinding BottomSidePanel}" />
+                                              Content="{TemplateBinding LayoutRootPanel}" />
                             <ContentPresenter x:Name="PART_AutoHideArea"
                                               Grid.Row="1"
                                               Grid.Column="1"
                                               HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                               Content="{TemplateBinding AutoHideWindow}" />
+                            <ContentPresenter Grid.Row="1"
+                                              Grid.Column="2"
+                                              Content="{TemplateBinding RightSidePanel}" />
+                            <ContentPresenter Grid.Row="2"
+                                              Grid.Column="1"
+                                              Content="{TemplateBinding BottomSidePanel}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -1003,12 +994,13 @@
     </Style>
 
     <Style TargetType="{x:Type controls:LayoutDocumentControl}">
+        <Setter Property="BorderThickness" Value="1,0,1,1" />
         <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutDocumentControl}">
                     <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderBrush="{DynamicResource GrayBrush8}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <ContentPresenter Content="{Binding Model.Content, RelativeSource={RelativeSource TemplatedParent}}"
                                           ContentTemplateSelector="{Binding LayoutItemTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}" />
@@ -1485,7 +1477,7 @@
     </Style>
 
     <Style x:Key="{x:Type controls:LayoutAutoHideWindowControl}" TargetType="{x:Type controls:LayoutAutoHideWindowControl}">
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ExtremeWhiteBrush}" />
     </Style>
 
     <Style x:Key="MetroNavigatorWindowListBoxItemFocusVisual">

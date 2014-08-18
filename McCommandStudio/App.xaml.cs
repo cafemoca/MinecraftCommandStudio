@@ -1,14 +1,10 @@
-﻿using Cafemoca.McCommandStudio.Services;
-using Cafemoca.McCommandStudio.Settings;
+﻿using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels;
 using Cafemoca.McCommandStudio.Views;
 using Livet;
 using MahApps.Metro;
-using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -29,8 +25,10 @@ namespace Cafemoca.McCommandStudio
             DispatcherHelper.UIDispatcher = this.Dispatcher;
             Setting.Load();
 
+            ThemeManager.AddAppTheme("McsDark", new Uri(mcsDarkTheme, UriKind.Relative));
+            ThemeManager.AddAppTheme("McsLight", new Uri(mcsLightTheme, UriKind.Relative));
             var accent = ThemeManager.GetAccent("Yellow");
-            var theme = ThemeManager.GetAppTheme("BaseDark");
+            var theme = ThemeManager.GetAppTheme("McsDark");
             ThemeManager.ChangeAppStyle(App.Current, accent, theme);
 
             MainViewModel = new MainWindowViewModel();
@@ -55,5 +53,8 @@ namespace Cafemoca.McCommandStudio
 
             Setting.Save();
         }
+
+        private const string mcsDarkTheme = "/McCommandStudio;component/Themes/Colors/McsDark.xaml";
+        private const string mcsLightTheme = "/McCommandStudio;component/Themes/Colors/McsLight.xaml";
     }
 }

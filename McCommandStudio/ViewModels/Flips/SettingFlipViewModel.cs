@@ -1,5 +1,6 @@
 ﻿using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Settings;
+using Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips;
 using Livet;
 using System.Collections.Generic;
 
@@ -7,6 +8,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips
 {
     public class SettingFlipViewModel : ViewModel
     {
+        public AboutViewModel AboutViewModel { get; private set; }
+
         public EscapeModeValue EscapeMode
         {
             get { return Setting.Current.EscapeMode; }
@@ -107,6 +110,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips
 
         public SettingFlipViewModel()
         {
+            this.AboutViewModel = new AboutViewModel();
+
             this.EscapeModeList = new Dictionary<EscapeModeValue, string>()
             {
                 { EscapeModeValue.New, "1.8.x (14w31a 以降)" },

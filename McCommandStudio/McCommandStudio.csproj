@@ -67,6 +67,7 @@
     <Reference Include="System.Interactive">
       <HintPath>..\packages\Ix-Main.1.2.2\lib\net45\System.Interactive.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Reactive.Core">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -141,14 +142,19 @@
     <Compile Include="Internals\AvalonDock\Themes\MahAppsMetroTheme.cs" />
     <Compile Include="Internals\Controls\HyperlinkText.cs" />
     <Compile Include="Internals\Converters\ActiveDocumentConverter.cs" />
+    <Compile Include="Internals\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Internals\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Internals\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Internals\Utils\Commands\AppCommand.cs" />
+    <Compile Include="Services\AutoUpdateService.cs" />
     <Compile Include="Models\FileManager.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Settings\Setting.cs" />
     <Compile Include="Settings\Xml\XmlFileReader.cs" />
     <Compile Include="Settings\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Settings\Xml\XmlFileWriter.cs" />
+    <Compile Include="ViewModels\Flips\SettingFlips\AboutViewModel.cs" />
+    <Compile Include="ViewModels\Flips\SettingFlips\VersionInfoViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlipViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Bases\FileViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Bases\PaneViewModel.cs" />
@@ -173,6 +179,12 @@
     </Compile>
     <Compile Include="Views\Flips\SettingFlip.xaml.cs">
       <DependentUpon>SettingFlip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flips\SettingFlips\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flips\SettingFlips\VersionInfo.xaml.cs">
+      <DependentUpon>VersionInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Layouts\Documents\Document.xaml.cs">
       <DependentUpon>Document.xaml</DependentUpon>
@@ -248,7 +260,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Internals\Extensions\" />
     <Folder Include="ViewModels\Dialogs\" />
   </ItemGroup>
   <ItemGroup>
@@ -333,6 +344,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Flips\SettingFlip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flips\SettingFlips\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flips\SettingFlips\VersionInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

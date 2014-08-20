@@ -3,6 +3,7 @@
                     xmlns:converters="clr-namespace:Cafemoca.McCommandStudio.Internals.Converters">
 
     <converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
 </ResourceDictionary>

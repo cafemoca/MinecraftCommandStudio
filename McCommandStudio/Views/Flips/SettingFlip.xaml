@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Cafemoca.McCommandStudio.ViewModels.Flips"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:panels="clr-namespace:Cafemoca.McCommandStudio.Views.Flips.SettingFlips"
              d:DesignHeight="480"
              d:DesignWidth="640"
              mc:Ignorable="d">
@@ -13,8 +14,8 @@
     <Grid>
         <metro:MetroTabControl TabStripPlacement="Left">
             <metro:MetroTabItem Header="テキスト エディター"
-                                metro:ControlsHelper.HeaderFontSize="14">
-                <StackPanel Margin="20"
+                                metro:ControlsHelper.HeaderFontSize="13">
+                <StackPanel Margin="20,0,20,20"
                             Orientation="Vertical">
                     <CheckBox Margin="0,5"
                               Content="テキストの終わりより下までスクロール可能にする"
@@ -86,8 +87,8 @@
                 </StackPanel>
             </metro:MetroTabItem>
             <metro:MetroTabItem Header="コマンド生成ルール"
-                                metro:ControlsHelper.HeaderFontSize="14">
-                <StackPanel Margin="20"
+                                metro:ControlsHelper.HeaderFontSize="13">
+                <StackPanel Margin="20,0"
                             Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Label Width="160"
@@ -102,26 +103,12 @@
                 </StackPanel>
             </metro:MetroTabItem>
             <metro:MetroTabItem Header="Mc Command Studio について"
-                                metro:ControlsHelper.HeaderFontSize="14">
-                <StackPanel Margin="20">
-                    <TextBlock>
-                        Minecraft のコマンドを独自フォーマットで記述するためのエディタです。
-                        <LineBreak />
-                        <LineBreak />
-                        開発版です。多くの機能が未実装です。
-                        <LineBreak />
-                        開発・調整中なので、正式にリリースするときに実装される予定です。
-                        <LineBreak />
-                        <LineBreak />
-                        <TextBlock Foreground="{DynamicResource GrayBrush3}">(開発途中: 入力中のコンプリーションウィンドウ, メニュー, 設定の保存, オートアップデート, など)</TextBlock>
-                        <LineBreak />
-                        <LineBreak />
-                        Author / Developer:
-                        <controls:HyperlinkText Uri="https://twitter.com/yuri_v3v">@yuri_v3v</controls:HyperlinkText>
-                        <LineBreak />
-                        Copyright © 2014 yuri (Cafemoca)
-                    </TextBlock>
-                </StackPanel>
+                                metro:ControlsHelper.HeaderFontSize="13">
+                <ScrollViewer Margin="20,0,0,20"
+                              Padding="0,0,20,0"
+                              VerticalScrollBarVisibility="Auto">
+                    <panels:About DataContext="{Binding AboutViewModel}" />
+                </ScrollViewer>
             </metro:MetroTabItem>
         </metro:MetroTabControl>
     </Grid>

@@ -7,11 +7,11 @@ using System.Windows;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("McCommandStudio")]
-[assembly: AssemblyDescription("Minecraft コマンド編集に特化したテキストエディタ")]
+[assembly: AssemblyTitle("McSlimUpdater")]
+[assembly: AssemblyDescription("Mc Command Studio アップデータ")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("McCommandStudio")]
+[assembly: AssemblyProduct("McSlimUpdater")]
 [assembly: AssemblyCopyright("Copyright © 2014 yuri")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -51,5 +51,5 @@ using System.Windows;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.8.6.0")]
-[assembly: AssemblyFileVersion("0.8.6.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

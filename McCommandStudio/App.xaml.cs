@@ -1,10 +1,14 @@
-﻿using Cafemoca.McCommandStudio.Settings;
+﻿using Cafemoca.McCommandStudio.Services;
+using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels;
 using Cafemoca.McCommandStudio.Views;
 using Livet;
 using MahApps.Metro;
 using System;
+using System.IO;
+using System.Linq;
 using System.Reactive.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
@@ -21,6 +25,11 @@ namespace Cafemoca.McCommandStudio
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            if (e.Args.Contains("/updated"))
+            {
+                AutoUpdateService.PostUpdate();
+            }
 
             DispatcherHelper.UIDispatcher = this.Dispatcher;
             Setting.Load();
@@ -56,5 +65,21 @@ namespace Cafemoca.McCommandStudio
 
         private const string mcsDarkTheme = "/McCommandStudio;component/Themes/Colors/McsDark.xaml";
         private const string mcsLightTheme = "/McCommandStudio;component/Themes/Colors/McsLight.xaml";
+
+        private static readonly Version _version = Assembly.GetEntryAssembly().GetName().Version;
+        internal static Version Version
+        {
+#if DEBUG
+            get { return Version.Parse("0.0.0"); }
+#else
+            get { return _version; }
+#endif
+        }
+
+        private static readonly string _binDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        internal static string BinDirectory
+        {
+            get { return _binDirectory; }
+        }
     }
 }

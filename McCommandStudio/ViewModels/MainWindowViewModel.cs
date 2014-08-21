@@ -46,7 +46,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
             this.Tools.Add(new FileExplorerViewModel());
 
             this.Files = new ReactiveCollection<FileViewModel>();
-            this.Files.Add(startPageViewModel);
+            this.Files.Add(this.startPageViewModel);
 
             this.NewCommand = new ReactiveCommand();
             this.NewCommand.Subscribe(_ =>
@@ -54,7 +54,6 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 var newFile = new DocumentViewModel();
                 this.Files.Add(newFile);
                 this.ActiveDocument.Value = newFile;
-                this.CloseStartPage();
             });
 
             this.OpenCommand = new ReactiveCommand();
@@ -72,13 +71,15 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 }
             });
 
-            this.SaveCommand = this.ActiveDocument
-                .Select(f => f != null ? f.IsModified.Value : false)
+            this.SaveCommand = (ReactiveCommand)this.ActiveDocument
+                .Where(f => f != null)
+                .Select(f => f != null && !(f is StartPageViewModel))
                 .ToReactiveCommand(false);
             this.SaveCommand.Subscribe(_ =>
                 this.Save(this.ActiveDocument.Value, false));
 
             this.SaveAsCommand = this.ActiveDocument
+                .Where(f => f != null)
                 .Select(f => f != null && !(f is StartPageViewModel))
                 .ToReactiveCommand(false);
             this.SaveAsCommand.Subscribe(_ =>
@@ -88,9 +89,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 .Any()
                 .ToReactiveCommand();
             this.SaveAllCommand.Subscribe(_ =>
-            {
-                this.SaveAll();
-            });
+                this.SaveAll());
 
             this.CloseCommand = this.ActiveDocument
                 .Select(f => f != null)
@@ -104,10 +103,13 @@ namespace Cafemoca.McCommandStudio.ViewModels
             this.SettingCommand.Subscribe(_ =>
                 this.IsSettingFlipOpen.Value = !this.IsSettingFlipOpen.Value);
 
-
             this.ExitCommand = new ReactiveCommand();
             this.ExitCommand.Subscribe(_ =>
                 this.WindowClose = true);
+
+            this.NewCommand.Subscribe(_ => this.CloseStartPage());
+            this.OpenCommand.Subscribe(_ => this.CloseStartPage());
+            this.CloseCommand.Subscribe(_ => this.CloseStartPage());
         }
 
         private void CloseStartPage()
@@ -115,6 +117,10 @@ namespace Cafemoca.McCommandStudio.ViewModels
             if (this.Files.Contains(this.startPageViewModel))
             {
                 this.Files.Remove(this.startPageViewModel);
+            }
+            else if (!this.Files.Any())
+            {
+                this.Files.Add(this.startPageViewModel);
             }
         }
 
@@ -135,13 +141,16 @@ namespace Cafemoca.McCommandStudio.ViewModels
             this.Files.Add(fileViewModel);
 
             this.ActiveDocument.Value = fileViewModel;
-            this.CloseStartPage();
 
             return fileViewModel;
         }
 
         public void Save(FileViewModel fileToSave, bool saveAsFlag = false)
         {
+            if (fileToSave is StartPageViewModel)
+            {
+                return;
+            }
             if (fileToSave.FilePath.Value != null && !saveAsFlag && !fileToSave.IsModified.Value)
             {
                 return;

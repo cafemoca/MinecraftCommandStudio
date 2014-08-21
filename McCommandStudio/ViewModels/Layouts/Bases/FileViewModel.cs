@@ -1,4 +1,5 @@
 ﻿using Cafemoca.McCommandStudio.Models;
+using Cafemoca.McCommandStudio.Settings;
 using Codeplex.Reactive;
 using Codeplex.Reactive.Extensions;
 using System;
@@ -24,12 +25,27 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
         public virtual ReactiveCommand SaveAsCommand { get; private set; }
         public virtual ReactiveCommand CloseCommand { get; private set; }
 
+        public virtual string DefaultFileName
+        {
+            get { return Setting.Current.DefaultFileName; }
+        }
+
         public FileViewModel()
-            : this(null)
+            : this(null, -1)
+        {
+        }
+
+        public FileViewModel(int count)
+            : this(null, count)
         {
         }
 
         public FileViewModel(string filePath)
+            : this(filePath, -1)
+        {
+        }
+
+        public FileViewModel(string filePath, int count)
             : base()
         {
             this.Title = new ReactiveProperty<string>();
@@ -41,7 +57,9 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
 
             this.IsModified = new ReactiveProperty<bool>(false);
             this.FileName = this.FilePath
-                .Select(p => (p == null) ? "untitled" : Path.GetFileName(p))
+                .Select(p => (p == null)
+                    ? this.DefaultFileName + ((count >= 0) ? " " + count : string.Empty) + ".txt"
+                    : Path.GetFileName(p))
                 .ToReactiveProperty();
 
             this.Text.Pairwise()

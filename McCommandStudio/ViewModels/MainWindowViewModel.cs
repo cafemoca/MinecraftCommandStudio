@@ -36,6 +36,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
         public ReactiveCommand CloseCommand { get; private set; }
 
         private readonly StartPageViewModel startPageViewModel = new StartPageViewModel();
+        private int documentCount = 0;
 
         public MainWindowViewModel()
         {
@@ -51,7 +52,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
             this.NewCommand = new ReactiveCommand();
             this.NewCommand.Subscribe(_ =>
             {
-                var newFile = new DocumentViewModel();
+                var newFile = new DocumentViewModel(this.documentCount++);
                 this.Files.Add(newFile);
                 this.ActiveDocument.Value = newFile;
             });

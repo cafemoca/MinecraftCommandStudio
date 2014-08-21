@@ -69,6 +69,7 @@ namespace Cafemoca.McCommandStudio.Settings
                 FontSize = 12,
                 ShowLineNumbers = true,
                 TextWrapping = false,
+                DefaultFileName = "untitled",
             };
         }
 
@@ -348,6 +349,21 @@ namespace Cafemoca.McCommandStudio.Settings
             set
             {
                 this._textWrapping = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region DefaultFileName 変更通知プロパティ
+
+        private string _defaultFileName = "untitled";
+        public string DefaultFileName
+        {
+            get { return this._defaultFileName; }
+            set
+            {
+                this._defaultFileName = value;
                 this.RaisePropertyChanged();
             }
         }

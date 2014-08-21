@@ -51,12 +51,22 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
         public ReactiveCommand CopyCommand { get; private set; }
 
         public DocumentViewModel()
-            : this(null)
+            : this(null, -1)
+        {
+        }
+
+        public DocumentViewModel(int count)
+            : this(null, count)
         {
         }
 
         public DocumentViewModel(string filePath)
-            : base(filePath)
+            : this(filePath, -1)
+        {
+        }
+
+        public DocumentViewModel(string filePath, int count)
+            : base(filePath, count)
         {
             Setting.Current.ObserveProperty(x => x.Options)
                 .Subscribe(_ => this.RaisePropertyChanged("Options"));

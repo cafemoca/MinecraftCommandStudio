@@ -106,6 +106,12 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips
             set { Setting.Current.FontSize = value; }
         }
 
+        public string DefaultFileName
+        {
+            get { return Setting.Current.DefaultFileName; }
+            set { Setting.Current.DefaultFileName = value; }
+        }
+
         public Dictionary<EscapeModeValue, string> EscapeModeList { get; private set; }
 
         public SettingFlipViewModel()

@@ -13,6 +13,20 @@
 
     <Grid>
         <metro:MetroTabControl TabStripPlacement="Left">
+            <metro:MetroTabItem Header="一般設定"
+                                metro:ControlsHelper.HeaderFontSize="13">
+                <StackPanel Margin="20,0,20,20"
+                            Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="130"
+                               Content="デフォルトのファイル名:" />
+                        <TextBox Width="200"
+                                 MinHeight="24"
+                                 BorderBrush="{DynamicResource GrayBrush8}"
+                                 Text="{Binding DefaultFileName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </metro:MetroTabItem>
             <metro:MetroTabItem Header="テキスト エディター"
                                 metro:ControlsHelper.HeaderFontSize="13">
                 <StackPanel Margin="20,0,20,20"

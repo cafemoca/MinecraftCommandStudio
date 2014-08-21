@@ -142,6 +142,10 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
         public void Save(FileViewModel fileToSave, bool saveAsFlag = false)
         {
+            if (fileToSave.FilePath.Value != null && !saveAsFlag && !fileToSave.IsModified.Value)
+            {
+                return;
+            }
             if (fileToSave.FilePath.Value == null || saveAsFlag)
             {
                 var dialog = new CommonSaveFileDialog();

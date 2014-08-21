@@ -25,14 +25,12 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
             #region Save
             window.CommandBindings.Add(new CommandBinding(AppCommand.Save,
-                (s, e) => this.SaveCommand.Execute(),
-                (s, e) => this.SaveCommand.CanExecute()));
+                (s, e) => this.Save(this.ActiveDocument.Value, false)));
             #endregion
 
             #region SaveAs
             window.CommandBindings.Add(new CommandBinding(AppCommand.SaveAs,
-                (s, e) => this.SaveAsCommand.Execute(),
-                (s, e) => this.SaveAsCommand.CanExecute()));
+                (s, e) => this.Save(this.ActiveDocument.Value, true)));
             #endregion
 
             #region SaveAll

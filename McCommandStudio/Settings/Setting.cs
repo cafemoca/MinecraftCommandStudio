@@ -85,7 +85,6 @@ namespace Cafemoca.McCommandStudio.Settings
                 this._options.ShowEndOfLine = this.ShowEndOfLine;
                 this._options.AllowScrollBelowDocument = this.AllowScrollBelowDocument;
                 this._options.CutCopyWholeLine = this.CutCopyWholeLine;
-                this._options.CutCopyWholeLine = this.ConvertTabsToSpaces;
                 this._options.ConvertTabsToSpaces = this.ConvertTabsToSpaces;
                 this._options.IndentationSize = this.IndentationSize;
                 this._options.ColumnRulerPosition = this.ColumnRulerPosition;

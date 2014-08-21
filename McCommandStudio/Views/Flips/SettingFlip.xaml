@@ -21,9 +21,9 @@
                               Content="テキストの終わりより下までスクロール可能にする"
                               IsChecked="{Binding AllowScrollBelowDocument}" />
                     <CheckBox Margin="0,5"
-                              Content="行単位の切り取りを有効にする"
+                              Content="行単位の切り取り・コピーを有効にする"
                               IsChecked="{Binding CutCopyWholeLine}"
-                              ToolTip="テキストを選択せずに切り取り (Ctrl + X) をした際にカーソルのある行全体を切り取ります" />
+                              ToolTip="テキストを選択せずに切り取り・コピーをした際にカーソルのある行全体に対して行います" />
                     <CheckBox Margin="0,5"
                               Content="文字の入力中にカーソルを非表示にする"
                               IsChecked="{Binding HideCursorWhileTyping}" />

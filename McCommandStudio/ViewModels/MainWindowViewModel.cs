@@ -160,6 +160,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 var dialog = new CommonSaveFileDialog();
                 dialog.Filters.Add(new CommonFileDialogFilter("テキスト ファイル (*.txt)", "*.txt"));
                 dialog.Filters.Add(new CommonFileDialogFilter("すべてのファイル (*.*)", "*.*"));
+                dialog.DefaultFileName = fileToSave.FileName.Value;
                 dialog.DefaultExtension = "txt";
 
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)

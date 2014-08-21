@@ -205,5 +205,10 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 this.ActiveDocument.Value = this.Files.FirstOrDefault();
             }
         }
+
+        public void Close(ToolViewModel toolViewModel)
+        {
+            this.Tools.Remove(toolViewModel);
+        }
     }
 }

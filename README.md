@@ -1,4 +1,4 @@
-McCommandStudio
+Mc Command Studio
 ===
 
 Minecraft のコマンドの記述に特化した IDE ライクなテキストエディタです。  
@@ -82,13 +82,14 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 * [AvalonEdit](http://avalonedit.net/)
 * [AvalonDock](https://avalondock.codeplex.com/)
 * [Windows API Code Pack](http://archive.msdn.microsoft.com/WindowsAPICodePack)
+* [WPF TaskDialog](http://www.codeproject.com/Articles/137552/WPF-TaskDialog-Wrapper-and-Emulator)
 * [WPF Toolkit](https://www.nuget.org/packages/WPFToolkit/)
 * [Extended WPF Toolkit](https://wpftoolkit.codeplex.com/)
 * [WPF File System Controls](http://fsc.codeplex.com/)
 
 また下記のアプリケーションの一部ソースコードを参考にさせていただきました。
 
-* [Krile StaryEyes](http://krile.starwing.net/) (Tokenizer, QueryEditor, etc)
+* [Krile StaryEyes](http://krile.starwing.net/) (Tokenizer, QueryEditor, SweetMagic, etc)
 * [提督業も忙しい！](http://grabacr.net/kancolleviewer) (Settings, Xml-related)
 * [Edi](http://edi.codeplex.com/) (AppCommands, how to use AvalonEdit and AvalonDock)
 

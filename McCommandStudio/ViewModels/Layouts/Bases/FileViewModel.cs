@@ -5,6 +5,7 @@ using Codeplex.Reactive.Extensions;
 using System;
 using System.IO;
 using System.Reactive.Linq;
+using System.Text;
 using System.Windows.Media;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
@@ -20,6 +21,7 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
         public virtual ReactiveProperty<string> FileName { get; private set; }
         public virtual ReactiveProperty<string> Text { get; private set; }
         public virtual ReactiveProperty<bool> IsModified { get; private set; }
+        public virtual ReactiveProperty<Encoding> Encoding { get; private set; }
 
         public virtual ReactiveCommand SaveCommand { get; private set; }
         public virtual ReactiveCommand SaveAsCommand { get; private set; }
@@ -50,10 +52,11 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
         {
             this.Title = new ReactiveProperty<string>();
 
-            this.FilePath = new ReactiveProperty<string>(filePath);
-            this.Text = new ReactiveProperty<string>((filePath != null)
-                ? FileManager.LoadTextFile(filePath)
-                : string.Empty);
+            var textFile = FileManager.LoadTextFile(filePath);
+
+            this.FilePath = new ReactiveProperty<string>(textFile.FilePath);
+            this.Text = new ReactiveProperty<string>(textFile.Text ?? string.Empty);
+            this.Encoding = new ReactiveProperty<Encoding>(textFile.Encoding);
 
             this.IsModified = new ReactiveProperty<bool>(false);
             this.FileName = this.FilePath

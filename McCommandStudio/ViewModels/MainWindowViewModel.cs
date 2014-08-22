@@ -174,7 +174,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 }
             }
 
-            FileManager.SaveTextFile(fileToSave.FilePath.Value, fileToSave.Text.Value);
+            FileManager.SaveTextFile(fileToSave.FilePath.Value, fileToSave.Text.Value, fileToSave.Encoding.Value);
             this.ActiveDocument.Value.IsModified.Value = false;
         }
 

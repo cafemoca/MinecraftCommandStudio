@@ -146,6 +146,10 @@
     <Compile Include="Internals\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Internals\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Internals\Utils\Commands\AppCommand.cs" />
+    <Compile Include="Internals\Utils\ReadJEnc\CharCode.cs" />
+    <Compile Include="Internals\Utils\ReadJEnc\FileReader.cs" />
+    <Compile Include="Internals\Utils\ReadJEnc\FileType.cs" />
+    <Compile Include="Internals\Utils\ReadJEnc\ReadJEnc.cs" />
     <Compile Include="Services\AutoUpdateService.cs" />
     <Compile Include="Models\FileManager.cs" />
     <Compile Include="Services\DialogService.cs" />
@@ -169,6 +173,7 @@
     <Compile Include="ViewModels\MainWindowViewModel_Commands.cs" />
     <Compile Include="ViewModels\MainWindowViewModel_Exit.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Parts\StatusBarViewModel.cs" />
     <Compile Include="Views\Behaviors\Actions\CloseMode.cs" />
     <Compile Include="Views\Behaviors\Actions\WindowCloseAction.cs" />
     <Compile Include="Views\Behaviors\Actions\WindowClosingAction.cs" />
@@ -216,6 +221,9 @@
     <Compile Include="Views\Panes\LayoutInitializer.cs" />
     <Compile Include="Views\Panes\PanesStyleSelector.cs" />
     <Compile Include="Views\Panes\PanesTemplateSelector.cs" />
+    <Compile Include="Views\Parts\StatusBar.xaml.cs">
+      <DependentUpon>StatusBar.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -396,6 +404,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Parts\StatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

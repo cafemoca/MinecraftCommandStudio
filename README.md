@@ -86,6 +86,7 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 * [WPF Toolkit](https://www.nuget.org/packages/WPFToolkit/)
 * [Extended WPF Toolkit](https://wpftoolkit.codeplex.com/)
 * [WPF File System Controls](http://fsc.codeplex.com/)
+* [ReadJEnc](http://www.vector.co.jp/soft/winnt/util/se506899.html)
 
 また下記のアプリケーションの一部ソースコードを参考にさせていただきました。
 

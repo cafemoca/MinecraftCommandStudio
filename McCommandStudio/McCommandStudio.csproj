@@ -153,6 +153,7 @@
     <Compile Include="Services\AutoUpdateService.cs" />
     <Compile Include="Models\FileManager.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\StatusService.cs" />
     <Compile Include="Settings\Setting.cs" />
     <Compile Include="Settings\Xml\XmlFileReader.cs" />
     <Compile Include="Settings\Xml\XmlSerializableDictionary.cs" />
@@ -221,6 +222,9 @@
     <Compile Include="Views\Panes\LayoutInitializer.cs" />
     <Compile Include="Views\Panes\PanesStyleSelector.cs" />
     <Compile Include="Views\Panes\PanesTemplateSelector.cs" />
+    <Compile Include="Views\Parts\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Parts\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
@@ -404,6 +408,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Parts\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

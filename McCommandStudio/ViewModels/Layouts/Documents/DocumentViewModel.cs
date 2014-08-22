@@ -1,5 +1,6 @@
 ﻿using Cafemoca.CommandEditor;
 using Cafemoca.CommandEditor.Utils;
+using Cafemoca.McCommandStudio.Services;
 using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
 using Codeplex.Reactive;
@@ -85,7 +86,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 
             this.CopyCommand = new ReactiveCommand();
             this.CopyCommand.Subscribe(_ =>
-                Clipboard.SetText(this.CompiledText.Value));
+                this.Line.Value = 3);
+                //Clipboard.SetText(this.CompiledText.Value));
         }
 
         public void JumpToLine(int line)
@@ -101,6 +103,20 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
         public void UpdateCommand()
         {
             this.CompiledText.Value = this.Text.Value.Tokenize().Compile(this.EscapeMode);
+        }
+
+        private void SetDocumentStatus()
+        {
+            var message = new[]
+            {
+                this.Encoding.Value.ToString(),
+                this.Line.Value.ToString(),
+                this.Column.Value.ToString()
+            }
+            .JoinString(" / ")
+            .ToString();
+
+            StatusService.Current.SetMain(message);
         }
     }
 }

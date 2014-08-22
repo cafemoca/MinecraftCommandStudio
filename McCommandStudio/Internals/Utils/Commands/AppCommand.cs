@@ -49,6 +49,9 @@ namespace Cafemoca.McCommandStudio.Internals.Utils.Commands
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.G, ModifierKeys.Control, "Ctrl+G"));
             AppCommand._gotoLine = new RoutedUICommand("", "GotoLine", typeof(AppCommand), inputs);
+
+            inputs = new InputGestureCollection();
+            AppCommand._openSettings = new RoutedUICommand("", "OpenSettings", typeof(AppCommand), inputs);
         }
 
         private static RoutedUICommand _exit;
@@ -109,6 +112,12 @@ namespace Cafemoca.McCommandStudio.Internals.Utils.Commands
         public static RoutedUICommand GotoLine
         {
             get { return AppCommand._gotoLine; }
+        }
+
+        private static RoutedUICommand _openSettings;
+        public static RoutedUICommand OpenSettings
+        {
+            get { return AppCommand._openSettings; }
         }
     }
 }

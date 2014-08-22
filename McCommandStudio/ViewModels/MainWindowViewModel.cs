@@ -1,8 +1,10 @@
 ﻿using Cafemoca.McCommandStudio.Models;
+using Cafemoca.McCommandStudio.Services;
 using Cafemoca.McCommandStudio.ViewModels.Flips;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Tools;
+using Cafemoca.McCommandStudio.ViewModels.Parts;
 using Codeplex.Reactive;
 using Codeplex.Reactive.Extensions;
 using Livet;
@@ -11,8 +13,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
-using System.Windows;
 using TaskDialog = TaskDialogInterop;
 
 namespace Cafemoca.McCommandStudio.ViewModels
@@ -23,6 +23,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
         public ReactiveCollection<ToolViewModel> Tools { get; private set; }
         public ReactiveCollection<FileViewModel> Files { get; private set; }
+
+        public StatusBarViewModel StatusBarViewModel { get; private set; }
 
         public SettingFlipViewModel SettingFlipViewModel { get; private set; }
         public ReactiveProperty<bool> IsSettingFlipOpen { get; private set; }
@@ -48,6 +50,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
             this.Files = new ReactiveCollection<FileViewModel>();
             this.Files.Add(this.startPageViewModel);
+            this.Files.CollectionChangedAsObservable().Subscribe(_ =>
+                StatusService.Current.SetMain(this.Files.Count + " 個のドキュメント"));
 
             this.NewCommand = new ReactiveCommand();
             this.NewCommand.Subscribe(_ =>
@@ -55,6 +59,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 var newFile = new DocumentViewModel(this.documentCount++);
                 this.Files.Add(newFile);
                 this.ActiveDocument.Value = newFile;
+                this.CloseStartPage();
+                StatusService.Current.Notify("新規ドキュメントを作成しました。");
             });
 
             this.OpenCommand = new ReactiveCommand();
@@ -68,20 +74,21 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
-                    var fileViewModel = this.Open(dialog.FileName);
+                    var vm = this.Open(dialog.FileName);
+                    StatusService.Current.Notify(vm.FilePath.Value + " を開きました。");
                 }
             });
 
             this.SaveCommand = (ReactiveCommand)this.ActiveDocument
                 .Where(f => f != null)
-                .Select(f => f != null && !(f is StartPageViewModel))
+                .Select(f => !(f is StartPageViewModel))
                 .ToReactiveCommand(false);
             this.SaveCommand.Subscribe(_ =>
                 this.Save(this.ActiveDocument.Value, false));
 
             this.SaveAsCommand = this.ActiveDocument
                 .Where(f => f != null)
-                .Select(f => f != null && !(f is StartPageViewModel))
+                .Select(f => !(f is StartPageViewModel))
                 .ToReactiveCommand(false);
             this.SaveAsCommand.Subscribe(_ =>
                 this.Save(this.ActiveDocument.Value, true));
@@ -93,10 +100,13 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 this.SaveAll());
 
             this.CloseCommand = this.ActiveDocument
-                .Select(f => f != null)
+                .Where(f => f != null)
+                .Select(f => !(f is StartPageViewModel))
                 .ToReactiveCommand(false);
             this.CloseCommand.Subscribe(_ =>
                 this.Close(this.ActiveDocument.Value));
+
+            this.StatusBarViewModel = new StatusBarViewModel();
 
             this.SettingFlipViewModel = new SettingFlipViewModel();
             this.IsSettingFlipOpen = new ReactiveProperty<bool>(false);
@@ -107,10 +117,6 @@ namespace Cafemoca.McCommandStudio.ViewModels
             this.ExitCommand = new ReactiveCommand();
             this.ExitCommand.Subscribe(_ =>
                 this.WindowClose = true);
-
-            this.NewCommand.Subscribe(_ => this.CloseStartPage());
-            this.OpenCommand.Subscribe(_ => this.CloseStartPage());
-            this.CloseCommand.Subscribe(_ => this.CloseStartPage());
         }
 
         private void CloseStartPage()
@@ -140,6 +146,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
             fileViewModel = new DocumentViewModel(filePath);
             this.Files.Add(fileViewModel);
+            this.CloseStartPage();
 
             this.ActiveDocument.Value = fileViewModel;
 
@@ -175,6 +182,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
             }
 
             FileManager.SaveTextFile(fileToSave.FilePath.Value, fileToSave.Text.Value, fileToSave.Encoding.Value);
+            StatusService.Current.Notify(fileToSave.FilePath.Value + "に保存しました。");
             this.ActiveDocument.Value.IsModified.Value = false;
         }
 
@@ -215,6 +223,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
             }
 
             this.Files.Remove(fileToClose);
+            this.CloseStartPage();
             if (this.ActiveDocument.Value == fileToClose)
             {
                 this.ActiveDocument.Value = this.Files.FirstOrDefault();

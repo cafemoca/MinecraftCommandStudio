@@ -16,6 +16,7 @@
                    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
                    xmlns:metro_dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
                    xmlns:panes="clr-namespace:Cafemoca.McCommandStudio.Views.Panes"
+                   xmlns:parts="clr-namespace:Cafemoca.McCommandStudio.Views.Parts"
                    xmlns:themes="clr-namespace:Cafemoca.McCommandStudio.Internals.AvalonDock.Themes"
                    xmlns:tools="clr-namespace:Cafemoca.McCommandStudio.Views.Layouts.Tools"
                    xmlns:viewmodels="clr-namespace:Cafemoca.McCommandStudio.ViewModels"
@@ -75,58 +76,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <Menu Grid.Row="0"
-              Style="{DynamicResource MetroMenu}">
-            <MenuItem Header="ファイル(_F)">
-                <MenuItem Command="{Binding NewCommand}"
-                          Header="新規作成(_N)" />
-                <MenuItem Command="{Binding OpenCommand}"
-                          Header="開く(_O)" />
-                <Separator />
-                <MenuItem Command="{Binding CloseCommand}"
-                          Header="閉じる(_C)" />
-                <Separator />
-                <MenuItem Command="{Binding SaveCommand}"
-                          Header="保存(_S)" />
-                <MenuItem Command="{Binding SaveAsCommand}"
-                          Header="名前を付けて保存(_A)" />
-                <MenuItem Command="{Binding SaveAllCommand}"
-                          Header="すべて保存(_L)" />
-                <Separator />
-                <MenuItem Command="{Binding ExitCommand}"
-                          Header="終了(_X)" />
-            </MenuItem>
-            <MenuItem Header="編集 (_E)">
-                <MenuItem Command="ApplicationCommands.Undo"
-                          Header="元に戻す (_U)" />
-                <MenuItem Command="ApplicationCommands.Redo"
-                          Header="やり直し(_R)" />
-                <Separator />
-                <MenuItem Command="ApplicationCommands.Cut"
-                          Header="切り取り (_T)" />
-                <MenuItem Command="ApplicationCommands.Copy"
-                          Header="コピー (_C)" />
-                <MenuItem Command="ApplicationCommands.Paste"
-                          Header="貼り付け (_P)" />
-                <MenuItem Command="ApplicationCommands.Delete"
-                          Header="削除 (_D)" />
-                <Separator />
-                <MenuItem Command="ApplicationCommands.SelectAll"
-                          Header="すべて選択 (_A)" />
-                <Separator />
-                <MenuItem Command="ApplicationCommands.Find"
-                          Header="検索 (_F)" />
-                <MenuItem Command="ApplicationCommands.Replace"
-                          Header="置換 (_H)" />
-            </MenuItem>
-            <MenuItem Header="ツール (_T)">
-                <MenuItem Header="設定 (_S)"
-                          Command="{Binding SettingCommand}" />
-            </MenuItem>
-        </Menu>
-
+        <parts:MainMenu Grid.Row="0"
+                        DataContext="{Binding MainMenuViewModel}" />
         <dock:DockingManager Grid.Row="1"
                              ActiveContent="{Binding ActiveDocument.Value, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                              AllowDrop="True"
@@ -197,6 +150,8 @@
                 </dock:LayoutPanel>
             </dock:LayoutRoot>
         </dock:DockingManager>
+        <parts:StatusBar Grid.Row="2"
+                         DataContext="{Binding StatusBarViewModel}" />
     </Grid>
 
 </metro:MetroWindow>

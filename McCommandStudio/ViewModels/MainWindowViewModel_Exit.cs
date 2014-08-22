@@ -25,6 +25,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
         #endregion
 
+        #region WindowClose 変更通知プロパティ
+
         private bool _windowClose = false;
         public bool WindowClose
         {
@@ -35,6 +37,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 this.RaisePropertyChanged();
             }
         }
+
+        #endregion
 
         public ReactiveCommand ExitCommand { get; private set; }
 

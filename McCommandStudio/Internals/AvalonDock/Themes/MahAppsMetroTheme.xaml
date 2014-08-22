@@ -4,7 +4,8 @@
                     xmlns:converters="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:dock="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:properties="clr-namespace:Xceed.Wpf.AvalonDock.Properties;assembly=Xceed.Wpf.AvalonDock"
-                    xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock">
+                    xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
+                    xmlns:commands="clr-namespace:Cafemoca.McCommandStudio.Internals.Utils.Commands">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Brushes.xaml" />
@@ -902,7 +903,6 @@
                        Stretch="Uniform" />
             </MenuItem.Icon>
         </MenuItem>
-
         <MenuItem Command="{Binding NewVerticalTabGroupCommand}"
                   Header="垂直タブ グループの新規作成 (_V)"
                   Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">

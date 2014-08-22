@@ -15,9 +15,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
+                   Margin="-3,-15,0,0"
                    FontFamily="Segoe UI Light"
                    FontSize="45"
                    Foreground="{DynamicResource AccentColorBrush}"
@@ -29,7 +29,8 @@
               VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" MaxWidth="220" />
+                <ColumnDefinition Width="*"
+                                  MaxWidth="220" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TextBlock Foreground="{DynamicResource GrayBrush6}"
@@ -86,17 +87,6 @@
                 </TextBlock>
             </Border>
         </Grid>
-        <TextBlock Grid.Row="3"
-                   VerticalAlignment="Bottom"
-                   FontFamily="{StaticResource DefaultFontFamily}">
-            (C) 2014 yuri.
-            <LineBreak />
-            All rights reserved.
-            <LineBreak />
-            This application is licensed under
-            <controls:HyperlinkText Uri="https://raw.githubusercontent.com/cafemoca/McCommandStudio/master/LICENSE.txt">The MIT License</controls:HyperlinkText>
-            .
-        </TextBlock>
     </Grid>
 
 </UserControl>

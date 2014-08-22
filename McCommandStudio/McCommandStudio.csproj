@@ -154,6 +154,9 @@
     <Compile Include="Settings\Xml\XmlSerializableDictionary.cs" />
     <Compile Include="Settings\Xml\XmlFileWriter.cs" />
     <Compile Include="ViewModels\Flips\SettingFlips\AboutViewModel.cs" />
+    <Compile Include="ViewModels\Flips\SettingFlips\CommonViewModel.cs" />
+    <Compile Include="ViewModels\Flips\SettingFlips\CompileViewModel.cs" />
+    <Compile Include="ViewModels\Flips\SettingFlips\EditorViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlips\VersionInfoViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlipViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Bases\FileViewModel.cs" />
@@ -182,6 +185,15 @@
     </Compile>
     <Compile Include="Views\Flips\SettingFlips\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flips\SettingFlips\Common.xaml.cs">
+      <DependentUpon>Common.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flips\SettingFlips\Compile.xaml.cs">
+      <DependentUpon>Compile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flips\SettingFlips\Editor.xaml.cs">
+      <DependentUpon>Editor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Flips\SettingFlips\VersionInfo.xaml.cs">
       <DependentUpon>VersionInfo.xaml</DependentUpon>
@@ -348,6 +360,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Flips\SettingFlips\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flips\SettingFlips\Common.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flips\SettingFlips\Compile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flips\SettingFlips\Editor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

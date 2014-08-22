@@ -34,11 +34,8 @@ namespace Cafemoca.McCommandStudio.Services
             {
                 using (var client = new HttpClient())
                 {
-#if DEBUG
-                    xmldata = await client.GetByteArrayAsync("https://dl.dropboxusercontent.com/s/73qsyynu680f3tt/version.xml?dl=1");
-#else
+                    //xmldata = await client.GetByteArrayAsync("https://dl.dropboxusercontent.com/s/73qsyynu680f3tt/version.xml?dl=1");
                     xmldata = await client.GetByteArrayAsync(RemoteVersionXml);
-#endif
                     var d = new StringReader(Encoding.ASCII.GetString(xmldata));
                     doc = XDocument.Load(d);
                 }

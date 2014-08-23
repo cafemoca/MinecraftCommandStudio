@@ -86,8 +86,7 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 
             this.CopyCommand = new ReactiveCommand();
             this.CopyCommand.Subscribe(_ =>
-                this.Line.Value = 3);
-                //Clipboard.SetText(this.CompiledText.Value));
+                Clipboard.SetText(this.CompiledText.Value));
         }
 
         public void JumpToLine(int line)

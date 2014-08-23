@@ -78,8 +78,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <parts:MainMenu Grid.Row="0"
-                        DataContext="{Binding MainMenuViewModel}" />
+        <parts:MainMenu Grid.Row="0" />
         <dock:DockingManager Grid.Row="1"
                              ActiveContent="{Binding ActiveDocument.Value, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                              AllowDrop="True"

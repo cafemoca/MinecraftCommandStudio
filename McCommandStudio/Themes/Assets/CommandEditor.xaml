@@ -8,6 +8,24 @@
                     xmlns:rendering="clr-namespace:ICSharpCode.AvalonEdit.Rendering;assembly=ICSharpCode.AvalonEdit"
                     xmlns:search="clr-namespace:ICSharpCode.AvalonEdit.Search;assembly=ICSharpCode.AvalonEdit">
 
+    <Style TargetType="{x:Type completion:CompletionWindow}">
+        <Setter Property="MaxHeight" Value="600" />
+        <Setter Property="MaxWidth" Value="215" />
+        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="ShowActivated" Value="False" />
+        <Setter Property="AllowsTransparency" Value="True" />
+    </Style>
+
+    <Style TargetType="{x:Type completion:CompletionListBox}">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
     <Style TargetType="{x:Type editor:CommandEditor}">
         <Setter Property="ContextMenu">
             <Setter.Value>
@@ -128,16 +146,6 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                        </Style>
-
-                        <Style TargetType="{x:Type completion:CompletionWindowBase}">
-                            <Setter Property="MaxHeight" Value="600" />
-                            <Setter Property="MaxWidth" Value="215" />
-                            <Setter Property="Background" Value="#00000000" />
-                            <Setter Property="BorderThickness" Value="0" />
-                            <Setter Property="BorderBrush" Value="{x:Null}" />
-                            <Setter Property="WindowStyle" Value="None" />
-                            <Setter Property="AllowsTransparency" Value="True" />
                         </Style>
 
                         <Style TargetType="{x:Type search:SearchPanel}">

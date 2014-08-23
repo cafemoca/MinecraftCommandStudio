@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Cafemoca.CommandEditor.Utils
 {
@@ -36,6 +37,18 @@ namespace Cafemoca.CommandEditor.Utils
                 : ignoreCase
                     ? token.Value.Equals(value, StringComparison.OrdinalIgnoreCase)
                     : token.Value == value;
+        }
+
+        internal static bool ContainsLiteral(this Token token, string[] value)
+        {
+            return (token.Type != TokenType.Literal)
+                ? false
+                : value.Contains(token.Value);
+        }
+
+        internal static bool IsMatchType(this Token token, TokenType type)
+        {
+            return token.Type == type;
         }
     }
 

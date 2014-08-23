@@ -36,6 +36,10 @@ namespace Cafemoca.McCommandStudio.Models
         {
             try
             {
+                if (enc == null)
+                {
+                    enc = Encoding.UTF8;
+                }
                 File.WriteAllText(path, text, enc);
             }
             catch (Exception ex)

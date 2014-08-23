@@ -113,7 +113,7 @@ namespace Cafemoca.McCommandStudio.Services
             try
             {
                 var retry = 0;
-                while (File.Exists(xmlPath) &&
+                while (File.Exists(xmlPath) ||
                        File.Exists(updaterPath))
                 {
                     try

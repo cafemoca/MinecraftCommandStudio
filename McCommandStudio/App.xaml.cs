@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -28,7 +29,7 @@ namespace Cafemoca.McCommandStudio
 
             if (e.Args.Contains("/updated"))
             {
-                AutoUpdateService.PostUpdate();
+                Task.Run(() => AutoUpdateService.PostUpdate());
             }
 
             DispatcherHelper.UIDispatcher = this.Dispatcher;

@@ -4,7 +4,8 @@
         Title="Mc Slim Updater"
         Width="480"
         Height="640"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"
@@ -53,7 +54,9 @@
                          Height="5"
                          Margin="0,0,30,20"
                          IsIndeterminate="True" />
-            <TextBox Grid.Row="3"
+            <TextBox x:Name="LogField"
+                     Grid.Row="3"
+                     TextChanged="TextBox_TextChanged"
                      Grid.Column="1"
                      Margin="0,0,0,30"
                      Background="{DynamicResource BackgroundBrush}"

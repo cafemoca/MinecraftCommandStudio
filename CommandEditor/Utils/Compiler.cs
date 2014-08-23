@@ -33,7 +33,6 @@ namespace Cafemoca.CommandEditor.Utils
             TokenType.OperatorLocation,
             TokenType.OperatorTarget,
             TokenType.OpenCurlyBrace,
-            TokenType.OpenSquareBracket,
             TokenType.String,
             TokenType.ScoreAdd,
             TokenType.ScoreDivide,

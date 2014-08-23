@@ -188,7 +188,7 @@
       <Word>Leashed</Word>
       <Word>Sitting</Word>
       <Word>BatFlags</Word>
-      <Word>IsChickenJockey </Word>
+      <Word>IsChickenJockey</Word>
       <Word>powered</Word>
       <Word>ExplosionRadius</Word>
       <Word>ignited</Word>
@@ -263,6 +263,7 @@
       <Word>Small</Word>
       <Word>NoAI</Word>
       <Word>NoBasePlate</Word>
+      <Word>wasOnGround</Word>
     </Keywords>
 
     <!-- tag int -->
@@ -461,6 +462,7 @@
       <Word>slot_16</Word>
       <Word>slot_17</Word>
       <Word>slot_18</Word>
+      <Word>SkullOwner</Word>
     </Keywords>
 
     <!-- tag list -->
@@ -541,6 +543,7 @@
       <Word>data</Word>
       <Word>DisplaySlots</Word>
       <Word>Pose</Word>
+      <Word>SelectedItem</Word>
     </Keywords>
 
     <!-- tag byte array -->

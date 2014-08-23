@@ -73,13 +73,13 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
             this.IconSource.Value = imageSourceConverter.ConvertFromInvariantString(documentIcon) as ImageSource;
 
             this.SaveCommand = this.IsModified.ToReactiveCommand();
-            this.SaveCommand.Subscribe(_ => App.MainViewModel.SaveCommand.Execute(this));
+            this.SaveCommand.Subscribe(_ => App.MainViewModel.Save(this, false));
 
             this.SaveAsCommand = new ReactiveCommand();
-            this.SaveAsCommand.Subscribe(_ => App.MainViewModel.SaveAsCommand.Execute(this));
+            this.SaveAsCommand.Subscribe(_ => App.MainViewModel.Save(this, true));
 
             this.CloseCommand = new ReactiveCommand();
-            this.CloseCommand.Subscribe(_ => App.MainViewModel.CloseCommand.Execute(this));
+            this.CloseCommand.Subscribe(_ => App.MainViewModel.Close(this));
         }
     }
 }

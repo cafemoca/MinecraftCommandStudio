@@ -32,9 +32,15 @@ namespace Cafemoca.CommandEditor.Utils
                             : new Token(TokenType.Plus, "+", cursor);
                         break;
                     case '-':
-                        yield return (text.CheckNext(cursor, '='))
-                            ? new Token(TokenType.ScoreSubtract, "-=", cursor++)
-                            : new Token(TokenType.Minus, "-", cursor);
+                        if (text.CheckNext(cursor, '='))
+                        {
+                            yield return new Token(TokenType.ScoreSubtract, "-=", cursor++);
+                        }
+                        else
+                        {
+                            var begin = cursor;
+                            yield return new Token(TokenType.Literal, text.GetLiteral(ref begin, ref cursor), cursor);
+                        }
                         break;
                     case '*':
                          yield return (text.CheckNext(cursor, '='))
@@ -216,7 +222,7 @@ namespace Cafemoca.CommandEditor.Utils
 
         public static string GetLiteral(this string text, ref int begin, ref int cursor)
         {
-            const string tokens = "<>+-*/%(){}[],:;=!#@~\"\t\r\n 　";
+            const string tokens = "<>+*/%(){}[],:;=!#@~\"\t\r\n 　";
             var literal = "";
 
             do

@@ -27,6 +27,9 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
         {
             this.ContentId.Value = ToolContentId;
             this.FolderListViewModel = new FolderListViewModel(this.FolderList_OnFileOpen);
+
+            this.FolderListViewModel.AddFilter("すべてのファイル", "*.*");
+            this.FolderListViewModel.AddFilter("テキスト ファイル", "*.txt", true);
         }
 
         private void FolderList_OnFileOpen(object sender, FileOpenEventArgs e)

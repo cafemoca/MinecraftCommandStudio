@@ -13,7 +13,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <fsc_views:FolderComboBox Grid.Row="0"
@@ -30,136 +29,157 @@
                 <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type fsc_views:FolderComboBox}" />
             </fsc_views:FolderComboBox.Style>
         </fsc_views:FolderComboBox>
-        <ToolBarTray Grid.Row="1"
-                     VerticalAlignment="Stretch">
-            <ToolBar SnapsToDevicePixels="True"
-                     ToolBarTray.IsLocked="True">
-                <Button Width="20"
-                        Height="20"
-                        Margin="0,0,2,0"
-                        Command="{Binding NavigateBackCommand}"
-                        DataContext="{Binding FolderListViewModel.FolderItemsView}">
-                    <Rectangle Width="12"
-                               Height="10"
-                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_arrow_left}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-                <Button Width="20"
-                        Height="20"
-                        Margin="0,0,2,0"
-                        Command="{Binding NavigateForwardCommand}"
-                        DataContext="{Binding FolderListViewModel.FolderItemsView}">
-                    <Rectangle Width="12"
-                               Height="10"
-                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_arrow_right}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-                <Button Width="20"
-                        Height="20"
-                        Margin="0,0,2,0"
-                        Command="{Binding NavigateUpCommand}"
-                        DataContext="{Binding FolderListViewModel.FolderItemsView}">
-                    <Rectangle Width="10"
-                               Height="12"
-                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_arrow_up}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-                <Button Width="20"
-                        Height="20"
-                        Margin="0,0,2,0"
-                        Command="{Binding RefreshCommand}"
-                        DataContext="{Binding FolderListViewModel.FolderItemsView}">
-                    <Rectangle Width="13"
-                               Height="13"
-                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_refresh}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </Button>
-                <GridSplitter Width="1"
-                              Margin="3,0"
-                              Background="{DynamicResource GrayBrush8}"
-                              SnapsToDevicePixels="True" />
-                <ToggleButton Width="20"
-                              Height="20"
-                              Margin="0,0,2,0"
-                              Command="{Binding ToggleIsFolderVisibleCommand}"
-                              DataContext="{Binding FolderListViewModel.FolderItemsView}"
-                              IsChecked="{Binding ShowFolders, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                              Style="{StaticResource BorderAccentToggleButtonStyle}">
-                    <Rectangle Width="11"
-                               Height="11"
-                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_folder}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </ToggleButton>
-                <ToggleButton Width="20"
-                              Height="20"
-                              Margin="0,0,2,0"
-                              Command="{Binding ToggleIsIconVisibleCommand}"
-                              DataContext="{Binding FolderListViewModel.FolderItemsView}"
-                              IsChecked="{Binding ShowIcons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                              Style="{StaticResource BorderAccentToggleButtonStyle}">
-                    <Rectangle Width="11"
-                               Height="11"
-                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_image}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </ToggleButton>
-                <ToggleButton Width="20"
-                              Height="20"
-                              Margin="0,0,2,0"
-                              Command="{Binding ToggleIsHiddenVisibleCommand}"
-                              DataContext="{Binding FolderListViewModel.FolderItemsView}"
-                              IsChecked="{Binding ShowHidden, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                              Style="{StaticResource BorderAccentToggleButtonStyle}">
-                    <Rectangle Width="11"
-                               Height="11"
-                               Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill"
-                                         Visual="{DynamicResource appbar_page_hidden}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </ToggleButton>
-            </ToolBar>
-        </ToolBarTray>
-        <!--
-            <fsc_views:FilterComboBox Grid.Row="2"
-            Margin="1"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Top"
-            DataContext="{Binding FolderListViewModel.Filters}"
-            ItemsSource="{Binding CurrentItems}"
-            SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-            Text="{Binding CurrentFilter, UpdateSourceTrigger=PropertyChanged}"
-            TextSearch.TextPath="FilterText"
-            fsc_behaviors:SelectionChangedCommand.ChangedCommand="{Binding SelectionChanged}">
-            <fsc_views:FilterComboBox.Style>
-            <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type fsc_views:FilterComboBox}" />
-            </fsc_views:FilterComboBox.Style>
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ToolBarTray Grid.Column="0"
+                         Margin="0,2,0,0">
+                <ToolBar SnapsToDevicePixels="True"
+                         ToolBarTray.IsLocked="True">
+                    <Button Width="20"
+                            Height="20"
+                            Command="{Binding NavigateBackCommand}"
+                            DataContext="{Binding FolderListViewModel.FolderItemsView}">
+                        <Rectangle Width="12"
+                                   Height="10"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_arrow_left}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                    <Button Width="20"
+                            Height="20"
+                            Command="{Binding NavigateForwardCommand}"
+                            DataContext="{Binding FolderListViewModel.FolderItemsView}">
+                        <Rectangle Width="12"
+                                   Height="10"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_arrow_right}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                    <Button Width="20"
+                            Height="20"
+                            Command="{Binding NavigateUpCommand}"
+                            DataContext="{Binding FolderListViewModel.FolderItemsView}">
+                        <Rectangle Width="10"
+                                   Height="12"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_arrow_up}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                    <Button Width="20"
+                            Height="20"
+                            Command="{Binding RefreshCommand}"
+                            DataContext="{Binding FolderListViewModel.FolderItemsView}">
+                        <Rectangle Width="13"
+                                   Height="13"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_refresh}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Button>
+                    <GridSplitter Width="1"
+                                  Margin="2,0"
+                                  Background="{DynamicResource GrayBrush8}"
+                                  SnapsToDevicePixels="True" />
+                    <ToggleButton Width="20"
+                                  Height="20"
+                                  Margin="0,0,2,0"
+                                  Command="{Binding ToggleIsFolderVisibleCommand}"
+                                  DataContext="{Binding FolderListViewModel.FolderItemsView}"
+                                  IsChecked="{Binding ShowFolders, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource BorderAccentToggleButtonStyle}">
+                        <Rectangle Width="11"
+                                   Height="11"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_folder}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </ToggleButton>
+                    <ToggleButton Width="20"
+                                  Height="20"
+                                  Margin="0,0,2,0"
+                                  Command="{Binding ToggleIsIconVisibleCommand}"
+                                  DataContext="{Binding FolderListViewModel.FolderItemsView}"
+                                  IsChecked="{Binding ShowIcons, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource BorderAccentToggleButtonStyle}">
+                        <Rectangle Width="11"
+                                   Height="11"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_image}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </ToggleButton>
+                    <ToggleButton Width="20"
+                                  Height="20"
+                                  Margin="0,0,2,0"
+                                  Command="{Binding ToggleIsHiddenVisibleCommand}"
+                                  DataContext="{Binding FolderListViewModel.FolderItemsView}"
+                                  IsChecked="{Binding ShowHidden, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Style="{StaticResource BorderAccentToggleButtonStyle}">
+                        <Rectangle Width="11"
+                                   Height="11"
+                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{DynamicResource appbar_page_hidden}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </ToggleButton>
+                </ToolBar>
+            </ToolBarTray>
+            <ToggleButton Grid.Column="1"
+                          Width="20"
+                          Height="20"
+                          Margin="0,2,2,0"
+                          Command="{Binding FolderItemsView.ToggleIsFilteredCommand}"
+                          DataContext="{Binding FolderListViewModel}"
+                          IsChecked="{Binding FolderItemsView.IsFiltered, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                          Style="{StaticResource BorderAccentToggleButtonStyle}"
+                          ToolTipService.ShowOnDisabled="True">
+                <Rectangle Width="11"
+                           Height="11"
+                           Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{DynamicResource appbar_magnify}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </ToggleButton>
+            <fsc_views:FilterComboBox Grid.Column="2"
+                                      BorderBrush="{DynamicResource GrayBrush8}"
+                                      DataContext="{Binding FolderListViewModel}"
+                                      IsEnabled="{Binding FolderItemsView.IsFiltered}"
+                                      ItemsSource="{Binding Filters.CurrentItems}"
+                                      Padding="0"
+                                      SelectedItem="{Binding Filters.SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                                      Text="{Binding Filters.CurrentFilter, UpdateSourceTrigger=PropertyChanged}"
+                                      TextSearch.TextPath="FilterText"
+                                      fsc_behaviors:SelectionChangedCommand.ChangedCommand="{Binding Filters.SelectionChanged}">
+                <fsc_views:FilterComboBox.Style>
+                    <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type fsc_views:FilterComboBox}" />
+                </fsc_views:FilterComboBox.Style>
             </fsc_views:FilterComboBox>
-        -->
+        </Grid>
         <ListBox Grid.Row="3"
                  Background="{DynamicResource ExtremeWhiteBrush}"
                  DataContext="{Binding FolderListViewModel.FolderItemsView}"

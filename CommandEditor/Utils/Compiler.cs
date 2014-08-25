@@ -74,7 +74,7 @@ namespace Cafemoca.CommandEditor.Utils
                 {
                     case TokenType.OpenCurlyBrace:
                         if ((lastBeforeToken.Type == TokenType.Literal) &&
-                            (lastToken.Type == TokenType.Collon))
+                            (lastToken.Type == TokenType.Colon))
                         {
                             switch (lastBeforeToken.Value)
                             {
@@ -148,7 +148,7 @@ namespace Cafemoca.CommandEditor.Utils
                             }
                         }
                         break;
-                    case TokenType.ExternalCommand:
+                    case TokenType.Extend:
                         continue;
                     default:
                         break;

@@ -59,8 +59,8 @@ namespace Cafemoca.CommandEditor.Utils
         AtMark,
         Period,
         Comma,
-        Collon,
-        SemiCollon,
+        Colon,
+        SemiColon,
         Exclamation,
         Literal,
         Sharp,
@@ -89,8 +89,8 @@ namespace Cafemoca.CommandEditor.Utils
         OpenCurlyBrace,
         CloseCurlyBrace,
         String,
-        ExternalCommand,
+        Extend,
         _Space,
-        _NoSpace,
+        _DeleteSpace,
     }
 }

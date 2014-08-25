@@ -91,7 +91,7 @@ namespace Cafemoca.CommandEditor.Utils
                         yield return new Token(TokenType.Comma, ",", cursor);
                         break;
                     case ':':
-                        yield return new Token(TokenType.Collon, ":", cursor);
+                        yield return new Token(TokenType.Colon, ":", cursor);
                         break;
                     case '_':
                         if (cursor + 1 < text.Length)
@@ -104,7 +104,7 @@ namespace Cafemoca.CommandEditor.Utils
                         }
                         break;
                     case ';':
-                        yield return new Token(TokenType._NoSpace, "", cursor);
+                        yield return new Token(TokenType._DeleteSpace, "", cursor);
                         break;
                     case '!':
                         yield return new Token(TokenType.Exclamation, "!", cursor);
@@ -135,7 +135,7 @@ namespace Cafemoca.CommandEditor.Utils
                             var command = text.GetLiteral(ref begin, ref cursor);
                             if (!command.IsEmpty())
                             {
-                                yield return new Token(TokenType.ExternalCommand, command, begin - 1);
+                                yield return new Token(TokenType.Extend, command, begin - 1);
                                 break;
                             }
                         }

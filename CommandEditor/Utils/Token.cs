@@ -90,5 +90,7 @@ namespace Cafemoca.CommandEditor.Utils
         CloseCurlyBrace,
         String,
         ExternalCommand,
+        _Space,
+        _NoSpace,
     }
 }

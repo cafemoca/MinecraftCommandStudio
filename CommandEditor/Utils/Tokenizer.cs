@@ -93,8 +93,18 @@ namespace Cafemoca.CommandEditor.Utils
                     case ':':
                         yield return new Token(TokenType.Collon, ":", cursor);
                         break;
+                    case '_':
+                        if (cursor + 1 < text.Length)
+                        {
+                            var begin = cursor;
+                            var literal = text.GetLiteral(ref begin, ref cursor);
+                            yield return literal != "_" //literal.Any(x => x != '_')
+                                ? new Token(TokenType.Literal, literal, cursor)
+                                : new Token(TokenType._Space, " ", cursor);
+                        }
+                        break;
                     case ';':
-                        yield return new Token(TokenType.SemiCollon, ";", cursor);
+                        yield return new Token(TokenType._NoSpace, "", cursor);
                         break;
                     case '!':
                         yield return new Token(TokenType.Exclamation, "!", cursor);

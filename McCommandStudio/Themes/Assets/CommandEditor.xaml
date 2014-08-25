@@ -181,7 +181,8 @@
                                                               Margin="0,0,2,0"
                                                               BorderThickness="0"
                                                               IsChecked="{Binding ReplaceMode, RelativeSource={RelativeSource TemplatedParent}}"
-                                                              Style="{DynamicResource RotateToggleButtonStyle}">
+                                                              Style="{DynamicResource RotateToggleButtonStyle}"
+                                                              TabIndex="30">
                                                     <Rectangle Width="8"
                                                                Height="6"
                                                                Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}, Mode=OneWay}">
@@ -207,7 +208,8 @@
                                                              Background="{DynamicResource GrayBrush8}"
                                                              BorderThickness="0"
                                                              Cursor="IBeam"
-                                                             Focusable="True">
+                                                             Focusable="True"
+                                                             TabIndex="1">
                                                         <TextBox.Text>
                                                             <Binding Path="SearchPattern"
                                                                      RelativeSource="{RelativeSource TemplatedParent}"
@@ -260,6 +262,7 @@
                                                                 Foreground="{DynamicResource GrayBrush1}"
                                                                 Padding="0"
                                                                 Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                TabIndex="10"
                                                                 ToolTip="{Binding Localization.FindPreviousText, RelativeSource={RelativeSource TemplatedParent}}">
                                                             <Rectangle Width="10"
                                                                        Height="8"
@@ -276,6 +279,7 @@
                                                                 Foreground="{DynamicResource GrayBrush1}"
                                                                 Padding="0"
                                                                 Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                TabIndex="11"
                                                                 ToolTip="{Binding Localization.FindNextText, RelativeSource={RelativeSource TemplatedParent}}">
                                                             <Rectangle Width="10"
                                                                        Height="8"
@@ -290,7 +294,8 @@
                                                                 Height="22"
                                                                 Command="search:SearchCommands.CloseSearchPanel"
                                                                 Padding="0"
-                                                                Style="{DynamicResource SimpleFlatButtonStyle}">
+                                                                Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                TabIndex="31">
                                                             <Rectangle Width="10"
                                                                        Height="10"
                                                                        Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
@@ -318,7 +323,8 @@
                                                              Background="{DynamicResource GrayBrush8}"
                                                              BorderThickness="0"
                                                              Cursor="IBeam"
-                                                             Focusable="True">
+                                                             Focusable="True"
+                                                             TabIndex="2">
                                                         <TextBox.Text>
                                                             <Binding Path="ReplacePattern"
                                                                      RelativeSource="{RelativeSource TemplatedParent}"
@@ -372,6 +378,7 @@
                                                                 Foreground="{DynamicResource GrayBrush1}"
                                                                 Padding="0"
                                                                 Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                TabIndex="12"
                                                                 ToolTip="{Binding Localization.ReplaceNextText, RelativeSource={RelativeSource TemplatedParent}}">
                                                             <Rectangle Width="15"
                                                                        Height="18"
@@ -389,6 +396,7 @@
                                                                 Foreground="{DynamicResource GrayBrush1}"
                                                                 Padding="0"
                                                                 Style="{DynamicResource SimpleFlatButtonStyle}"
+                                                                TabIndex="13"
                                                                 ToolTip="{Binding Localization.ReplaceAllText, RelativeSource={RelativeSource TemplatedParent}}">
                                                             <Rectangle Width="17"
                                                                        Height="18.5"
@@ -410,6 +418,7 @@
                                                                   Margin="0,0,2,0"
                                                                   IsChecked="{Binding MatchCase, RelativeSource={RelativeSource TemplatedParent}}"
                                                                   Style="{DynamicResource BorderAccentToggleButtonStyle}"
+                                                                  TabIndex="21"
                                                                   ToolTip="{Binding Localization.MatchCaseText, RelativeSource={RelativeSource TemplatedParent}}">
                                                         <Rectangle Width="14"
                                                                    Height="10"
@@ -425,6 +434,7 @@
                                                                   Margin="0,0,2,0"
                                                                   IsChecked="{Binding WholeWords, RelativeSource={RelativeSource TemplatedParent}}"
                                                                   Style="{DynamicResource BorderAccentToggleButtonStyle}"
+                                                                  TabIndex="22"
                                                                   ToolTip="{Binding Localization.MatchWholeWordsText, RelativeSource={RelativeSource TemplatedParent}}">
                                                         <Rectangle Width="16"
                                                                    Height="11"
@@ -440,6 +450,7 @@
                                                                   Margin="0,0,2,0"
                                                                   IsChecked="{Binding UseRegex, RelativeSource={RelativeSource TemplatedParent}}"
                                                                   Style="{DynamicResource BorderAccentToggleButtonStyle}"
+                                                                  TabIndex="23"
                                                                   ToolTip="{Binding Localization.UseRegexText, RelativeSource={RelativeSource TemplatedParent}}">
                                                         <Rectangle Width="12"
                                                                    Height="11"

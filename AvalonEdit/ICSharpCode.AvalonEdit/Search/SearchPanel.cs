@@ -364,17 +364,25 @@ namespace ICSharpCode.AvalonEdit.Search
 		/// </summary>
 		public void ReplaceNext()
 		{
-			if (!this.ReplaceMode)
-				return;
-			SearchResult result = renderer.CurrentResults.FindFirstSegmentWithStartAfter(textArea.Caret.Offset + 1);
-			if (result == null)
-				result = renderer.CurrentResults.FirstSegment;
-			if (result != null)
-			{
-				string replacePattern = this.ReplacePattern;
-				textArea.Document.Replace(result.StartOffset, result.segmentLength, replacePattern);
-				ReplaceResult(result, replacePattern);
-			}
+            if (!this.ReplaceMode)
+                return;
+            SearchResult result = renderer.CurrentResults.FindFirstSegmentWithStartAfter(textArea.Caret.Offset);
+            if (result == null)
+                result = renderer.CurrentResults.FirstSegment;
+            if (result == null)
+                return;
+            if (this.UseRegex)
+            {
+                RegexOptions options = this.MatchCase ? RegexOptions.None : RegexOptions.IgnoreCase;
+                string input = result.Data.ToString();
+                string replacement = Regex.Replace(input, Regex.Unescape(this.SearchPattern), Regex.Unescape(this.ReplacePattern), options);
+                textArea.Document.Replace(result.StartOffset, result.Length, replacement);
+            }
+            else
+            {
+                textArea.Document.Replace(result.StartOffset, result.Length, this.ReplacePattern);
+            }
+            this.FindNext();
 		}
 
 		/// <summary>
@@ -384,22 +392,24 @@ namespace ICSharpCode.AvalonEdit.Search
 		{
 			if (!this.ReplaceMode)
 				return;
-			var results = renderer.CurrentResults.FindOverlappingSegments(0, textArea.Document.TextLength).Reverse();
+			var results = renderer.CurrentResults.FindOverlappingSegments(0, textArea.Document.TextLength);
 			if (results == null)
-				return;
-			string replacePattern = this.ReplacePattern;
-			textArea.Document.BeginUpdate();
-			try
-			{
-				foreach (var res in results)
-				{
-					textArea.Document.Replace(res, replacePattern);
-				}
-			}
-			finally
-			{
-				textArea.Document.EndUpdate();
-			}
+                return;
+            int offset = 0;
+            string replacement = this.ReplacePattern;
+            if (this.UseRegex)
+            {
+                RegexOptions options = this.MatchCase ? RegexOptions.None : RegexOptions.IgnoreCase;
+                string input = results.First().Data.ToString();
+                replacement = Regex.Replace(input, Regex.Unescape(this.SearchPattern), Regex.Unescape(this.ReplacePattern), options);
+            }
+            textArea.Document.BeginUpdate();
+            foreach (SearchResult result in results)
+            {
+                textArea.Document.Replace(offset + result.StartOffset, result.Length, replacement);
+                offset += replacement.Length - result.Length;
+            }
+            textArea.Document.EndUpdate();
 			textArea.Caret.Show();
 		}
 		

@@ -75,7 +75,6 @@ namespace Cafemoca.McCommandStudio.ViewModels
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     var vm = this.Open(dialog.FileName);
-                    StatusService.Current.Notify(vm.FilePath.Value + " を開きました。");
                 }
             });
 
@@ -149,6 +148,7 @@ namespace Cafemoca.McCommandStudio.ViewModels
             this.CloseStartPage();
 
             this.ActiveDocument.Value = fileViewModel;
+            StatusService.Current.Notify(fileViewModel.FilePath.Value + " を開きました。");
 
             return fileViewModel;
         }

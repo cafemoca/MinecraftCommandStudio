@@ -10,17 +10,17 @@ namespace Cafemoca.CommandEditor
 
         public static readonly DependencyProperty BindableTextProperty =
             DependencyProperty.Register("BindableText", typeof(string), typeof(CommandEditor),
-            new PropertyMetadata("", (obj, e) =>
+            new PropertyMetadata(null, (obj, e) =>
             {
                 var editor = obj as CommandEditor;
                 if ((e == null) ||
                     (editor == null) ||
-                    (editor.Document == null) ||
-                    (editor.Document.Text == (string)e.NewValue))
+                    (editor == null) ||
+                    (editor.Text == (string)e.NewValue))
                 {
                     return;
                 }
-                editor.Document.Text = (string)e.NewValue ?? "";
+                editor.Text = (string)e.NewValue ?? string.Empty;
                 
             }));
 

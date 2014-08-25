@@ -25,9 +25,8 @@ namespace Cafemoca.McCommandStudio.Models
                     return new TextFile(filePath, reader.Text, enc);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Debug.WriteLine(ex);
                 return new TextFile();
             }
         }
@@ -61,7 +60,7 @@ namespace Cafemoca.McCommandStudio.Models
         public Encoding Encoding { get; set; }
 
         public TextFile()
-            : this(null, null, null)
+            : this(null, null, Encoding.UTF8)
         {
         }
 

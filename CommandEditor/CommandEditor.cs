@@ -31,7 +31,7 @@ namespace Cafemoca.CommandEditor
 
         protected override void OnTextChanged(EventArgs e)
         {
-            this.BindableText = this.Document.Text;
+            this.BindableText = this.Text;
             base.OnTextChanged(e);
             this.UpdateFoldings();
 

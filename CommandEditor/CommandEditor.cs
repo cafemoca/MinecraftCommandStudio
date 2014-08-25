@@ -5,6 +5,7 @@ using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Search;
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Cafemoca.CommandEditor
 {
@@ -54,6 +55,20 @@ namespace Cafemoca.CommandEditor
             }
 
             this.HighlightBrackets();
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            base.OnPreviewKeyDown(e);
+
+            this.FixOnPreviewKeyDown(e);
+        }
+
+        protected override void OnPreviewTextInput(TextCompositionEventArgs e)
+        {
+            base.OnPreviewTextInput(e);
+
+            this.FixOnPreviewTextInput(e);
         }
 
         public void Dispose()

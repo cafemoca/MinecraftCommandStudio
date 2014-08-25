@@ -1,6 +1,8 @@
 ﻿using Cafemoca.CommandEditor.Extensions;
+using Cafemoca.CommandEditor.Utils;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -46,8 +48,6 @@ namespace Cafemoca.CommandEditor.Indentations
         private Block _block;
 
         private bool _inString;
-        private bool _inChar;
-        private bool _verbatim;
         private bool _escape;
 
         private bool _lineComment;
@@ -80,8 +80,6 @@ namespace Cafemoca.CommandEditor.Indentations
             this._block.StartLine = 0;
 
             this._inString = false;
-            this._inChar = false;
-            this._verbatim = false;
             this._escape = false;
 
             this._lineComment = false;
@@ -102,7 +100,7 @@ namespace Cafemoca.CommandEditor.Indentations
             var indent = new StringBuilder();
             if (line.Length == 0)
             {
-                if (this._blockComment || (this._inString && this._verbatim))
+                if (this._blockComment)
                 {
                     return;
                 }
@@ -119,109 +117,80 @@ namespace Cafemoca.CommandEditor.Indentations
                 return;
             }
 
-            if (TrimEnd(document))
+            if (document.TrimEnd())
             {
                 line = document.Text.TrimStart();
             }
 
             var oldBlock = this._block;
             var startInComment = this._blockComment;
-            var startInString = (this._inString && this._verbatim);
 
             this._lineComment = false;
-            this._inChar = false;
             this._escape = false;
-            if (!this._verbatim)
-            {
-                this._inString = false;
-            }
 
             this._lastNonCommentChar = '\n';
 
-            var cha = ' ';
-            var lastChar = ' ';
-            var nextChar = line[0];
+            var reader = new CharReader(line);
 
-            for (int i = 0; i < line.Length; i++)
+            var cha = ' ';
+            var prev = '\0';
+            var next = '\n';
+
+            while (reader.IsRemainChar)
             {
+                cha = reader.Get();
+                prev = reader.Backward;
+                next = reader.Ahead;
+
                 if (this._lineComment)
                 {
                     break;
                 }
-
-                lastChar = cha;
-                cha = nextChar;
-                if (i + 1 < line.Length)
-                {
-                    nextChar = line[i + 1];
-                }
-                else
-                {
-                    nextChar = '\n';
-                }
-
                 if (this._escape)
                 {
                     this._escape = false;
                     continue;
                 }
-
+                
                 switch (cha)
                 {
                     case '/':
-                        if (this._blockComment && lastChar == '*')
+                        if (this._blockComment && prev == '*')
                         {
                             this._blockComment = false;
                         }
-                        if (!this._inString && !this._inChar)
+                        if (!this._inString)
                         {
-                            if (!this._blockComment && nextChar == '/')
+                            if (!this._blockComment && next == '/')
                             {
                                 this._lineComment = true;
                             }
-                            if (!this._lineComment && nextChar == '*')
+                            if (!this._lineComment && next == '*')
                             {
                                 this._blockComment = true;
                             }
                         }
                         break;
                     case '"':
-                        if (!(this._inChar || this._lineComment || this._blockComment))
+                        if (!(this._lineComment || this._blockComment))
                         {
-                            this._inString = !this._inString;
-                            if (!this._inString && this._verbatim)
+                            if (this._inString)
                             {
-                                if (nextChar == '"')
-                                {
-                                    this._escape = true;
-                                    this._inString = true;
-                                }
-                                else
-                                {
-                                    this._verbatim = false;
-                                }
+                                this._inString = !this._escape;
                             }
-                            else if (this._inString && lastChar == '@')
-                            {
-                                this._verbatim = true;
-                            }
-                        }
-                        break;
-                    case '\'':
-                        if (!(this._inString || this._lineComment || this._blockComment))
-                        {
-                            this._inChar = !this._inChar;
                         }
                         break;
                     case '\\':
-                        if ((this._inString && !this._verbatim) || this._inChar)
+                        if (this._inString)
                         {
                             this._escape = true;
                         }
                         break;
+                    default:
+                        break;
                 }
 
-                if (this._lineComment || this._blockComment || this._inString || this._inChar)
+                if (this._lineComment || this._blockComment || this._inString)
                 {
                     if (this._wordBuilder.Length > 0)
                     {
@@ -231,12 +200,9 @@ namespace Cafemoca.CommandEditor.Indentations
                     continue;
                 }
 
-                if (!char.IsWhiteSpace(cha) && cha != '[' && cha != '/' && !Regex.IsMatch(cha.ToString(), "[A-Za-z0-9]"))
+                if (!char.IsWhiteSpace(cha) && "@~+-*%/#;:,._".Contains(cha) && !Regex.IsMatch(cha.ToString(), "[A-Za-z0-9]"))
                 {
-                    if (this._block.Bracket == '{')
-                    {
-                        this._block.Continuation = true;
-                    }
+                    this._block.Continuation = true;
                 }
 
                 if (char.IsLetterOrDigit(cha))
@@ -254,15 +220,23 @@ namespace Cafemoca.CommandEditor.Indentations
 
                 switch (cha)
                 {
+                    case '(':
                     case '{':
+                    case '[':
                         this._block.ResetOneLineBlock();
                         this._blocks.Push(this._block);
                         this._block.StartLine = document.LineNumber;
                         this._block.Indent(settings);
-                        this._block.Bracket = '{';
+                        this._block.Bracket = cha;
                         break;
                     case '}':
-                        while (this._block.Bracket != '{')
+                        var bracketPair = new Dictionary<char, char>()
+                        {
+                            { ')', '(' },
+                            { '}', '{' },
+                            { ']', '[' },
+                        };
+                        while (this._block.Bracket != bracketPair[cha])
                         {
                             if (this._blocks.Count == 0)
                             {
@@ -275,45 +249,6 @@ namespace Cafemoca.CommandEditor.Indentations
                             break;
                         }
                         this._block = this._blocks.Pop();
-                        this._block.Continuation = false;
-                        this._block.ResetOneLineBlock();
-                        break;
-                    case '(':
-                    case '[':
-                        this._blocks.Push(this._block);
-                        if (this._block.StartLine == document.LineNumber)
-                        {
-                            this._block.InnerIndent = this._block.OuterIndent;
-                        }
-                        else
-                        {
-                            this._block.StartLine = document.LineNumber;
-                        }
-                        this._block.Indent(
-                            settings.IndentString.Repeat(oldBlock.OneLineBlock) +
-                            (oldBlock.Continuation ? settings.IndentString : "") +
-                            (i == line.Length - 1 ? settings.IndentString : new String(' ', i + 1)));
-                        this._block.Bracket = cha;
-                        break;
-                    case ')':
-                        if (this._blocks.Count == 0) break;
-                        if (this._block.Bracket == '(')
-                        {
-                            this._block = this._blocks.Pop();
-                        }
-                        break;
-                    case ']':
-                        if (this._blocks.Count == 0)
-                        {
-                            break;
-                        }
-                        if (this._block.Bracket == '[')
-                        {
-                            this._block = this._blocks.Pop();
-                        }
-                        break;
-                    case ';':
-                    case ',':
                         this._block.Continuation = false;
                         this._block.ResetOneLineBlock();
                         break;
@@ -331,15 +266,14 @@ namespace Cafemoca.CommandEditor.Indentations
             }
             this._wordBuilder.Length = 0;
 
-            if (startInString ||
-                (startInComment && line[0] != '*') ||
+            if ((startInComment && line[0] != '*') ||
                 document.Text.StartsWith("//\t", StringComparison.Ordinal) ||
                 (document.Text == "//"))
             {
                 return;
             }
 
-            if (line[0] == '}')
+            if ("]})".Contains(line[0]))
             {
                 indent.Append(oldBlock.OuterIndent);
                 oldBlock.ResetOneLineBlock();
@@ -411,8 +345,11 @@ namespace Cafemoca.CommandEditor.Indentations
                 document.Text = indent.ToString() + line;
             }
         }
+    }
 
-        private static bool TrimEnd(IDocumentAccessor document)
+    internal static class ReformatterExtensions
+    {
+        internal static bool TrimEnd(this IDocumentAccessor document)
         {
             var line = document.Text;
             if (!char.IsWhiteSpace(line[line.Length - 1]))

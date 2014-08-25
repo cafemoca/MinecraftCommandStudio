@@ -69,6 +69,7 @@
     <Compile Include="Completions\CompletionData.cs" />
     <Compile Include="Completions\MinecraftCompletions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\IndentationExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Foldings\CommandFoldingStrategy.cs" />
     <Compile Include="Indentations\CommandIndentationStrategy.cs" />
@@ -79,10 +80,13 @@
     <Compile Include="Renderings\BracketSearcher.cs" />
     <Compile Include="Renderings\BracketSearchResult.cs" />
     <Compile Include="Renderings\HighlightCurrentLineBackgroundRenderer.cs" />
+    <Compile Include="Utils\CharReader.cs" />
     <Compile Include="Utils\Compiler.cs" />
     <Compile Include="Utils\Escaping.cs" />
+    <Compile Include="Utils\Reformatter.cs" />
     <Compile Include="Utils\Token.cs" />
     <Compile Include="Utils\Tokenizer.cs" />
+    <Compile Include="Utils\TokenReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

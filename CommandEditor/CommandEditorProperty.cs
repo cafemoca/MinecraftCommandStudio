@@ -96,5 +96,33 @@ namespace Cafemoca.CommandEditor
         }
 
         #endregion
+
+        #region PreviousChar
+
+        private char PreviousChar
+        {
+            get
+            {
+                return (this.CaretOffset > 0)
+                    ? this.Document.GetCharAt(this.CaretOffset - 1)
+                    : '\0';
+            }
+        }
+
+        #endregion
+
+        #region NextChar
+
+        private char NextChar
+        {
+            get
+            {
+                return (this.Document.TextLength > this.CaretOffset)
+                    ? this.Document.GetCharAt(this.CaretOffset)
+                    : '\0';
+            }
+        }
+
+        #endregion
     }
 }

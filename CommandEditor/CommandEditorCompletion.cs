@@ -1,4 +1,6 @@
 ﻿using Cafemoca.CommandEditor.Completions;
+using Cafemoca.CommandEditor.Extensions;
+using Cafemoca.CommandEditor.Indentations;
 using Cafemoca.CommandEditor.Utils;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
@@ -11,7 +13,6 @@ namespace Cafemoca.CommandEditor
     public partial class CommandEditor : TextEditor
     {
         private CompletionWindow _completionWindow;
-        private Key _lastInputted;
 
         private void ShowCompletionWindow(IEnumerable<CompletionData> completions)
         {
@@ -50,25 +51,100 @@ namespace Cafemoca.CommandEditor
             }
 
             var index = this.CaretOffset;
-            var inputted = e.Text;
+            var input = e.Text;
 
-            var completionData = this.GetCompletionData(index, inputted);
+            var completionData = this.GetCompletionData(index, input);
             if (completionData != null)
             {
                 this.ShowCompletionWindow(completionData);
             }
         }
 
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
-        {
-            base.OnPreviewKeyDown(e);
+        private Key _latestKey;
 
+        private void FixOnPreviewKeyDown(KeyEventArgs e)
+        {
+            var index = this.CaretOffset;
             var key = e.Key;
 
-            this._lastInputted = key;
+            var prev = this.PreviousChar.ToString();
+            var next = this.NextChar.ToString();
+
+            switch (key)
+            {
+                case Key.Back:
+                case Key.Delete:
+                    if (this.CheckBothSide("(", ")") ||
+                        this.CheckBothSide("{", "}") ||
+                        this.CheckBothSide("[", "]") ||
+                        this.CheckBothSide("'", "'") ||
+                        this.CheckBothSide("\"", "\""))
+                    {
+                        e.Handled = true;
+                        this.Document.Remove(index - 1, 2);
+                    }
+                    break;
+                case Key.Tab:
+                    if (this._latestKey == Key.Tab)
+                    {
+                        //snippets
+                    }
+                    this._latestKey = Key.Tab;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private IEnumerable<CompletionData> GetCompletionData(int index, string inputted)
+        private void FixOnPreviewTextInput(TextCompositionEventArgs e)
+        {
+            var index = this.CaretOffset;
+            var input = e.Text;
+
+            var prev = this.PreviousChar.ToString();
+            var next = this.NextChar.ToString();
+
+            var spaces = "\t\r\n\0　 ";
+            var bracketPair = new Dictionary<string, string>()
+            {
+                { "(", ")" },
+                { "{", "}" },
+                { "[", "]" },
+            };
+
+            switch (input)
+            {
+                case "'":
+                case "\"":
+                    if (next == input &&
+                        prev == input)
+                    {
+                        e.Handled = true;
+                        this.CaretOffset++;
+                    }
+                    else if (spaces.Contains(next))
+                    {
+                        e.Handled = true;
+                        this.Document.Insert(index, input + input);
+                        this.CaretOffset--;
+                    }
+                    break;
+                case "(":
+                case "{":
+                case "[":
+                    if (spaces.Contains(next))
+                    {
+                        e.Handled = true;
+                        this.Document.Insert(index, input + bracketPair[input]);
+                        this.CaretOffset--;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private IEnumerable<CompletionData> GetCompletionData(int index, string input)
         {
             var tokens = this.Text
                 .Tokenize()
@@ -86,7 +162,7 @@ namespace Cafemoca.CommandEditor
 
             var lastToken = beforeTokens.SkipLast(1).LastOrDefault();
 
-            switch (inputted.ToLower())
+            switch (input.ToLower())
             {
                 case ":":
                     if (lastToken.IsMatchLiteral("minecraft"))
@@ -107,6 +183,21 @@ namespace Cafemoca.CommandEditor
                         return null;
                     }
                     break;
+                case ")":
+                case "}":
+                case "]":
+                    this.BeginChange();
+                    this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
+                    this.EndChange();
+                    break;
+                case "\n":
+                    if ("]})".Contains(next))
+                    {
+                        this.BeginChange();
+                        this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
+                        this.EndChange();
+                    }
+                    break;
                 default:
                     break;
             }
@@ -122,6 +213,17 @@ namespace Cafemoca.CommandEditor
                     break;
             }
             return null;
+        }
+
+        private bool CheckBothSide(char prev, char next)
+        {
+            return this.CheckBothSide(prev, next);
+        }
+
+        private bool CheckBothSide(string prev, string next)
+        {
+            return this.PreviousChar.ToString() == prev &&
+                   this.NextChar.ToString() == next;
         }
     }
 }

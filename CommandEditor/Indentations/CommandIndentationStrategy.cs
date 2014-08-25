@@ -22,11 +22,16 @@ namespace Cafemoca.CommandEditor.Indentations
             set { this._indentationString = value ?? "\t"; }
         }
 
+        public void Indent(TextDocument document, bool keepEmptyLines)
+        {
+            this.Indent(new TextDocumentAccessor(document), keepEmptyLines);
+        }
+
         public void Indent(IDocumentAccessor document, bool keepEmptyLines)
         {
             if (document == null)
             {
-                throw new ArgumentNullException("Document");
+                throw new ArgumentNullException("document");
             }
             var settings = new IndentationSettings(this.IndentationString, keepEmptyLines);
             var reformatter = new IndentationReformatter();
@@ -37,7 +42,7 @@ namespace Cafemoca.CommandEditor.Indentations
         {
             if (document == null)
             {
-                throw new ArgumentNullException("Document");
+                throw new ArgumentNullException("document");
             }
             var lineNumber = line.LineNumber;
             var accessor = new TextDocumentAccessor(document, lineNumber, lineNumber);

@@ -284,15 +284,6 @@ namespace Cafemoca.CommandEditor.Indentations
                 indent.Append(oldBlock.InnerIndent);
             }
 
-            if (indent.Length > 0 && oldBlock.Bracket == '(' && line[0] == ')')
-            {
-                indent.Remove(indent.Length - 1, 1);
-            }
-            else if (indent.Length > 0 && oldBlock.Bracket == '[' && line[0] == ']')
-            {
-                indent.Remove(indent.Length - 1, 1);
-            }
-
             if (line[0] == ':')
             {
                 oldBlock.Continuation = true;
@@ -322,15 +313,6 @@ namespace Cafemoca.CommandEditor.Indentations
                     this._block.InnerIndent = indent.ToString();
                 }
                 return;
-            }
-
-            if (line[0] != '{')
-            {
-                if (line[0] != ')' && oldBlock.Continuation && oldBlock.Bracket == '{')
-                {
-                    indent.Append(settings.IndentString);
-                }
-                indent.Append(settings.IndentString.Repeat(oldBlock.OneLineBlock));
             }
 
             if (startInComment)

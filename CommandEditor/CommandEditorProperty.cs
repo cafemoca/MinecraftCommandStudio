@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.AvalonEdit;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Cafemoca.CommandEditor
@@ -48,7 +49,8 @@ namespace Cafemoca.CommandEditor
         #region Column 依存関係プロパティ
 
         private static readonly DependencyProperty ColumnProperty =
-            DependencyProperty.Register("Column", typeof(int), typeof(CommandEditor), new UIPropertyMetadata(1));
+            DependencyProperty.Register("Column", typeof(int), typeof(CommandEditor),
+            new UIPropertyMetadata(1));
 
         public int Column
         {
@@ -61,7 +63,8 @@ namespace Cafemoca.CommandEditor
         #region Line 依存関係プロパティ
 
         private static readonly DependencyProperty LineProperty =
-            DependencyProperty.Register("Line", typeof(int), typeof(CommandEditor), new UIPropertyMetadata(1));
+            DependencyProperty.Register("Line", typeof(int), typeof(CommandEditor),
+            new UIPropertyMetadata(1));
 
         public int Line
         {
@@ -93,6 +96,19 @@ namespace Cafemoca.CommandEditor
         {
             get { return (SolidColorBrush)GetValue(CurrentLineBackgroundProperty); }
             set { SetValue(CurrentLineBackgroundProperty, value); }
+        }
+
+        #endregion
+
+        #region EncloseSelection 依存関係プロパティ
+
+        private static readonly DependencyProperty EncloseSelectionProperty =
+            DependencyProperty.Register("EncloseSelection", typeof(bool), typeof(CommandEditor));
+
+        public bool EncloseSelection
+        {
+            get { return (bool)this.GetValue(EncloseSelectionProperty); }
+            set { this.SetValue(EncloseSelectionProperty, value); }
         }
 
         #endregion

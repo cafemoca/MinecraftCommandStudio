@@ -70,6 +70,7 @@ namespace Cafemoca.McCommandStudio.Settings
                 ShowLineNumbers = true,
                 TextWrapping = false,
                 DefaultFileName = "untitled",
+                EncloseSelection = true,
             };
         }
 
@@ -364,6 +365,21 @@ namespace Cafemoca.McCommandStudio.Settings
             set
             {
                 this._defaultFileName = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region EncloseSelection 変更通知プロパティ
+
+        private bool _encloseSelection = true;
+        public bool EncloseSelection
+        {
+            get { return this._encloseSelection; }
+            set
+            {
+                this._encloseSelection = value;
                 this.RaisePropertyChanged();
             }
         }

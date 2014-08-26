@@ -3,6 +3,7 @@
 
   <Color name="String" foreground="Chocolate" />
   <Color name="Parenthesis" foreground="Brown" fontWeight="bold" />
+  <Color name="SquareBracket" foreground="BurlyWood" fontWeight="bold" />
 
   <Color name="Null" foreground="MediumAquamarine" />
   <Color name="Boolean" foreground="DeepSkyBlue" />
@@ -67,6 +68,12 @@
     <Keywords color="Parenthesis">
       <Word>(</Word>
       <Word>)</Word>
+    </Keywords>
+
+    <!-- square bracket -->
+    <Keywords color="SquareBracket">
+      <Word>[</Word>
+      <Word>]</Word>
     </Keywords>
     
     <!-- bool -->

@@ -94,5 +94,11 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
             get { return Setting.Current.FontSize; }
             set { Setting.Current.FontSize = value; }
         }
+
+        public bool EncloseSelection
+        {
+            get { return Setting.Current.EncloseSelection; }
+            set { Setting.Current.EncloseSelection = value; }
+        }
     }
 }

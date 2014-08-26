@@ -44,6 +44,11 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
             get { return Setting.Current.TextWrapping; }
         }
 
+        public bool EncloseSelection
+        {
+            get { return Setting.Current.EncloseSelection; }
+        }
+
         public EscapeModeValue EscapeMode
         {
             get { return Setting.Current.EscapeMode; }
@@ -70,11 +75,13 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
             : base(filePath, count)
         {
             Setting.Current.ObserveProperty(x => x.Options)
-                .Subscribe(_ => this.RaisePropertyChanged("Options"));
+                .Subscribe(_ => this.RaisePropertyChanged(() => this.Options));
             Setting.Current.ObserveProperty(x => x.ShowLineNumbers)
-                .Subscribe(_ => this.RaisePropertyChanged("ShowLineNumbers"));
+                .Subscribe(_ => this.RaisePropertyChanged(() => this.ShowLineNumbers));
             Setting.Current.ObserveProperty(x => x.TextWrapping)
-                .Subscribe(_ => this.RaisePropertyChanged("TextWrapping"));
+                .Subscribe(_ => this.RaisePropertyChanged(() => this.TextWrapping));
+            Setting.Current.ObserveProperty(x => x.EncloseSelection)
+                .Subscribe(_ => this.RaisePropertyChanged(() => this.EncloseSelection));
 
             this.CompiledText = this.Text
                 .Throttle(TimeSpan.FromSeconds(1))

@@ -20,6 +20,7 @@
                               Column="{Binding Column.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               CurrentLineBackground="{DynamicResource GrayBrush10}"
                               EncloseSelection="{Binding EncloseSelection, UpdateSourceTrigger=PropertyChanged}"
+                              EncloseMultiLine="{Binding EncloseMultiLine, UpdateSourceTrigger=PropertyChanged}"
                               FontFamily="{Binding FontFamily, UpdateSourceTrigger=PropertyChanged}"
                               FontSize="{Binding FontSize, UpdateSourceTrigger=PropertyChanged}"
                               Foreground="{DynamicResource BlackBrush}"

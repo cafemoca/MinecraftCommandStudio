@@ -1,4 +1,6 @@
 ﻿using ICSharpCode.AvalonEdit;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -103,12 +105,27 @@ namespace Cafemoca.CommandEditor
         #region EncloseSelection 依存関係プロパティ
 
         private static readonly DependencyProperty EncloseSelectionProperty =
-            DependencyProperty.Register("EncloseSelection", typeof(bool), typeof(CommandEditor));
+            DependencyProperty.Register("EncloseSelection", typeof(bool), typeof(CommandEditor),
+            new UIPropertyMetadata(true));
 
         public bool EncloseSelection
         {
             get { return (bool)this.GetValue(EncloseSelectionProperty); }
             set { this.SetValue(EncloseSelectionProperty, value); }
+        }
+
+        #endregion
+
+        #region EncloseMultiLine 依存関係プロパティ
+
+        private static readonly DependencyProperty EncloseMultiLineProperty =
+            DependencyProperty.Register("EncloseMultiLine", typeof(bool), typeof(CommandEditor),
+            new UIPropertyMetadata(false));
+
+        public bool EncloseMultiLine
+        {
+            get { return (bool)this.GetValue(EncloseMultiLineProperty); }
+            set { this.SetValue(EncloseMultiLineProperty, value); }
         }
 
         #endregion
@@ -137,6 +154,33 @@ namespace Cafemoca.CommandEditor
                     ? this.Document.GetCharAt(this.CaretOffset)
                     : '\0';
             }
+        }
+
+        #endregion
+
+        #region IsSelection
+
+        private bool IsSelection
+        {
+            get { return this.SelectionLength > 0; }
+        }
+
+        #endregion
+
+        #region IsSingleLineSelection
+
+        private bool IsSingleLineSelection
+        {
+            get { return this.IsSelection && !this.SelectedText.Any(x => "\r\n".Contains(x)); }
+        }
+
+        #endregion
+
+        #region IsMultiLineSelection
+
+        private bool IsMultiLineSelection
+        {
+            get { return this.IsSelection && this.SelectedText.Any(x => "\r\n".Contains(x)); }
         }
 
         #endregion

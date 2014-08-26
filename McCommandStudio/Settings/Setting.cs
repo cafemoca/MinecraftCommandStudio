@@ -71,6 +71,7 @@ namespace Cafemoca.McCommandStudio.Settings
                 TextWrapping = false,
                 DefaultFileName = "untitled",
                 EncloseSelection = true,
+                EncloseMultiLine = false,
             };
         }
 
@@ -380,6 +381,21 @@ namespace Cafemoca.McCommandStudio.Settings
             set
             {
                 this._encloseSelection = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region EncloseMultiLine 変更通知プロパティ
+
+        private bool _encloseMultiLine = false;
+        public bool EncloseMultiLine
+        {
+            get { return this._encloseMultiLine; }
+            set
+            {
+                this._encloseMultiLine = value;
                 this.RaisePropertyChanged();
             }
         }

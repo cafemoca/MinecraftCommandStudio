@@ -100,5 +100,11 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
             get { return Setting.Current.EncloseSelection; }
             set { Setting.Current.EncloseSelection = value; }
         }
+
+        public bool EncloseMultiLine
+        {
+            get { return Setting.Current.EncloseMultiLine; }
+            set { Setting.Current.EncloseMultiLine = value; }
+        }
     }
 }

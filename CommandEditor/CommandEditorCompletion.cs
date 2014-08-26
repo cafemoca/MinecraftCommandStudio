@@ -78,6 +78,7 @@ namespace Cafemoca.CommandEditor
             switch (key)
             {
                 case Key.Back:
+                    this.DeleteBothBracket(e);
                     if (this.TextArea.Caret.Column == 1 &&
                         line.LineNumber > 1)
                     {
@@ -88,9 +89,9 @@ namespace Cafemoca.CommandEditor
                         e.Handled = true;
                         this.Document.Remove(line.PreviousLine.EndOffset, indentLength);
                     }
-                    this.DeleteBothBracket(e);
                     break;
                 case Key.Delete:
+                    this.DeleteBothBracket(e);
                     if (index == line.EndOffset)
                     {
                         var indentLength = this.Text
@@ -100,7 +101,6 @@ namespace Cafemoca.CommandEditor
                         e.Handled = true;
                         this.Document.Remove(index, indentLength);
                     }
-                    this.DeleteBothBracket(e);
                     break;
                 case Key.Tab:
                     if (this._latestKey == Key.Tab)
@@ -110,7 +110,7 @@ namespace Cafemoca.CommandEditor
                     this._latestKey = Key.Tab;
                     break;
                 case Key.Enter:
-                    if (")}]".Contains(next))
+                    if (!this.IsSelection && ")}]".Contains(next))
                     {
                         e.Handled = true;
                         this.BeginChange();
@@ -163,7 +163,8 @@ namespace Cafemoca.CommandEditor
             {
                 case "'":
                 case "\"":
-                    if (this.SelectionLength > 0)
+                    if (this.IsSingleLineSelection ||
+                       (this.IsMultiLineSelection && this.EncloseMultiLine))
                     {
                         if (this.EncloseSelection)
                         {
@@ -173,6 +174,10 @@ namespace Cafemoca.CommandEditor
                             this.Document.Insert(this.SelectionStart + this.SelectionLength, input);
                             this.EndChange();
                         }
+                        break;
+                    }
+                    if (this.IsMultiLineSelection && !this.EncloseMultiLine)
+                    {
                         break;
                     }
                     if (next == input &&
@@ -186,14 +191,22 @@ namespace Cafemoca.CommandEditor
                     {
                         e.Handled = true;
                         this.Document.Insert(index, input + input);
-                        this.CaretOffset--;
+                        if (this.IsMultiLineSelection)
+                        {
+                            this.CaretOffset++;
+                        }
+                        else
+                        {
+                            this.CaretOffset--;
+                        }
                         break;
                     }
                     break;
                 case "(":
                 case "{":
                 case "[":
-                    if (this.SelectionLength > 0)
+                    if (this.IsSingleLineSelection ||
+                       ( this.IsMultiLineSelection && this.EncloseMultiLine))
                     {
                         if (this.EncloseSelection)
                         {
@@ -205,17 +218,35 @@ namespace Cafemoca.CommandEditor
                         }
                         break;
                     }
+                    if (this.IsMultiLineSelection && !this.EncloseMultiLine)
+                    {
+                        break;
+                    }
                     if (spaces.Contains(next))
                     {
                         e.Handled = true;
                         this.Document.Insert(index, input + bracketPair[input]);
-                        this.CaretOffset--;
+                        if (this.IsMultiLineSelection)
+                        {
+                            this.CaretOffset++;
+                        }
+                        else
+                        {
+                            this.CaretOffset--;
+                        }
                         break;
                     }
                     break;
                 case ")":
                 case "}":
                 case "]":
+                    if (next == input &&
+                        prev == bracketPair.First(x => x.Value == input).Key)
+                    {
+                        e.Handled = true;
+                        this.CaretOffset++;
+                        break;
+                    }
                     this.BeginChange();
                     this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
                     this.EndChange();
@@ -224,7 +255,7 @@ namespace Cafemoca.CommandEditor
                     break;
             }
         }
-
+        
         private IEnumerable<CompletionData> GetCompletionData(int index, string input)
         {
             var tokens = this.Text

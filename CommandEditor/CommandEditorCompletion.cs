@@ -320,24 +320,30 @@ namespace Cafemoca.CommandEditor
         private IEnumerable<CompletionData> GetCompletionData(int index, string input)
         {
             var tokens = this.Text
-                .Tokenize()
-                .Where(x => !x.ContainsType(TokenType.Blank, TokenType.Comment));
+                .Tokenize();
 
             var next = this.NextChar;
             var prev = (this.CaretOffset > 1)
                 ? this.Document.GetCharAt(this.CaretOffset - 2)
                 : '\0';
 
-            var beforeTokens = tokens.TakeWhile(x => x.Index < index);
-            var afterTokens = tokens.SkipWhile(x => x.Index < index);
+            var beforeTokens = tokens
+                .TakeWhile(x => x.Index < index)
+                .Where(x => !x.ContainsType(TokenType.Blank, TokenType.Comment));
+            var afterTokens = tokens
+                .SkipWhile(x => x.Index < index)
+                .Where(x => !x.ContainsType(TokenType.Blank, TokenType.Comment));
+
+            var prevToken = tokens.LastOrDefault(x => x.Index <= index);
+
+            if (!prevToken.IsEmpty() && prevToken.IsMatchType(TokenType.Comment))
+            {
+                return null;
+            }
 
             switch (input.ToLower())
             {
                 case "/":
-                    if ("*/".Contains(prev))
-                    {
-                        break;
-                    }
                     return MinecraftCompletions.GetCommandCompletion();
                 case "*":
                     if (prev == '/')
@@ -345,6 +351,8 @@ namespace Cafemoca.CommandEditor
                         return null;
                     }
                     break;
+                case "@":
+                    return MinecraftCompletions.GetTargetCompletion();
                 case ")":
                 case "}":
                 case "]":

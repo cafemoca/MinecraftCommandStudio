@@ -638,5 +638,16 @@ namespace Cafemoca.CommandEditor.Completions
                 new CompletionData("false", "false"),
             };
         }
+
+        public static IEnumerable<CompletionData> GetTargetCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("@p", "p", "最寄りのプレイヤー 1名\n\n同じ距離に複数のプレイヤーが存在する場合、最後にログインしたプレイヤーを対象とします。"),
+                new CompletionData("@r", "r", "ランダムなプレイヤー 1名"),
+                new CompletionData("@a", "a", "すべてのプレイヤー"),
+                new CompletionData("@e", "e", "すべてのエンティティ\n\nプレイヤーを含みます"),
+            };
+        }
     }
 }

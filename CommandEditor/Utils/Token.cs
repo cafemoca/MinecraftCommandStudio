@@ -59,6 +59,12 @@ namespace Cafemoca.CommandEditor.Utils
         {
             return types.Any(x => token.IsMatchType(x));
         }
+
+        public static bool IsEmpty(this Token token)
+        {
+            var value = token as Token?;
+            return value == null;
+        }
     }
 
     public enum TokenType

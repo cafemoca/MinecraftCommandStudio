@@ -86,6 +86,7 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
                 }
                 this.CompiledText = this.Text
                     .Throttle(TimeSpan.FromMilliseconds(v))
+                    .Select(t => t.Compile())
                     .ToReactiveProperty(initialValue);
             });
 

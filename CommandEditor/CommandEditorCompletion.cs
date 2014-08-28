@@ -56,6 +56,8 @@ namespace Cafemoca.CommandEditor
             var index = this.CaretOffset;
             var input = e.Text;
 
+            this.FixOnTextEntered(index, input);
+
             var completionData = this.GetCompletionData(index, input);
             if (completionData != null)
             {
@@ -74,7 +76,7 @@ namespace Cafemoca.CommandEditor
             var next = this.NextChar.ToString();
 
             var line = this.Document.GetLineByOffset(index);
-
+            
             switch (key)
             {
                 case Key.Back:
@@ -82,24 +84,40 @@ namespace Cafemoca.CommandEditor
                     if (this.TextArea.Caret.Column == 1 &&
                         line.LineNumber > 1)
                     {
-                        var indentLength = this.Text
-                            .Substring(line.PreviousLine.EndOffset)
-                            .TakeWhile(x => "\t\r\n 　".Contains(x))
+                        var eol = this.Text
+                            .Skip(line.PreviousLine.EndOffset)
+                            .TakeWhile(x => "\r\n".Contains(x))
                             .Count();
-                        e.Handled = true;
-                        this.Document.Remove(line.PreviousLine.EndOffset, indentLength);
+                        var indent = this.Text
+                            .Skip(line.PreviousLine.EndOffset + eol)
+                            .TakeWhile(x => "\t ".Contains(x))
+                            .Count();
+                        if (indent > 0)
+                        {
+                            e.Handled = true;
+                            this.Document.Remove(line.PreviousLine.EndOffset, eol + indent);
+                        }
                     }
                     break;
                 case Key.Delete:
-                    this.DeleteBothBracket(e);
-                    if (index == line.EndOffset)
+                    //this.DeleteBothBracket(e);
+                    if (index == line.EndOffset &&
+                        line.LineNumber < LineCount)
                     {
-                        var indentLength = this.Text
-                            .Substring(index)
-                            .TakeWhile(x => "\t\r\n 　".Contains(x))
+                        var eol = this.Text
+                            .Skip(index)
+                            .TakeWhile(x => "\r\n".Contains(x))
                             .Count();
-                        e.Handled = true;
-                        this.Document.Remove(index, indentLength);
+                        var indent = this.Text
+                            .Skip(index)
+                            .SkipWhile(x => "\r\n".Contains(x))
+                            .TakeWhile(x => "\t ".Contains(x))
+                            .Count();
+                        if (indent > 0)
+                        {
+                            e.Handled = true;
+                            this.Document.Remove(index, indent + eol);
+                        }
                     }
                     break;
                 case Key.Tab:
@@ -158,6 +176,8 @@ namespace Cafemoca.CommandEditor
                 { "{", "}" },
                 { "[", "]" },
             };
+
+            e.Handled = false;
 
             switch (input)
             {
@@ -247,11 +267,32 @@ namespace Cafemoca.CommandEditor
                         this.CaretOffset++;
                         break;
                     }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void FixOnTextEntered(int index, string input)
+        {
+            var prev = this.PreviousChar.ToString();
+            var next = this.NextChar.ToString();
+
+            var bracketPair = new Dictionary<string, string>()
+            {
+                { "(", ")" },
+                { "{", "}" },
+                { "[", "]" },
+            };
+
+            switch (input)
+            {
+                case ")":
+                case "}":
+                case "]":
                     this.BeginChange();
                     this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
                     this.EndChange();
-                    break;
-                default:
                     break;
             }
         }

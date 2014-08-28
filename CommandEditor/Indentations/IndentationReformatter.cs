@@ -200,11 +200,6 @@ namespace Cafemoca.CommandEditor.Indentations
                     continue;
                 }
 
-                if (!char.IsWhiteSpace(cha) && "@~+-*%/#;:,._".Contains(cha) && !Regex.IsMatch(cha.ToString(), "[A-Za-z0-9]"))
-                {
-                    this._block.Continuation = true;
-                }
-
                 if (char.IsLetterOrDigit(cha))
                 {
                     this._wordBuilder.Append(cha);
@@ -229,14 +224,16 @@ namespace Cafemoca.CommandEditor.Indentations
                         this._block.Indent(settings);
                         this._block.Bracket = cha;
                         break;
+                    case ')':
                     case '}':
-                        var bracketPair = new Dictionary<char, char>()
+                    case ']':
+                        var pair = new Dictionary<char, char>()
                         {
                             { ')', '(' },
                             { '}', '{' },
                             { ']', '[' },
                         };
-                        while (this._block.Bracket != bracketPair[cha])
+                        while (this._block.Bracket != pair[cha])
                         {
                             if (this._blocks.Count == 0)
                             {
@@ -282,11 +279,6 @@ namespace Cafemoca.CommandEditor.Indentations
             else
             {
                 indent.Append(oldBlock.InnerIndent);
-            }
-
-            if (line[0] == ':')
-            {
-                oldBlock.Continuation = true;
             }
 
             if (document.IsReadOnly)

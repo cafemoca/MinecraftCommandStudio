@@ -61,14 +61,20 @@ namespace Cafemoca.CommandEditor
         {
             base.OnPreviewKeyDown(e);
 
-            this.FixOnPreviewKeyDown(e);
+            if (this.TextArea.IsFocused)
+            {
+                this.FixOnPreviewKeyDown(e);
+            }
         }
 
         protected override void OnPreviewTextInput(TextCompositionEventArgs e)
         {
             base.OnPreviewTextInput(e);
 
-            this.FixOnPreviewTextInput(e);
+            if (this.TextArea.IsFocused)
+            {
+                this.FixOnPreviewTextInput(e);
+            }
         }
 
         public void Dispose()

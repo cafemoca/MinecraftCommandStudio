@@ -129,6 +129,7 @@ namespace Cafemoca.CommandEditor
                     break;
                 case Key.Enter:
                     if (!this.IsSelection &&
+                        ",".Contains(prev) &&
                         "]})".Contains(next))
                     {
                         e.Handled = true;

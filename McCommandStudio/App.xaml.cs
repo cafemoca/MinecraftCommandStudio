@@ -27,9 +27,10 @@ namespace Cafemoca.McCommandStudio
         {
             base.OnStartup(e);
 
+            Task.Run(() => AutoUpdateService.DeleteUpdater());
             if (e.Args.Contains("/updated"))
             {
-                Task.Run(() => AutoUpdateService.PostUpdate());
+                StatusService.Current.Notify("アップデートが完了しました。");
             }
 
             DispatcherHelper.UIDispatcher = this.Dispatcher;

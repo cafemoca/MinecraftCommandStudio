@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TaskDialogInterop;
 
 namespace Cafemoca.McCommandStudio.Services
 {
@@ -15,18 +16,12 @@ namespace Cafemoca.McCommandStudio.Services
     {
         private const string RemoteVersionXml = "https://raw.githubusercontent.com/cafemoca/McCommandStudio/update/version.xml";
 
-        private static readonly string completedFileName = Path.Combine(App.BinDirectory, "msup.completed");
         private static readonly string xmlPath = Path.Combine(App.BinDirectory, "version.xml");
         private static readonly string updaterPath = Path.Combine(App.BinDirectory, "McSlimUpdater.exe");
 
         private static string updaterUri;
         private static byte[] xmldata;
         private static XDocument doc;
-
-        internal static bool IsUpdateCompleteFileExisted()
-        {
-            return File.Exists(Path.Combine(App.BinDirectory, completedFileName));
-        }
 
         internal static async Task<bool> CheckUpdateAsync(Version version)
         {
@@ -108,7 +103,7 @@ namespace Cafemoca.McCommandStudio.Services
             }
         }
 
-        internal static void PostUpdate()
+        internal static void DeleteUpdater()
         {
             try
             {
@@ -149,8 +144,22 @@ namespace Cafemoca.McCommandStudio.Services
             App.MainViewModel.SaveAll();
             if (App.MainViewModel.Files.Where(x => x.IsModified.Value).Any())
             {
-                // warning
-                return false;
+                var dialog = new TaskDialogOptions();
+                dialog.Owner = App.MainView;
+                dialog.Title = "続行しますか？";
+                dialog.MainIcon = VistaTaskDialogIcon.Warning;
+                dialog.MainInstruction = "保存していないファイルがあります！";
+                dialog.Content = "保存しない場合、現在の変更は失われます。";
+                dialog.CustomButtons = new[] { "変更を破棄して続行 (&D)", "キャンセル (&C)" };
+                    
+                var result = TaskDialog.Show(dialog);
+                switch (result.CustomButtonResult)
+                {
+                    case 0:
+                        return true;
+                    case 1:
+                        return false;
+                }
             }
             try
             {

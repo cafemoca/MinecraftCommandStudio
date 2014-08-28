@@ -30,7 +30,14 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
             this.StartUpdateCommand = this.IsUpdateAvailable.ToReactiveCommand();
             this.StartUpdateCommand.Subscribe(async _ => await this.StartUpdateAsync());
 
-            Task.Run(async () => await this.CheckUpdateAsync());
+            Task.Run(async () =>
+            {
+                await this.CheckUpdateAsync();
+                if (this.IsUpdateAvailable.Value)
+                {
+                    StatusService.Current.Notify("アップデートが利用できます。最新版に更新するには、設定画面からアップデートを実行してください。");
+                }
+            });
         }
 
         public async Task CheckUpdateAsync()

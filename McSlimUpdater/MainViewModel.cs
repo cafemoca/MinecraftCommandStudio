@@ -8,7 +8,7 @@ namespace Cafemoca.McSlimUpdater
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private string _log = "Initializing...";
+        private string _log = "Initializing..." + Environment.NewLine;
         public string Log
         {
             get { return this._log; }

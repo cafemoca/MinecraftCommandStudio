@@ -6,11 +6,26 @@ namespace Cafemoca.CommandEditor.Utils
     internal class CharReader
     {
         private readonly List<char> _chars;
-        private int _cursor;
+
+        private int _cursor = 0;
+        public int Cursor
+        {
+            get { return this._cursor; }
+        }
 
         public bool IsRemainChar
         {
             get { return this._cursor < this._chars.Count; }
+        }
+
+        public char Ahead
+        {
+            get { return this.IsRemainChar ? this._chars[this._cursor] : '\0'; }
+        }
+
+        public char Backward
+        {
+            get { return this._cursor > 1 ? this._chars[this._cursor - 2] : '\0'; }
         }
 
         public CharReader(IEnumerable<char> chars)
@@ -27,16 +42,6 @@ namespace Cafemoca.CommandEditor.Utils
             return this._chars[this._cursor++];
         }
 
-        public char Ahead
-        {
-            get { return this.IsRemainChar ? this._chars[this._cursor] : '\0'; }
-        }
-
-        public char Backward
-        {
-            get { return this._cursor > 1 ? this._chars[this._cursor - 2] : '\0'; }
-        }
-
         public char LookAtRelative(int relative)
         {
             relative--;
@@ -45,7 +50,7 @@ namespace Cafemoca.CommandEditor.Utils
             {
                 return '\0';
             }
-            return this._chars[this._cursor];
+            return this._chars[this._cursor + relative];
         }
     }
 }

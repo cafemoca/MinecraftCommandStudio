@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace Cafemoca.CommandEditor.Utils
 {
@@ -30,50 +31,51 @@ namespace Cafemoca.CommandEditor.Utils
 
     public static class TokenExtensions
     {
-        internal static bool IsMatchLiteral(this Token token, string value, bool ignoreCase = true)
+        public static bool IsMatchLiteral(this Token token, string value, bool ignoreCase = true)
         {
-            return (token.Type != TokenType.Literal)
-                ? false
-                : ignoreCase
+            return (token.Type == TokenType.Literal)
+                ? ignoreCase
                     ? token.Value.Equals(value, StringComparison.OrdinalIgnoreCase)
-                    : token.Value == value;
+                    : token.Value == value
+                : false;
         }
 
-        internal static bool ContainsLiteral(this Token token, string[] value)
+        public static bool ContainsLiteral(this Token token, string[] value, bool ignoreCase = true)
         {
-            return (token.Type != TokenType.Literal)
-                ? false
-                : value.Contains(token.Value);
+            var comparer = ignoreCase
+                ? StringComparer.OrdinalIgnoreCase
+                : StringComparer.Ordinal;
+            return (token.Type == TokenType.Literal)
+                ? value.Contains(token.Value, comparer)
+                : false;
         }
 
-        internal static bool IsMatchType(this Token token, TokenType type)
+        public static bool IsMatchType(this Token token, TokenType type)
         {
             return token.Type == type;
+        }
+
+        public static bool ContainsType(this Token token, params TokenType[] types)
+        {
+            return types.Any(x => token.IsMatchType(x));
         }
     }
 
     public enum TokenType
     {
-        Blank,
-        Comment,
-        AtMark,
-        Period,
-        Comma,
-        Colon,
-        SemiColon,
-        Exclamation,
+        // common
         Literal,
-        Sharp,
-        And,
-        Or,
-        Plus,
-        Minus,
-        Asterisk,
-        Slash,
-        Percent,
+        String,
         Equal,
-        OperatorLocation,
-        OperatorTarget,
+
+        // command
+        Command,
+        LocationSelector,
+        TargetSelector,
+        TagBlock,
+        ArrayBlock,
+
+        // scoreboard
         ScoreMin,
         ScoreMax,
         ScoreSwaps,
@@ -82,15 +84,22 @@ namespace Cafemoca.CommandEditor.Utils
         ScoreMultiple,
         ScoreDivide,
         ScoreModulo,
+        Asterisk,
+
+        // tag
+        Comma,
+        Colon,
         OpenParenthesis,
         CloseParenthesis,
         OpenSquareBracket,
         CloseSquareBracket,
         OpenCurlyBrace,
         CloseCurlyBrace,
-        String,
-        Extend,
-        _Space,
-        _DeleteSpace,
+        Exclamation,
+        StringBlock,
+
+        // skip
+        Blank,
+        Comment,
     }
 }

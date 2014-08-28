@@ -92,7 +92,7 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 
             this.CompiledText = this.Text
                 .Throttle(TimeSpan.FromSeconds(1))
-                .Select(s => s.IsEmpty() ? "" : s.Tokenize().Compile(this.EscapeMode))
+                .Select(s => s.IsEmpty() ? "" : s.Compile(this.EscapeMode))
                 .ToReactiveProperty<string>("");
 
             this.Line = new ReactiveProperty<int>(0);
@@ -115,7 +115,7 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 
         public void UpdateCommand()
         {
-            this.CompiledText.Value = this.Text.Value.Tokenize().Compile(this.EscapeMode);
+            this.CompiledText.Value = this.Text.Value.Compile(this.EscapeMode);
         }
 
         private void SetDocumentStatus()

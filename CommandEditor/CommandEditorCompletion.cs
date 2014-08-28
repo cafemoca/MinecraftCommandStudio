@@ -272,8 +272,6 @@ namespace Cafemoca.CommandEditor
             var beforeTokens = tokens.TakeWhile(x => x.Index < index);
             var afterTokens = tokens.SkipWhile(x => x.Index < index);
 
-            var lastToken = beforeTokens.SkipLast(1).LastOrDefault();
-
             switch (input.ToLower())
             {
                 case "/":
@@ -303,9 +301,6 @@ namespace Cafemoca.CommandEditor
                 case "{":
                     break;
                 case ":":
-                    if (lastToken.IsMatchLiteral("minecraft"))
-                    {
-                    }
                     break;
                 case " ":
                     break;

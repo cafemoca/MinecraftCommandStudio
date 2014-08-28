@@ -7,161 +7,161 @@ namespace Cafemoca.CommandEditor.Utils
 {
     public static class Compiler
     {
-        #region 特定のトークンが連続した場合に半角スペースを挿入する
-
-        private static readonly TokenType[] spaceBefore = new[]
+        public static string Compile(this string text)
         {
-            TokenType.Literal,
-            TokenType.OperatorLocation,
-            TokenType.OperatorTarget,
-            TokenType.CloseSquareBracket,
-            TokenType.String,
-            TokenType.ScoreAdd,
-            TokenType.ScoreDivide,
-            TokenType.ScoreMax,
-            TokenType.ScoreMin,
-            TokenType.ScoreModulo,
-            TokenType.ScoreMultiple,
-            TokenType.ScoreSubtract,
-            TokenType.ScoreSwaps,
-            TokenType.Asterisk,
-        };
+            return text.Compile(TokenizeType.Command, 0, EscapeModeValue.New, ParentType.Default);
+        }
 
-        private static readonly TokenType[] spaceAfter = new[]
+        public static string Compile(this string text, EscapeModeValue escapeMode)
         {
-            TokenType.Literal,
-            TokenType.OperatorLocation,
-            TokenType.OperatorTarget,
-            TokenType.OpenCurlyBrace,
-            TokenType.String,
-            TokenType.ScoreAdd,
-            TokenType.ScoreDivide,
-            TokenType.ScoreMax,
-            TokenType.ScoreMin,
-            TokenType.ScoreModulo,
-            TokenType.ScoreMultiple,
-            TokenType.ScoreSubtract,
-            TokenType.ScoreSwaps,
-            TokenType.Slash,
-            TokenType.Asterisk,
-        };
+            return text.Compile(TokenizeType.Command, 0, escapeMode, ParentType.Default);
+        }
 
-        #endregion
-
-        public static string Compile(this IEnumerable<Token> tokens,
-            EscapeModeValue escapeMode = EscapeModeValue.New)
+        public static string Compile(this string text, TokenizeType tokenizeType,
+            int escapeLevel, EscapeModeValue escapeMode, ParentType parentType)
         {
-            var result = string.Empty;
-
-            tokens = tokens.Where(t => t.Type != TokenType.Blank && t.Type != TokenType.Comment);
-
-            var lastBeforeToken = new Token();
-            var lastToken = new Token();
-
-            var escapeLevel = 0;
-            var stackCurlyBracket = new Stack<bool>();
-            var stackParenthesis = new Stack<bool>();
-
-            foreach (var token in tokens)
+            if (text.IsEmpty())
             {
-                var value = token.Value;
-                if (spaceAfter.Contains(token.Type) && spaceBefore.Contains(lastToken.Type))
-                {
-                    result += " ";
-                }
-
-                switch (token.Type)
-                {
-                    case TokenType.OpenCurlyBrace:
-                        if ((lastBeforeToken.Type == TokenType.Literal) &&
-                            (lastToken.Type == TokenType.Colon))
-                        {
-                            switch (lastBeforeToken.Value)
-                            {
-                                case "Text1":
-                                case "Text2":
-                                case "Text3":
-                                case "Text4":
-                                case "value":
-                                    stackCurlyBracket.Push(true);
-                                    value = GetRepeatedEscape(escapeLevel, escapeMode) + "\"" + value;
-                                    escapeLevel++;
-                                    break;
-                                default:
-                                    stackCurlyBracket.Push(false);
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            stackCurlyBracket.Push(false);
-                        }
-                        break;
-                    case TokenType.String:
-                        if (escapeMode == EscapeModeValue.New)
-                        {
-                            for (int i = 0; i < escapeLevel; i++)
-                            {
-                                value = value.Escape('"');
-                            }
-                        }
-                        else if (escapeMode == EscapeModeValue.Old)
-                        {
-                            value = value
-                                .Replace("\\", GetRepeatedEscape(escapeLevel, escapeMode))
-                                .Replace("\"", GetRepeatedEscape(escapeLevel, escapeMode) + "\"");
-                        }
-                        break;
-                    case TokenType.CloseCurlyBrace:
-                        if (lastToken.Type == TokenType.Comma)
-                        {
-                            result = result.TrimEnd(',');
-                        }
-                        if (stackCurlyBracket.Count > 0)
-                        {
-                            if (stackCurlyBracket.Pop())
-                            {
-                                escapeLevel--;
-                                value = value + GetRepeatedEscape(escapeLevel, escapeMode) + "\"";
-                            }
-                        }
-                        break;
-                    case TokenType.OpenParenthesis:
-                        if (lastBeforeToken.Type == TokenType.Literal && lastBeforeToken.Value == "tellraw")
-                        {
-                            stackParenthesis.Push(false);
-                        }
-                        else
-                        {
-                            stackParenthesis.Push(true);
-                            value = GetRepeatedEscape(escapeLevel, escapeMode) + "\"";
-                            escapeLevel++;
-                        }
-                        break;
-                    case TokenType.CloseParenthesis:
-                        if (stackParenthesis.Count > 0)
-                        {
-                            if (stackParenthesis.Pop())
-                            {
-                                escapeLevel--;
-                                value = GetRepeatedEscape(escapeLevel, escapeMode) + "\"";
-                            }
-                        }
-                        break;
-                    case TokenType.Extend:
-                        continue;
-                    default:
-                        break;
-                }
-
-                lastBeforeToken = lastToken;
-                lastToken = token;
-
-                result += value;
+                return string.Empty;
             }
 
-            return result;
+            var tokens = text.Tokenize(tokenizeType)
+                .Where(t => !t.ContainsType(TokenType.Blank, TokenType.Comment));
+
+            if (tokens.IsEmpty())
+            {
+                return string.Empty;
+            }
+            
+            var builder = new StringBuilder(tokens.Count());
+
+            try
+            {
+                using (var reader = new TokenReader(tokens))
+                {
+                    while (reader.IsRemainToken)
+                    {
+                        var token = reader.Get();
+                        var value = token.Value;
+
+                        var start = false;
+                        var end = false;
+                        var quote = GetRepeatedEscape(escapeLevel, escapeMode) + "\"";
+
+                        switch (token.Type)
+                        {
+                            case TokenType.String:
+                                if (escapeMode == EscapeModeValue.New)
+                                {
+                                    for (int i = 0; i < escapeLevel; i++)
+                                    {
+                                        value = value.Escape('"');
+                                    }
+                                }
+                                else if (escapeMode == EscapeModeValue.Old)
+                                {
+                                    value = value
+                                        .Replace("\\", GetRepeatedEscape(escapeLevel, escapeMode))
+                                        .Replace("\"", GetRepeatedEscape(escapeLevel, escapeMode) + "\"");
+                                }
+                                break;
+                            case TokenType.StringBlock:
+                                value = value
+                                    .Unenclose('(', ')')
+                                    .Compile(TokenizeType.Command, escapeLevel + 1, escapeMode, ParentType.Default)
+                                    .Quote(quote);
+                                break;
+                            case TokenType.TagBlock:
+                                start = value.First() == '{';
+                                end = value.Last() == '}' ;
+                                if (parentType == ParentType.RawJson ||
+                                    (reader.Cursor > 1 &&
+                                     reader.Backward.IsMatchType(TokenType.Colon) &&
+                                     reader.LookAtRelative(-2).ContainsLiteral(EscapeKey, false)))
+                                {
+                                    value = value
+                                        .Unenclose('{', '}')
+                                        .Compile(TokenizeType.Block, escapeLevel + 1, escapeMode, ParentType.TagBlock);
+                                    value = value.Enclose(
+                                        start ? quote + "{" : "",
+                                        end ? "}" + quote : "");
+                                }
+                                else
+                                {
+                                    value = value
+                                        .Unenclose('{', '}')
+                                        .Compile(TokenizeType.Block, escapeLevel, escapeMode, ParentType.TagBlock);
+                                    value = value.Enclose(
+                                        start ? "{" : "",
+                                        end ? "}" : "");
+                                }
+                                break;
+                            case TokenType.ArrayBlock:
+                                start = value.First() == '[';
+                                end = value.Last() == ']';
+                                if (reader.Cursor > 1 &&
+                                    reader.Backward.IsMatchType(TokenType.Colon) &&
+                                    reader.LookAtRelative(-2).IsMatchLiteral("pages", false))
+                                {
+                                    value = value
+                                        .Unenclose('[', ']')
+                                        .Compile(TokenizeType.Block, escapeLevel, escapeMode, ParentType.RawJson);
+                                }
+                                else
+                                {
+                                    value = value
+                                        .Unenclose('[', ']')
+                                        .Compile(TokenizeType.Block, escapeLevel, escapeMode, ParentType.ArrayBlock);
+                                }
+                                value = value.Enclose(
+                                    start ? "[" : "",
+                                    end ? "]" : "");
+                                break;
+                        }
+
+                        if (parentType == ParentType.Default && reader.Cursor > 1)
+                        {
+                            if (!(token.IsMatchType(TokenType.ArrayBlock) &&
+                                  reader.Backward.IsMatchType(TokenType.TargetSelector) &&
+                                  !value.CheckNext(0, '{')))
+                            {
+                                builder.Append(" ");
+                            }
+                        }
+                        if (parentType != ParentType.Default && reader.Cursor > 1)
+                        {
+                            if (token.IsMatchType(TokenType.Literal) &&
+                                reader.Backward.IsMatchType(TokenType.Literal))
+                            {
+                                builder.Append(" ");
+                            }
+                            if (token.IsMatchType(TokenType.String) &&
+                                reader.Backward.IsMatchType(TokenType.String))
+                            {
+                                builder.Remove(builder.Length - 1, 1);
+                                value.TrimStart('"');
+                            }
+                        }
+
+                        builder.Append(value);
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            return builder.ToString();
         }
+
+        private static readonly string[] EscapeKey =
+        {
+            "Text1",
+            "Text2",
+            "Text3",
+            "Text4",
+            "Command",
+        };
 
         private static string GetRepeatedEscape(int escapeLevel, EscapeModeValue escapeMode)
         {
@@ -181,6 +181,14 @@ namespace Cafemoca.CommandEditor.Utils
             Enumerable.Range(1, count).ForEach(_ => b.Append("\\"));
             return b.ToString();
         }
+    }
+
+    public enum ParentType
+    {
+        Default,
+        TagBlock,
+        ArrayBlock,
+        RawJson,
     }
 
     public enum EscapeModeValue

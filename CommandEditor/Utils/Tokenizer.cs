@@ -6,14 +6,22 @@ namespace Cafemoca.CommandEditor.Utils
 {
     public static class Tokenizer
     {
-        public static IEnumerable<Token> Tokenize(this string text)
+        public static IEnumerable<Token> Tokenize(this string text, TokenizeType type = TokenizeType.Command)
         {
             if (text.IsEmpty())
             {
-                yield break;
+                return null;
             }
 
+            return (type == TokenizeType.Command)
+                ? text.TokenizeCommand()
+                : text.TokenizeDataTag();
+        }
+
+        public static IEnumerable<Token> TokenizeCommand(this string text)
+        {
             var cursor = 0;
+
             do
             {
                 switch (text[cursor])
@@ -22,70 +30,98 @@ namespace Cafemoca.CommandEditor.Utils
                         yield return new Token(TokenType.ScoreMin, "<", cursor);
                         break;
                     case '>':
-                        yield return (text.CheckNext(cursor, '<'))
+                        yield return text.CheckNext(cursor, '<')
                             ? new Token(TokenType.ScoreSwaps, "><", cursor++)
                             : new Token(TokenType.ScoreMax, ">", cursor);
                         break;
                     case '+':
-                        yield return (text.CheckNext(cursor, '='))
+                        yield return text.CheckNext(cursor, '=')
                             ? new Token(TokenType.ScoreAdd, "+=", cursor++)
-                            : new Token(TokenType.Plus, "+", cursor);
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
                         break;
                     case '-':
-                        if (text.CheckNext(cursor, '='))
-                        {
-                            yield return new Token(TokenType.ScoreSubtract, "-=", cursor++);
-                        }
-                        else
-                        {
-                            var begin = cursor;
-                            yield return new Token(TokenType.Literal, text.GetLiteral(ref begin, ref cursor), cursor);
-                        }
+                        yield return text.CheckNext(cursor, '=')
+                            ? new Token(TokenType.ScoreSubtract, "-=", cursor++)
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
                         break;
                     case '*':
-                         yield return (text.CheckNext(cursor, '='))
-                            ? new Token(TokenType.ScoreMultiple, "*=", cursor++)
-                            : new Token(TokenType.Asterisk, "*", cursor);
+                        yield return text.CheckNext(cursor, '=')
+                           ? new Token(TokenType.ScoreMultiple, "*=", cursor++)
+                           : new Token(TokenType.Asterisk, "*", cursor);
+                        break;
+                    case '%':
+                        yield return text.CheckNext(cursor, '=')
+                            ? new Token(TokenType.ScoreModulo, "%=", cursor++)
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
                         break;
                     case '/':
-                        if (text.CheckNext(cursor, '='))
-                        {
-                            yield return new Token(TokenType.ScoreDivide, "/=", cursor++);
-                        }
-                        else if (text.CheckNext(cursor, "/*"))
+                        if (text.CheckNext(cursor, '/', '*'))
                         {
                             yield return new Token(TokenType.Comment, text.GetComments(ref cursor), cursor);
                         }
                         else
                         {
-                            yield return new Token(TokenType.Slash, "/", cursor);
+                            yield return (text.CheckNext(cursor, '='))
+                                ? new Token(TokenType.ScoreDivide, "/=", cursor++)
+                                : new Token(TokenType.Command, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
                         }
                         break;
-                    case '%':
-                        yield return (text.CheckNext(cursor, '='))
-                            ? new Token(TokenType.ScoreModulo, "%=", cursor++)
-                            : new Token(TokenType.Percent, "%", cursor);
+                    case '{':
+                        yield return new Token(TokenType.TagBlock, text.GetBlock('{', '}', ref cursor), cursor);
+                        break;
+                    case '[':
+                        yield return new Token(TokenType.ArrayBlock, text.GetBlock('[', ']', ref cursor), cursor);
+                        break;
+                    case '@':
+                        yield return new Token(TokenType.TargetSelector, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                        break;
+                    case '~':
+                        yield return new Token(TokenType.LocationSelector, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                        break;
+                    case '"':
+                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
+                        break;
+                    case '\t':
+                    case ' ':
+                    case '\r':
+                    case '\n':
+                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), cursor);
+                        break;
+                    default:
+                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                        break;
+                }
+                cursor++;
+            } while (cursor < text.Length);
+        }
+
+        public static IEnumerable<Token> TokenizeDataTag(this string text)
+        {
+            var cursor = 0;
+
+            do
+            {
+                switch (text[cursor])
+                {
+                    case '/':
+                        yield return text.CheckNext(cursor, '/', '*')
+                            ? new Token(TokenType.Comment, text.GetComments(ref cursor), cursor)
+                            : new Token(TokenType.Command, text.GetLiteral(TokenizeType.Block, ref cursor), cursor);
                         break;
                     case '=':
                         yield return new Token(TokenType.Equal, "=", cursor);
                         break;
-                    case '(':
-                        yield return new Token(TokenType.OpenParenthesis, "(", cursor);
+                    case '!':
+                        yield return new Token(TokenType.Exclamation, "!", cursor);
                         break;
-                    case ')':
-                        yield return new Token(TokenType.CloseParenthesis, ")", cursor);
+                    case '(':
+                        yield return new Token(TokenType.StringBlock, text.GetBlock('(', ')', ref cursor), cursor);
                         break;
                     case '{':
-                        yield return new Token(TokenType.OpenCurlyBrace, "{", cursor);
-                        break;
-                    case '}':
-                        yield return new Token(TokenType.CloseCurlyBrace, "}", cursor);
+                        yield return new Token(TokenType.TagBlock, text.GetBlock('{', '}', ref cursor), cursor);
                         break;
                     case '[':
-                        yield return new Token(TokenType.OpenSquareBracket, "[", cursor);
-                        break;
-                    case ']':
-                        yield return new Token(TokenType.CloseSquareBracket, "]", cursor);
+                        yield return new Token(TokenType.ArrayBlock, text.GetBlock('[', ']', ref cursor), cursor);
                         break;
                     case ',':
                         yield return new Token(TokenType.Comma, ",", cursor);
@@ -93,70 +129,20 @@ namespace Cafemoca.CommandEditor.Utils
                     case ':':
                         yield return new Token(TokenType.Colon, ":", cursor);
                         break;
-                    case '_':
-                        if (cursor + 1 < text.Length)
-                        {
-                            var begin = cursor;
-                            var literal = text.GetLiteral(ref begin, ref cursor);
-                            yield return literal != "_" //literal.Any(x => x != '_')
-                                ? new Token(TokenType.Literal, literal, cursor)
-                                : new Token(TokenType._Space, " ", cursor);
-                        }
-                        break;
-                    case ';':
-                        yield return new Token(TokenType._DeleteSpace, "", cursor);
-                        break;
-                    case '!':
-                        yield return new Token(TokenType.Exclamation, "!", cursor);
-                        break;
-                    case '@':
-                        if (text.CheckNext(cursor, "pear"))
-                        {
-                            var next = text.GetNext(cursor);
-                            yield return new Token(TokenType.OperatorTarget, "@" + next, cursor++);
-                            break;
-                        }
-                        yield return new Token(TokenType.AtMark, "@", cursor);
-                        break;
-                    case '~':
-                        if (cursor + 1 < text.Length)
-                        {
-                            var begin = ++cursor;
-                            var location = text.GetLiteral(ref begin, ref cursor);
-                            yield return new Token(TokenType.OperatorLocation, "~" + location, begin - 1);
-                            break;
-                        }
-                        yield return new Token(TokenType.OperatorLocation, "~", cursor);
-                        break;
-                    case '#':
-                        if (cursor + 1 < text.Length)
-                        {
-                            var begin = ++cursor;
-                            var command = text.GetLiteral(ref begin, ref cursor);
-                            if (!command.IsEmpty())
-                            {
-                                yield return new Token(TokenType.Extend, command, begin - 1);
-                                break;
-                            }
-                        }
-                        yield return new Token(TokenType.Sharp, "#", cursor);
+                    case '\'':
+                        yield return new Token(TokenType.String, text.GetString('\'', ref cursor), cursor);
                         break;
                     case '"':
-                        yield return new Token(TokenType.String, GetString(text, ref cursor), cursor);
+                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
                         break;
                     case '\t':
-                    case ' ':
-                    case '　':
                     case '\r':
                     case '\n':
+                    case ' ':
                         yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), cursor);
                         break;
                     default:
-                        {
-                            var begin = cursor;
-                            var literal = text.GetLiteral(ref begin, ref cursor);
-                            yield return new Token(TokenType.Literal, literal, begin);
-                        }
+                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Block, ref cursor), cursor);
                         break;
                 }
                 cursor++;
@@ -165,10 +151,12 @@ namespace Cafemoca.CommandEditor.Utils
 
         public static string GetBlanks(this string text, ref int cursor)
         {
+            const string blanks = "\t\r\n ";
             var begin = cursor;
-            do
+
+            while (cursor < text.Length)
             {
-                if ("\t\r\n 　".Contains(text[cursor]))
+                if (blanks.Contains(text[cursor]))
                 {
                     cursor++;
                 }
@@ -178,46 +166,34 @@ namespace Cafemoca.CommandEditor.Utils
                     return text.Substring(begin, cursor - begin);
                 }
             }
-            while (cursor < text.Length);
-            return "";
+
+            return (cursor >= text.Length)
+                ? text.Substring(begin)
+                : string.Empty;
         }
 
         public static string GetComments(this string text, ref int cursor)
         {
-            var begin = cursor;
+            var begin = cursor++;
+            var inBlockComment = (text[cursor++] == '*') ? true : false;
 
-            var inLineComment = false;
-            var inBlockComment = false;
-
-            var next = text[++cursor];
-            switch (next)
-            {
-                case '*':
-                    inBlockComment = true;
-                    break;
-                case '/':
-                    inLineComment = true;
-                    break;
-                default:
-                    return "";
-            }
-
-            do
+            while (cursor < text.Length)
             {
                 switch (text[cursor])
                 {
                     case '*':
                         if (inBlockComment)
                         {
-                            if (text.Length <= cursor || text.GetNext(cursor) == '/')
+                            if (text.GetNext(cursor) == '/')
                             {
                                 cursor++;
                                 return text.Substring(begin, cursor - begin);
                             }
                         }
                         break;
+                    case '\r':
                     case '\n':
-                        if (inLineComment)
+                        if (!inBlockComment)
                         {
                             return text.Substring(begin, cursor - begin);
                         }
@@ -225,169 +201,108 @@ namespace Cafemoca.CommandEditor.Utils
                 }
                 cursor++;
             }
-            while (cursor < text.Length);
 
-            return "";
+            return (cursor >= text.Length)
+                ? text.Substring(begin)
+                : string.Empty;
         }
 
-        public static string GetLiteral(this string text, ref int begin, ref int cursor)
+        public static string GetLiteral(this string text, TokenizeType type, ref int cursor)
         {
-            const string tokens = "<>+*/%(){}[],:;=!#@~\"\t\r\n 　";
-            var literal = "";
+            var tokens = string.Empty;
+            
+            switch (type)
+            {
+                case TokenizeType.Command:
+                    tokens = "{}[]=@~/\t\r\n ";
+                    break;
+                case TokenizeType.Block:
+                default:
+                    tokens = "(){}[],:;=\"\t\r\n ";
+                    break;
+            }
 
-            do
+            var begin = cursor++;
+
+            while (cursor < text.Length)
             {
                 if (tokens.Contains(text[cursor]))
                 {
-                    literal = text.Substring(begin, cursor - begin);
                     cursor--;
-                    break;
+                    return text.Substring(begin, cursor - begin + 1);
                 }
                 cursor++;
             }
-            while (cursor < text.Length);
-            if (cursor == text.Length)
-            {
-                literal = text.Substring(begin, cursor - begin);
-            }
-            return literal;
-        }
 
-        public static string GetInQuoteString(this string text, ref int cursor)
-        {
-            var begin = cursor++;
-            var result = string.Empty;
-
-            while (cursor < text.Length)
-            {
-                if (text[cursor] == '\\')
-                {
-                    if (cursor + 1 == text.Length)
-                    {
-                        result = text.Substring(begin + 1).Unescape('"');
-                        break;
-                    }
-                    if (text[cursor + 1] == '"' || text[cursor + 1] == '\\')
-                    {
-                        cursor++;
-                    }
-                }
-                else if (text[cursor] == '"')
-                {
-                    result = text.Substring(begin + 1, cursor - begin - 1).Unescape('"');
-                    break;
-                }
-                cursor++;
-            }
-            return (cursor == text.Length)
-                ? text.Substring(begin + 1).Unescape('"')
-                : result;
-        }
-
-        public static string GetString(this string text, ref int cursor)
-        {
-            var begin = cursor++;
-            var result = string.Empty;
-
-            while (cursor < text.Length)
-            {
-                if (text[cursor] == '\\')
-                {
-                    if (cursor + 1 == text.Length)
-                    {
-                        result = text.Substring(begin);
-                        break;
-                    }
-                    if (text[cursor + 1] == '"' || text[cursor + 1] == '\\')
-                    {
-                        cursor++;
-                    }
-                }
-                else if (text[cursor] == '"')
-                {
-                    result = text.Substring(begin, cursor - begin + 1);
-                    break;
-                }
-                cursor++;
-            }
-            return (cursor == text.Length)
+            return (cursor >= text.Length)
                 ? text.Substring(begin)
-                : result;
+                : string.Empty;
         }
 
-        /*
-        [Obsolete]
-        public static string GetInBracketString(string text, char beginChar, char endChar, ref int cursor)
+        public static string GetString(this string text, char quote, ref int cursor)
         {
             var begin = cursor++;
-            var nest = 0;
+
             while (cursor < text.Length)
             {
-                if (text[cursor] == beginChar)
+                if (text[cursor] == '\\')
                 {
-                    nest++;
-                    if (cursor + 1 == text.Length)
+                    if (cursor > text.Length)
                     {
-                        return text.Substring(begin + 1).Unescape();
+                        return text.Substring(begin);
+                    }
+                    if (text.CheckNext(cursor, quote) || text.CheckNext(cursor, '\\'))
+                    {
+                        cursor++;
                     }
                 }
-                else if (text[cursor] == endChar)
+                else if (text[cursor] == quote)
                 {
-                    if (nest > 0)
+                    return text.Substring(begin, cursor - begin + 1);
+                }
+                cursor++;
+            }
+
+            return (cursor >= text.Length)
+                ? text.Substring(begin)
+                : string.Empty;
+        }
+
+        public static string GetBlock(this string text, char start, char end, ref int cursor)
+        {
+            var begin = cursor++;
+            var stack = new Stack<char>();
+
+            while (cursor < text.Length)
+            {
+                var cha = text[cursor];
+                if (cha == start)
+                {
+                    stack.Push(cha);
+                }
+                if (cha == end)
+                {
+                    if (stack.Any())
                     {
-                        nest--;
+                        stack.Pop();
                     }
                     else
                     {
-                        return text.Substring(begin + 1, cursor - begin - 1).Unescape();
+                        return text.Substring(begin, cursor - begin + 1);
                     }
                 }
                 cursor++;
             }
-            return text.Substring(begin + 1).Escape();
-        }
-        */
 
-        public static bool CheckNext(this string text, int index, char character)
-        {
-            index++;
-            return index >= 0 && text.Length > index && text[index] == character;
+            return (cursor >= text.Length)
+                ? text.Substring(begin)
+                : string.Empty;
         }
+    }
 
-        public static bool CheckNext(this string text, int index, IEnumerable<char> characters)
-        {
-            index++;
-            return index >= 0 && text.Length > index && characters.Contains(text[index]);
-        }
-
-        public static char GetNext(this string text, int index)
-        {
-            index++;
-            return index >= 0 && text.Length > index ? text[index] : '\0';
-        }
-
-        public static bool CheckPrevious(this string text, int index, char character)
-        {
-            return index >= 0 && text.Length > index + 1 && text[index] == character;
-        }
-
-        public static bool CheckPrevious(this string text, int index, IEnumerable<char> characters)
-        {
-            return index >= 0 && text.Length > index + 1 && characters.Contains(text[index]);
-        }
-
-        public static char GetPrevious(this string text, int index)
-        {
-            return index >= 0 && text.Length > index + 1 ? text[index] : '\0';
-        }
-
-        public static bool CheckBothSide(this string text, int index, char previous, char next)
-        {
-            return
-                index >= 0 &&
-                text.Length > index + 1 &&
-                previous == text[index] &&
-                next == text[index + 1];
-        }
+    public enum TokenizeType
+    {
+        Command,
+        Block,
     }
 }

@@ -10,9 +10,8 @@ namespace Cafemoca.CommandEditor.Utils
         {
             if (text.IsEmpty())
             {
-                return null;
+                text = string.Empty;
             }
-
             return (type == TokenizeType.Command)
                 ? text.TokenizeCommand()
                 : text.TokenizeDataTag();

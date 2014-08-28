@@ -128,11 +128,15 @@ namespace Cafemoca.CommandEditor
                     this._latestKey = Key.Tab;
                     break;
                 case Key.Enter:
-                    if (!this.IsSelection && ")}]".Contains(next))
+                    if (!this.IsSelection &&
+                        "]})".Contains(next))
                     {
                         e.Handled = true;
                         this.BeginChange();
-                        this.Document.Insert(index, Environment.NewLine + "\t" + Environment.NewLine);
+                        this.Document.Insert(index,
+                            Environment.NewLine +
+                            this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().IndentationString +
+                            Environment.NewLine);
                         this.TextArea.IndentationStrategy.IndentLines(this.Document, line.LineNumber, line.NextLine.NextLine.LineNumber);
                         this.CaretOffset--;
                         this.EndChange();
@@ -300,6 +304,16 @@ namespace Cafemoca.CommandEditor
                         this.EndChange();
                     }
                     break;
+                case "\r":
+                case "\n":
+                    var indent = this.Text
+                        .Skip(this.CaretOffset)
+                        .TakeWhile(x => "\t ".Contains(x))
+                        .Count();
+                    this.CaretOffset += indent;
+                    break;
+                default:
+                    break;
             }
         }
         
@@ -307,13 +321,11 @@ namespace Cafemoca.CommandEditor
         {
             var tokens = this.Text
                 .Tokenize()
-                .Where(x => !x.IsMatchType(TokenType.Blank) || !x.IsMatchType(TokenType.Comment));
+                .Where(x => !x.ContainsType(TokenType.Blank, TokenType.Comment));
 
-            var previous = index > 1
-                ? this.Document.GetCharAt(index - 2)
-                : '\0';
-            var next = this.Document.TextLength > index + 1
-                ? this.Document.GetCharAt(index)
+            var next = this.NextChar;
+            var prev = (this.CaretOffset > 1)
+                ? this.Document.GetCharAt(this.CaretOffset - 2)
                 : '\0';
 
             var beforeTokens = tokens.TakeWhile(x => x.Index < index);
@@ -322,13 +334,13 @@ namespace Cafemoca.CommandEditor
             switch (input.ToLower())
             {
                 case "/":
-                    if ("*/".Contains(previous))
+                    if ("*/".Contains(prev))
                     {
                         break;
                     }
                     return MinecraftCompletions.GetCommandCompletion();
                 case "*":
-                    if (previous == '/')
+                    if (prev == '/')
                     {
                         return null;
                     }

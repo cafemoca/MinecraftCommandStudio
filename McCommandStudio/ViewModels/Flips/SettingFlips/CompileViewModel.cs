@@ -7,6 +7,11 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
 {
     public class CompileViewModel : ViewModel
     {
+        public int CompileInterval
+        {
+            get { return Setting.Current.CompileInterval; }
+            set { Setting.Current.CompileInterval = value; }
+        }
         public EscapeModeValue EscapeMode
         {
             get { return Setting.Current.EscapeMode; }
@@ -19,8 +24,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
         {
             this.EscapeModeList = new Dictionary<EscapeModeValue, string>()
             {
-                { EscapeModeValue.New, "1.8.x (14w31a 以降)" },
-                { EscapeModeValue.Old, "1.7.x (14w30c 以前)" },
+                { EscapeModeValue.New, "version 1.8 (14w31a 以降)" },
+                { EscapeModeValue.Old, "version 1.7 (14w30c 以前)" },
             };
         }
     }

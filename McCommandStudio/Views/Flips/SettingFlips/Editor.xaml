@@ -44,6 +44,12 @@
                       Header="操作">
                 <StackPanel Margin="5"
                             Orientation="Vertical">
+                    <CheckBox Margin="0,5"
+                              Content="引用符・括弧入力時に自動的に閉じ括弧 (または引用符) を補完する"
+                              IsChecked="{Binding BracketCompletion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <CheckBox Margin="0,5"
+                              Content="閉じ括弧入力時にインデントを自動的に整形する"
+                              IsChecked="{Binding AutoReformat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     <CheckBox x:Name="EncloseSelection"
                               Margin="0,5"
                               Content="引用符・括弧入力時に選択している文字列を囲む (単行選択のみ有効)"

@@ -3,17 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
              d:DesignHeight="480"
              d:DesignWidth="640"
              mc:Ignorable="d">
 
     <Grid>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="0,5,0,3"
+                        Orientation="Horizontal">
+                <Label Width="160"
+                       Content="入力から生成までの間隔:"
+                       ToolTip="最後に入力してから指定した時間テキストに変化がなかった場合にコマンドが生成されます" />
+                <metro:NumericUpDown Width="200"
+                                     MinHeight="24"
+                                     BorderBrush="{DynamicResource GrayBrush8}"
+                                     Maximum="60000"
+                                     Minimum="0"
+                                     Speedup="True"
+                                     Value="{Binding CompileInterval, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <metro:NumericUpDown.StringFormat>{0} ms</metro:NumericUpDown.StringFormat>
+                </metro:NumericUpDown>
+            </StackPanel>
+            <StackPanel Margin="0,5,0,3"
+                        Orientation="Horizontal">
                 <Label Width="160"
                        Content="エスケープ文字の生成モード:"
                        ToolTip="コマンド生成時にエスケープ文字を自動補完する際に、指定したバージョンに対応した数が生成されます" />
                 <ComboBox Width="200"
+                          MinHeight="24"
                           DisplayMemberPath="Value"
                           ItemsSource="{Binding EscapeModeList}"
                           SelectedValue="{Binding EscapeMode}"

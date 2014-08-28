@@ -72,6 +72,9 @@ namespace Cafemoca.McCommandStudio.Settings
                 DefaultFileName = "untitled",
                 EncloseSelection = true,
                 EncloseMultiLine = false,
+                AutoReformat = true,
+                BracketCompletion = true,
+                CompileInterval = 1000,
             };
         }
 
@@ -396,6 +399,51 @@ namespace Cafemoca.McCommandStudio.Settings
             set
             {
                 this._encloseMultiLine = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region AutoReformat 変更通知プロパティ
+
+        private bool _autoReformat = true;
+        public bool AutoReformat
+        {
+            get { return this._autoReformat; }
+            set
+            {
+                this._autoReformat = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region BracketCompletion 変更通知プロパティ
+
+        private bool _bracketCompletion = true;
+        public bool BracketCompletion
+        {
+            get { return this._bracketCompletion; }
+            set
+            {
+                this._bracketCompletion = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region CompileInterval 変更通知プロパティ
+
+        private int _compileInterval = 1000;
+        public int CompileInterval
+        {
+            get { return this._compileInterval; }
+            set
+            {
+                this._compileInterval = value;
                 this.RaisePropertyChanged();
             }
         }

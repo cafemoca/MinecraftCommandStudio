@@ -9,55 +9,38 @@ using ICSharpCode.AvalonEdit;
 using System;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 {
     public class DocumentViewModel : FileViewModel
     {
-        public ReactiveProperty<string> CompiledText { get; private set; }
+        private ReactiveProperty<string> _compiledText;
+        public ReactiveProperty<string> CompiledText
+        {
+            get { return this._compiledText; }
+            set
+            {
+                this._compiledText = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         public ReactiveProperty<int> Line { get; private set; }
         public ReactiveProperty<int> Column { get; private set; }
 
-        public TextEditorOptions Options
-        {
-            get { return Setting.Current.Options; }
-        }
-
-        public string FontFamily
-        {
-            get { return Setting.Current.FontFamily; }
-        }
-
-        public int FontSize
-        {
-            get { return Setting.Current.FontSize; }
-        }
-
-        public bool ShowLineNumbers
-        {
-            get { return Setting.Current.ShowLineNumbers; }
-        }
-
-        public bool TextWrapping
-        {
-            get { return Setting.Current.TextWrapping; }
-        }
-
-        public bool EncloseSelection
-        {
-            get { return Setting.Current.EncloseSelection; }
-        }
-
-        public bool EncloseMultiLine
-        {
-            get { return Setting.Current.EncloseMultiLine; }
-        }
-
-        public EscapeModeValue EscapeMode
-        {
-            get { return Setting.Current.EscapeMode; }
-        }
+        public ReactiveProperty<TextEditorOptions> Options { get; private set; }
+        public ReactiveProperty<string> FontFamily { get; private set; }
+        public ReactiveProperty<int> FontSize { get; private set; }
+        public ReactiveProperty<bool> ShowLineNumbers { get; private set; }
+        public ReactiveProperty<bool> TextWrapping { get; private set; }
+        public ReactiveProperty<bool> EncloseSelection { get; private set; }
+        public ReactiveProperty<bool> EncloseMultiLine { get; private set; }
+        public ReactiveProperty<bool> AutoReformat { get; private set; }
+        public ReactiveProperty<bool> BracketCompletion { get; private set; }
+        public ReactiveProperty<int> CompileInterval { get; private set; }
+        public ReactiveProperty<EscapeModeValue> EscapeMode { get; private set; }
 
         public ReactiveCommand CopyCommand { get; private set; }
 
@@ -79,24 +62,32 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
         public DocumentViewModel(string filePath, int count)
             : base(filePath, count)
         {
-            Setting.Current.ObserveProperty(x => x.Options)
-                .Subscribe(_ => this.RaisePropertyChanged(() => this.Options));
-            Setting.Current.ObserveProperty(x => x.ShowLineNumbers)
-                .Subscribe(_ => this.RaisePropertyChanged(() => this.ShowLineNumbers));
-            Setting.Current.ObserveProperty(x => x.TextWrapping)
-                .Subscribe(_ => this.RaisePropertyChanged(() => this.TextWrapping));
-            Setting.Current.ObserveProperty(x => x.EncloseSelection)
-                .Subscribe(_ => this.RaisePropertyChanged(() => this.EncloseSelection));
-            Setting.Current.ObserveProperty(x => x.EncloseMultiLine)
-                .Subscribe(_ => this.RaisePropertyChanged(() => this.EncloseMultiLine));
-
-            this.CompiledText = this.Text
-                .Throttle(TimeSpan.FromSeconds(1))
-                .Select(s => s.IsEmpty() ? "" : s.Compile(this.EscapeMode))
-                .ToReactiveProperty<string>("");
-
             this.Line = new ReactiveProperty<int>(0);
             this.Column = new ReactiveProperty<int>(0);
+
+            this.Options = Setting.Current.ObserveProperty(x => x.Options).ToReactiveProperty();
+            this.FontFamily = Setting.Current.ObserveProperty(x => x.FontFamily).ToReactiveProperty();
+            this.FontSize = Setting.Current.ObserveProperty(x => x.FontSize).ToReactiveProperty();
+            this.ShowLineNumbers = Setting.Current.ObserveProperty(x => x.ShowLineNumbers).ToReactiveProperty();
+            this.TextWrapping = Setting.Current.ObserveProperty(x => x.TextWrapping).ToReactiveProperty();
+            this.EncloseSelection = Setting.Current.ObserveProperty(x => x.EncloseSelection).ToReactiveProperty();
+            this.EncloseMultiLine = Setting.Current.ObserveProperty(x => x.EncloseMultiLine).ToReactiveProperty();
+            this.AutoReformat = Setting.Current.ObserveProperty(x => x.AutoReformat).ToReactiveProperty();
+            this.BracketCompletion = Setting.Current.ObserveProperty(x => x.BracketCompletion).ToReactiveProperty();
+            this.CompileInterval = Setting.Current.ObserveProperty(x => x.CompileInterval).ToReactiveProperty();
+
+            this.CompileInterval.Subscribe(v =>
+            {
+                var initialValue = string.Empty;
+                if (this.CompiledText != null)
+                {
+                    initialValue = this.CompiledText.Value;
+                    this.CompiledText.Dispose();
+                }
+                this.CompiledText = this.Text
+                    .Throttle(TimeSpan.FromMilliseconds(v))
+                    .ToReactiveProperty(initialValue);
+            });
 
             this.CopyCommand = new ReactiveCommand();
             this.CopyCommand.Subscribe(_ =>
@@ -115,7 +106,7 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 
         public void UpdateCommand()
         {
-            this.CompiledText.Value = this.Text.Value.Compile(this.EscapeMode);
+            this.CompiledText.Value = this.Text.Value.Compile();
         }
 
         private void SetDocumentStatus()
@@ -130,6 +121,19 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
             .ToString();
 
             StatusService.Current.SetMain(message);
+        }
+
+        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (object.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
+            this.RaisePropertyChanged(propertyName);
+
+            return true;
         }
     }
 }

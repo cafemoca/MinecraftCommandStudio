@@ -28,7 +28,7 @@
                     <panels:Editor DataContext="{Binding EditorViewModel}" />
                 </ScrollViewer>
             </metro:MetroTabItem>
-            <metro:MetroTabItem Header="コマンド生成ルール"
+            <metro:MetroTabItem Header="コマンド生成"
                                 metro:ControlsHelper.HeaderFontSize="13">
                 <ScrollViewer Margin="20,0,0,20"
                               Padding="0,0,20,0"

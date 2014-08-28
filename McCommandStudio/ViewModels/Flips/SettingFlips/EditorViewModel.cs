@@ -106,5 +106,17 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
             get { return Setting.Current.EncloseMultiLine; }
             set { Setting.Current.EncloseMultiLine = value; }
         }
+
+        public bool AutoReformat
+        {
+            get { return Setting.Current.AutoReformat; }
+            set { Setting.Current.AutoReformat = value; }
+        }
+
+        public bool BracketCompletion
+        {
+            get { return Setting.Current.BracketCompletion; }
+            set { Setting.Current.BracketCompletion = value; }
+        }
     }
 }

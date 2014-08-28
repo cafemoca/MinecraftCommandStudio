@@ -130,6 +130,36 @@ namespace Cafemoca.CommandEditor
 
         #endregion
 
+        #region AutoReformat 依存関係プロパティ
+
+        private static readonly DependencyProperty AutoReformatProperty =
+            DependencyProperty.Register("AutoReformat", typeof(bool), typeof(CommandEditor),
+            new UIPropertyMetadata(true));
+
+        public bool AutoReformat
+        {
+            get { return (bool)this.GetValue(AutoReformatProperty); }
+            set { this.SetValue(AutoReformatProperty, value); }
+        }
+
+        #endregion
+
+        #region BracketCompletion 依存関係プロパティ
+
+        private static readonly DependencyProperty BracketCompletionProperty =
+            DependencyProperty.Register("BracketCompletion", typeof(bool), typeof(CommandEditor),
+            new UIPropertyMetadata(true));
+
+        public bool BracketCompletion
+        {
+            get { return (bool)this.GetValue(BracketCompletionProperty); }
+            set { this.SetValue(BracketCompletionProperty, value); }
+        }
+
+        #endregion
+
+        #region private
+
         #region PreviousChar
 
         private char PreviousChar
@@ -182,6 +212,8 @@ namespace Cafemoca.CommandEditor
         {
             get { return this.IsSelection && this.SelectedText.Any(x => "\r\n".Contains(x)); }
         }
+
+        #endregion
 
         #endregion
     }

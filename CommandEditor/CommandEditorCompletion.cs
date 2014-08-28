@@ -169,7 +169,6 @@ namespace Cafemoca.CommandEditor
             var prev = this.PreviousChar.ToString();
             var next = this.NextChar.ToString();
 
-            var spaces = "\t\r\n\0　 ";
             var bracketPair = new Dictionary<string, string>()
             {
                 { "(", ")" },
@@ -178,7 +177,7 @@ namespace Cafemoca.CommandEditor
             };
 
             e.Handled = false;
-
+            
             switch (input)
             {
                 case "'":
@@ -207,7 +206,9 @@ namespace Cafemoca.CommandEditor
                         this.CaretOffset++;
                         break;
                     }
-                    if (spaces.Contains(next))
+                    if (this.BracketCompletion &&
+                        ("\t\r\n \0".Contains(next) ||
+                        ("({[".Contains(prev) && "]})".Contains(next))))
                     {
                         e.Handled = true;
                         this.Document.Insert(index, input + input);
@@ -242,7 +243,9 @@ namespace Cafemoca.CommandEditor
                     {
                         break;
                     }
-                    if (spaces.Contains(next))
+                    if (this.BracketCompletion &&
+                        ("\t\r\n \0".Contains(next) ||
+                        ("({[".Contains(prev) && "]})".Contains(next))))
                     {
                         e.Handled = true;
                         this.Document.Insert(index, input + bracketPair[input]);
@@ -290,9 +293,12 @@ namespace Cafemoca.CommandEditor
                 case ")":
                 case "}":
                 case "]":
-                    this.BeginChange();
-                    this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
-                    this.EndChange();
+                    if (this.AutoReformat)
+                    {
+                        this.BeginChange();
+                        this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
+                        this.EndChange();
+                    }
                     break;
             }
         }
@@ -332,12 +338,6 @@ namespace Cafemoca.CommandEditor
                 case "]":
                     break;
                 case "\n":
-                    if ("]})".Contains(next))
-                    {
-                        this.BeginChange();
-                        this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
-                        this.EndChange();
-                    }
                     break;
                 case "{":
                     break;

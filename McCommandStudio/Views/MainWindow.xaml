@@ -78,7 +78,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <parts:MainMenu Grid.Row="0" />
+        <parts:MainMenu Grid.Row="0"
+                        HorizontalAlignment="Left" />
         <dock:DockingManager Grid.Row="1"
                              ActiveContent="{Binding ActiveDocument.Value, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                              AllowDrop="True"

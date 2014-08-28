@@ -45,8 +45,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
             this.ActiveDocument = new ReactiveProperty<FileViewModel>();
 
             this.Tools = new ReactiveCollection<ToolViewModel>();
-            this.Tools.Add(new RecentFilesViewModel());
-            this.Tools.Add(new FileExplorerViewModel());
+            //this.Tools.Add(new RecentFilesViewModel());
+            //this.Tools.Add(new FileExplorerViewModel());
 
             this.Files = new ReactiveCollection<FileViewModel>();
             this.Files.Add(this.startPageViewModel);

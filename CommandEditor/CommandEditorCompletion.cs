@@ -1,13 +1,11 @@
 ﻿using Cafemoca.CommandEditor.Completions;
 using Cafemoca.CommandEditor.Extensions;
-using Cafemoca.CommandEditor.Indentations;
 using Cafemoca.CommandEditor.Utils;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 
@@ -38,7 +36,10 @@ namespace Cafemoca.CommandEditor
 
         private void CloseCompletionWindow()
         {
-            this._completionWindow.Close();
+            if (this._completionWindow != null)
+            {
+                this._completionWindow.Close();
+            }
         }
 
         private void TextArea_TextEntering(object sender, TextCompositionEventArgs e)
@@ -72,8 +73,6 @@ namespace Cafemoca.CommandEditor
                 }
             }
         }
-
-        private Key _latestKey;
 
         private void FixOnPreviewKeyDown(KeyEventArgs e)
         {
@@ -133,13 +132,6 @@ namespace Cafemoca.CommandEditor
                         }
                     }
                     break;
-                case Key.Tab:
-                    if (this._latestKey == Key.Tab)
-                    {
-                        //snippets
-                    }
-                    this._latestKey = Key.Tab;
-                    break;
                 case Key.Enter:
                     if (!this.IsSelection &&
                         "({[\t ,".Contains(prev) &&
@@ -155,6 +147,10 @@ namespace Cafemoca.CommandEditor
                         this.CaretOffset--;
                         this.EndChange();
                     }
+                    break;
+                case Key.Home:
+                case Key.End:
+                    this.CloseCompletionWindow();
                     break;
                 default:
                     break;

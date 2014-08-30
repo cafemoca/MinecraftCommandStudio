@@ -12,9 +12,11 @@ namespace Cafemoca.CommandEditor.Utils
             {
                 text = string.Empty;
             }
-            return (type == TokenizeType.Command)
-                ? text.TokenizeCommand()
-                : text.TokenizeDataTag();
+            return (type == TokenizeType.All)
+                ? text.TokenizeAll()
+                : (type == TokenizeType.Command)
+                    ? text.TokenizeCommand()
+                    : text.TokenizeDataTag();
         }
 
         public static IEnumerable<Token> TokenizeCommand(this string text)
@@ -76,6 +78,9 @@ namespace Cafemoca.CommandEditor.Utils
                         break;
                     case '~':
                         yield return new Token(TokenType.LocationSelector, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                        break;
+                    case ',':
+                        yield return new Token(TokenType.Comma, ",", cursor);
                         break;
                     case '"':
                         yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
@@ -142,6 +147,107 @@ namespace Cafemoca.CommandEditor.Utils
                         break;
                     default:
                         yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Block, ref cursor), cursor);
+                        break;
+                }
+                cursor++;
+            } while (cursor < text.Length);
+        }
+
+        public static IEnumerable<Token> TokenizeAll(this string text)
+        {
+            var cursor = 0;
+
+            do
+            {
+                switch (text[cursor])
+                {
+                    case '<':
+                        yield return new Token(TokenType.ScoreMin, "<", cursor);
+                        break;
+                    case '>':
+                        yield return text.CheckNext(cursor, '<')
+                            ? new Token(TokenType.ScoreSwaps, "><", cursor++)
+                            : new Token(TokenType.ScoreMax, ">", cursor);
+                        break;
+                    case '+':
+                        yield return text.CheckNext(cursor, '=')
+                            ? new Token(TokenType.ScoreAdd, "+=", cursor++)
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        break;
+                    case '-':
+                        yield return text.CheckNext(cursor, '=')
+                            ? new Token(TokenType.ScoreSubtract, "-=", cursor++)
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        break;
+                    case '*':
+                        yield return text.CheckNext(cursor, '=')
+                           ? new Token(TokenType.ScoreMultiple, "*=", cursor++)
+                           : new Token(TokenType.Asterisk, "*", cursor);
+                        break;
+                    case '%':
+                        yield return text.CheckNext(cursor, '=')
+                            ? new Token(TokenType.ScoreModulo, "%=", cursor++)
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        break;
+                    case '/':
+                        if (text.CheckNext(cursor, '/', '*'))
+                        {
+                            yield return new Token(TokenType.Comment, text.GetComments(ref cursor), cursor);
+                        }
+                        else
+                        {
+                            yield return (text.CheckNext(cursor, '='))
+                                ? new Token(TokenType.ScoreDivide, "/=", cursor++)
+                                : new Token(TokenType.Command, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        }
+                        break;
+                    case '=':
+                        yield return new Token(TokenType.Equal, "=", cursor);
+                        break;
+                    case '!':
+                        yield return new Token(TokenType.Exclamation, "!", cursor);
+                        break;
+                    case '(':
+                        yield return new Token(TokenType.OpenParenthesis, "(", cursor);
+                        break;
+                    case ')':
+                        yield return new Token(TokenType.CloseParenthesis, ")", cursor);
+                        break;
+                    case '{':
+                        yield return new Token(TokenType.OpenCurlyBrace, "{", cursor);
+                        break;
+                    case '}':
+                        yield return new Token(TokenType.CloseCurlyBrace, "}", cursor);
+                        break;
+                    case '[':
+                        yield return new Token(TokenType.OpenSquareBracket, "[", cursor);
+                        break;
+                    case ']':
+                        yield return new Token(TokenType.CloseSquareBracket, "]", cursor);
+                        break;
+                    case '@':
+                        yield return new Token(TokenType.TargetSelector, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        break;
+                    case '~':
+                        yield return new Token(TokenType.LocationSelector, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        break;
+                    case ',':
+                        yield return new Token(TokenType.Comma, ",", cursor);
+                        break;
+                    case ':':
+                        yield return new Token(TokenType.Colon, ":", cursor);
+                        break;
+                    case '"':
+                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
+                        break;
+                    case '\t':
+                    case ' ':
+                    case '\r':
+                    case '\n':
+                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), cursor);
+                        break;
+                    default:
+                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
                         break;
                 }
                 cursor++;
@@ -216,8 +322,11 @@ namespace Cafemoca.CommandEditor.Utils
                     tokens = "{}[]=@~/\t\r\n ";
                     break;
                 case TokenizeType.Block:
-                default:
                     tokens = "(){}[],:;=\"\t\r\n ";
+                    break;
+                case TokenizeType.All:
+                default:
+                    tokens = "(){}[]<>+-*/%@~,:;!=\"\t\r\n ";
                     break;
             }
 
@@ -301,6 +410,7 @@ namespace Cafemoca.CommandEditor.Utils
 
     public enum TokenizeType
     {
+        All,
         Command,
         Block,
     }

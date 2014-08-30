@@ -118,5 +118,11 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
             get { return Setting.Current.BracketCompletion; }
             set { Setting.Current.BracketCompletion = value; }
         }
+
+        public bool EnableCompletion
+        {
+            get { return Setting.Current.EnableCompletion; }
+            set { Setting.Current.EnableCompletion = value; }
+        }
     }
 }

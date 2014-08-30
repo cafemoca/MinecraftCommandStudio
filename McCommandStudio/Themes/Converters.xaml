@@ -1,9 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:converters="clr-namespace:Cafemoca.McCommandStudio.Internals.Converters">
+                    xmlns:converters="clr-namespace:Cafemoca.McCommandStudio.Internals.Converters"
+                    xmlns:dock="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock">
 
     <converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <dock:BoolToVisibilityConverter x:Key="DockBooleanToVisibilityConverter" />
 
 </ResourceDictionary>

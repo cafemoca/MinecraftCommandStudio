@@ -1,9 +1,12 @@
 ﻿using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Settings.Xml;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
+using Codeplex.Reactive;
 using ICSharpCode.AvalonEdit;
 using Livet;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -75,6 +78,10 @@ namespace Cafemoca.McCommandStudio.Settings
                 AutoReformat = true,
                 BracketCompletion = true,
                 CompileInterval = 1000,
+                EnableCompletion = true,
+                PlayerNames = new ReactiveCollection<string>(),
+                ScoreNames = new ReactiveCollection<string>(),
+                TeamNames = new ReactiveCollection<string>(),
             };
         }
 
@@ -444,6 +451,66 @@ namespace Cafemoca.McCommandStudio.Settings
             set
             {
                 this._compileInterval = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region EnableCompletion 変更通知プロパティ
+
+        private bool _enableCompletion = true;
+        public bool EnableCompletion
+        {
+            get { return this._enableCompletion; }
+            set
+            {
+                this._enableCompletion = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region PlayerNames 変更通知プロパティ
+
+        private ReactiveCollection<string> _playerNames = new ReactiveCollection<string>();
+        public ReactiveCollection<string> PlayerNames
+        {
+            get { return this._playerNames; }
+            set
+            {
+                this._playerNames = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region ScoreNames 変更通知プロパティ
+
+        private ReactiveCollection<string> _scoreNames = new ReactiveCollection<string>();
+        public ReactiveCollection<string> ScoreNames
+        {
+            get { return this._scoreNames; }
+            set
+            {
+                this._scoreNames = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region TeamNames 変更通知プロパティ
+
+        private ReactiveCollection<string> _teamNames = new ReactiveCollection<string>();
+        public ReactiveCollection<string> TeamNames
+        {
+            get { return this._teamNames; }
+            set
+            {
+                this._teamNames = value;
                 this.RaisePropertyChanged();
             }
         }

@@ -1,8 +1,7 @@
 ﻿using ICSharpCode.AvalonEdit;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Cafemoca.CommandEditor
@@ -35,15 +34,41 @@ namespace Cafemoca.CommandEditor
 
         #endregion
 
-        #region CompiledText 依存関係プロパティ
+        #region PlayerNames 依存関係プロパティ
 
-        public static readonly DependencyProperty CompiledTextProperty =
-            DependencyProperty.Register("CompiledText", typeof(string), typeof(CommandEditor));
+        private static readonly DependencyProperty PlayerNamesProperty =
+            DependencyProperty.Register("PlayerNames", typeof(IEnumerable<string>), typeof(CommandEditor));
 
-        public string CompiledText
+        public IEnumerable<string> PlayerNames
         {
-            get { return (string)GetValue(CompiledTextProperty); }
-            set { SetValue(CompiledTextProperty, value); }
+            get { return (IEnumerable<string>)this.GetValue(PlayerNamesProperty); }
+            set { this.SetValue(PlayerNamesProperty, value); }
+        }
+
+        #endregion
+
+        #region ScoreNames 依存関係プロパティ
+
+        private static readonly DependencyProperty ScoreNamesProperty =
+            DependencyProperty.Register("ScoreNames", typeof(IEnumerable<string>), typeof(CommandEditor));
+
+        public IEnumerable<string> ScoreNames
+        {
+            get { return (IEnumerable<string>)this.GetValue(ScoreNamesProperty); }
+            set { this.SetValue(ScoreNamesProperty, value); }
+        }
+
+        #endregion
+
+        #region TeamNames 依存関係プロパティ
+
+        private static readonly DependencyProperty TeamNamesProperty =
+            DependencyProperty.Register("TeamNames", typeof(IEnumerable<string>), typeof(CommandEditor));
+
+        public IEnumerable<string> TeamNames
+        {
+            get { return (IEnumerable<string>)this.GetValue(TeamNamesProperty); }
+            set { this.SetValue(TeamNamesProperty, value); }
         }
 
         #endregion
@@ -154,6 +179,20 @@ namespace Cafemoca.CommandEditor
         {
             get { return (bool)this.GetValue(BracketCompletionProperty); }
             set { this.SetValue(BracketCompletionProperty, value); }
+        }
+
+        #endregion
+
+        #region EnableCompletion 依存関係プロパティ
+
+        private static readonly DependencyProperty EnableCompletionProperty =
+            DependencyProperty.Register("EnableCompletion", typeof(bool), typeof(CommandEditor),
+            new UIPropertyMetadata(true));
+
+        public bool EnableCompletion
+        {
+            get { return (bool)this.GetValue(EnableCompletionProperty); }
+            set { this.SetValue(EnableCompletionProperty, value); }
         }
 
         #endregion

@@ -31,7 +31,14 @@ namespace Cafemoca.CommandEditor.Utils
 
     public static class TokenExtensions
     {
-        public static bool IsMatchLiteral(this Token token, string value, bool ignoreCase = true)
+        public static bool IsMatchCommand(this Token token, string value)
+        {
+            return (token.Type == TokenType.Command)
+                ? token.Value == "/" + value
+                : false;
+        }
+
+        public static bool IsMatchLiteral(this Token token, string value, bool ignoreCase = false)
         {
             return (token.Type == TokenType.Literal)
                 ? ignoreCase
@@ -40,7 +47,7 @@ namespace Cafemoca.CommandEditor.Utils
                 : false;
         }
 
-        public static bool ContainsLiteral(this Token token, string[] value, bool ignoreCase = true)
+        public static bool IsMatchLiteral(this Token token, string[] value, bool ignoreCase = false)
         {
             var comparer = ignoreCase
                 ? StringComparer.OrdinalIgnoreCase
@@ -50,12 +57,29 @@ namespace Cafemoca.CommandEditor.Utils
                 : false;
         }
 
+        public static bool IsMatchLiteral(this Token token, params string[] value)
+        {
+            return token.IsMatchLiteral(value, false);
+        }
+
+        public static bool IsMatchLiteral(this Token token, bool ignoreCase, params string[] value)
+        {
+            return token.IsMatchLiteral(value, ignoreCase);
+        }
+
+        public static bool ContainsLiteral(this Token token, string value)
+        {
+            return (token.Type == TokenType.Literal)
+                ? token.Value.Contains(value)
+                : false;
+        }
+
         public static bool IsMatchType(this Token token, TokenType type)
         {
             return token.Type == type;
         }
 
-        public static bool ContainsType(this Token token, params TokenType[] types)
+        public static bool IsMatchType(this Token token, params TokenType[] types)
         {
             return types.Any(x => token.IsMatchType(x));
         }

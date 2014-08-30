@@ -79,7 +79,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <parts:MainMenu Grid.Row="0"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        DataContext="{Binding MainMenuViewModel}" />
         <dock:DockingManager Grid.Row="1"
                              ActiveContent="{Binding ActiveDocument.Value, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                              AllowDrop="True"
@@ -113,6 +114,11 @@
                             <tools:FileExplorer />
                         </DataTemplate>
                     </panes:PanesTemplateSelector.FileExplorerTemplate>
+                    <panes:PanesTemplateSelector.CompletionEditorTemplate>
+                        <DataTemplate>
+                            <tools:CompletionEditor />
+                        </DataTemplate>
+                    </panes:PanesTemplateSelector.CompletionEditorTemplate>
                 </panes:PanesTemplateSelector>
             </dock:DockingManager.LayoutItemTemplateSelector>
             <dock:DockingManager.LayoutItemContainerStyleSelector>
@@ -132,7 +138,7 @@
                             <Setter Property="IconSource" Value="{Binding Model.IconSource.Value}" />
                             <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                             <Setter Property="ContentId" Value="{Binding Model.ContentId.Value}" />
-                            <Setter Property="Visibility" Value="{Binding Model.IsVisible.Value, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Setter Property="Visibility" Value="{Binding Model.IsVisible.Value, Mode=TwoWay, Converter={StaticResource DockBooleanToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
                             <Setter Property="IsSelected" Value="{Binding Model.IsSelected.Value, Mode=TwoWay}" />
                             <Setter Property="IsActive" Value="{Binding Model.IsActive.Value, Mode=TwoWay}" />
                         </Style>

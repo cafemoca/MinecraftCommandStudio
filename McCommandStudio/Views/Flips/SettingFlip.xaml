@@ -11,7 +11,7 @@
              mc:Ignorable="d">
 
     <Grid>
-        <metro:MetroTabControl TabStripPlacement="Left">
+        <metro:MetroAnimatedTabControl TabStripPlacement="Left">
             <metro:MetroTabItem Header="一般設定"
                                 metro:ControlsHelper.HeaderFontSize="13">
                 <ScrollViewer Margin="20,0,0,20"
@@ -64,7 +64,7 @@
                     </TextBlock>
                 </Grid>
             </metro:MetroTabItem>
-        </metro:MetroTabControl>
+        </metro:MetroAnimatedTabControl>
     </Grid>
 
 </UserControl>

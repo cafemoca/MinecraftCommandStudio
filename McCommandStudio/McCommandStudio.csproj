@@ -169,11 +169,13 @@
     <Compile Include="ViewModels\Layouts\Bases\ToolViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Documents\DocumentViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Documents\StartPageViewModel.cs" />
+    <Compile Include="ViewModels\Layouts\Tools\CompletionEditorViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Tools\FileExplorerViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Tools\RecentFilesViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel_Commands.cs" />
     <Compile Include="ViewModels\MainWindowViewModel_Exit.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Parts\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\Parts\StatusBarViewModel.cs" />
     <Compile Include="Views\Behaviors\Actions\CloseMode.cs" />
     <Compile Include="Views\Behaviors\Actions\WindowCloseAction.cs" />
@@ -209,6 +211,9 @@
     </Compile>
     <Compile Include="Views\Layouts\Documents\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layouts\Tools\CompletionEditor.xaml.cs">
+      <DependentUpon>CompletionEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Layouts\Tools\FileExplorer.xaml.cs">
       <DependentUpon>FileExplorer.xaml</DependentUpon>
@@ -323,6 +328,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Assets\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Assets\Menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -396,6 +405,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Layouts\Documents\StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layouts\Tools\CompletionEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

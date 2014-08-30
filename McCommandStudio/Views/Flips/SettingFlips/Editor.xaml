@@ -45,6 +45,10 @@
                 <StackPanel Margin="5"
                             Orientation="Vertical">
                     <CheckBox Margin="0,5"
+                              Content="補完ウィンドウを表示する (不完全)"
+                              IsChecked="{Binding EnableCompletion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              ToolTip="入力中に、特定の条件にマッチした補完ウィンドウを表示します" />
+                    <CheckBox Margin="0,5"
                               Content="引用符・括弧入力時に自動的に閉じ括弧 (または引用符) を補完する"
                               IsChecked="{Binding BracketCompletion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     <CheckBox Margin="0,5"

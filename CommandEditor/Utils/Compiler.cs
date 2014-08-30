@@ -26,7 +26,7 @@ namespace Cafemoca.CommandEditor.Utils
             }
 
             var tokens = text.Tokenize(tokenizeType)
-                .Where(t => !t.ContainsType(TokenType.Blank, TokenType.Comment));
+                .Where(t => !t.IsMatchType(TokenType.Blank, TokenType.Comment));
 
             if (tokens.IsEmpty())
             {
@@ -77,7 +77,7 @@ namespace Cafemoca.CommandEditor.Utils
                                 if (parentType == ParentType.RawJson ||
                                     (reader.Cursor > 1 &&
                                      reader.Backward.IsMatchType(TokenType.Colon) &&
-                                     reader.LookAtRelative(-2).ContainsLiteral(EscapeKey, false)))
+                                     reader.LookAtRelative(-2).IsMatchLiteral(EscapeKey, false)))
                                 {
                                     value = value
                                         .Unenclose('{', '}')
@@ -101,7 +101,7 @@ namespace Cafemoca.CommandEditor.Utils
                                 end = value.Last() == ']';
                                 if (reader.Cursor > 1 &&
                                     reader.Backward.IsMatchType(TokenType.Colon) &&
-                                    reader.LookAtRelative(-2).IsMatchLiteral("pages", false))
+                                    reader.LookAtRelative(-2).IsMatchLiteral("pages"))
                                 {
                                     value = value
                                         .Unenclose('[', ']')

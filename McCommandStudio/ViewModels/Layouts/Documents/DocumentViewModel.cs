@@ -1,5 +1,4 @@
-﻿using Cafemoca.CommandEditor;
-using Cafemoca.CommandEditor.Utils;
+﻿using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Services;
 using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
@@ -7,6 +6,7 @@ using Codeplex.Reactive;
 using Codeplex.Reactive.Extensions;
 using ICSharpCode.AvalonEdit;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
@@ -40,7 +40,24 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
         public ReactiveProperty<bool> AutoReformat { get; private set; }
         public ReactiveProperty<bool> BracketCompletion { get; private set; }
         public ReactiveProperty<int> CompileInterval { get; private set; }
+        public ReactiveProperty<bool> EnableCompletion { get; private set; }
         public ReactiveProperty<EscapeModeValue> EscapeMode { get; private set; }
+
+        public ReactiveCollection<string> PlayerNames
+        {
+            get { return Setting.Current.PlayerNames; }
+            set { Setting.Current.PlayerNames = value; }
+        }
+        public ReactiveCollection<string> ScoreNames
+        {
+            get { return Setting.Current.ScoreNames; }
+            set { Setting.Current.ScoreNames = value; }
+        }
+        public ReactiveCollection<string> TeamNames
+        {
+            get { return Setting.Current.TeamNames; }
+            set { Setting.Current.TeamNames = value; }
+        }
 
         public ReactiveCommand CopyCommand { get; private set; }
 
@@ -75,6 +92,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
             this.AutoReformat = Setting.Current.ObserveProperty(x => x.AutoReformat).ToReactiveProperty();
             this.BracketCompletion = Setting.Current.ObserveProperty(x => x.BracketCompletion).ToReactiveProperty();
             this.CompileInterval = Setting.Current.ObserveProperty(x => x.CompileInterval).ToReactiveProperty();
+            this.EnableCompletion = Setting.Current.ObserveProperty(x => x.EnableCompletion).ToReactiveProperty();
+            this.EscapeMode = Setting.Current.ObserveProperty(x => x.EscapeMode).ToReactiveProperty();
 
             this.CompileInterval.Subscribe(v =>
             {

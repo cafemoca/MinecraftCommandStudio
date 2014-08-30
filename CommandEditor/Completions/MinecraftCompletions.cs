@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Cafemoca.CommandEditor.Completions
 {
@@ -648,6 +649,132 @@ namespace Cafemoca.CommandEditor.Completions
                 new CompletionData("@a", "a", "すべてのプレイヤー"),
                 new CompletionData("@e", "e", "すべてのエンティティ\n\nプレイヤーを含みます"),
             };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("objectives"),
+                new CompletionData("players"),
+                new CompletionData("teams"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardObjectivesCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("list"),
+                new CompletionData("add"),
+                new CompletionData("remove"),
+                new CompletionData("setdisplay"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardPlayersCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("list"),
+                new CompletionData("set"),
+                new CompletionData("add"),
+                new CompletionData("remove"),
+                new CompletionData("reset"),
+                new CompletionData("enable"),
+                new CompletionData("test"),
+                new CompletionData("operation"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardTeamsCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("list"),
+                new CompletionData("add"),
+                new CompletionData("remove"),
+                new CompletionData("empty"),
+                new CompletionData("join"),
+                new CompletionData("leave"),
+                new CompletionData("option"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardCriteriaCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("dummy"),
+                new CompletionData("trigger"),
+                new CompletionData("deathCount"),
+                new CompletionData("playerKillCount"),
+                new CompletionData("totalKillCount"),
+                new CompletionData("health"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardSlotsCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("list"),
+                new CompletionData("sidebar"),
+                new CompletionData("sidebar.team"),
+                new CompletionData("belowName"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardOperationCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("+=", "+=\n" +
+                                         "<targetName> <targetObjective> += <selectorName> <selectorObjective>\n" +
+                                         "セレクタのセレクタスコアをターゲットのターゲットスコアに加算します。\n\n" +
+                                         "(例):\n\t/scoreboard players operation @a score1 += @a[team=team1] score2"),
+                new CompletionData("-=", "-=\n" +
+                                         "/scoreboard players operation <target> <>"),
+                new CompletionData("*="),
+                new CompletionData("/="),
+                new CompletionData("%="),
+                new CompletionData("="),
+                new CompletionData("<"),
+                new CompletionData(">"),
+                new CompletionData("><"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardTeamOptionCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("color"),
+                new CompletionData("friendlyfire"),
+                new CompletionData("seeFriendlyInvisibles"),
+                new CompletionData("nametagVisibility"),
+                new CompletionData("deathMessageVisibility"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> GetScoreboardTeamOptionArgsCompletion()
+        {
+            return new[]
+            {
+                new CompletionData("never"),
+                new CompletionData("hideForOtherTeams"),
+                new CompletionData("hideForOwnTeam"),
+                new CompletionData("always"),
+            };
+        }
+
+        public static IEnumerable<CompletionData> ToCompletionData(this IEnumerable<string> text)
+        {
+            if (text == null || text.IsEmpty())
+            {
+                return null;
+            }
+            return text.Select(x => new CompletionData(x, x));
         }
     }
 }

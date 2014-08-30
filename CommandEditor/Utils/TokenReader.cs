@@ -1,21 +1,42 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace Cafemoca.CommandEditor.Utils
 {
     internal class TokenReader : IDisposable
     {
-        private readonly List<Token> _tokens;
+        private List<Token> _tokens;
 
-        private int _cursor = 0;
-        public int Cursor
+        public int Cursor { get; set; }
+
+        public int Count
         {
-            get { return this._cursor; }
+            get { return this._tokens.Count; }
         }
 
         public bool IsRemainToken
         {
-            get { return this._cursor < this._tokens.Count; }
+            get { return this.Cursor < this._tokens.Count; }
+        }
+
+        public TokenReader(IEnumerable<Token> tokens, bool reverse = false)
+        {
+            this._tokens = new List<Token>(reverse ? tokens.Reverse() : tokens);
+            this.Cursor = 0;
+        }
+
+        public Token Now
+        {
+            get
+            {
+                if (this.Cursor < 1)
+                {
+                    throw new IndexOutOfRangeException("Now");
+                }
+                return this._tokens[this.Cursor - 1];
+            }
         }
 
         public Token Ahead
@@ -26,7 +47,7 @@ namespace Cafemoca.CommandEditor.Utils
                 {
                     throw new Exception("IsRemainToken");
                 }
-                return this._tokens[this._cursor];
+                return this._tokens[this.Cursor];
             }
         }
 
@@ -34,17 +55,12 @@ namespace Cafemoca.CommandEditor.Utils
         {
             get
             {
-                if (this._cursor < 2)
+                if (this.Cursor < 2)
                 {
                     throw new IndexOutOfRangeException("Backward");
                 }
-                return this._tokens[this._cursor - 2];
+                return this._tokens[this.Cursor - 2];
             }
-        }
-
-        public TokenReader(IEnumerable<Token> tokens)
-        {
-            this._tokens = new List<Token>(tokens);
         }
 
         public Token Get()
@@ -53,7 +69,7 @@ namespace Cafemoca.CommandEditor.Utils
             {
                 throw new Exception("IsRemainToken");
             }
-            return this._tokens[this._cursor++];
+            return this._tokens[this.Cursor++];
         }
 
         public Token LookAt(int index)
@@ -66,15 +82,22 @@ namespace Cafemoca.CommandEditor.Utils
             return this._tokens[index];
         }
 
-        public Token LookAtRelative(int relative)
+        public Token LookAtRelative(int relative, bool safe = false)
         {
             relative--;
-            if (this._cursor + relative > this._tokens.Count ||
-                this._cursor + relative < 0)
+            if (this.Cursor + relative > this._tokens.Count ||
+                this.Cursor + relative < 0)
             {
-                throw new Exception("IndexOutOfRange?");
+                if (safe)
+                {
+                    return default(Token);
+                }
+                else
+                {
+                    throw new Exception("IndexOutOfRange?");
+                }
             }
-            return this._tokens[this._cursor + relative];
+            return this._tokens[this.Cursor + relative];
         }
 
         public Token AssertGet(TokenType type)
@@ -89,6 +112,38 @@ namespace Cafemoca.CommandEditor.Utils
                 throw new Exception("UnexpectedToken");
             }
             return token;
+        }
+
+        public void CursorToLast()
+        {
+            this.Cursor = this._tokens.Count - 1;
+        }
+
+        public void MoveNext()
+        {
+            this.Cursor++;
+        }
+
+        public void Skip(int count)
+        {
+            this.Cursor += count;
+        }
+
+        public Token SkipGet(Func<Token, bool> predicate)
+        {
+            while (this.IsRemainToken && !predicate(this._tokens[this.Cursor]))
+            {
+                this.Get();
+            }
+            return this._tokens[this.Cursor++];
+        }
+
+        public void Reverse()
+        {
+            this._tokens.Reverse();
+
+            var cursor = this.Cursor;
+            this.Cursor = this.Count - cursor + 1;
         }
 
         public void Dispose()

@@ -9,6 +9,7 @@
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/ContextMenu.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Flyout.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Hyperlink.xaml" />
+        <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/ListView.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/Menu.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/MetroDialog.xaml" />
         <ResourceDictionary Source="/McCommandStudio;component/Themes/Assets/ScrollBar.xaml" />

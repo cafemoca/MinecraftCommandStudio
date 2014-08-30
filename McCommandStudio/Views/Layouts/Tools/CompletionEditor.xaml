@@ -1,0 +1,219 @@
+﻿<UserControl x:Class="Cafemoca.McCommandStudio.Views.Layouts.Tools.CompletionEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             d:DesignHeight="480"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+
+    <Grid>
+        <metro:MetroAnimatedSingleRowTabControl Style="{StaticResource MetroTabControl}">
+            <metro:MetroTabItem Header="プレイヤー"
+                                metro:ControlsHelper.HeaderFontSize="12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                        </Grid.ColumnDefinitions>
+                        <Grid x:Name="StretchHelper"
+                              Grid.Column="0" />
+                    </Grid>
+                    <ListView Grid.Row="0"
+                              AllowDrop="True"
+                              Background="{DynamicResource ExtremeWhiteBrush}"
+                              BorderThickness="0"
+                              Focusable="False"
+                              ItemsSource="{Binding PlayerNames, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedPlayer.Value, UpdateSourceTrigger=PropertyChanged}"
+                              SelectionMode="Single">
+                        <ListView.InputBindings>
+                            <KeyBinding Key="Delete"
+                                        Command="{Binding DelPlayerCommand}" />
+                        </ListView.InputBindings>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="{Binding DelPlayerCommand}"
+                                          Header="削除" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Width="{Binding ActualWidth, ElementName=StretchHelper}"
+                                                    DisplayMemberBinding="{Binding}">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 MinHeight="23"
+                                 Background="{DynamicResource WhiteBrush}"
+                                 BorderThickness="0"
+                                 MaxLines="1"
+                                 Text="{Binding PlayerName.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter"
+                                            Command="{Binding AddPlayerCommand}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Grid.Column="1"
+                                Width="60"
+                                MinHeight="23"
+                                Command="{Binding AddPlayerCommand}"
+                                Content="追加"
+                                Padding="0" />
+                    </Grid>
+                </Grid>
+            </metro:MetroTabItem>
+            <metro:MetroTabItem Header="スコア"
+                                metro:ControlsHelper.HeaderFontSize="12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="0"
+                              AllowDrop="True"
+                              Background="{DynamicResource ExtremeWhiteBrush}"
+                              BorderThickness="0"
+                              Focusable="False"
+                              ItemsSource="{Binding ScoreNames, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedScore.Value, UpdateSourceTrigger=PropertyChanged}"
+                              SelectionMode="Single">
+                        <ListView.InputBindings>
+                            <KeyBinding Key="Delete"
+                                        Command="{Binding DelScoreCommand}" />
+                        </ListView.InputBindings>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="{Binding DelScoreCommand}"
+                                          Header="削除" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Width="{Binding ActualWidth, ElementName=StretchHelper}"
+                                                    DisplayMemberBinding="{Binding}">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 MinHeight="23"
+                                 Background="{DynamicResource WhiteBrush}"
+                                 BorderThickness="0"
+                                 MaxLines="1"
+                                 Text="{Binding ScoreName.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter"
+                                            Command="{Binding AddScoreCommand}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Grid.Column="1"
+                                Width="60"
+                                MinHeight="23"
+                                Command="{Binding AddScoreCommand}"
+                                Content="追加"
+                                Padding="0" />
+                    </Grid>
+                </Grid>
+            </metro:MetroTabItem>
+            <metro:MetroTabItem Header="チーム"
+                                metro:ControlsHelper.HeaderFontSize="12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListView Grid.Row="0"
+                              AllowDrop="True"
+                              Background="{DynamicResource ExtremeWhiteBrush}"
+                              BorderThickness="0"
+                              Focusable="False"
+                              ItemsSource="{Binding TeamNames, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedTeam.Value, UpdateSourceTrigger=PropertyChanged}"
+                              SelectionMode="Single">
+                        <ListView.InputBindings>
+                            <KeyBinding Key="Delete"
+                                        Command="{Binding DelTeamCommand}" />
+                        </ListView.InputBindings>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="{Binding DelTeamCommand}"
+                                          Header="削除" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Width="{Binding ActualWidth, ElementName=StretchHelper}"
+                                                    DisplayMemberBinding="{Binding}">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 MinHeight="23"
+                                 Background="{DynamicResource WhiteBrush}"
+                                 BorderThickness="0"
+                                 MaxLines="1"
+                                 Text="{Binding TeamName.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter"
+                                            Command="{Binding AddTeamCommand}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Grid.Column="1"
+                                Width="60"
+                                MinHeight="23"
+                                Command="{Binding AddTeamCommand}"
+                                Content="追加"
+                                Padding="0" />
+                    </Grid>
+                </Grid>
+            </metro:MetroTabItem>
+        </metro:MetroAnimatedSingleRowTabControl>
+    </Grid>
+
+</UserControl>

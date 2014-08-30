@@ -16,6 +16,9 @@ namespace Cafemoca.CommandEditor.Completions
 
         private readonly string _completion;
 
+        public CompletionData(string text)
+            : this(null, text, text, text, 0.0) { }
+
         public CompletionData(string text, string desc)
             : this(null, text, text, desc, 0.0) { }
 

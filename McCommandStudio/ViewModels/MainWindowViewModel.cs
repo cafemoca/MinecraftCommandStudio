@@ -19,6 +19,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
 {
     public partial class MainWindowViewModel : ViewModel
     {
+        public MainMenuViewModel MainMenuViewModel { get; private set; }
+
         public ReactiveProperty<FileViewModel> ActiveDocument { get; private set; }
 
         public ReactiveCollection<ToolViewModel> Tools { get; private set; }
@@ -29,6 +31,8 @@ namespace Cafemoca.McCommandStudio.ViewModels
         public SettingFlipViewModel SettingFlipViewModel { get; private set; }
         public ReactiveProperty<bool> IsSettingFlipOpen { get; private set; }
         public ReactiveCommand SettingCommand { get; private set; }
+
+        public CompletionEditorViewModel CompletionEditorViewModel { get; set; }
 
         public ReactiveCommand NewCommand { get; private set; }
         public ReactiveCommand OpenCommand { get; private set; }
@@ -42,9 +46,14 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
         public MainWindowViewModel()
         {
+            this.MainMenuViewModel = new MainMenuViewModel();
+
             this.ActiveDocument = new ReactiveProperty<FileViewModel>();
 
+            this.CompletionEditorViewModel = new CompletionEditorViewModel();
+
             this.Tools = new ReactiveCollection<ToolViewModel>();
+            this.Tools.Add(this.CompletionEditorViewModel);
             //this.Tools.Add(new RecentFilesViewModel());
             //this.Tools.Add(new FileExplorerViewModel());
 
@@ -232,7 +241,10 @@ namespace Cafemoca.McCommandStudio.ViewModels
 
         public void Close(ToolViewModel toolViewModel)
         {
-            this.Tools.Remove(toolViewModel);
+            if (this.Tools.Any(x => x == toolViewModel))
+            {
+                this.Tools.Remove(toolViewModel);
+            }
         }
     }
 }

@@ -3,11 +3,11 @@
 namespace Cafemoca.McCommandStudio.Views.Layouts.Tools
 {
     /// <summary>
-    /// FileExplorer.xaml の相互作用ロジック
+    /// CompletionEditor.xaml の相互作用ロジック
     /// </summary>
-    public partial class FileExplorer : UserControl
+    public partial class CompletionEditor : UserControl
     {
-        public FileExplorer()
+        public CompletionEditor()
         {
             InitializeComponent();
         }

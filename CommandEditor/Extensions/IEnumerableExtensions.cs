@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Cafemoca.CommandEditor.Extensions
 {
@@ -16,6 +17,33 @@ namespace Cafemoca.CommandEditor.Extensions
                 index++;
             }
             return -1;
+        }
+
+        public static int IndexOf<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        {
+            var index = 0;
+            foreach (var item in source)
+            {
+                if (predicate(item))
+                {
+                    return index;
+                }
+                index++;
+            }
+            return -1;
+        }
+
+        public static string JoinString(this IEnumerable<string> source, string separator)
+        {
+            if (source == null)
+            {
+                return string.Empty;
+            }
+            if (separator == null)
+            {
+                return source.ToString();
+            }
+            return string.Join(separator, source);
         }
     }
 }

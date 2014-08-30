@@ -15,6 +15,7 @@ namespace Cafemoca.McCommandStudio.Views.Panes
         public DataTemplate DocumentTemplate { get; set; }
         public DataTemplate RecentFilesTemplate { get; set; }
         public DataTemplate FileExplorerTemplate { get; set; }
+        public DataTemplate CompletionEditorTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -33,6 +34,10 @@ namespace Cafemoca.McCommandStudio.Views.Panes
             if (item is FileExplorerViewModel)
             {
                 return this.FileExplorerTemplate;
+            }
+            if (item is CompletionEditorViewModel)
+            {
+                return this.CompletionEditorTemplate;
             }
 
             return base.SelectTemplate(item, container);

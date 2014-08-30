@@ -194,6 +194,11 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="表示 (_V)">
+            <MenuItem Header="名前設定パネル"
+                      IsCheckable="True"
+                      IsChecked="{Binding CompletionEditor.IsVisible.Value, Mode=TwoWay}" />
+        </MenuItem>
         <MenuItem Header="ツール (_T)">
             <MenuItem Command="commands:AppCommand.OpenSettings"
                       Header="設定 (_S)">

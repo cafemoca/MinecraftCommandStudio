@@ -398,6 +398,7 @@ namespace Cafemoca.CommandEditor
                         case "=":
                             if (reader.IsRemainToken)
                             {
+                                reader.MoveNext();
                                 if (reader.Ahead.IsMatchLiteral("team"))
                                 {
                                     return this.TeamNames.ToCompletionData();

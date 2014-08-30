@@ -142,7 +142,7 @@ namespace Cafemoca.CommandEditor.Utils
         {
             this._tokens.Reverse();
 
-            var cursor = this.Cursor;
+            var cursor = this.Cursor == 0 ? this._tokens.Count + 1 : this.Cursor;
             this.Cursor = this.Count - cursor + 1;
         }
 

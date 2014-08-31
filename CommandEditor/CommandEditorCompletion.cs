@@ -64,7 +64,7 @@ namespace Cafemoca.CommandEditor
 
             this.FixOnTextEntered(index, input);
 
-            if (this.EnableCompletion)
+            if (this.ExtendedOptions.EnableCompletion)
             {
                 var completionData = this.GetCompletionData(index, input);
                 if (completionData != null)
@@ -133,7 +133,7 @@ namespace Cafemoca.CommandEditor
                     }
                     break;
                 case Key.Enter:
-                    if (!this.IsSelection &&
+                    if (!this.IsSelected &&
                         "({[\t ,".Contains(prev) &&
                         "]})".Contains(next))
                     {
@@ -196,10 +196,10 @@ namespace Cafemoca.CommandEditor
             {
                 case "'":
                 case "\"":
-                    if (this.IsSingleLineSelection ||
-                       (this.IsMultiLineSelection && this.EncloseMultiLine))
+                    if (this.IsSelectedSingleLine ||
+                       (this.IsSelectedMultiLine && this.ExtendedOptions.EncloseMultiLine))
                     {
-                        if (this.EncloseSelection)
+                        if (this.ExtendedOptions.EncloseSelection)
                         {
                             e.Handled = true;
                             this.BeginChange();
@@ -209,7 +209,7 @@ namespace Cafemoca.CommandEditor
                         }
                         break;
                     }
-                    if (this.IsMultiLineSelection && !this.EncloseMultiLine)
+                    if (this.IsSelectedMultiLine && !this.ExtendedOptions.EncloseMultiLine)
                     {
                         break;
                     }
@@ -220,13 +220,13 @@ namespace Cafemoca.CommandEditor
                         this.CaretOffset++;
                         break;
                     }
-                    if (this.BracketCompletion &&
+                    if (this.ExtendedOptions.BracketCompletion &&
                         ("\t\r\n \0".Contains(next) ||
                         ("({[".Contains(prev) && "]})".Contains(next))))
                     {
                         e.Handled = true;
                         this.Document.Insert(index, input + input);
-                        if (this.IsMultiLineSelection)
+                        if (this.IsSelectedMultiLine)
                         {
                             this.CaretOffset++;
                         }
@@ -240,10 +240,10 @@ namespace Cafemoca.CommandEditor
                 case "(":
                 case "{":
                 case "[":
-                    if (this.IsSingleLineSelection ||
-                       ( this.IsMultiLineSelection && this.EncloseMultiLine))
+                    if (this.IsSelectedSingleLine ||
+                       (this.IsSelectedMultiLine && this.ExtendedOptions.EncloseMultiLine))
                     {
-                        if (this.EncloseSelection)
+                        if (this.ExtendedOptions.EncloseSelection)
                         {
                             e.Handled = true;
                             this.BeginChange();
@@ -253,17 +253,17 @@ namespace Cafemoca.CommandEditor
                         }
                         break;
                     }
-                    if (this.IsMultiLineSelection && !this.EncloseMultiLine)
+                    if (this.IsSelectedMultiLine && !this.ExtendedOptions.EncloseMultiLine)
                     {
                         break;
                     }
-                    if (this.BracketCompletion &&
+                    if (this.ExtendedOptions.BracketCompletion &&
                         ("\t\r\n \0".Contains(next) ||
                         ("({[".Contains(prev) && "]})".Contains(next))))
                     {
                         e.Handled = true;
                         this.Document.Insert(index, input + bracketPair[input]);
-                        if (this.IsMultiLineSelection)
+                        if (this.IsSelectedMultiLine)
                         {
                             this.CaretOffset++;
                         }
@@ -307,7 +307,7 @@ namespace Cafemoca.CommandEditor
                 case ")":
                 case "}":
                 case "]":
-                    if (this.AutoReformat)
+                    if (this.ExtendedOptions.AutoReformat)
                     {
                         this.BeginChange();
                         this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
@@ -380,7 +380,7 @@ namespace Cafemoca.CommandEditor
                         case "_":
                             if (prevToken.IsMatchLiteral("score_"))
                             {
-                                return this.ScoreNames.ToCompletionData();
+                                return this.ExtendedOptions.ScoreNames.ToCompletionData();
                             }
                             break;
                         case "!":
@@ -397,11 +397,11 @@ namespace Cafemoca.CommandEditor
                                 reader.MoveNext();
                                 if (reader.Ahead.IsMatchLiteral("team"))
                                 {
-                                    return this.TeamNames.ToCompletionData();
+                                    return this.ExtendedOptions.TeamNames.ToCompletionData();
                                 }
                                 if (reader.Ahead.IsMatchLiteral("name"))
                                 {
-                                    return this.PlayerNames.ToCompletionData();
+                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
                                 }
                             }
                             break;
@@ -513,7 +513,7 @@ namespace Cafemoca.CommandEditor
                                 // scoreboard objectives add <objective>
                                 if (!reader.IsRemainToken)
                                 {
-                                    return this.ScoreNames.ToCompletionData();
+                                    return this.ExtendedOptions.ScoreNames.ToCompletionData();
                                 }
                                 // scoreboard objectives add ...
                                 else
@@ -536,7 +536,7 @@ namespace Cafemoca.CommandEditor
                                             // scoreboard objectives add <objective> trigger <trigger>
                                             if (now.IsMatchLiteral("trigger"))
                                             {
-                                                return this.GetCompletionOrEmpty(this.ScoreNames, reader.IsRemainToken);
+                                                return this.GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
                                             }
                                         }
                                     }
@@ -545,7 +545,7 @@ namespace Cafemoca.CommandEditor
                             // scoreboard objectives remove <objective>
                             else if (now.IsMatchLiteral("remove"))
                             {
-                                return GetCompletionOrEmpty(this.ScoreNames, reader.IsRemainToken);
+                                return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
                             }
                             // scoreboard objectives setdisplay ?
                             else if (now.IsMatchLiteral("setdisplay"))
@@ -564,7 +564,7 @@ namespace Cafemoca.CommandEditor
                                     if (now.IsMatchLiteral("list", "sidebar", "belowName") ||
                                         now.ContainsLiteral("sidebar.team."))
                                     {
-                                        return GetCompletionOrEmpty(this.ScoreNames, reader.IsRemainToken);
+                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
                                     }
                                 }
                             }
@@ -586,7 +586,7 @@ namespace Cafemoca.CommandEditor
                             // scoreboard players list <playername>
                             if (now.IsMatchLiteral("list"))
                             {
-                                return GetCompletionOrEmpty(this.PlayerNames, reader.IsRemainToken);
+                                return GetCompletionOrEmpty(this.ExtendedOptions.PlayerNames, reader.IsRemainToken);
                             }
                             // scoreboard players (set|add|remove|reset|) ?
                             else if (now.IsMatchLiteral("set", "add", "remove", "reset"))
@@ -594,7 +594,7 @@ namespace Cafemoca.CommandEditor
                                 // scoreboard players (set|add|remove|reset) <playername>
                                 if (!reader.IsRemainToken)
                                 {
-                                    return this.PlayerNames.ToCompletionData();
+                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
                                 }
                                 // scoreboard players (set|add|remove|reset) ...
                                 else
@@ -604,7 +604,7 @@ namespace Cafemoca.CommandEditor
                                     // scoreboard players (set|add|remove|reset) <playername> <objective>
                                     if (this.CheckPlayer(reader))
                                     {
-                                        return GetCompletionOrEmpty(this.ScoreNames, reader.IsRemainToken);
+                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
                                     }
                                 }
                             }
@@ -614,7 +614,7 @@ namespace Cafemoca.CommandEditor
                                 // scoreboard players enable <playername>
                                 if (!reader.IsRemainToken)
                                 {
-                                    return this.PlayerNames.ToCompletionData();
+                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
                                 }
                                 // scoreboard players enable ...
                                 else
@@ -624,7 +624,7 @@ namespace Cafemoca.CommandEditor
                                     // scoreboard players enable <playername> <trigger>
                                     if (this.CheckPlayer(reader))
                                     {
-                                        return GetCompletionOrEmpty(this.ScoreNames, reader.IsRemainToken);
+                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
                                     }
                                 }
                             }
@@ -634,7 +634,7 @@ namespace Cafemoca.CommandEditor
                                 // scoreboard players test <playername>
                                 if (!reader.IsRemainToken)
                                 {
-                                    return this.PlayerNames.ToCompletionData();
+                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
                                 }
                                 // scoreboard players test ...
                                 else
@@ -644,7 +644,7 @@ namespace Cafemoca.CommandEditor
                                     // scoreboard players enable <playername> <objective>
                                     if (this.CheckPlayer(reader))
                                     {
-                                        return GetCompletionOrEmpty(this.ScoreNames, reader.IsRemainToken);
+                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
                                     }
                                 }
                             }
@@ -654,7 +654,7 @@ namespace Cafemoca.CommandEditor
                                 // scoreboard players operation <target>
                                 if (!reader.IsRemainToken)
                                 {
-                                    return this.PlayerNames.ToCompletionData();
+                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
                                 }
                                 // scoreboard players operation ...
                                 else
@@ -667,7 +667,7 @@ namespace Cafemoca.CommandEditor
                                         // scoreboard players operation <target> <targetObjective>
                                         if (!reader.IsRemainToken)
                                         {
-                                            return this.ScoreNames.ToCompletionData();
+                                            return this.ExtendedOptions.ScoreNames.ToCompletionData();
                                         }
                                         // scoreboard players operation <target> ...
                                         else
@@ -701,7 +701,7 @@ namespace Cafemoca.CommandEditor
                                                         // scoreboard players operation <target> <targetObjective> <operation> <selector>
                                                         if (!reader.IsRemainToken)
                                                         {
-                                                            return this.PlayerNames.ToCompletionData();
+                                                            return this.ExtendedOptions.PlayerNames.ToCompletionData();
                                                         }
                                                         // scoreboard players operation <target> <targetObjective> <operation> ...
                                                         else
@@ -711,7 +711,7 @@ namespace Cafemoca.CommandEditor
                                                             // scoreboard players operation <target> <targetObjective> <operation> <selector> ?
                                                             if (this.CheckPlayer(reader))
                                                             {
-                                                                return this.GetCompletionOrEmpty(this.ScoreNames, reader.IsRemainToken);
+                                                                return this.GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
                                                             }
                                                         }
                                                     }
@@ -738,12 +738,12 @@ namespace Cafemoca.CommandEditor
                             // scoreboard teams list <playername>
                             if (now.IsMatchLiteral("list"))
                             {
-                                return GetCompletionOrEmpty(this.TeamNames, reader.IsRemainToken);
+                                return GetCompletionOrEmpty(this.ExtendedOptions.TeamNames, reader.IsRemainToken);
                             }
                             // scoreboard teams (add|remove|empty) <teamname>
                             else if (now.IsMatchLiteral("add", "remove", "empty"))
                             {
-                                return GetCompletionOrEmpty(this.TeamNames, reader.IsRemainToken);
+                                return GetCompletionOrEmpty(this.ExtendedOptions.TeamNames, reader.IsRemainToken);
                             }
                             // scoreboard teams (join|leave) ?
                             else if (now.IsMatchLiteral("join", "leave"))
@@ -751,7 +751,7 @@ namespace Cafemoca.CommandEditor
                                 // scoreboard teams (join|leave) <teamname>
                                 if (!reader.IsRemainToken)
                                 {
-                                    return this.TeamNames.ToCompletionData();
+                                    return this.ExtendedOptions.TeamNames.ToCompletionData();
                                 }
                                 // scoreboard teams (join|leave) ...
                                 else
@@ -761,7 +761,7 @@ namespace Cafemoca.CommandEditor
                                     // scoreboard temas (join|leave) <teamname> <playername>
                                     if (now.IsMatchType(TokenType.Literal, TokenType.String))
                                     {
-                                        return this.GetCompletionOrEmpty(this.PlayerNames, reader.IsRemainToken);
+                                        return this.GetCompletionOrEmpty(this.ExtendedOptions.PlayerNames, reader.IsRemainToken);
                                     }
                                 }
                             }
@@ -771,7 +771,7 @@ namespace Cafemoca.CommandEditor
                                 // scoreboard teams option <teamname>
                                 if (!reader.IsRemainToken)
                                 {
-                                    return this.TeamNames.ToCompletionData();
+                                    return this.ExtendedOptions.TeamNames.ToCompletionData();
                                 }
                                 // scoreboard teams option ...
                                 else

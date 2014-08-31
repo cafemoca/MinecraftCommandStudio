@@ -24,6 +24,8 @@ namespace Cafemoca.CommandEditor
             this.TextArea.TextEntering += this.TextArea_TextEntering;
             this.TextArea.TextEntered += this.TextArea_TextEntered;
 
+            this.ExtendedOptions = new ExtendedOptions();
+
             this._searchPanel = SearchPanel.Install(this.TextArea);
         }
 
@@ -41,6 +43,8 @@ namespace Cafemoca.CommandEditor
 
         private void Caret_PositionChanged(object sender, EventArgs e)
         {
+            this.HighlightBrackets();
+
             this.TextArea.TextView.InvalidateLayer(KnownLayer.Background);
 
             if (this.TextArea != null)
@@ -53,8 +57,6 @@ namespace Cafemoca.CommandEditor
                 this.Column = 0;
                 this.Line = 0;
             }
-
-            this.HighlightBrackets();
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)

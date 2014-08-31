@@ -28,6 +28,14 @@
                     <panels:Editor DataContext="{Binding EditorViewModel}" />
                 </ScrollViewer>
             </metro:MetroTabItem>
+            <metro:MetroTabItem Header="エディター 拡張設定"
+                                metro:ControlsHelper.HeaderFontSize="13">
+                <ScrollViewer Margin="20,0,0,20"
+                              Padding="0,0,20,0"
+                              VerticalScrollBarVisibility="Auto">
+                    <panels:Extended DataContext="{Binding ExtendedViewModel}" />
+                </ScrollViewer>
+            </metro:MetroTabItem>
             <metro:MetroTabItem Header="コマンド生成"
                                 metro:ControlsHelper.HeaderFontSize="13">
                 <ScrollViewer Margin="20,0,0,20"

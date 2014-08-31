@@ -12,23 +12,23 @@
         <StackPanel Orientation="Vertical">
             <CheckBox Margin="0,5"
                       Content="テキストの終わりより下までスクロール可能にする"
-                      IsChecked="{Binding AllowScrollBelowDocument}" />
+                      IsChecked="{Binding AllowScrollBelowDocument, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             <CheckBox Margin="0,5"
                       Content="行単位の切り取り・コピーを有効にする"
-                      IsChecked="{Binding CutCopyWholeLine}"
+                      IsChecked="{Binding CutCopyWholeLine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                       ToolTip="テキストを選択せずに切り取り・コピーをした際にカーソルのある行全体に対して行います" />
             <CheckBox Margin="0,5"
                       Content="文字の入力中にカーソルを非表示にする"
-                      IsChecked="{Binding HideCursorWhileTyping}" />
+                      IsChecked="{Binding HideCursorWhileTyping, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             <CheckBox Margin="0,5"
                       Content="文字列をドラッグ＆ドロップで追加できるようにする"
-                      IsChecked="{Binding EnableTextDragDrop}" />
+                      IsChecked="{Binding EnableTextDragDrop, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             <CheckBox Margin="0,5"
                       Content="画面端で折り返す"
-                      IsChecked="{Binding TextWrapping}" />
+                      IsChecked="{Binding TextWrapping, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             <CheckBox Margin="0,5"
                       Content="タブをスペースに変換する"
-                      IsChecked="{Binding ConvertTabsToSpaces}"
+                      IsChecked="{Binding ConvertTabsToSpaces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                       ToolTip="タブを入力した際に自動的に半角スペースへ変換します" />
             <StackPanel Orientation="Horizontal">
                 <Label Width="91"
@@ -41,42 +41,16 @@
                                      Value="{Binding IndentationSize, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </StackPanel>
             <GroupBox Margin="0,10,0,0"
-                      Header="操作">
-                <StackPanel Margin="5"
-                            Orientation="Vertical">
-                    <CheckBox Margin="0,5"
-                              Content="補完ウィンドウを表示する (不完全)"
-                              IsChecked="{Binding EnableCompletion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              ToolTip="入力中に、特定の条件にマッチした補完ウィンドウを表示します" />
-                    <CheckBox Margin="0,5"
-                              Content="引用符・括弧入力時に自動的に閉じ括弧 (または引用符) を補完する"
-                              IsChecked="{Binding BracketCompletion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                    <CheckBox Margin="0,5"
-                              Content="閉じ括弧入力時にインデントを自動的に整形する"
-                              IsChecked="{Binding AutoReformat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                    <CheckBox x:Name="EncloseSelection"
-                              Margin="0,5"
-                              Content="引用符・括弧入力時に選択している文字列を囲む (単行選択のみ有効)"
-                              IsChecked="{Binding EncloseSelection, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              ToolTip="文字列を選択した状態で括弧や引用符を入力すると文字列を囲みます" />
-                    <CheckBox Margin="25,5,0,5"
-                              Content="複数行選択時でも同様に囲む"
-                              IsChecked="{Binding EncloseMultiLine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              IsEnabled="{Binding IsChecked, ElementName=EncloseSelection}"
-                              ToolTip="上記設定を複数行にも適用します" />
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Margin="0,10,0,0"
                       Header="表示">
                 <StackPanel Margin="5"
                             Orientation="Vertical">
                     <CheckBox Margin="0,5"
                               Content="行番号"
-                              IsChecked="{Binding ShowLineNumbers}"
+                              IsChecked="{Binding ShowLineNumbers, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ToolTip="行番号を表示するかどうかを設定します" />
                     <CheckBox Margin="0,5"
                               Content="ルーラ"
-                              IsChecked="{Binding ShowColumnRuler}"
+                              IsChecked="{Binding ShowColumnRuler, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ToolTip="ルーラを表示するかどうかを設定します" />
                     <StackPanel Orientation="Horizontal">
                         <Label Width="80"
@@ -91,15 +65,15 @@
                     <Separator Margin="0,5,0,3" />
                     <CheckBox Margin="0,5"
                               Content="半角スペース"
-                              IsChecked="{Binding ShowSpaces}"
+                              IsChecked="{Binding ShowSpaces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ToolTip="半角スペースを可視化するかどうかを設定します" />
                     <CheckBox Margin="0,5"
                               Content="タブ"
-                              IsChecked="{Binding ShowTabs}"
+                              IsChecked="{Binding ShowTabs, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ToolTip="タブを可視化するかどうかを設定します" />
                     <CheckBox Margin="0,5"
                               Content="改行マーク"
-                              IsChecked="{Binding ShowEndOfLine}"
+                              IsChecked="{Binding ShowEndOfLine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ToolTip="改行マークを可視化するかどうかを設定します" />
                 </StackPanel>
             </GroupBox>

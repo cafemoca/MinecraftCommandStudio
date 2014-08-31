@@ -17,7 +17,8 @@ namespace Cafemoca.CommandEditor.Renderings
         public HighlightCurrentLineBackgroundRenderer(TextEditor editor, SolidColorBrush brush = null)
         {
             this._editor = editor;
-            this.BackgroundColorBrush = new SolidColorBrush(brush == null ? Color.FromArgb(0x10, 0x80, 0x80, 0x80) : brush.Color);
+            this.BackgroundColorBrush = new SolidColorBrush(
+                brush == null ? Color.FromArgb(0x10, 0x80, 0x80, 0x80) : brush.Color);
         }
 
         public KnownLayer Layer

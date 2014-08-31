@@ -14,8 +14,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
         }
         public EscapeModeValue EscapeMode
         {
-            get { return Setting.Current.EscapeMode; }
-            set { Setting.Current.EscapeMode = value; }
+            get { return Setting.Current.ExtendedOptions.EscapeMode; }
+            set { Setting.Current.ExtendedOptions.EscapeMode = value; }
         }
 
         public Dictionary<EscapeModeValue, string> EscapeModeList { get; private set; }

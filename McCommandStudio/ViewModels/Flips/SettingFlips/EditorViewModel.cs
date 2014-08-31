@@ -5,22 +5,70 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
 {
     public class EditorViewModel : ViewModel
     {
+        public bool AllowScrollBelowDocument
+        {
+            get { return Setting.Current.EditorOptions.AllowScrollBelowDocument; }
+            set { Setting.Current.EditorOptions.AllowScrollBelowDocument = value; }
+        }
+
+        public bool CutCopyWholeLine
+        {
+            get { return Setting.Current.EditorOptions.CutCopyWholeLine; }
+            set { Setting.Current.EditorOptions.CutCopyWholeLine = value; }
+        }
+
+        public bool EnableTextDragDrop
+        {
+            get { return Setting.Current.EditorOptions.EnableTextDragDrop; }
+            set { Setting.Current.EditorOptions.EnableTextDragDrop = value; }
+        }
+
+        public bool HideCursorWhileTyping
+        {
+            get { return Setting.Current.EditorOptions.HideCursorWhileTyping; }
+            set { Setting.Current.EditorOptions.HideCursorWhileTyping = value; }
+        }
+
+        public bool ConvertTabsToSpaces
+        {
+            get { return Setting.Current.EditorOptions.ConvertTabsToSpaces; }
+            set { Setting.Current.EditorOptions.ConvertTabsToSpaces = value; }
+        }
+
+        public int IndentationSize
+        {
+            get { return Setting.Current.EditorOptions.IndentationSize; }
+            set { Setting.Current.EditorOptions.IndentationSize = value; }
+        }
+
+        public bool ShowColumnRuler
+        {
+            get { return Setting.Current.EditorOptions.ShowColumnRuler; }
+            set { Setting.Current.EditorOptions.ShowColumnRuler = value; }
+        }
+
+        public int ColumnRulerPosition
+        {
+            get { return Setting.Current.EditorOptions.ColumnRulerPosition; }
+            set { Setting.Current.EditorOptions.ColumnRulerPosition = value; }
+        }
+
         public bool ShowSpaces
         {
-            get { return Setting.Current.ShowSpaces; }
-            set { Setting.Current.ShowSpaces = value; }
+            get { return Setting.Current.EditorOptions.ShowSpaces; }
+            set { Setting.Current.EditorOptions.ShowSpaces = value; }
         }
 
         public bool ShowTabs
         {
-            get { return Setting.Current.ShowTabs; }
-            set { Setting.Current.ShowTabs = value; }
+            get { return Setting.Current.EditorOptions.ShowTabs; }
+            set { Setting.Current.EditorOptions.ShowTabs = value; }
         }
 
         public bool ShowEndOfLine
         {
-            get { return Setting.Current.ShowEndOfLine; }
-            set { Setting.Current.ShowEndOfLine = value; }
+            get { return Setting.Current.EditorOptions.ShowEndOfLine; }
+            set { Setting.Current.EditorOptions.ShowEndOfLine = value; }
         }
 
         public bool ShowLineNumbers
@@ -35,54 +83,6 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
             set { Setting.Current.TextWrapping = value; }
         }
 
-        public bool AllowScrollBelowDocument
-        {
-            get { return Setting.Current.AllowScrollBelowDocument; }
-            set { Setting.Current.AllowScrollBelowDocument = value; }
-        }
-
-        public bool CutCopyWholeLine
-        {
-            get { return Setting.Current.CutCopyWholeLine; }
-            set { Setting.Current.CutCopyWholeLine = value; }
-        }
-
-        public bool ConvertTabsToSpaces
-        {
-            get { return Setting.Current.ConvertTabsToSpaces; }
-            set { Setting.Current.ConvertTabsToSpaces = value; }
-        }
-
-        public int IndentationSize
-        {
-            get { return Setting.Current.IndentationSize; }
-            set { Setting.Current.IndentationSize = value; }
-        }
-
-        public int ColumnRulerPosition
-        {
-            get { return Setting.Current.ColumnRulerPosition; }
-            set { Setting.Current.ColumnRulerPosition = value; }
-        }
-
-        public bool HideCursorWhileTyping
-        {
-            get { return Setting.Current.HideCursorWhileTyping; }
-            set { Setting.Current.HideCursorWhileTyping = value; }
-        }
-
-        public bool ShowColumnRuler
-        {
-            get { return Setting.Current.ShowColumnRuler; }
-            set { Setting.Current.ShowColumnRuler = value; }
-        }
-
-        public bool EnableTextDragDrop
-        {
-            get { return Setting.Current.EnableTextDragDrop; }
-            set { Setting.Current.EnableTextDragDrop = value; }
-        }
-
         public string FontFamily
         {
             get { return Setting.Current.FontFamily; }
@@ -93,36 +93,6 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
         {
             get { return Setting.Current.FontSize; }
             set { Setting.Current.FontSize = value; }
-        }
-
-        public bool EncloseSelection
-        {
-            get { return Setting.Current.EncloseSelection; }
-            set { Setting.Current.EncloseSelection = value; }
-        }
-
-        public bool EncloseMultiLine
-        {
-            get { return Setting.Current.EncloseMultiLine; }
-            set { Setting.Current.EncloseMultiLine = value; }
-        }
-
-        public bool AutoReformat
-        {
-            get { return Setting.Current.AutoReformat; }
-            set { Setting.Current.AutoReformat = value; }
-        }
-
-        public bool BracketCompletion
-        {
-            get { return Setting.Current.BracketCompletion; }
-            set { Setting.Current.BracketCompletion = value; }
-        }
-
-        public bool EnableCompletion
-        {
-            get { return Setting.Current.EnableCompletion; }
-            set { Setting.Current.EnableCompletion = value; }
         }
     }
 }

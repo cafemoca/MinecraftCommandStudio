@@ -65,6 +65,7 @@
     <Compile Include="CommandEditorCompletion.cs" />
     <Compile Include="CommandEditorHighlight.cs" />
     <Compile Include="CommandEditorFolding.cs" />
+    <Compile Include="ExtendedOptions.cs" />
     <Compile Include="CommandEditorProperty.cs" />
     <Compile Include="Completions\CompletionData.cs" />
     <Compile Include="Completions\MinecraftCompletions.cs" />

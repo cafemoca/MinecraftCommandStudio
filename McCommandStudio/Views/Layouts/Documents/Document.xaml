@@ -15,25 +15,18 @@
         </Grid.RowDefinitions>
         <editor:CommandEditor x:Name="Editor"
                               Grid.Row="0"
-                              AutoReformat="{Binding AutoReformat.Value, UpdateSourceTrigger=PropertyChanged}"
                               Background="{DynamicResource ExtremeWhiteBrush}"
                               BindableText="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                              BracketCompletion="{Binding BracketCompletion.Value, UpdateSourceTrigger=PropertyChanged}"
                               Column="{Binding Column.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               CurrentLineBackground="{DynamicResource GrayBrush10}"
-                              EnableCompletion="{Binding EnableCompletion.Value, UpdateSourceTrigger=PropertyChanged}"
-                              EncloseMultiLine="{Binding EncloseMultiLine.Value, UpdateSourceTrigger=PropertyChanged}"
-                              EncloseSelection="{Binding EncloseSelection.Value, UpdateSourceTrigger=PropertyChanged}"
                               FontFamily="{Binding FontFamily.Value, UpdateSourceTrigger=PropertyChanged}"
                               FontSize="{Binding FontSize.Value, UpdateSourceTrigger=PropertyChanged}"
                               Foreground="{DynamicResource BlackBrush}"
                               HorizontalScrollBarVisibility="Auto"
                               Line="{Binding Line.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               Options="{Binding Options.Value, UpdateSourceTrigger=PropertyChanged}"
-                              PlayerNames="{Binding PlayerNames, UpdateSourceTrigger=PropertyChanged}"
-                              ScoreNames="{Binding ScoreNames, UpdateSourceTrigger=PropertyChanged}"
+                              ExtendedOptions="{Binding ExtendedOptions.Value, UpdateSourceTrigger=PropertyChanged}"
                               ShowLineNumbers="{Binding ShowLineNumbers.Value, UpdateSourceTrigger=PropertyChanged}"
-                              TeamNames="{Binding TeamNames, UpdateSourceTrigger=PropertyChanged}"
                               WordWrap="{Binding TextWrapping.Value, UpdateSourceTrigger=PropertyChanged}" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

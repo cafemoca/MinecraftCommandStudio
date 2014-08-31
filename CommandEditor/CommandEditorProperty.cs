@@ -1,5 +1,4 @@
 ﻿using ICSharpCode.AvalonEdit;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -8,6 +7,19 @@ namespace Cafemoca.CommandEditor
 {
     public partial class CommandEditor : TextEditor
     {
+        #region ExtendedOptions 依存関係プロパティ
+
+        public static readonly DependencyProperty ExtendedOptionsProperty =
+            DependencyProperty.Register("ExtendedOptions", typeof(ExtendedOptions), typeof(CommandEditor));
+
+        public ExtendedOptions ExtendedOptions
+        {
+            get { return (ExtendedOptions)GetValue(ExtendedOptionsProperty); }
+            set { SetValue(ExtendedOptionsProperty, value); }
+        }
+
+        #endregion
+
         #region BindableText 依存関係プロパティ
 
         public static readonly DependencyProperty BindableTextProperty =
@@ -30,45 +42,6 @@ namespace Cafemoca.CommandEditor
         {
             get { return (string)GetValue(BindableTextProperty); }
             set { SetValue(BindableTextProperty, value); }
-        }
-
-        #endregion
-
-        #region PlayerNames 依存関係プロパティ
-
-        private static readonly DependencyProperty PlayerNamesProperty =
-            DependencyProperty.Register("PlayerNames", typeof(IEnumerable<string>), typeof(CommandEditor));
-
-        public IEnumerable<string> PlayerNames
-        {
-            get { return (IEnumerable<string>)this.GetValue(PlayerNamesProperty); }
-            set { this.SetValue(PlayerNamesProperty, value); }
-        }
-
-        #endregion
-
-        #region ScoreNames 依存関係プロパティ
-
-        private static readonly DependencyProperty ScoreNamesProperty =
-            DependencyProperty.Register("ScoreNames", typeof(IEnumerable<string>), typeof(CommandEditor));
-
-        public IEnumerable<string> ScoreNames
-        {
-            get { return (IEnumerable<string>)this.GetValue(ScoreNamesProperty); }
-            set { this.SetValue(ScoreNamesProperty, value); }
-        }
-
-        #endregion
-
-        #region TeamNames 依存関係プロパティ
-
-        private static readonly DependencyProperty TeamNamesProperty =
-            DependencyProperty.Register("TeamNames", typeof(IEnumerable<string>), typeof(CommandEditor));
-
-        public IEnumerable<string> TeamNames
-        {
-            get { return (IEnumerable<string>)this.GetValue(TeamNamesProperty); }
-            set { this.SetValue(TeamNamesProperty, value); }
         }
 
         #endregion
@@ -127,76 +100,6 @@ namespace Cafemoca.CommandEditor
 
         #endregion
 
-        #region EncloseSelection 依存関係プロパティ
-
-        private static readonly DependencyProperty EncloseSelectionProperty =
-            DependencyProperty.Register("EncloseSelection", typeof(bool), typeof(CommandEditor),
-            new UIPropertyMetadata(true));
-
-        public bool EncloseSelection
-        {
-            get { return (bool)this.GetValue(EncloseSelectionProperty); }
-            set { this.SetValue(EncloseSelectionProperty, value); }
-        }
-
-        #endregion
-
-        #region EncloseMultiLine 依存関係プロパティ
-
-        private static readonly DependencyProperty EncloseMultiLineProperty =
-            DependencyProperty.Register("EncloseMultiLine", typeof(bool), typeof(CommandEditor),
-            new UIPropertyMetadata(false));
-
-        public bool EncloseMultiLine
-        {
-            get { return (bool)this.GetValue(EncloseMultiLineProperty); }
-            set { this.SetValue(EncloseMultiLineProperty, value); }
-        }
-
-        #endregion
-
-        #region AutoReformat 依存関係プロパティ
-
-        private static readonly DependencyProperty AutoReformatProperty =
-            DependencyProperty.Register("AutoReformat", typeof(bool), typeof(CommandEditor),
-            new UIPropertyMetadata(true));
-
-        public bool AutoReformat
-        {
-            get { return (bool)this.GetValue(AutoReformatProperty); }
-            set { this.SetValue(AutoReformatProperty, value); }
-        }
-
-        #endregion
-
-        #region BracketCompletion 依存関係プロパティ
-
-        private static readonly DependencyProperty BracketCompletionProperty =
-            DependencyProperty.Register("BracketCompletion", typeof(bool), typeof(CommandEditor),
-            new UIPropertyMetadata(true));
-
-        public bool BracketCompletion
-        {
-            get { return (bool)this.GetValue(BracketCompletionProperty); }
-            set { this.SetValue(BracketCompletionProperty, value); }
-        }
-
-        #endregion
-
-        #region EnableCompletion 依存関係プロパティ
-
-        private static readonly DependencyProperty EnableCompletionProperty =
-            DependencyProperty.Register("EnableCompletion", typeof(bool), typeof(CommandEditor),
-            new UIPropertyMetadata(true));
-
-        public bool EnableCompletion
-        {
-            get { return (bool)this.GetValue(EnableCompletionProperty); }
-            set { this.SetValue(EnableCompletionProperty, value); }
-        }
-
-        #endregion
-
         #region private
 
         #region PreviousChar
@@ -227,29 +130,40 @@ namespace Cafemoca.CommandEditor
 
         #endregion
 
-        #region IsSelection
+        #region IsSelected
 
-        private bool IsSelection
+        private bool IsSelected
         {
-            get { return this.SelectionLength > 0; }
+            get
+            {
+                return this.SelectionLength > 0;
+            }
         }
 
         #endregion
 
-        #region IsSingleLineSelection
+        #region IsSelectedSingleLine
 
-        private bool IsSingleLineSelection
+        private bool IsSelectedSingleLine
         {
-            get { return this.IsSelection && !this.SelectedText.Any(x => "\r\n".Contains(x)); }
+            get
+            {
+                return this.IsSelected &&
+                    !this.SelectedText.Any(x => "\r\n".Contains(x));
+            }
         }
 
         #endregion
 
-        #region IsMultiLineSelection
+        #region IsSelectedMultiLine
 
-        private bool IsMultiLineSelection
+        private bool IsSelectedMultiLine
         {
-            get { return this.IsSelection && this.SelectedText.Any(x => "\r\n".Contains(x)); }
+            get
+            {
+                return this.IsSelected &&
+                    this.SelectedText.Any(x => "\r\n".Contains(x));
+            }
         }
 
         #endregion

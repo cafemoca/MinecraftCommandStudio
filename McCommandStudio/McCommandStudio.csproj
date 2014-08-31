@@ -162,6 +162,7 @@
     <Compile Include="ViewModels\Flips\SettingFlips\CommonViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlips\CompileViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlips\EditorViewModel.cs" />
+    <Compile Include="ViewModels\Flips\SettingFlips\ExtendedViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlips\VersionInfoViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlipViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Bases\FileViewModel.cs" />
@@ -202,6 +203,9 @@
     </Compile>
     <Compile Include="Views\Flips\SettingFlips\Editor.xaml.cs">
       <DependentUpon>Editor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Flips\SettingFlips\Extended.xaml.cs">
+      <DependentUpon>Extended.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Flips\SettingFlips\VersionInfo.xaml.cs">
       <DependentUpon>VersionInfo.xaml</DependentUpon>
@@ -393,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Flips\SettingFlips\Editor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Flips\SettingFlips\Extended.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

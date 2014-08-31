@@ -3,6 +3,7 @@ using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
 using Codeplex.Reactive;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
@@ -11,35 +12,47 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
     {
         public const string ToolContentId = "CompletionEditor";
 
-        public ReactiveCollection<string> PlayerNames
+        #region PlayerNames
+
+        public ObservableCollection<string> PlayerNames
         {
-            get { return Setting.Current.PlayerNames; }
-            set { Setting.Current.PlayerNames = value; }
+            get { return Setting.Current.ExtendedOptions.PlayerNames; }
+            set { Setting.Current.ExtendedOptions.PlayerNames = value; }
         }
         public ReactiveProperty<string> PlayerName { get; private set; }
         public ReactiveProperty<string> SelectedPlayer { get; private set; }
         public ReactiveCommand AddPlayerCommand { get; private set; }
         public ReactiveCommand DelPlayerCommand { get; private set; }
 
-        public ReactiveCollection<string> ScoreNames
+        #endregion
+
+        #region ScoreNames
+
+        public ObservableCollection<string> ScoreNames
         {
-            get { return Setting.Current.ScoreNames; }
-            set { Setting.Current.ScoreNames = value; }
+            get { return Setting.Current.ExtendedOptions.ScoreNames; }
+            set { Setting.Current.ExtendedOptions.ScoreNames = value; }
         }
         public ReactiveProperty<string> ScoreName { get; private set; }
         public ReactiveProperty<string> SelectedScore { get; private set; }
         public ReactiveCommand AddScoreCommand { get; private set; }
         public ReactiveCommand DelScoreCommand { get; private set; }
 
-        public ReactiveCollection<string> TeamNames
+        #endregion
+
+        #region TeamNames
+
+        public ObservableCollection<string> TeamNames
         {
-            get { return Setting.Current.TeamNames; }
-            set { Setting.Current.TeamNames = value; }
+            get { return Setting.Current.ExtendedOptions.TeamNames; }
+            set { Setting.Current.ExtendedOptions.TeamNames = value; }
         }
         public ReactiveProperty<string> TeamName { get; private set; }
         public ReactiveProperty<string> SelectedTeam { get; private set; }
         public ReactiveCommand AddTeamCommand { get; private set; }
         public ReactiveCommand DelTeamCommand { get; private set; }
+
+        #endregion
 
         public CompletionEditorViewModel()
             : base("名前設定")
@@ -50,51 +63,39 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
             this.SelectedPlayer = new ReactiveProperty<string>();
 
             this.AddPlayerCommand = new ReactiveCommand();
-            this.AddPlayerCommand.Subscribe(_ => this.AddCollection(this.PlayerNames, this.PlayerName));
+            this.AddPlayerCommand.Subscribe(_ =>
+                this.AddCollection(this.PlayerNames, this.PlayerName));
 
             this.DelPlayerCommand = new ReactiveCommand();
             this.DelPlayerCommand.Subscribe(_ =>
-            {
-                if (this.PlayerNames.Any(x => x == this.SelectedPlayer.Value))
-                {
-                    this.PlayerNames.Remove(this.SelectedPlayer.Value);
-                }
-            });
+                this.RemoveCollection(this.PlayerNames, this.SelectedPlayer));
 
             this.ScoreName = new ReactiveProperty<string>();
             this.SelectedScore = new ReactiveProperty<string>();
 
             this.AddScoreCommand = new ReactiveCommand();
-            this.AddScoreCommand.Subscribe(_ => this.AddCollection(this.ScoreNames, this.ScoreName));
+            this.AddScoreCommand.Subscribe(_ =>
+                this.AddCollection(this.ScoreNames, this.ScoreName));
 
             this.DelScoreCommand = new ReactiveCommand();
             this.DelScoreCommand.Subscribe(_ =>
-            {
-                if (this.ScoreNames.Any(x => x == this.SelectedScore.Value))
-                {
-                    this.ScoreNames.Remove(this.SelectedScore.Value);
-                }
-            });
+                this.RemoveCollection(this.ScoreNames, this.SelectedScore));
 
             this.TeamName = new ReactiveProperty<string>();
             this.SelectedTeam = new ReactiveProperty<string>();
 
             this.AddTeamCommand = new ReactiveCommand();
-            this.AddTeamCommand.Subscribe(_ => this.AddCollection(this.TeamNames, this.TeamName));
+            this.AddTeamCommand.Subscribe(_ =>
+                this.AddCollection(this.TeamNames, this.TeamName));
 
             this.DelTeamCommand = new ReactiveCommand();
             this.DelTeamCommand.Subscribe(_ =>
-            {
-                if (this.TeamNames.Any(x => x == this.SelectedTeam.Value))
-                {
-                    this.TeamNames.Remove(this.SelectedTeam.Value);
-                }
-            });
+                this.RemoveCollection(this.TeamNames, this.SelectedTeam));
         }
 
-        private void AddCollection(ReactiveCollection<string> collection, ReactiveProperty<string> value)
+        private void AddCollection(ObservableCollection<string> collection, ReactiveProperty<string> value)
         {
-            if (value.Value.IsEmpty())
+            if (collection == null || value.Value.IsEmpty())
             {
                 return;
             }
@@ -111,6 +112,14 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
                 StatusService.Current.Notify("その名前は既に存在しています。");
             }
             value.Value = string.Empty;
+        }
+
+        private void RemoveCollection(ObservableCollection<string> collection, ReactiveProperty<string> value)
+        {
+            if (collection.Any(x => x == value.Value))
+            {
+                collection.Remove(value.Value);
+            }
         }
     }
 }

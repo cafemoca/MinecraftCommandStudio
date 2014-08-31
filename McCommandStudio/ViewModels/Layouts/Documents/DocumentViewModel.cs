@@ -1,4 +1,5 @@
-﻿using Cafemoca.CommandEditor.Utils;
+﻿using Cafemoca.CommandEditor;
+using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Services;
 using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
@@ -6,10 +7,8 @@ using Codeplex.Reactive;
 using Codeplex.Reactive.Extensions;
 using ICSharpCode.AvalonEdit;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
@@ -31,33 +30,13 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
         public ReactiveProperty<int> Column { get; private set; }
 
         public ReactiveProperty<TextEditorOptions> Options { get; private set; }
+        public ReactiveProperty<ExtendedOptions> ExtendedOptions { get; private set; }
+
         public ReactiveProperty<string> FontFamily { get; private set; }
         public ReactiveProperty<int> FontSize { get; private set; }
         public ReactiveProperty<bool> ShowLineNumbers { get; private set; }
         public ReactiveProperty<bool> TextWrapping { get; private set; }
-        public ReactiveProperty<bool> EncloseSelection { get; private set; }
-        public ReactiveProperty<bool> EncloseMultiLine { get; private set; }
-        public ReactiveProperty<bool> AutoReformat { get; private set; }
-        public ReactiveProperty<bool> BracketCompletion { get; private set; }
         public ReactiveProperty<int> CompileInterval { get; private set; }
-        public ReactiveProperty<bool> EnableCompletion { get; private set; }
-        public ReactiveProperty<EscapeModeValue> EscapeMode { get; private set; }
-
-        public ReactiveCollection<string> PlayerNames
-        {
-            get { return Setting.Current.PlayerNames; }
-            set { Setting.Current.PlayerNames = value; }
-        }
-        public ReactiveCollection<string> ScoreNames
-        {
-            get { return Setting.Current.ScoreNames; }
-            set { Setting.Current.ScoreNames = value; }
-        }
-        public ReactiveCollection<string> TeamNames
-        {
-            get { return Setting.Current.TeamNames; }
-            set { Setting.Current.TeamNames = value; }
-        }
 
         public ReactiveCommand CopyCommand { get; private set; }
 
@@ -82,18 +61,14 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
             this.Line = new ReactiveProperty<int>(0);
             this.Column = new ReactiveProperty<int>(0);
 
-            this.Options = Setting.Current.ObserveProperty(x => x.Options).ToReactiveProperty();
+            this.Options = Setting.Current.ObserveProperty(x => x.EditorOptions).ToReactiveProperty();
+            this.ExtendedOptions = Setting.Current.ObserveProperty(x => x.ExtendedOptions).ToReactiveProperty();
+
             this.FontFamily = Setting.Current.ObserveProperty(x => x.FontFamily).ToReactiveProperty();
             this.FontSize = Setting.Current.ObserveProperty(x => x.FontSize).ToReactiveProperty();
             this.ShowLineNumbers = Setting.Current.ObserveProperty(x => x.ShowLineNumbers).ToReactiveProperty();
             this.TextWrapping = Setting.Current.ObserveProperty(x => x.TextWrapping).ToReactiveProperty();
-            this.EncloseSelection = Setting.Current.ObserveProperty(x => x.EncloseSelection).ToReactiveProperty();
-            this.EncloseMultiLine = Setting.Current.ObserveProperty(x => x.EncloseMultiLine).ToReactiveProperty();
-            this.AutoReformat = Setting.Current.ObserveProperty(x => x.AutoReformat).ToReactiveProperty();
-            this.BracketCompletion = Setting.Current.ObserveProperty(x => x.BracketCompletion).ToReactiveProperty();
             this.CompileInterval = Setting.Current.ObserveProperty(x => x.CompileInterval).ToReactiveProperty();
-            this.EnableCompletion = Setting.Current.ObserveProperty(x => x.EnableCompletion).ToReactiveProperty();
-            this.EscapeMode = Setting.Current.ObserveProperty(x => x.EscapeMode).ToReactiveProperty();
 
             this.CompileInterval.Subscribe(v =>
             {
@@ -137,23 +112,10 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
                 this.Line.Value.ToString(),
                 this.Column.Value.ToString()
             }
-            .JoinString(" / ")
+            .JoinString("  /  ")
             .ToString();
 
             StatusService.Current.SetMain(message);
-        }
-
-        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (object.Equals(storage, value))
-            {
-                return false;
-            }
-
-            storage = value;
-            this.RaisePropertyChanged(propertyName);
-
-            return true;
         }
     }
 }

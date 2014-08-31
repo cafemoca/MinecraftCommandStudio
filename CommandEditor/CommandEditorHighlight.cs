@@ -47,7 +47,7 @@ namespace Cafemoca.CommandEditor
                 {
                     this._bracketSearcher = new BracketSearcher();
                 }
-                var bracketSearchResult = this._bracketSearcher.SearchBrackets(this.TextArea.Document, this.CaretOffset);
+                var bracketSearchResult = this._bracketSearcher.SearchBrackets(this.Document, this.TextArea.Caret.Offset);
                 this._bracketRenderer.SetHighlight(bracketSearchResult);
             }
             catch (Exception ex)
@@ -72,6 +72,15 @@ namespace Cafemoca.CommandEditor
 
                 this.TextArea.TextView.BackgroundRenderers.Remove(oldRenderer);
                 this.TextArea.TextView.BackgroundRenderers.Add(new HighlightCurrentLineBackgroundRenderer(this, brush.Clone()));
+
+                if (this._bracketRenderer != null)
+                {
+                    this.TextArea.TextView.BackgroundRenderers.Remove(this._bracketRenderer);
+                    this._bracketRenderer = null;
+                }
+
+                this._bracketRenderer = new BracketHighlightRenderer(this.TextArea.TextView);
+                this.TextArea.TextView.BackgroundRenderers.Add(new BracketHighlightRenderer(this.TextArea.TextView));
             }
             catch (Exception ex)
             {

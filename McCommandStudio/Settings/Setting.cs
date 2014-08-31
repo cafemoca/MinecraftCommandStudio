@@ -1,11 +1,11 @@
-﻿using Cafemoca.CommandEditor.Utils;
+﻿using Cafemoca.CommandEditor;
+using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Settings.Xml;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
 using Codeplex.Reactive;
 using ICSharpCode.AvalonEdit;
 using Livet;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -33,10 +33,9 @@ namespace Cafemoca.McCommandStudio.Settings
                     Initialize();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 Initialize();
-                Debug.WriteLine(ex);
             }
         }
 
@@ -56,252 +55,79 @@ namespace Cafemoca.McCommandStudio.Settings
         {
             Current = new Setting()
             {
-                EscapeMode = EscapeModeValue.New,
-                ShowSpaces = true,
-                ShowTabs = true,
-                ShowEndOfLine = false,
-                AllowScrollBelowDocument = true,
-                CutCopyWholeLine = true,
-                ConvertTabsToSpaces = false,
-                IndentationSize = 4,
-                ColumnRulerPosition = 80,
-                HideCursorWhileTyping = false,
-                ShowColumnRuler = false,
-                EnableTextDragDrop = true,
+                EditorOptions = new TextEditorOptions()
+                {
+                    AllowScrollBelowDocument = true,
+                    //AllowToggleOverstrikeMode = true,
+                    ColumnRulerPosition = 80,
+                    ConvertTabsToSpaces = false,
+                    CutCopyWholeLine = true,
+                    //EnableEmailHyperlinks = false,
+                    //EnableHyperlinks = false,
+                    //EnableImeSupport = true,
+                    EnableRectangularSelection = true,
+                    EnableTextDragDrop = true,
+                    EnableVirtualSpace = false,
+                    HideCursorWhileTyping = false,
+                    HighlightCurrentLine = true,
+                    IndentationSize = 4,
+                    //InheritWordWrapIndentation = false,
+                    //RequireControlModifierForHyperlinkClick = false,
+                    //ShowBoxForControlCharacters = false,
+                    ShowColumnRuler = false,
+                    ShowEndOfLine = false,
+                    ShowSpaces = false,
+                    ShowTabs = false,
+                    //WordWrapIndentation = 0,
+                },
+                ExtendedOptions = new ExtendedOptions()
+                {
+                    AutoReformat = true,
+                    BracketCompletion = true,
+                    EnableCompletion = true,
+                    EncloseMultiLine = false,
+                    EncloseSelection = false,
+                    EscapeMode = EscapeModeValue.New,
+                    PlayerNames = new ObservableCollection<string>(),
+                    ScoreNames = new ObservableCollection<string>(),
+                    TeamNames = new ObservableCollection<string>(),
+                },
                 FontFamily = "Consolas",
                 FontSize = 12,
                 ShowLineNumbers = true,
                 TextWrapping = false,
                 DefaultFileName = "untitled",
-                EncloseSelection = true,
-                EncloseMultiLine = false,
-                AutoReformat = true,
-                BracketCompletion = true,
                 CompileInterval = 1000,
-                EnableCompletion = true,
-                PlayerNames = new ReactiveCollection<string>(),
-                ScoreNames = new ReactiveCollection<string>(),
-                TeamNames = new ReactiveCollection<string>(),
             };
         }
 
-        #region Options 変更通知プロパティ
+        #region EditorOptions 変更通知プロパティ
 
-        private TextEditorOptions _options = new TextEditorOptions();
-        [XmlIgnore]
-        public TextEditorOptions Options
+        private TextEditorOptions _editorOptions = new TextEditorOptions();
+        [XmlElement("EditorOptions")]
+        public TextEditorOptions EditorOptions
         {
-            get
-            {
-                this._options.ShowSpaces = this.ShowSpaces;
-                this._options.ShowTabs = this.ShowTabs;
-                this._options.ShowEndOfLine = this.ShowEndOfLine;
-                this._options.AllowScrollBelowDocument = this.AllowScrollBelowDocument;
-                this._options.CutCopyWholeLine = this.CutCopyWholeLine;
-                this._options.ConvertTabsToSpaces = this.ConvertTabsToSpaces;
-                this._options.IndentationSize = this.IndentationSize;
-                this._options.ColumnRulerPosition = this.ColumnRulerPosition;
-                this._options.HideCursorWhileTyping = this.HideCursorWhileTyping;
-                this._options.ShowColumnRuler = this.ShowColumnRuler;
-                this._options.EnableTextDragDrop = this.EnableTextDragDrop;
-                return this._options;
-            }
+            get { return this._editorOptions; }
             set
             {
-                this._options = value;
+                this._editorOptions = value;
                 this.RaisePropertyChanged();
             }
         }
 
         #endregion
 
-        #region EscapeMode 変更通知プロパティ
+        #region ExtendedOptions 変更通知プロパティ
 
-        private EscapeModeValue _escapeMode = EscapeModeValue.New;
-        public EscapeModeValue EscapeMode
+        private ExtendedOptions _extendedOptions = new ExtendedOptions();
+        [XmlElement("ExtendedOptions")]
+        public ExtendedOptions ExtendedOptions
         {
-            get { return this._escapeMode; }
+            get { return this._extendedOptions; }
             set
             {
-                this._escapeMode = value;
+                this._extendedOptions = value;
                 this.RaisePropertyChanged();
-                this.ApplySettingsForDocuments();
-            }
-        }
-
-        #endregion
-
-        #region ShowSpaces 変更通知プロパティ
-
-        private bool _showSpaces = true;
-        public bool ShowSpaces
-        {
-            get { return this._showSpaces; }
-            set
-            {
-                this._showSpaces = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region ShowTabs 変更通知プロパティ
-
-        private bool _showTabs = true;
-        public bool ShowTabs
-        {
-            get { return this._showTabs; }
-            set
-            {
-                this._showTabs = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region ShowEndOfLine 変更通知プロパティ
-
-        private bool _showEndOfLine = false;
-        public bool ShowEndOfLine
-        {
-            get { return this._showEndOfLine; }
-            set
-            {
-                this._showEndOfLine = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region AllowScrollBelowDocument 変更通知プロパティ
-
-        private bool _allowScrollBelowDocument = true;
-        public bool AllowScrollBelowDocument
-        {
-            get { return this._allowScrollBelowDocument; }
-            set
-            {
-                this._allowScrollBelowDocument = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region CutCopyWholeLine 変更通知プロパティ
-
-        private bool _cutCopyWholeLine = true;
-        public bool CutCopyWholeLine
-        {
-            get { return this._cutCopyWholeLine; }
-            set
-            {
-                this._cutCopyWholeLine = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region ConvertTabsToSpaces 変更通知プロパティ
-
-        private bool _convertTabsToSpaces = false;
-        public bool ConvertTabsToSpaces
-        {
-            get { return this._convertTabsToSpaces; }
-            set
-            {
-                this._convertTabsToSpaces = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region IndentationSize 変更通知プロパティ
-
-        private int _indentationSize = 4;
-        public int IndentationSize
-        {
-            get { return this._indentationSize; }
-            set
-            {
-                this._indentationSize = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region ColumnRulerPosition 変更通知プロパティ
-
-        private int _columnRulerPosition = 80;
-        public int ColumnRulerPosition
-        {
-            get { return this._columnRulerPosition; }
-            set
-            {
-                this._columnRulerPosition = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region HideCursorWhileTyping 変更通知プロパティ
-
-        private bool _hideCursorWhileTyping = false;
-        public bool HideCursorWhileTyping
-        {
-            get { return this._hideCursorWhileTyping; }
-            set
-            {
-                this._hideCursorWhileTyping = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region ShowColumnRuler 変更通知プロパティ
-
-        private bool _showColumnRuler = false;
-        public bool ShowColumnRuler
-        {
-            get { return this._showColumnRuler; }
-            set
-            {
-                this._showColumnRuler = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
-            }
-        }
-
-        #endregion
-
-        #region EnableTextDragDrop 変更通知プロパティ
-
-        private bool _enableTextDragDrop = true;
-        public bool EnableTextDragDrop
-        {
-            get { return this._enableTextDragDrop; }
-            set
-            {
-                this._enableTextDragDrop = value;
-                this.RaisePropertyChanged();
-                this.RaisePropertyChanged("Options");
             }
         }
 
@@ -382,66 +208,6 @@ namespace Cafemoca.McCommandStudio.Settings
 
         #endregion
 
-        #region EncloseSelection 変更通知プロパティ
-
-        private bool _encloseSelection = true;
-        public bool EncloseSelection
-        {
-            get { return this._encloseSelection; }
-            set
-            {
-                this._encloseSelection = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region EncloseMultiLine 変更通知プロパティ
-
-        private bool _encloseMultiLine = false;
-        public bool EncloseMultiLine
-        {
-            get { return this._encloseMultiLine; }
-            set
-            {
-                this._encloseMultiLine = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region AutoReformat 変更通知プロパティ
-
-        private bool _autoReformat = true;
-        public bool AutoReformat
-        {
-            get { return this._autoReformat; }
-            set
-            {
-                this._autoReformat = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region BracketCompletion 変更通知プロパティ
-
-        private bool _bracketCompletion = true;
-        public bool BracketCompletion
-        {
-            get { return this._bracketCompletion; }
-            set
-            {
-                this._bracketCompletion = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
         #region CompileInterval 変更通知プロパティ
 
         private int _compileInterval = 1000;
@@ -451,66 +217,6 @@ namespace Cafemoca.McCommandStudio.Settings
             set
             {
                 this._compileInterval = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region EnableCompletion 変更通知プロパティ
-
-        private bool _enableCompletion = true;
-        public bool EnableCompletion
-        {
-            get { return this._enableCompletion; }
-            set
-            {
-                this._enableCompletion = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region PlayerNames 変更通知プロパティ
-
-        private ReactiveCollection<string> _playerNames = new ReactiveCollection<string>();
-        public ReactiveCollection<string> PlayerNames
-        {
-            get { return this._playerNames; }
-            set
-            {
-                this._playerNames = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region ScoreNames 変更通知プロパティ
-
-        private ReactiveCollection<string> _scoreNames = new ReactiveCollection<string>();
-        public ReactiveCollection<string> ScoreNames
-        {
-            get { return this._scoreNames; }
-            set
-            {
-                this._scoreNames = value;
-                this.RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region TeamNames 変更通知プロパティ
-
-        private ReactiveCollection<string> _teamNames = new ReactiveCollection<string>();
-        public ReactiveCollection<string> TeamNames
-        {
-            get { return this._teamNames; }
-            set
-            {
-                this._teamNames = value;
                 this.RaisePropertyChanged();
             }
         }

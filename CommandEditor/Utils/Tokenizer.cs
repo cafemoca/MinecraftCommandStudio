@@ -82,6 +82,9 @@ namespace Cafemoca.CommandEditor.Utils
                     case ',':
                         yield return new Token(TokenType.Comma, ",", cursor);
                         break;
+                    case ':':
+                        yield return new Token(TokenType.Colon, ":", cursor);
+                        break;
                     case '"':
                         yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
                         break;
@@ -319,7 +322,7 @@ namespace Cafemoca.CommandEditor.Utils
             switch (type)
             {
                 case TokenizeType.Command:
-                    tokens = "{}[]=@~/\t\r\n ";
+                    tokens = "{}[]=@~:/\t\r\n ";
                     break;
                 case TokenizeType.Block:
                     tokens = "(){}[],:;=\"\t\r\n ";

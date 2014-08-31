@@ -152,6 +152,20 @@ namespace Cafemoca.CommandEditor
                 case Key.End:
                     this.CloseCompletionWindow();
                     break;
+                case Key.F2:
+                    if (this.Text.IsEmpty())
+                    {
+                        return;
+                    }
+                    if (this.ExtendedOptions.EnableCompletion)
+                    {
+                        var completionData = this.GetCompletionData(index, " ");
+                        if (completionData != null)
+                        {
+                            this.ShowCompletionWindow(completionData);
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
@@ -416,17 +430,32 @@ namespace Cafemoca.CommandEditor
                             {
                                 return null;
                             }
+                            if (input == "\r" || input == "\n")
+                            {
+                                if ((Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None)
+                                {
+                                    return null;
+                                }
+                            }
                             var command = reader.SkipGet(x => x.IsMatchType(TokenType.Command));
                             if (!command.IsEmpty())
                             {
+                                var comp = new CommandCompletions(this.ExtendedOptions);
                                 reader.Reverse();
                                 switch (command.Value)
                                 {
                                     case "/scoreboard":
-                                        var scoreboard = this.CompletionScoreboard(reader);
+                                        var scoreboard = comp.ScoreboardCompletion(reader);
                                         if (scoreboard != null)
                                         {
                                             return scoreboard;
+                                        }
+                                        break;
+                                    case "/give":
+                                        var give = comp.GiveCompletion(reader);
+                                        if (give != null)
+                                        {
+                                            return give;
                                         }
                                         break;
                                 }
@@ -447,380 +476,6 @@ namespace Cafemoca.CommandEditor
                 }
             }
 
-            return null;
-        }
-
-        private IEnumerable<CompletionData> GetCompletionOrEmpty(IEnumerable<string> completion, bool isRemainToken)
-        {
-            return !isRemainToken ? completion.ToCompletionData() : null;
-        }
-
-        private bool CheckPlayer(TokenReader reader)
-        {
-            if (reader.Now.IsMatchType(TokenType.Literal, TokenType.Asterisk))
-            {
-                return true;
-            }
-            if (reader.Now.IsMatchType(TokenType.TargetSelector))
-            {
-                if (!reader.IsRemainToken)
-                {
-                    return true;
-                }
-                else if (reader.Ahead.IsMatchType(TokenType.OpenSquareBracket))
-                {
-                    reader.MoveNext();
-                    var close = reader.SkipGet(x => x.IsMatchType(TokenType.CloseSquareBracket));
-                    if (!close.IsEmpty())
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        private IEnumerable<CompletionData> CompletionScoreboard(TokenReader reader)
-        {
-            try
-            {
-                // scoreboard (objectives|players|teams)
-                if (!reader.IsRemainToken)
-                {
-                    return MinecraftCompletions.GetScoreboardCompletion();
-                }
-                // scoreboard ...
-                else
-                {
-                    var now = reader.Get();
-
-                    // scoreboard objectives ?
-                    if (now.IsMatchLiteral("objectives"))
-                    {
-                        // scoreboard objectives (list|add|remove|setdisplay)
-                        if (!reader.IsRemainToken)
-                        {
-                            return MinecraftCompletions.GetScoreboardObjectivesCompletion();
-                        }
-                        // scoreboard objectives ...
-                        else
-                        {
-                            now = reader.Get();
-
-                            // scoreboard objectives add ?
-                            if (now.IsMatchLiteral("add"))
-                            {
-                                // scoreboard objectives add <objective>
-                                if (!reader.IsRemainToken)
-                                {
-                                    return this.ExtendedOptions.ScoreNames.ToCompletionData();
-                                }
-                                // scoreboard objectives add ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard objectives add <objective> ?
-                                    if (now.IsMatchType(TokenType.Literal, TokenType.String))
-                                    {
-                                        // scoreboard objectives add <objective> <criteria>
-                                        if (!reader.IsRemainToken)
-                                        {
-                                            return MinecraftCompletions.GetScoreboardCriteriaCompletion();
-                                        }
-                                        // scoreboard objectives add <objective> ...
-                                        else
-                                        {
-                                            now = reader.Get();
-
-                                            // scoreboard objectives add <objective> trigger <trigger>
-                                            if (now.IsMatchLiteral("trigger"))
-                                            {
-                                                return this.GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            // scoreboard objectives remove <objective>
-                            else if (now.IsMatchLiteral("remove"))
-                            {
-                                return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
-                            }
-                            // scoreboard objectives setdisplay ?
-                            else if (now.IsMatchLiteral("setdisplay"))
-                            {
-                                // scoreboard objectives setdisplay (list|sidebar|belowName)
-                                if (!reader.IsRemainToken)
-                                {
-                                    return MinecraftCompletions.GetScoreboardSlotsCompletion();
-                                }
-                                // scoreboard objectives setdisplay ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard objectives setdisplay (list|sidebar|belowName) <objectives>
-                                    if (now.IsMatchLiteral("list", "sidebar", "belowName") ||
-                                        now.ContainsLiteral("sidebar.team."))
-                                    {
-                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    // scoreboard players ?
-                    else if (now.IsMatchLiteral("players"))
-                    {
-                        // scoreboard players (list|set|add|remove|reset|enable|test)
-                        if (!reader.IsRemainToken)
-                        {
-                            return MinecraftCompletions.GetScoreboardPlayersCompletion();
-                        }
-                        // scoreboard players ...
-                        else
-                        {
-                            now = reader.Get();
-
-                            // scoreboard players list <playername>
-                            if (now.IsMatchLiteral("list"))
-                            {
-                                return GetCompletionOrEmpty(this.ExtendedOptions.PlayerNames, reader.IsRemainToken);
-                            }
-                            // scoreboard players (set|add|remove|reset|) ?
-                            else if (now.IsMatchLiteral("set", "add", "remove", "reset"))
-                            {
-                                // scoreboard players (set|add|remove|reset) <playername>
-                                if (!reader.IsRemainToken)
-                                {
-                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
-                                }
-                                // scoreboard players (set|add|remove|reset) ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard players (set|add|remove|reset) <playername> <objective>
-                                    if (this.CheckPlayer(reader))
-                                    {
-                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
-                                    }
-                                }
-                            }
-                            // scoreboard players enable ?
-                            else if (now.IsMatchLiteral("enable"))
-                            {
-                                // scoreboard players enable <playername>
-                                if (!reader.IsRemainToken)
-                                {
-                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
-                                }
-                                // scoreboard players enable ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard players enable <playername> <trigger>
-                                    if (this.CheckPlayer(reader))
-                                    {
-                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
-                                    }
-                                }
-                            }
-                            // scoreboard players test ?
-                            else if (now.IsMatchLiteral("test"))
-                            {
-                                // scoreboard players test <playername>
-                                if (!reader.IsRemainToken)
-                                {
-                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
-                                }
-                                // scoreboard players test ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard players enable <playername> <objective>
-                                    if (this.CheckPlayer(reader))
-                                    {
-                                        return GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
-                                    }
-                                }
-                            }
-                            // scoreboard players operation ?
-                            else if (now.IsMatchLiteral("operation"))
-                            {
-                                // scoreboard players operation <target>
-                                if (!reader.IsRemainToken)
-                                {
-                                    return this.ExtendedOptions.PlayerNames.ToCompletionData();
-                                }
-                                // scoreboard players operation ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard players operation <target> ?
-                                    if (this.CheckPlayer(reader))
-                                    {
-                                        // scoreboard players operation <target> <targetObjective>
-                                        if (!reader.IsRemainToken)
-                                        {
-                                            return this.ExtendedOptions.ScoreNames.ToCompletionData();
-                                        }
-                                        // scoreboard players operation <target> ...
-                                        else
-                                        {
-                                            now = reader.Get();
-
-                                            // scoreboard players operation <target> <targetObjective> ?
-                                            if (now.IsMatchType(TokenType.Literal, TokenType.String))
-                                            {
-                                                // scoreboard players operation <target> <targetObjective> <operation>
-                                                if (!reader.IsRemainToken)
-                                                {
-                                                    return MinecraftCompletions.GetScoreboardOperationCompletion();
-                                                }
-                                                // scoreboard players operation <target> <targetObjective> ...
-                                                else
-                                                {
-                                                    now = reader.Get();
-
-                                                    // scoreboard players operation <target> <targetObjective> <operation> ?
-                                                    if (now.IsMatchType(TokenType.ScoreAdd,      // +=
-                                                                        TokenType.ScoreSubtract, // -=
-                                                                        TokenType.ScoreMultiple, // *=
-                                                                        TokenType.ScoreDivide,   // /=
-                                                                        TokenType.ScoreModulo,   // %=
-                                                                        TokenType.Equal,         // =
-                                                                        TokenType.ScoreMin,      // <
-                                                                        TokenType.ScoreMax,      // >
-                                                                        TokenType.ScoreSwaps))   // ><
-                                                    {
-                                                        // scoreboard players operation <target> <targetObjective> <operation> <selector>
-                                                        if (!reader.IsRemainToken)
-                                                        {
-                                                            return this.ExtendedOptions.PlayerNames.ToCompletionData();
-                                                        }
-                                                        // scoreboard players operation <target> <targetObjective> <operation> ...
-                                                        else
-                                                        {
-                                                            now = reader.Get();
-
-                                                            // scoreboard players operation <target> <targetObjective> <operation> <selector> ?
-                                                            if (this.CheckPlayer(reader))
-                                                            {
-                                                                return this.GetCompletionOrEmpty(this.ExtendedOptions.ScoreNames, reader.IsRemainToken);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else if (now.IsMatchLiteral("teams"))
-                    {
-                        // scoreboard teams (list|add|remove|empty|join|leave|option)
-                        if (!reader.IsRemainToken)
-                        {
-                            return MinecraftCompletions.GetScoreboardTeamsCompletion();
-                        }
-                        // scoreboard teams ...
-                        else
-                        {
-                            now = reader.Get();
-
-                            // scoreboard teams list <playername>
-                            if (now.IsMatchLiteral("list"))
-                            {
-                                return GetCompletionOrEmpty(this.ExtendedOptions.TeamNames, reader.IsRemainToken);
-                            }
-                            // scoreboard teams (add|remove|empty) <teamname>
-                            else if (now.IsMatchLiteral("add", "remove", "empty"))
-                            {
-                                return GetCompletionOrEmpty(this.ExtendedOptions.TeamNames, reader.IsRemainToken);
-                            }
-                            // scoreboard teams (join|leave) ?
-                            else if (now.IsMatchLiteral("join", "leave"))
-                            {
-                                // scoreboard teams (join|leave) <teamname>
-                                if (!reader.IsRemainToken)
-                                {
-                                    return this.ExtendedOptions.TeamNames.ToCompletionData();
-                                }
-                                // scoreboard teams (join|leave) ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard temas (join|leave) <teamname> <playername>
-                                    if (now.IsMatchType(TokenType.Literal, TokenType.String))
-                                    {
-                                        return this.GetCompletionOrEmpty(this.ExtendedOptions.PlayerNames, reader.IsRemainToken);
-                                    }
-                                }
-                            }
-                            // scoreboard teams (option) ?
-                            else if (now.IsMatchLiteral("option"))
-                            {
-                                // scoreboard teams option <teamname>
-                                if (!reader.IsRemainToken)
-                                {
-                                    return this.ExtendedOptions.TeamNames.ToCompletionData();
-                                }
-                                // scoreboard teams option ...
-                                else
-                                {
-                                    now = reader.Get();
-
-                                    // scoreboard temas option <teamname> ?
-                                    if (now.IsMatchType(TokenType.Literal, TokenType.String))
-                                    {
-                                        // scoreboard teams option <teamname> <option>
-                                        if (!reader.IsRemainToken)
-                                        {
-                                            return MinecraftCompletions.GetScoreboardTeamOptionCompletion();
-                                        }
-                                        // scoreboard teams option <teamname> ...
-                                        else
-                                        {
-                                            now = reader.Get();
-
-                                            // scoreboard teams option <teamname> color ?
-                                            if (now.IsMatchLiteral("color"))
-                                            {
-                                                return !reader.IsRemainToken
-                                                    ? MinecraftCompletions.GetColorCompletion()
-                                                    : null;
-                                            }
-                                            else if (now.IsMatchLiteral("friendlyfire", "seeFriendlyInvisibles"))
-                                            {
-                                                return !reader.IsRemainToken
-                                                    ? MinecraftCompletions.GetBooleanCompletion()
-                                                    : null;
-                                            }
-                                            else if (now.IsMatchLiteral("nametagVisibility", "deathMessageVisibility"))
-                                            {
-                                                return !reader.IsRemainToken
-                                                    ? MinecraftCompletions.GetScoreboardTeamOptionArgsCompletion()
-                                                    : null;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch
-            {
-            }
             return null;
         }
 

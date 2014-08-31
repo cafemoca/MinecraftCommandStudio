@@ -123,7 +123,11 @@ namespace Cafemoca.CommandEditor.Utils
                         {
                             if (!(token.IsMatchType(TokenType.ArrayBlock) &&
                                   reader.Backward.IsMatchType(TokenType.TargetSelector) &&
-                                  !value.CheckNext(0, '{')))
+                                  !value.CheckNext(0, '{')) &&
+                                !(token.IsMatchType(TokenType.Colon) &&
+                                  reader.Backward.IsMatchLiteral("minecraft")) &&
+                                !(token.IsMatchType(TokenType.Literal) &&
+                                  reader.Backward.IsMatchType(TokenType.Colon)))
                             {
                                 builder.Append(" ");
                             }

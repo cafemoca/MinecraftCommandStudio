@@ -120,7 +120,7 @@
     </Rule>
 
     <Keywords color="Minecraft">
-      <Word>minecraft:</Word>
+      <Word>minecraft</Word>
     </Keywords>
 
     <!-- tag short -->

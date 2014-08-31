@@ -46,7 +46,7 @@ namespace Cafemoca.CommandEditor.Utils
 
                         var start = false;
                         var end = false;
-                        var quote = GetRepeatedEscape(escapeLevel, escapeMode) + "\"";
+                        var escape = GetRepeatedEscape(escapeLevel, escapeMode) + "\"";
 
                         switch (token.Type)
                         {
@@ -69,7 +69,7 @@ namespace Cafemoca.CommandEditor.Utils
                                 value = value
                                     .Unenclose('(', ')')
                                     .Compile(TokenizeType.Command, escapeLevel + 1, escapeMode, ParentType.Default)
-                                    .Quote(quote);
+                                    .Quote(escape);
                                 break;
                             case TokenType.TagBlock:
                                 start = value.First() == '{';
@@ -83,8 +83,8 @@ namespace Cafemoca.CommandEditor.Utils
                                         .Unenclose('{', '}')
                                         .Compile(TokenizeType.Block, escapeLevel + 1, escapeMode, ParentType.TagBlock);
                                     value = value.Enclose(
-                                        start ? quote + "{" : "",
-                                        end ? "}" + quote : "");
+                                        start ? escape + "{" : "",
+                                        end ? "}" + escape : "");
                                 }
                                 else
                                 {
@@ -99,9 +99,19 @@ namespace Cafemoca.CommandEditor.Utils
                             case TokenType.ArrayBlock:
                                 start = value.First() == '[';
                                 end = value.Last() == ']';
-                                if (reader.Cursor > 1 &&
-                                    reader.Backward.IsMatchType(TokenType.Colon) &&
-                                    reader.LookAtRelative(-2).IsMatchLiteral("pages"))
+                                if (parentType == ParentType.RawJson)
+                                {
+                                    value = value
+                                        .Unenclose('[', ']')
+                                        .Compile(TokenizeType.Block, escapeLevel + 1, escapeMode, ParentType.ArrayBlock);
+                                    value = value.Enclose(
+                                        start ? escape + "[" : "",
+                                        end ? "]" + escape : "");
+                                    break;
+                                }
+                                else if (reader.Cursor > 1 &&
+                                         reader.Backward.IsMatchType(TokenType.Colon) &&
+                                         reader.LookAtRelative(-2).IsMatchLiteral("pages"))
                                 {
                                     value = value
                                         .Unenclose('[', ']')
@@ -123,7 +133,7 @@ namespace Cafemoca.CommandEditor.Utils
                         {
                             if (!(token.IsMatchType(TokenType.ArrayBlock) &&
                                   reader.Backward.IsMatchType(TokenType.TargetSelector) &&
-                                  !value.CheckNext(0, '{')) &&
+                                  !value.CheckNext(0, '{', '[')) &&
                                 !(token.IsMatchType(TokenType.Colon) &&
                                   reader.Backward.IsMatchLiteral("minecraft")) &&
                                 !(token.IsMatchType(TokenType.Literal) &&

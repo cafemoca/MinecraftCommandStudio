@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:commands="clr-namespace:Cafemoca.McCommandStudio.Internals.Utils.Commands"
                     xmlns:controls="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:converters="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:dock="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
                     xmlns:properties="clr-namespace:Xceed.Wpf.AvalonDock.Properties;assembly=Xceed.Wpf.AvalonDock"
-                    xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
-                    xmlns:commands="clr-namespace:Cafemoca.McCommandStudio.Internals.Utils.Commands">
+                    xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Brushes.xaml" />
@@ -995,19 +995,8 @@
 
     <Style TargetType="{x:Type controls:LayoutDocumentControl}">
         <Setter Property="BorderThickness" Value="1,0,1,1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
         <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:LayoutDocumentControl}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{DynamicResource GrayBrush8}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter Content="{Binding Model.Content, RelativeSource={RelativeSource TemplatedParent}}"
-                                          ContentTemplateSelector="{Binding LayoutItemTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style TargetType="{x:Type controls:LayoutDocumentTabItem}">
@@ -1112,50 +1101,16 @@
     </Style>
 
     <Style TargetType="{x:Type controls:LayoutAnchorableControl}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:LayoutAnchorableControl}">
-                    <Border x:Name="Bd"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Border x:Name="Header"
-                                    Background="{DynamicResource MetroBaseGradient4}">
-                                <controls:AnchorablePaneTitle Model="{Binding Model, RelativeSource={RelativeSource TemplatedParent}}" />
-                            </Border>
-                            <ContentPresenter Grid.Row="1"
-                                              Content="{Binding Model.Content, RelativeSource={RelativeSource TemplatedParent}}"
-                                              ContentTemplateSelector="{Binding LayoutItemTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
-                                              FlowDirection="{TemplateBinding FlowDirection}" />
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Model.IsFloating, RelativeSource={RelativeSource Self}}" Value="True" />
-                                <Condition Binding="{Binding Model.Parent.IsDirectlyHostedInFloatingWindow, RelativeSource={RelativeSource Self}}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="Header" Property="Visibility" Value="Collapsed" />
-                        </MultiDataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style x:Key="{x:Type controls:LayoutDocumentFloatingWindowControl}" TargetType="{x:Type controls:LayoutDocumentFloatingWindowControl}">
-        <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}" />
         <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
         <Setter Property="shell:WindowChrome.WindowChrome">
             <Setter.Value>
-                <shell:WindowChrome CaptionHeight="18"
-                                    CornerRadius="3"
+                <shell:WindowChrome CaptionHeight="20"
+                                    CornerRadius="0"
                                     GlassFrameThickness="0"
                                     ResizeBorderThickness="10"
                                     ShowSystemMenu="False" />
@@ -1171,13 +1126,13 @@
                                 BorderThickness="1">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="20" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Border x:Name="Header"
-                                        Background="{DynamicResource AccentColorBrush}"
-                                        Padding="3,2,2,3"
-                                        TextBlock.Foreground="{DynamicResource IdealForegroundColorBrush}">
+                                        Background="{TemplateBinding BorderBrush}"
+                                        Padding="4,2,3,0"
+                                        TextBlock.Foreground="{TemplateBinding Foreground}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -1265,35 +1220,12 @@
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="WindowBorder" Property="Padding" Value="3" />
                         </Trigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Model.RootDocument.IsActive, RelativeSource={RelativeSource Self}}" Value="True" />
-                                <Condition Binding="{Binding Model.RootDocument.IsLastFocusedDocument, RelativeSource={RelativeSource Self}}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush2}" />
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush2}" />
-                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource MetroBaseGradient6}" />
+                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="False">
+                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource GrayBrush10}" />
                             <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource BlackBrush}" />
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
-                            <Setter TargetName="PART_ImgPinRestore" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
-                            <Setter TargetName="PART_ImgPinMaximize" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
-                            <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
-                        </MultiDataTrigger>
-
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Model.RootDocument.IsActive, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding Model.RootDocument.IsLastFocusedDocument, RelativeSource={RelativeSource Self}}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush4}" />
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush4}" />
-                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource MetroBaseGradient5}" />
-                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource BlackBrush}" />
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
-                            <Setter TargetName="PART_ImgPinRestore" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
-                            <Setter TargetName="PART_ImgPinMaximize" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
-                            <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
-                        </MultiDataTrigger>
+                            <Setter TargetName="Pattern" Property="Fill" Value="{DynamicResource DragSelectedPattern}" />
+                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{DynamicResource GrayBrush10}" />
+                        </DataTrigger>
                         <Trigger SourceName="ContextMenuDropdownButton" Property="IsMouseOver" Value="True">
                             <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
                         </Trigger>
@@ -1318,11 +1250,13 @@
     </Style>
 
     <Style x:Key="{x:Type controls:LayoutAnchorableFloatingWindowControl}" TargetType="{x:Type controls:LayoutAnchorableFloatingWindowControl}">
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
         <Setter Property="shell:WindowChrome.WindowChrome">
             <Setter.Value>
-                <shell:WindowChrome CaptionHeight="18"
-                                    CornerRadius="7"
+                <shell:WindowChrome CaptionHeight="20"
+                                    CornerRadius="0"
                                     GlassFrameThickness="0"
                                     ResizeBorderThickness="10" />
             </Setter.Value>
@@ -1333,15 +1267,15 @@
                     <Grid>
                         <Border x:Name="WindowBorder"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{DynamicResource MetroBaseGradient4}"
-                                BorderThickness="1">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="18" />
+                                    <RowDefinition Height="20" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Border x:Name="Header"
-                                        Padding="2,0,2,0"
+                                        Padding="4,2,3,0"
                                         TextElement.Foreground="{DynamicResource IdealForegroundColorBrush}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -1444,7 +1378,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="WindowBorder" Property="Padding" Value="3" />
+                            <Setter TargetName="WindowBorder" Property="Padding" Value="4" />
                         </Trigger>
                         <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="Header" Property="Background" Value="{DynamicResource AccentColorBrush}" />
@@ -1454,6 +1388,12 @@
                             <Setter TargetName="PART_ImgPinRestore" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
                             <Setter TargetName="PART_ImgPinMaximize" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
                             <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="False">
+                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource GrayBrush10}" />
+                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource BlackBrush}" />
+                            <Setter TargetName="Pattern" Property="Fill" Value="{DynamicResource DragSelectedPattern}" />
+                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{DynamicResource GrayBrush10}" />
                         </DataTrigger>
                         <Trigger SourceName="SinglePaneContextMenu" Property="IsMouseOver" Value="True">
                             <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />

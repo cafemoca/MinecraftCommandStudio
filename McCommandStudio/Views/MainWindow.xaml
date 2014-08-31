@@ -151,7 +151,7 @@
             <dock:LayoutRoot>
                 <dock:LayoutPanel Orientation="Horizontal">
                     <dock:LayoutDocumentPane />
-                    <dock:LayoutAnchorablePane DockMinWidth="100"
+                    <dock:LayoutAnchorablePane DockMinWidth="150"
                                                DockWidth="250" />
                 </dock:LayoutPanel>
             </dock:LayoutRoot>

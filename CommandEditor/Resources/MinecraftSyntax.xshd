@@ -594,24 +594,6 @@
       <Word>yellow</Word>
       <Word>white</Word>
     </Keywords>
-    <!--
-    <Rule color="ColorBlack">\bblack\b</Rule>
-    <Rule color="ColorDarkBlue">\bdark_blue\b</Rule>
-    <Rule color="ColorDarkGreen">\bdark_green\b</Rule>
-    <Rule color="ColorDarkAqua">\bdark_aqua\b</Rule>
-    <Rule color="ColorDarkRed">\bdark_red\b</Rule>
-    <Rule color="ColorDarkPurple">\bdark_purple\b</Rule>
-    <Rule color="ColorGold">\bgold\b</Rule>
-    <Rule color="ColorGray">\bgray\b</Rule>
-    <Rule color="ColorDarkGray">\bdark_gray\b</Rule>
-    <Rule color="ColorBlue">\bblue\b</Rule>
-    <Rule color="ColorGreen">\bgreen\b</Rule>
-    <Rule color="ColorAqua">\baqua\b</Rule>
-    <Rule color="ColorRed">\bred\b</Rule>
-    <Rule color="ColorLightPurple">\blight_purple\b</Rule>
-    <Rule color="ColorYellow">\byellow\b</Rule>
-    <Rule color="ColorWhite">\bwhite\b</Rule>
-    -->
 
     <!-- attribute -->
     <Keywords color="Attribute">
@@ -632,7 +614,7 @@
       <Word>survival</Word>
       <Word>creative</Word>
       <Word>adventure</Word>
-      <Word>spectater</Word>
+      <Word>spectator</Word>
       <Word>run_command</Word>
       <Word>suggest_command</Word>
       <Word>open_url</Word>
@@ -1139,77 +1121,70 @@
     </Keywords>
 
     <!-- minecraft commands -->
-    <Span>
-      <Begin>/</Begin>
-      <End>\s</End>
-      <RuleSet>
-        <Keywords color="Command">
-          <Word>help</Word>
-          <Word>?</Word>
-          <Word>me</Word>
-          <Word>tell</Word>
-          <Word>msg</Word>
-          <Word>w</Word>
-          <Word>trigger</Word>
-          <Word>achievement</Word>
-          <Word>blockdata</Word>
-          <Word>clear</Word>
-          <Word>clone</Word>
-          <Word>debug</Word>
-          <Word>defaultgamemode</Word>
-          <Word>difficulty</Word>
-          <Word>effect</Word>
-          <Word>entitydata</Word>
-          <Word>execute</Word>
-          <Word>fill</Word>
-          <Word>gamemode</Word>
-          <Word>gamerule</Word>
-          <Word>give</Word>
-          <Word>kill</Word>
-          <Word>particle</Word>
-          <Word>playsound</Word>
-          <Word>publish</Word>
-          <Word>replaceitem</Word>
-          <Word>say</Word>
-          <Word>scoreboard</Word>
-          <Word>seed</Word>
-          <Word>setblock</Word>
-          <Word>setworldspawn</Word>
-          <Word>spawnpoint</Word>
-          <Word>spreadplayers</Word>
-          <Word>stats</Word>
-          <Word>summon</Word>
-          <Word>tellraw</Word>
-          <Word>testfor</Word>
-          <Word>testforblock</Word>
-          <Word>testforblocks</Word>
-          <Word>time</Word>
-          <Word>title</Word>
-          <Word>toggledownfall</Word>
-          <Word>tp</Word>
-          <Word>weather</Word>
-          <Word>worldborder</Word>
-          <Word>xp</Word>
-          <Word>ban</Word>
-          <Word>ban-ip</Word>
-          <Word>banlist</Word>
-          <Word>deop</Word>
-          <Word>kick</Word>
-          <Word>list</Word>
-          <Word>op</Word>
-          <Word>pardon</Word>
-          <Word>pardon-ip</Word>
-          <Word>save-all</Word>
-          <Word>save-off</Word>
-          <Word>save-on</Word>
-          <Word>setidletimeout</Word>
-          <Word>stop</Word>
-          <Word>whitelist</Word>
-        </Keywords>
-      </RuleSet>
-    </Span>
-    
-    
+    <Keywords color="Command">
+      <Word>/help</Word>
+      <Word>/?</Word>
+      <Word>/me</Word>
+      <Word>/tell</Word>
+      <Word>/msg</Word>
+      <Word>/w</Word>
+      <Word>/trigger</Word>
+      <Word>/achievement</Word>
+      <Word>/blockdata</Word>
+      <Word>/clear</Word>
+      <Word>/clone</Word>
+      <Word>/debug</Word>
+      <Word>/defaultgamemode</Word>
+      <Word>/difficulty</Word>
+      <Word>/effect</Word>
+      <Word>/entitydata</Word>
+      <Word>/execute</Word>
+      <Word>/fill</Word>
+      <Word>/gamemode</Word>
+      <Word>/gamerule</Word>
+      <Word>/give</Word>
+      <Word>/kill</Word>
+      <Word>/particle</Word>
+      <Word>/playsound</Word>
+      <Word>/publish</Word>
+      <Word>/replaceitem</Word>
+      <Word>/say</Word>
+      <Word>/scoreboard</Word>
+      <Word>/seed</Word>
+      <Word>/setblock</Word>
+      <Word>/setworldspawn</Word>
+      <Word>/spawnpoint</Word>
+      <Word>/spreadplayers</Word>
+      <Word>/stats</Word>
+      <Word>/summon</Word>
+      <Word>/tellraw</Word>
+      <Word>/testfor</Word>
+      <Word>/testforblock</Word>
+      <Word>/testforblocks</Word>
+      <Word>/time</Word>
+      <Word>/title</Word>
+      <Word>/toggledownfall</Word>
+      <Word>/tp</Word>
+      <Word>/weather</Word>
+      <Word>/worldborder</Word>
+      <Word>/xp</Word>
+      <Word>/ban</Word>
+      <Word>/ban-ip</Word>
+      <Word>/banlist</Word>
+      <Word>/deop</Word>
+      <Word>/kick</Word>
+      <Word>/list</Word>
+      <Word>/op</Word>
+      <Word>/pardon</Word>
+      <Word>/pardon-ip</Word>
+      <Word>/save-all</Word>
+      <Word>/save-off</Word>
+      <Word>/save-on</Word>
+      <Word>/setidletimeout</Word>
+      <Word>/stop</Word>
+      <Word>/whitelist</Word>
+    </Keywords>
 
   </RuleSet>
+
 </SyntaxDefinition>

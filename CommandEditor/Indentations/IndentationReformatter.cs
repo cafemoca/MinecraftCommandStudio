@@ -136,6 +136,8 @@ namespace Cafemoca.CommandEditor.Indentations
             var prev = '\0';
             var next = '\n';
 
+            var indented = false;
+
             while (reader.IsRemainChar)
             {
                 cha = reader.Get();
@@ -221,19 +223,18 @@ namespace Cafemoca.CommandEditor.Indentations
                         this._block.ResetOneLineBlock();
                         this._blocks.Push(this._block);
                         this._block.StartLine = document.LineNumber;
-                        this._block.Indent(settings);
+                        if (!indented)
+                        {
+                            this._block.Indent(settings);
+                            indented = true;
+                        }
                         this._block.Bracket = cha;
                         break;
                     case ')':
                     case '}':
                     case ']':
-                        var pair = new Dictionary<char, char>()
-                        {
-                            { ')', '(' },
-                            { '}', '{' },
-                            { ']', '[' },
-                        };
-                        while (this._block.Bracket != pair[cha])
+                        var openBracket = StringChecker.GetOpenBracket(cha);
+                        while (this._block.Bracket != openBracket)
                         {
                             if (this._blocks.Count == 0)
                             {

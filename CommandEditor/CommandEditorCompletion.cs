@@ -309,13 +309,6 @@ namespace Cafemoca.CommandEditor
             var prev = this.PreviousChar.ToString();
             var next = this.NextChar.ToString();
 
-            var bracketPair = new Dictionary<string, string>()
-            {
-                { "(", ")" },
-                { "{", "}" },
-                { "[", "]" },
-            };
-
             switch (input)
             {
                 case ")":
@@ -324,7 +317,9 @@ namespace Cafemoca.CommandEditor
                     if (this.ExtendedOptions.AutoReformat)
                     {
                         this.BeginChange();
-                        this.TextArea.IndentationStrategy.AsCommandIndentationStrategy().Indent(this.Document, true);
+                        this.TextArea.IndentationStrategy
+                            .AsCommandIndentationStrategy()
+                            .IndentBlock(this.Document, index);
                         this.EndChange();
                     }
                     break;

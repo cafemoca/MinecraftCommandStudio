@@ -86,6 +86,7 @@
     <Compile Include="Utils\Compiler.cs" />
     <Compile Include="Utils\Escaping.cs" />
     <Compile Include="Utils\Reformatter.cs" />
+    <Compile Include="Utils\StringChecker.cs" />
     <Compile Include="Utils\Token.cs" />
     <Compile Include="Utils\Tokenizer.cs" />
     <Compile Include="Utils\TokenReader.cs" />

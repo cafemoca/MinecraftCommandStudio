@@ -30,8 +30,8 @@ namespace Cafemoca.CommandEditor.Renderings
     /// </summary>
     public class BracketHighlightRenderer : IBackgroundRenderer
     {
-        public static readonly Color DefaultBackground = Color.FromArgb(22, 0, 0, 255);
-        public static readonly Color DefaultBorder = Color.FromArgb(52, 0, 0, 255);
+        public static readonly Color DefaultBackground = Color.FromArgb(64, 128, 180, 255);
+        public static readonly Color DefaultBorder = Color.FromArgb(128, 128, 180, 255);
 
         public KnownLayer Layer
         {
@@ -90,9 +90,14 @@ namespace Cafemoca.CommandEditor.Renderings
             });
 
             var geometry = builder.CreateGeometry();
+
+            if (this._borderPen == null)
+            {
+                this.UpdateColors(DefaultBackground, DefaultBackground);
+            }
             if (geometry != null)
             {
-                drawingContext.DrawGeometry(_backgroundBrush, _borderPen, geometry);
+                drawingContext.DrawGeometry(this._backgroundBrush, this._borderPen, geometry);
             }
         }
 
@@ -111,6 +116,7 @@ namespace Cafemoca.CommandEditor.Renderings
             foreach (var color in customizations)
             {
                 renderer.UpdateColors(color, color);
+                break;
             }
         }
     }

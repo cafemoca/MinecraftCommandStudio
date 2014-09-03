@@ -81,7 +81,7 @@ namespace Cafemoca.CommandEditor
                 }
 
                 this._bracketRenderer = new BracketHighlightRenderer(this.TextArea.TextView);
-                this.TextArea.TextView.BackgroundRenderers.Add(new BracketHighlightRenderer(this.TextArea.TextView));
+                this.TextArea.TextView.BackgroundRenderers.Add(this._bracketRenderer);
             }
             catch (Exception ex)
             {

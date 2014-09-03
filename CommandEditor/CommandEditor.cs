@@ -14,22 +14,20 @@ namespace Cafemoca.CommandEditor
         public CommandEditor()
             : base()
         {
-            this.TextArea.IndentationStrategy = new CommandIndentationStrategy();
-
             this.LoadSyntaxHighlight();
             this.SetDefaultFoldings();
             this.BracketHighlightInitialize();
+
+            this.ExtendedOptions = new ExtendedOptions();
+            this.TextArea.IndentationStrategy = new CommandIndentationStrategy();
 
             this.TextArea.Caret.PositionChanged += this.Caret_PositionChanged;
             this.TextArea.TextEntering += this.TextArea_TextEntering;
             this.TextArea.TextEntered += this.TextArea_TextEntered;
 
-            this.ExtendedOptions = new ExtendedOptions();
-
             this._searchPanel = SearchPanel.Install(this.TextArea);
         }
 
-        private IEnumerable<Token> _tokens;
         private SearchPanel _searchPanel;
 
         protected override void OnTextChanged(EventArgs e)
@@ -37,8 +35,6 @@ namespace Cafemoca.CommandEditor
             this.BindableText = this.Text;
             base.OnTextChanged(e);
             this.UpdateFoldings();
-
-            this._tokens = this.BindableText.Tokenize();
         }
 
         private void Caret_PositionChanged(object sender, EventArgs e)
@@ -82,6 +78,8 @@ namespace Cafemoca.CommandEditor
         public void Dispose()
         {
             this._searchPanel.Uninstall();
+            this._foldingStrategy = null;
+            this._foldingManager = null;
 
             this.TextArea.Caret.PositionChanged -= Caret_PositionChanged;
             this.TextArea.TextEntering -= this.TextArea_TextEntering;

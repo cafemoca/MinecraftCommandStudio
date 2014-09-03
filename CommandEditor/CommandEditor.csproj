@@ -79,8 +79,8 @@
     <Compile Include="Indentations\IndentationSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderings\BracketHighlightRenderer.cs" />
-    <Compile Include="Renderings\BracketSearcher.cs" />
-    <Compile Include="Renderings\BracketSearchResult.cs" />
+    <Compile Include="Utils\BracketSearcher.cs" />
+    <Compile Include="Utils\BracketSearchResult.cs" />
     <Compile Include="Renderings\HighlightCurrentLineBackgroundRenderer.cs" />
     <Compile Include="Utils\CharReader.cs" />
     <Compile Include="Utils\Compiler.cs" />

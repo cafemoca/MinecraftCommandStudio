@@ -197,13 +197,6 @@ namespace Cafemoca.CommandEditor
             var prev = this.PreviousChar.ToString();
             var next = this.NextChar.ToString();
 
-            var bracketPair = new Dictionary<string, string>()
-            {
-                { "(", ")" },
-                { "{", "}" },
-                { "[", "]" },
-            };
-
             e.Handled = false;
             
             switch (input)
@@ -254,6 +247,7 @@ namespace Cafemoca.CommandEditor
                 case "(":
                 case "{":
                 case "[":
+                    var closeBracket = StringChecker.GetCloseBracket(input).ToString();
                     if (this.IsSelectedSingleLine ||
                        (this.IsSelectedMultiLine && this.ExtendedOptions.EncloseMultiLine))
                     {
@@ -262,7 +256,7 @@ namespace Cafemoca.CommandEditor
                             e.Handled = true;
                             this.BeginChange();
                             this.Document.Insert(this.SelectionStart, input);
-                            this.Document.Insert(this.SelectionStart + this.SelectionLength, bracketPair[input]);
+                            this.Document.Insert(this.SelectionStart + this.SelectionLength, closeBracket);
                             this.EndChange();
                         }
                         break;
@@ -276,7 +270,7 @@ namespace Cafemoca.CommandEditor
                         ("({[".Contains(prev) && "]})".Contains(next))))
                     {
                         e.Handled = true;
-                        this.Document.Insert(index, input + bracketPair[input]);
+                        this.Document.Insert(index, input + closeBracket);
                         if (this.IsSelectedMultiLine)
                         {
                             this.CaretOffset++;
@@ -292,7 +286,7 @@ namespace Cafemoca.CommandEditor
                 case "}":
                 case "]":
                     if (next == input &&
-                        prev == bracketPair.First(x => x.Value == input).Key)
+                        prev == StringChecker.GetOpenBracket(input).ToString())
                     {
                         e.Handled = true;
                         this.CaretOffset++;
@@ -317,12 +311,29 @@ namespace Cafemoca.CommandEditor
                     if (this.ExtendedOptions.AutoReformat)
                     {
                         this.BeginChange();
+                        if (index < 1 ||
+                            index > this.Document.TextLength)
+                        {
+                            return;
+                        }
+                        if (this._bracketSearcher == null)
+                        {
+                            this._bracketSearcher = new BracketSearcher();
+                        }
+                        var bracketSearchResult = this._bracketSearcher.SearchBrackets(this.Document, index);
+                        if (bracketSearchResult == null)
+                        {
+                            return;
+                        }
+                        var a = this.Document.GetLineByOffset(bracketSearchResult.OpenBracketOffset);
+                        var b = this.Document.GetLineByOffset(bracketSearchResult.CloseBracketOffset);
                         this.TextArea.IndentationStrategy
                             .AsCommandIndentationStrategy()
-                            .IndentBlock(this.Document, index);
+                            .IndentLines(this.Document, a.LineNumber, b.LineNumber);
                         this.EndChange();
                     }
                     break;
+                case "\r\n":
                 case "\r":
                 case "\n":
                     var indent = this.Text
@@ -338,127 +349,170 @@ namespace Cafemoca.CommandEditor
         
         private IEnumerable<CompletionData> GetCompletionData(int index, string input)
         {
-            var tokens = this.Text
-                .Tokenize(TokenizeType.All);
+            var block = this._bracketSearcher.SearchBrackets(this.Document, index);
+            var bracket = string.Empty;
+
+            if (block != null)
+            {
+                bracket = this.Document.GetCharAt(block.OpenBracketOffset).ToString();
+            }
+
+            var inBlock = false;
+            var tokens = null as IEnumerable<Token>;
+
+            if (bracket == "{" || bracket == "[")
+            {
+                tokens = this.Text.Tokenize(TokenizeType.Block);
+                inBlock = true;
+            }
+            else
+            {
+                tokens = this.Text.Tokenize(TokenizeType.Command);
+                inBlock = false;
+            }
 
             var next = this.NextChar;
             var prev = (this.CaretOffset > 1)
                 ? this.Document.GetCharAt(this.CaretOffset - 2)
                 : '\0';
 
-            var beforeTokens = tokens
-                .TakeWhile(x => x.Index < index)
+            var before = tokens
+                .TakeWhile(x => x.Index <= index)
                 .Where(x => !x.IsMatchType(TokenType.Blank, TokenType.Comment));
-            var afterTokens = tokens
-                .SkipWhile(x => x.Index < index)
-                .Where(x => !x.IsMatchType(TokenType.Blank, TokenType.Comment));
-            var prevToken = beforeTokens.LastOrDefault();
 
-            if (beforeTokens.FirstOrDefault().IsEmpty() ||
-                prevToken.IsMatchType(TokenType.Comment))
+            var current = before.LastOrDefault();
+
+            if (before.IsEmpty() ||
+                (current.Index + current.Value.Length > index &&
+                 current.IsMatchType(TokenType.String)))
+            {
+                return null;
+            }
+            if ("\r\n".Contains(input) &&
+                (Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None)
             {
                 return null;
             }
 
-            using (var reader = new TokenReader(beforeTokens, true))
+            using (var reader = new TokenReader(before, true))
             {
                 try
                 {
                     switch (input.ToLower())
                     {
                         case "/":
-                            if ("/*".Contains(prev))
-                            {
-                                return null;
-                            }
                             return MinecraftCompletions.GetCommandCompletion();
-                        case "*":
-                            if (prev == '/')
-                            {
-                                return null;
-                            }
-                            break;
                         case "@":
                             return MinecraftCompletions.GetTargetCompletion();
-                        case ")":
-                        case "}":
-                        case "]":
-                            break;
-                        case "{":
-                            break;
                         case "_":
-                            if (prevToken.IsMatchLiteral("score_"))
-                            {
-                                return this.ExtendedOptions.ScoreNames.ToCompletionData();
-                            }
-                            break;
+                            return (current.IsMatchLiteral("score_"))
+                                ? this.ExtendedOptions.ScoreNames.ToCompletionData()
+                                : null;
                         case "!":
-                            if (reader.IsRemainToken &&
-                                reader.Ahead.IsMatchType(TokenType.Equal))
-                            {
-                                prevToken = reader.Get();
-                                goto case "=";
-                            }
-                            break;
-                        case "=":
-                            if (reader.IsRemainToken)
+                            if (inBlock &&
+                                reader.CheckNext(x => x.IsMatchType(TokenType.Equal)))
                             {
                                 reader.MoveNext();
-                                if (reader.Ahead.IsMatchLiteral("team"))
+                                goto case "=";
+                            }
+                            return null;
+                        case "=":
+                            if (inBlock && reader.IsRemainToken)
+                            {
+                                reader.MoveNext();
+                                if (reader.CheckNext(x => x.IsMatchLiteral("team")))
                                 {
                                     return this.ExtendedOptions.TeamNames.ToCompletionData();
                                 }
-                                if (reader.Ahead.IsMatchLiteral("name"))
+                                if (reader.CheckNext(x => x.IsMatchLiteral("name")))
                                 {
                                     return this.ExtendedOptions.PlayerNames.ToCompletionData();
                                 }
                             }
-                            break;
+                            return null;
+                    }
+
+                    var command = reader.SkipGet(x => x.IsMatchType(TokenType.Command));
+                    if (!inBlock && command.IsEmpty())
+                    {
+                        return null;
+                    }
+
+                    switch (input.ToLower())
+                    {
                         case ":":
+                            if (!command.IsEmpty())
+                            {
+                                reader.Reverse();
+                                switch (command.Value)
+                                {
+                                    case "/give":
+                                        break;
+                                }
+                            }
                             break;
                         case "\r\n":
                         case "\r":
                         case "\n":
                         case "\t":
                         case " ":
-                            if (!reader.IsRemainToken)
-                            {
-                                return null;
-                            }
-                            if (input == "\r" || input == "\n")
-                            {
-                                if ((Keyboard.Modifiers & ModifierKeys.Shift) != ModifierKeys.None)
-                                {
-                                    return null;
-                                }
-                            }
-                            var command = reader.SkipGet(x => x.IsMatchType(TokenType.Command));
                             if (!command.IsEmpty())
                             {
-                                var comp = new CommandCompletions(this.ExtendedOptions);
-                                reader.Reverse();
-                                switch (command.Value)
+                                using (var comp = new CommandCompletions(this.ExtendedOptions))
                                 {
-                                    case "/scoreboard":
-                                        var scoreboard = comp.ScoreboardCompletion(reader);
-                                        if (scoreboard != null)
-                                        {
-                                            return scoreboard;
-                                        }
-                                        break;
-                                    case "/give":
-                                        var give = comp.GiveCompletion(reader);
-                                        if (give != null)
-                                        {
-                                            return give;
-                                        }
-                                        break;
+                                    reader.Reverse();
+                                    switch (command.Value)
+                                    {
+                                        case "/achievement":
+                                            return comp.AchievementCompletion(reader);
+                                        case "/clear":
+                                            return comp.ClearCompletion(reader);
+                                        case "/clone":
+                                            return comp.CloneCompletion(reader);
+                                        case "/debug":
+                                        case "/defaultgamemode":
+                                        case "/difficulty":
+                                        case "effect":
+                                        case "/enchant":
+                                        case "/entitydata":
+                                        case "/execute":
+                                        case "/fill":
+                                        case "/gamemode":
+                                        case "/gamerule":
+                                            break;
+                                        case "/give":
+                                            return comp.GiveCompletion(reader);
+                                        case "/kill":
+                                        case "/particle":
+                                        case "/playsound":
+                                        case "/replaceitem":
+                                            break;
+                                        case "/scoreboard":
+                                            return comp.ScoreboardCompletion(reader);
+                                        case "/setblock":
+                                            return comp.SetblockCompletion(reader);
+                                        case "/setworldspawn":
+                                        case "/spawnpoint":
+                                        case "/spreadplayers":
+                                        case "/stats":
+                                        case "/summon":
+                                        case "/testfor":
+                                        case "/testforblock":
+                                        case "/time":
+                                        case "/title":
+                                        case "/tp":
+                                        case "/trigger":
+                                        case "/weather":
+                                        case "/worldborder":
+                                        case "/xp":
+                                            break;
+                                    }
                                 }
                             }
                             break;
                         default:
-                            if (prevToken.IsMatchType(TokenType.TargetSelector) &&
-                                prevToken.Value.Length >= 1)
+                            if (current.IsMatchType(TokenType.TargetSelector) &&
+                                current.Value.Length >= 1)
                             {
                                 return null;
                             }

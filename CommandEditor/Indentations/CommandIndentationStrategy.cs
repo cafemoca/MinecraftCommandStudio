@@ -11,8 +11,6 @@ namespace Cafemoca.CommandEditor.Indentations
 {
     public class CommandIndentationStrategy : DefaultIndentationStrategy
     {
-        private BracketSearcher _bracketSearcher;
-
         public CommandIndentationStrategy() { }
 
         public CommandIndentationStrategy(TextEditorOptions options)
@@ -64,27 +62,6 @@ namespace Cafemoca.CommandEditor.Indentations
         public override void IndentLines(TextDocument document, int beginLine, int endLine)
         {
             this.Indent(new TextDocumentAccessor(document, beginLine, endLine), true);
-        }
-
-        public void IndentBlock(TextDocument document, int index)
-        {
-            if (index < 1 ||
-                index > document.TextLength)
-            {
-                return;
-            }
-            if (this._bracketSearcher == null)
-            {
-                this._bracketSearcher = new BracketSearcher();
-            }
-            var bracketSearchResult = this._bracketSearcher.SearchBrackets(document, index);
-            if (bracketSearchResult == null)
-            {
-                return;
-            }
-            var a = document.GetLineByOffset(bracketSearchResult.OpenBracketOffset);
-            var b = document.GetLineByOffset(bracketSearchResult.CloseBracketOffset);
-            this.IndentLines(document, a.LineNumber, b.LineNumber);
         }
     }
 }

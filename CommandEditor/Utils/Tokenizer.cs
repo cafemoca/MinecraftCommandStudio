@@ -25,6 +25,7 @@ namespace Cafemoca.CommandEditor.Utils
 
             do
             {
+                var begin = cursor;
                 switch (text[cursor])
                 {
                     case '<':
@@ -38,12 +39,12 @@ namespace Cafemoca.CommandEditor.Utils
                     case '+':
                         yield return text.CheckNext(cursor, '=')
                             ? new Token(TokenType.ScoreAdd, "+=", cursor++)
-                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), begin);
                         break;
                     case '-':
                         yield return text.CheckNext(cursor, '=')
                             ? new Token(TokenType.ScoreSubtract, "-=", cursor++)
-                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), begin);
                         break;
                     case '*':
                         yield return text.CheckNext(cursor, '=')
@@ -53,31 +54,31 @@ namespace Cafemoca.CommandEditor.Utils
                     case '%':
                         yield return text.CheckNext(cursor, '=')
                             ? new Token(TokenType.ScoreModulo, "%=", cursor++)
-                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), begin);
                         break;
                     case '/':
                         if (text.CheckNext(cursor, '/', '*'))
                         {
-                            yield return new Token(TokenType.Comment, text.GetComments(ref cursor), cursor);
+                            yield return new Token(TokenType.Comment, text.GetComments(ref cursor), begin);
                         }
                         else
                         {
                             yield return (text.CheckNext(cursor, '='))
                                 ? new Token(TokenType.ScoreDivide, "/=", cursor++)
-                                : new Token(TokenType.Command, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                                : new Token(TokenType.Command, text.GetLiteral(TokenizeType.Command, ref cursor), begin);
                         }
                         break;
                     case '{':
-                        yield return new Token(TokenType.TagBlock, text.GetBlock('{', '}', ref cursor), cursor);
+                        yield return new Token(TokenType.TagBlock, text.GetBlock('{', '}', ref cursor), begin);
                         break;
                     case '[':
-                        yield return new Token(TokenType.ArrayBlock, text.GetBlock('[', ']', ref cursor), cursor);
+                        yield return new Token(TokenType.ArrayBlock, text.GetBlock('[', ']', ref cursor), begin);
                         break;
                     case '@':
-                        yield return new Token(TokenType.TargetSelector, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                        yield return new Token(TokenType.TargetSelector, text.GetLiteral(TokenizeType.Command, ref cursor), begin);
                         break;
                     case '~':
-                        yield return new Token(TokenType.LocationSelector, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                        yield return new Token(TokenType.LocationSelector, text.GetLiteral(TokenizeType.Command, ref cursor), begin);
                         break;
                     case ',':
                         yield return new Token(TokenType.Comma, ",", cursor);
@@ -86,16 +87,16 @@ namespace Cafemoca.CommandEditor.Utils
                         yield return new Token(TokenType.Colon, ":", cursor);
                         break;
                     case '"':
-                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
+                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), begin);
                         break;
                     case '\t':
                     case ' ':
                     case '\r':
                     case '\n':
-                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), cursor);
+                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), begin);
                         break;
                     default:
-                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), cursor);
+                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Command, ref cursor), begin);
                         break;
                 }
                 cursor++;
@@ -108,12 +109,13 @@ namespace Cafemoca.CommandEditor.Utils
 
             do
             {
+                var begin = cursor;
                 switch (text[cursor])
                 {
                     case '/':
                         yield return text.CheckNext(cursor, '/', '*')
-                            ? new Token(TokenType.Comment, text.GetComments(ref cursor), cursor)
-                            : new Token(TokenType.Command, text.GetLiteral(TokenizeType.Block, ref cursor), cursor);
+                            ? new Token(TokenType.Comment, text.GetComments(ref cursor), begin)
+                            : new Token(TokenType.Command, text.GetLiteral(TokenizeType.Block, ref cursor), begin);
                         break;
                     case '=':
                         yield return new Token(TokenType.Equal, "=", cursor);
@@ -122,13 +124,13 @@ namespace Cafemoca.CommandEditor.Utils
                         yield return new Token(TokenType.Exclamation, "!", cursor);
                         break;
                     case '(':
-                        yield return new Token(TokenType.StringBlock, text.GetBlock('(', ')', ref cursor), cursor);
+                        yield return new Token(TokenType.StringBlock, text.GetBlock('(', ')', ref cursor), begin);
                         break;
                     case '{':
-                        yield return new Token(TokenType.TagBlock, text.GetBlock('{', '}', ref cursor), cursor);
+                        yield return new Token(TokenType.TagBlock, text.GetBlock('{', '}', ref cursor), begin);
                         break;
                     case '[':
-                        yield return new Token(TokenType.ArrayBlock, text.GetBlock('[', ']', ref cursor), cursor);
+                        yield return new Token(TokenType.ArrayBlock, text.GetBlock('[', ']', ref cursor), begin);
                         break;
                     case ',':
                         yield return new Token(TokenType.Comma, ",", cursor);
@@ -137,19 +139,19 @@ namespace Cafemoca.CommandEditor.Utils
                         yield return new Token(TokenType.Colon, ":", cursor);
                         break;
                     case '\'':
-                        yield return new Token(TokenType.String, text.GetString('\'', ref cursor), cursor);
+                        yield return new Token(TokenType.String, text.GetString('\'', ref cursor), begin);
                         break;
                     case '"':
-                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
+                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), begin);
                         break;
                     case '\t':
                     case '\r':
                     case '\n':
                     case ' ':
-                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), cursor);
+                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), begin);
                         break;
                     default:
-                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Block, ref cursor), cursor);
+                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.Block, ref cursor), begin);
                         break;
                 }
                 cursor++;
@@ -162,6 +164,7 @@ namespace Cafemoca.CommandEditor.Utils
 
             do
             {
+                var begin = cursor;
                 switch (text[cursor])
                 {
                     case '<':
@@ -175,12 +178,12 @@ namespace Cafemoca.CommandEditor.Utils
                     case '+':
                         yield return text.CheckNext(cursor, '=')
                             ? new Token(TokenType.ScoreAdd, "+=", cursor++)
-                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), begin);
                         break;
                     case '-':
                         yield return text.CheckNext(cursor, '=')
                             ? new Token(TokenType.ScoreSubtract, "-=", cursor++)
-                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), begin);
                         break;
                     case '*':
                         yield return text.CheckNext(cursor, '=')
@@ -190,18 +193,18 @@ namespace Cafemoca.CommandEditor.Utils
                     case '%':
                         yield return text.CheckNext(cursor, '=')
                             ? new Token(TokenType.ScoreModulo, "%=", cursor++)
-                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                            : new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), begin);
                         break;
                     case '/':
                         if (text.CheckNext(cursor, '/', '*'))
                         {
-                            yield return new Token(TokenType.Comment, text.GetComments(ref cursor), cursor);
+                            yield return new Token(TokenType.Comment, text.GetComments(ref cursor), begin);
                         }
                         else
                         {
                             yield return (text.CheckNext(cursor, '='))
                                 ? new Token(TokenType.ScoreDivide, "/=", cursor++)
-                                : new Token(TokenType.Command, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                                : new Token(TokenType.Command, text.GetLiteral(TokenizeType.All, ref cursor), begin);
                         }
                         break;
                     case '=':
@@ -229,10 +232,10 @@ namespace Cafemoca.CommandEditor.Utils
                         yield return new Token(TokenType.CloseSquareBracket, "]", cursor);
                         break;
                     case '@':
-                        yield return new Token(TokenType.TargetSelector, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        yield return new Token(TokenType.TargetSelector, text.GetLiteral(TokenizeType.All, ref cursor), begin);
                         break;
                     case '~':
-                        yield return new Token(TokenType.LocationSelector, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        yield return new Token(TokenType.LocationSelector, text.GetLiteral(TokenizeType.All, ref cursor), begin);
                         break;
                     case ',':
                         yield return new Token(TokenType.Comma, ",", cursor);
@@ -241,16 +244,16 @@ namespace Cafemoca.CommandEditor.Utils
                         yield return new Token(TokenType.Colon, ":", cursor);
                         break;
                     case '"':
-                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), cursor);
+                        yield return new Token(TokenType.String, text.GetString('"', ref cursor), begin);
                         break;
                     case '\t':
                     case ' ':
                     case '\r':
                     case '\n':
-                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), cursor);
+                        yield return new Token(TokenType.Blank, text.GetBlanks(ref cursor), begin);
                         break;
                     default:
-                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), cursor);
+                        yield return new Token(TokenType.Literal, text.GetLiteral(TokenizeType.All, ref cursor), begin);
                         break;
                 }
                 cursor++;

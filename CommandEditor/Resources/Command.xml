@@ -1,4 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <CommandDefinition name="Minecraft Command" xmlns="http://yuri.nu/cafemoca/commanddefinition/2008">
+
+  <Command name="/achievement">
+    <Arg type="literal"
+          literal="give">
+      <Arg type="keywords">
+        <Arg type="target" />
+      </Arg>
+    </Arg>
+  </Command>
+
+  <Command name="/blockdata">
+    <Arg type="location"
+          lenght="3">
+      <Arg type="nbt" />
+    </Arg>
+  </Command>
+
+  <Command name="/clear">
+    <Arg type="target">
+      <Arg type="item">
+        <Arg type="numeric">
+          <Arg type="numeric">
+            <Arg type="nbt" />
+          </Arg>
+        </Arg>
+      </Arg>
+    </Arg>
+  </Command>
+
+  <Command name="/clone">
+    <Arg type="location"
+          lenght="9">
+      <Arg type="keywords">
+        <Arg type="keywords">
+          <Arg type="block" />
+        </Arg>
+      </Arg>
+    </Arg>
+  </Command>
+
+  <Command name="/debug">
+    <Arg type="keywords">
+      <Word>start</Word>
+      <Word>stop</Word>
+      <Word>chunk</Word>
+      <Arg type="location"
+            lenght="3" />
+    </Arg>
+  </Command>
+
+  <Command name="/defaultgamemode">
+    <Arg type="keywords">
+      <Word>survival</Word>
+      <Word>creative</Word>
+      <Word>adventure</Word>
+      <Word>spectator</Word>
+    </Arg>
+  </Command>
+  
+  <Command name="/give">
+    <Arg type="target">
+      <Arg type="item">
+        <Arg type="numeric">
+          <Arg type="numeric">
+            <Arg type="nbt" />
+          </Arg>
+        </Arg>
+      </Arg>
+    </Arg>
+  </Command>
   
 </CommandDefinition>

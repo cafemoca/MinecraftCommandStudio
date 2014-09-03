@@ -1,4 +1,4 @@
-﻿namespace Cafemoca.CommandEditor.Renderings
+﻿namespace Cafemoca.CommandEditor.Utils
 {
     public class BracketSearchResult
     {

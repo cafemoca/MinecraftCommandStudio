@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Cafemoca.CommandEditor.Renderings
+namespace Cafemoca.CommandEditor.Utils
 {
     public class BracketSearcher
     {

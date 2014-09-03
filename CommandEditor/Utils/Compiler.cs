@@ -76,8 +76,8 @@ namespace Cafemoca.CommandEditor.Utils
                                 end = value.Last() == '}' ;
                                 if (parentType == ParentType.RawJson ||
                                     (reader.Cursor > 1 &&
-                                     reader.Backward.IsMatchType(TokenType.Colon) &&
-                                     reader.LookAtRelative(-2).IsMatchLiteral(EscapeKey, false)))
+                                     reader.CheckPrevious(x => x.IsMatchType(TokenType.Colon)) &&
+                                     reader.CheckAtRelative(-2, x => x.IsMatchLiteral(EscapeKey, false))))
                                 {
                                     value = value
                                         .Unenclose('{', '}')
@@ -110,8 +110,8 @@ namespace Cafemoca.CommandEditor.Utils
                                     break;
                                 }
                                 else if (reader.Cursor > 1 &&
-                                         reader.Backward.IsMatchType(TokenType.Colon) &&
-                                         reader.LookAtRelative(-2).IsMatchLiteral("pages"))
+                                         reader.CheckPrevious(x => x.IsMatchType(TokenType.Colon)) &&
+                                         reader.CheckAtRelative(-2, x => x.IsMatchLiteral("pages")))
                                 {
                                     value = value
                                         .Unenclose('[', ']')
@@ -132,12 +132,12 @@ namespace Cafemoca.CommandEditor.Utils
                         if (parentType == ParentType.Default && reader.Cursor > 1)
                         {
                             if (!(token.IsMatchType(TokenType.ArrayBlock) &&
-                                  reader.Backward.IsMatchType(TokenType.TargetSelector) &&
+                                  reader.CheckPrevious(x => x.IsMatchType(TokenType.TargetSelector)) &&
                                   !value.CheckNext(0, '{', '[')) &&
                                 !(token.IsMatchType(TokenType.Colon) &&
-                                  reader.Backward.IsMatchLiteral("minecraft")) &&
+                                  reader.CheckPrevious(x => x.IsMatchLiteral("minecraft"))) &&
                                 !(token.IsMatchType(TokenType.Literal) &&
-                                  reader.Backward.IsMatchType(TokenType.Colon)))
+                                  reader.CheckPrevious(x => x.IsMatchType(TokenType.Colon))))
                             {
                                 builder.Append(" ");
                             }
@@ -145,12 +145,12 @@ namespace Cafemoca.CommandEditor.Utils
                         if (parentType != ParentType.Default && reader.Cursor > 1)
                         {
                             if (token.IsMatchType(TokenType.Literal) &&
-                                reader.Backward.IsMatchType(TokenType.Literal))
+                                reader.CheckPrevious(x => x.IsMatchType(TokenType.Literal)))
                             {
                                 builder.Append(" ");
                             }
                             if (token.IsMatchType(TokenType.String) &&
-                                reader.Backward.IsMatchType(TokenType.String))
+                                reader.CheckPrevious(x => x.IsMatchType(TokenType.String)))
                             {
                                 builder.Remove(builder.Length - 1, 1);
                                 value.TrimStart('"');

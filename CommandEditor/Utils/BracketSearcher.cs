@@ -13,7 +13,7 @@ namespace Cafemoca.CommandEditor.Utils
 
         public BracketSearchResult SearchBrackets(TextDocument document, int offset)
         {
-            if (offset <= 0)
+            if (offset <= 0 || offset > document.TextLength)
             {
                 return null;
             }

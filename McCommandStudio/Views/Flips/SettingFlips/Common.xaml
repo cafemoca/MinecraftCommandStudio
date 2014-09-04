@@ -17,6 +17,11 @@
                          BorderBrush="{DynamicResource GrayBrush8}"
                          Text="{Binding DefaultFileName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </StackPanel>
+            <Separator Margin="0,7,0,3" />
+            <CheckBox Margin="0,5"
+                      Content="スタートページを表示する"
+                      IsChecked="{Binding ShowStartPage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      ToolTip="起動時およびすべてのドキュメントが閉じられた際に表示されます" />
         </StackPanel>
     </Grid>
 

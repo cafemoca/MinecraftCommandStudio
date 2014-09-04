@@ -10,5 +10,11 @@ namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
             get { return Setting.Current.DefaultFileName; }
             set { Setting.Current.DefaultFileName = value; }
         }
+
+        public bool ShowStartPage
+        {
+            get { return Setting.Current.ShowStartPage; }
+            set { Setting.Current.ShowStartPage = value; }
+        }
     }
 }

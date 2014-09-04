@@ -98,6 +98,7 @@ namespace Cafemoca.McCommandStudio.Settings
                 TextWrapping = false,
                 DefaultFileName = "untitled",
                 CompileInterval = 1000,
+                ShowStartPage = true,
             };
         }
 
@@ -217,6 +218,21 @@ namespace Cafemoca.McCommandStudio.Settings
             set
             {
                 this._compileInterval = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region ShowStartPage 変更通知プロパティ
+
+        private bool _showStartPage = true;
+        public bool ShowStartPage
+        {
+            get { return this._showStartPage; }
+            set
+            {
+                this._showStartPage = value;
                 this.RaisePropertyChanged();
             }
         }

@@ -39,6 +39,7 @@ namespace Cafemoca.CommandEditor
 
         private BracketSearcher _bracketSearcher = null;
         private BracketHighlightRenderer _bracketRenderer = null;
+        private HighlightCurrentLineBackgroundRenderer _currentLineRenderer = null;
 
         private void HighlightBrackets()
         {
@@ -48,6 +49,7 @@ namespace Cafemoca.CommandEditor
                 {
                     this._bracketSearcher = new BracketSearcher();
                 }
+
                 var bracketSearchResult = this._bracketSearcher.SearchBrackets(this.Document, this.TextArea.Caret.Offset);
                 this._bracketRenderer.SetHighlight(bracketSearchResult);
             }
@@ -57,7 +59,7 @@ namespace Cafemoca.CommandEditor
             }
         }
 
-        private void HighlightCurrentLine(SolidColorBrush brush)
+        private void SetHighlightCurrentLineBackground(SolidColorBrush brush)
         {
             try
             {
@@ -72,15 +74,51 @@ namespace Cafemoca.CommandEditor
                 }
 
                 this.TextArea.TextView.BackgroundRenderers.Remove(oldRenderer);
-                this.TextArea.TextView.BackgroundRenderers.Add(new HighlightCurrentLineBackgroundRenderer(this, brush.Clone()));
+
+                if (this._currentLineRenderer != null)
+                {
+                    if (this.TextArea.TextView.BackgroundRenderers.Contains(this._currentLineRenderer))
+                    {
+                        this.TextArea.TextView.BackgroundRenderers.Remove(this._currentLineRenderer);
+                    }
+                    this._currentLineRenderer = null;
+                }
+
+                this._currentLineRenderer = new HighlightCurrentLineBackgroundRenderer(this, brush.Clone());
+                this.TextArea.TextView.BackgroundRenderers.Add(this._currentLineRenderer);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        private void SetHighlightBracketBackground(SolidColorBrush brush)
+        {
+            try
+            {
+                var oldRenderer = null as BracketHighlightRenderer;
+
+                foreach (var item in this.TextArea.TextView.BackgroundRenderers)
+                {
+                    if (item != null && item is BracketHighlightRenderer)
+                    {
+                        oldRenderer = item as BracketHighlightRenderer;
+                    }
+                }
+
+                this.TextArea.TextView.BackgroundRenderers.Remove(oldRenderer);
 
                 if (this._bracketRenderer != null)
                 {
-                    this.TextArea.TextView.BackgroundRenderers.Remove(this._bracketRenderer);
+                    if (this.TextArea.TextView.BackgroundRenderers.Contains(this._bracketRenderer))
+                    {
+                        this.TextArea.TextView.BackgroundRenderers.Remove(this._bracketRenderer);
+                    }
                     this._bracketRenderer = null;
                 }
 
-                this._bracketRenderer = new BracketHighlightRenderer(this.TextArea.TextView);
+                this._bracketRenderer = new BracketHighlightRenderer(this.TextArea.TextView, brush);
                 this.TextArea.TextView.BackgroundRenderers.Add(this._bracketRenderer);
             }
             catch (Exception ex)

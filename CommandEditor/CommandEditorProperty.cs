@@ -74,7 +74,7 @@ namespace Cafemoca.CommandEditor
 
         #endregion
 
-        #region CurrentLineBackgroundProperty 依存関係プロパティ
+        #region CurrentLineBackground 依存関係プロパティ
 
         private static readonly DependencyProperty CurrentLineBackgroundProperty =
             DependencyProperty.Register("CurrentLineBackground", typeof(SolidColorBrush), typeof(CommandEditor),
@@ -88,7 +88,7 @@ namespace Cafemoca.CommandEditor
                 var brush = e.NewValue as SolidColorBrush;
                 if (brush != null)
                 {
-                    editor.HighlightCurrentLine(brush);
+                    editor.SetHighlightCurrentLineBackground(brush);
                 }
             }));
 
@@ -96,6 +96,32 @@ namespace Cafemoca.CommandEditor
         {
             get { return (SolidColorBrush)GetValue(CurrentLineBackgroundProperty); }
             set { SetValue(CurrentLineBackgroundProperty, value); }
+        }
+
+        #endregion
+
+        #region BracketBackground 依存関係プロパティ
+
+        private static readonly DependencyProperty BracketBackgroundProperty =
+            DependencyProperty.Register("BracketBackground", typeof(SolidColorBrush), typeof(CommandEditor),
+            new UIPropertyMetadata(new SolidColorBrush(Color.FromArgb(64, 128, 180, 255)), (obj, e) =>
+            {
+                var editor = obj as CommandEditor;
+                if (e == null || editor == null)
+                {
+                    return;
+                }
+                var brush = e.NewValue as SolidColorBrush;
+                if (brush != null)
+                {
+                    editor.SetHighlightBracketBackground(brush);
+                }
+            }));
+
+        public SolidColorBrush BracketBackground
+        {
+            get { return (SolidColorBrush)GetValue(BracketBackgroundProperty); }
+            set { SetValue(BracketBackgroundProperty, value); }
         }
 
         #endregion

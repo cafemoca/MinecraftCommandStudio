@@ -42,6 +42,8 @@ namespace Cafemoca.CommandEditor.Renderings
         private Pen _borderPen;
         private Brush _backgroundBrush;
         private TextView _textView;
+        private Color _background;
+        private Color _foreground;
 
         public void SetHighlight(BracketSearchResult result)
         {
@@ -53,12 +55,29 @@ namespace Cafemoca.CommandEditor.Renderings
         }
 
         public BracketHighlightRenderer(TextView textView)
+            : this (textView, DefaultBackground, DefaultBorder)
+        {
+        }
+
+        public BracketHighlightRenderer(TextView textView, SolidColorBrush brush)
+            : this(textView, brush.Color, brush.Color)
+        {
+        }
+
+        public BracketHighlightRenderer(TextView textView, SolidColorBrush background, SolidColorBrush foreground)
+            : this(textView, background.Color, foreground.Color)
+        {
+        }
+
+        public BracketHighlightRenderer(TextView textView, Color background, Color foreground)
         {
             if (textView == null)
             {
                 throw new ArgumentNullException();
             }
 
+            this._background = background;
+            this._foreground = foreground;
             this._textView = textView;
             this._textView.BackgroundRenderers.Add(this);
         }
@@ -93,7 +112,7 @@ namespace Cafemoca.CommandEditor.Renderings
 
             if (this._borderPen == null)
             {
-                this.UpdateColors(DefaultBackground, DefaultBackground);
+                this.UpdateColors(this._background, this._foreground);
             }
             if (geometry != null)
             {

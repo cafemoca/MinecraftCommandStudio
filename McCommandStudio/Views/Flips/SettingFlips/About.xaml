@@ -84,6 +84,8 @@
                     <controls:HyperlinkText Uri="https://wpftoolkit.codeplex.com/">Extended WPF Toolkit</controls:HyperlinkText>
                     <LineBreak />
                     <controls:HyperlinkText Uri="http://fsc.codeplex.com/">WPF File System Controls</controls:HyperlinkText>
+                    <LineBreak />
+                    <controls:HyperlinkText Uri="http://www.vector.co.jp/soft/winnt/util/se506899.html">ReadJEnc</controls:HyperlinkText>
                 </TextBlock>
             </Border>
         </Grid>

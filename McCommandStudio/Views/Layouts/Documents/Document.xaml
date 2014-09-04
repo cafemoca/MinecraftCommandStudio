@@ -17,15 +17,16 @@
                               Grid.Row="0"
                               Background="{DynamicResource ExtremeWhiteBrush}"
                               BindableText="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              BracketBackground="{DynamicResource AccentColorBrush4}"
                               Column="{Binding Column.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               CurrentLineBackground="{DynamicResource GrayBrush10}"
+                              ExtendedOptions="{Binding ExtendedOptions.Value, UpdateSourceTrigger=PropertyChanged}"
                               FontFamily="{Binding FontFamily.Value, UpdateSourceTrigger=PropertyChanged}"
                               FontSize="{Binding FontSize.Value, UpdateSourceTrigger=PropertyChanged}"
                               Foreground="{DynamicResource BlackBrush}"
                               HorizontalScrollBarVisibility="Auto"
                               Line="{Binding Line.Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               Options="{Binding Options.Value, UpdateSourceTrigger=PropertyChanged}"
-                              ExtendedOptions="{Binding ExtendedOptions.Value, UpdateSourceTrigger=PropertyChanged}"
                               ShowLineNumbers="{Binding ShowLineNumbers.Value, UpdateSourceTrigger=PropertyChanged}"
                               WordWrap="{Binding TextWrapping.Value, UpdateSourceTrigger=PropertyChanged}" />
         <Grid Grid.Row="1">

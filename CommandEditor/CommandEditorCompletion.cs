@@ -350,12 +350,12 @@ namespace Cafemoca.CommandEditor
         private IEnumerable<CompletionData> GetCompletionData(int index, string input)
         {
             var block = this._bracketSearcher.SearchBrackets(this.Document, index);
-            if (block == null)
-            {
-                return null;
-            }
+            var bracket = string.Empty;
 
-            var bracket = this.Document.GetCharAt(block.OpenBracketOffset).ToString();
+            if (block != null)
+            {
+                bracket = this.Document.GetCharAt(block.OpenBracketOffset).ToString();
+            }
 
             var inBlock = false;
             var tokens = null as IEnumerable<Token>;

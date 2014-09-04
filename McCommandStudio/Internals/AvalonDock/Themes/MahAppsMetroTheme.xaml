@@ -228,7 +228,8 @@
                                                      Focusable="False"
                                                      Style="{StaticResource MetroToolButtonStyle}">
                                 <controls:DropDownButton.DropDownContextMenu>
-                                    <controls:ContextMenuEx ItemsSource="{Binding Model.ChildrenSorted, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <controls:ContextMenuEx ItemsSource="{Binding Model.ChildrenSorted, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            Style="{StaticResource MetroContextMenu}">
                                         <controls:ContextMenuEx.ItemContainerStyle>
                                             <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type controls:MenuItemEx}">
                                                 <Setter Property="HeaderTemplate" Value="{Binding Root.Manager.DocumentPaneMenuItemHeaderTemplate}" />

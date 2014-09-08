@@ -880,7 +880,7 @@
                   Header="ドッキング (_D)" />
         <MenuItem Command="{Binding AutoHideCommand}"
                   Header="自動的に隠す (_A)" />
-        <MenuItem Command="{Binding CloseCommand}"
+        <MenuItem Command="{Binding HideCommand}"
                   Header="非表示 (_H)"
                   Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
     </ContextMenu>

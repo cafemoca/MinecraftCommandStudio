@@ -394,9 +394,6 @@ namespace Cafemoca.CommandEditor.Completions
 
         public static IEnumerable<CompletionData> GetBlockCompletion()
         {
-            // リソースファイルで管理するべき
-            //return resources.Where(r => r.Type == ItemType.Block).Select(r => new CompletionData(r.Name, r.Desc));
-
             return new[]
             {
                 new CompletionData("air", "空気"),
@@ -635,8 +632,8 @@ namespace Cafemoca.CommandEditor.Completions
         {
             return new[]
             {
-                new CompletionData("true", "true"),
-                new CompletionData("false", "false"),
+                new CompletionData("true", "true\nもしくは 1b"),
+                new CompletionData("false", "false\nもしくは 0b"),
             };
         }
 
@@ -651,120 +648,133 @@ namespace Cafemoca.CommandEditor.Completions
             };
         }
 
-        public static IEnumerable<CompletionData> GetScoreboardCompletion()
+        public static IEnumerable<CompletionData> GetEffectCompletion()
         {
             return new[]
             {
-                new CompletionData("objectives"),
-                new CompletionData("players"),
-                new CompletionData("teams"),
+                new CompletionData("speed"),
+                new CompletionData("slowness"),
+                new CompletionData("haste"),
+                new CompletionData("mining_fatigue"),
+                new CompletionData("strength"),
+                new CompletionData("instant_health"),
+                new CompletionData("instant_damage"),
+                new CompletionData("jump_boost"),
+                new CompletionData("nausea"),
+                new CompletionData("regeneration"),
+                new CompletionData("resistance"),
+                new CompletionData("fire_resistance"),
+                new CompletionData("water_breathing"),
+                new CompletionData("invisibility"),
+                new CompletionData("blindness"),
+                new CompletionData("night_vision"),
+                new CompletionData("hunger"),
+                new CompletionData("weakness"),
+                new CompletionData("poison"),
+                new CompletionData("wither"),
+                new CompletionData("health_boost"),
+                new CompletionData("absorption"),
+                new CompletionData("saturation"),
             };
         }
 
-        public static IEnumerable<CompletionData> GetScoreboardObjectivesCompletion()
+        public static IEnumerable<CompletionData> GetEnchantCompletion()
         {
             return new[]
             {
-                new CompletionData("list"),
-                new CompletionData("add"),
-                new CompletionData("remove"),
-                new CompletionData("setdisplay"),
+                new CompletionData("protection"),
+                new CompletionData("fire_protection"),
+                new CompletionData("feather_falling"),
+                new CompletionData("blast_protection"),
+                new CompletionData("projectile_protection"),
+                new CompletionData("respiration"),
+                new CompletionData("aqua_affinity"),
+                new CompletionData("thorns"),
+                new CompletionData("depth_strider"),
+                new CompletionData("sharpness"),
+                new CompletionData("smite"),
+                new CompletionData("bane_of_arthropods"),
+                new CompletionData("knockback"),
+                new CompletionData("fire_aspect"),
+                new CompletionData("looting"),
+                new CompletionData("efficiency"),
+                new CompletionData("silk_touch"),
+                new CompletionData("unbreaking"),
+                new CompletionData("fortune"),
+                new CompletionData("power"),
+                new CompletionData("punch"),
+                new CompletionData("flame"),
+                new CompletionData("infinity"),
+                new CompletionData("luck_of_the_sea"),
+                new CompletionData("lure"),
             };
         }
 
-        public static IEnumerable<CompletionData> GetScoreboardPlayersCompletion()
+        public static IEnumerable<CompletionData> GetEntityCompletion()
         {
             return new[]
             {
-                new CompletionData("list"),
-                new CompletionData("set"),
-                new CompletionData("add"),
-                new CompletionData("remove"),
-                new CompletionData("reset"),
-                new CompletionData("enable"),
-                new CompletionData("test"),
-                new CompletionData("operation"),
-            };
-        }
-
-        public static IEnumerable<CompletionData> GetScoreboardTeamsCompletion()
-        {
-            return new[]
-            {
-                new CompletionData("list"),
-                new CompletionData("add"),
-                new CompletionData("remove"),
-                new CompletionData("empty"),
-                new CompletionData("join"),
-                new CompletionData("leave"),
-                new CompletionData("option"),
-            };
-        }
-
-        public static IEnumerable<CompletionData> GetScoreboardCriteriaCompletion()
-        {
-            return new[]
-            {
-                new CompletionData("dummy"),
-                new CompletionData("trigger"),
-                new CompletionData("deathCount"),
-                new CompletionData("playerKillCount"),
-                new CompletionData("totalKillCount"),
-                new CompletionData("health"),
-            };
-        }
-
-        public static IEnumerable<CompletionData> GetScoreboardSlotsCompletion()
-        {
-            return new[]
-            {
-                new CompletionData("list"),
-                new CompletionData("sidebar"),
-                new CompletionData("sidebar.team"),
-                new CompletionData("belowName"),
-            };
-        }
-
-        public static IEnumerable<CompletionData> GetScoreboardOperationCompletion()
-        {
-            return new[]
-            {
-                new CompletionData("+=", "+=\n" +
-                                         "<targetName> <targetObjective> += <selectorName> <selectorObjective>\n" +
-                                         "セレクタのセレクタスコアをターゲットのターゲットスコアに加算します。\n\n" +
-                                         "(例):\n\t/scoreboard players operation @a score1 += @a[team=team1] score2"),
-                new CompletionData("-=", "-=\n" +
-                                         "/scoreboard players operation <target> <>"),
-                new CompletionData("*="),
-                new CompletionData("/="),
-                new CompletionData("%="),
-                new CompletionData("="),
-                new CompletionData("<"),
-                new CompletionData(">"),
-                new CompletionData("><"),
-            };
-        }
-
-        public static IEnumerable<CompletionData> GetScoreboardTeamOptionCompletion()
-        {
-            return new[]
-            {
-                new CompletionData("color"),
-                new CompletionData("friendlyfire"),
-                new CompletionData("seeFriendlyInvisibles"),
-                new CompletionData("nametagVisibility"),
-                new CompletionData("deathMessageVisibility"),
-            };
-        }
-
-        public static IEnumerable<CompletionData> GetScoreboardTeamOptionArgsCompletion()
-        {
-            return new[]
-            {
-                new CompletionData("never"),
-                new CompletionData("hideForOtherTeams"),
-                new CompletionData("hideForOwnTeam"),
-                new CompletionData("always"),
+                new CompletionData("Item"),
+                new CompletionData("XPOrb"),
+                new CompletionData("LeashKnot"),
+                new CompletionData("Painting"),
+                new CompletionData("ItemFrame"),
+                new CompletionData("ArmorStand"),
+                new CompletionData("EnderCrystal"),
+                new CompletionData("Arrow"),
+                new CompletionData("Snowball"),
+                new CompletionData("Fireball"),
+                new CompletionData("SmallFireball"),
+                new CompletionData("ThrownEnderpearl"),
+                new CompletionData("EyeOfEnderSignal"),
+                new CompletionData("ThrownPotion"),
+                new CompletionData("ThrownExpBottle"),
+                new CompletionData("WitherSkull"),
+                new CompletionData("FireworksRocketEntity"),
+                new CompletionData("PrimedTnt"),
+                new CompletionData("FallingSand"),
+                new CompletionData("MinecartCommandBlock"),
+                new CompletionData("Boat"),
+                new CompletionData("MinecartRideable"),
+                new CompletionData("MinecartChest"),
+                new CompletionData("MinecartFurnace"),
+                new CompletionData("MinecartTNT"),
+                new CompletionData("MinecartHopper"),
+                new CompletionData("MinecartSpawner"),
+                new CompletionData("Mob"),
+                new CompletionData("Monster"),
+                new CompletionData("Creeper"),
+                new CompletionData("Skeleton"),
+                new CompletionData("Spider"),
+                new CompletionData("Giant"),
+                new CompletionData("Zombie"),
+                new CompletionData("Slime"),
+                new CompletionData("Ghast"),
+                new CompletionData("PigZombie"),
+                new CompletionData("Enderman"),
+                new CompletionData("CaveSpider"),
+                new CompletionData("Silverfish"),
+                new CompletionData("Blaze"),
+                new CompletionData("LavaSlime"),
+                new CompletionData("EnderDragon"),
+                new CompletionData("WitherBoss"),
+                new CompletionData("Witch"),
+                new CompletionData("Endermite"),
+                new CompletionData("Guardian"),
+                new CompletionData("Bat"),
+                new CompletionData("Pig"),
+                new CompletionData("Sheep"),
+                new CompletionData("Cow"),
+                new CompletionData("Chicken"),
+                new CompletionData("Squid"),
+                new CompletionData("Wolf"),
+                new CompletionData("MushroomCow"),
+                new CompletionData("SnowMan"),
+                new CompletionData("Ozelot"),
+                new CompletionData("VillagerGolem"),
+                new CompletionData("EntityHorse"),
+                new CompletionData("Rabbit"),
+                new CompletionData("Villager"),
             };
         }
 

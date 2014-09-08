@@ -14,12 +14,12 @@ namespace Cafemoca.CommandEditor
 {
     public partial class CommandEditor : TextEditor
     {
-        private const string ResourceFile = "Cafemoca.CommandEditor.Resources.MinecraftSyntax.xshd";
+        private const string SyntaxDefinition = "Cafemoca.CommandEditor.Resources.MinecraftSyntax.xshd";
 
         private void LoadSyntaxHighlight()
         {
             var asm = Assembly.GetExecutingAssembly();
-            using (var stream = asm.GetManifestResourceStream(ResourceFile) ?? Stream.Null)
+            using (var stream = asm.GetManifestResourceStream(SyntaxDefinition) ?? Stream.Null)
             using (var reader = XmlReader.Create(stream))
             {
                 this.SyntaxHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);

@@ -1,10 +1,8 @@
 ﻿using Cafemoca.CommandEditor.Indentations;
-using Cafemoca.CommandEditor.Utils;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Search;
 using System;
-using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Cafemoca.CommandEditor
@@ -15,6 +13,7 @@ namespace Cafemoca.CommandEditor
             : base()
         {
             this.LoadSyntaxHighlight();
+            this.LoadCommandDefinition();
             this.SetDefaultFoldings();
             this.BracketHighlightInitialize();
 

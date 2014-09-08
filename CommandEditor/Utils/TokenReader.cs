@@ -48,10 +48,7 @@ namespace Cafemoca.CommandEditor.Utils
 
         public Token SkipGet(Func<Token, bool> predicate)
         {
-            while (this.IsRemainToken && !predicate(this._tokens[this._cursor]))
-            {
-                this.MoveNext();
-            }
+            this.Skip(predicate);
             return this._current = this._tokens[this._cursor++];
         }
 
@@ -119,6 +116,14 @@ namespace Cafemoca.CommandEditor.Utils
         public void MoveLast()
         {
             this._current = this._tokens[this._cursor = this._tokens.Count - 1];
+        }
+
+        public void Skip(Func<Token, bool> predicate)
+        {
+            while (this.IsRemainToken && !predicate(this._tokens[this._cursor]))
+            {
+                this.MoveNext();
+            }
         }
 
         public bool Skip(int count)

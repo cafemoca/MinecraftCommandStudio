@@ -6,13 +6,31 @@ using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Input;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Cafemoca.CommandEditor
 {
     public partial class CommandEditor : TextEditor
     {
+        private const string CommandDefinition = "Cafemoca.CommandEditor.Resources.Command.xml";
+
+        private XDocument _commandDefinition;
+
+        private void LoadCommandDefinition()
+        {
+            var asm = Assembly.GetExecutingAssembly();
+            using (var stream = asm.GetManifestResourceStream(CommandDefinition) ?? Stream.Null)
+            using (var reader = XmlReader.Create(stream))
+            {
+                this._commandDefinition = XDocument.Load(reader);
+            }
+        }
+
         private CompletionWindow _completionWindow;
 
         private void ShowCompletionWindow(IEnumerable<CompletionData> completions)
@@ -351,25 +369,23 @@ namespace Cafemoca.CommandEditor
         {
             var block = this._bracketSearcher.SearchBrackets(this.Document, index);
             var bracket = string.Empty;
+            var inBlock = TokenType.StringBlock;
 
             if (block != null)
             {
                 bracket = this.Document.GetCharAt(block.OpenBracketOffset).ToString();
+
+                if (bracket == "{")
+                {
+                    inBlock = TokenType.TagBlock;
+                }
+                else if (bracket == "[")
+                {
+                    inBlock = TokenType.ArrayBlock;
+                }
             }
 
-            var inBlock = false;
-            var tokens = null as IEnumerable<Token>;
-
-            if (bracket == "{" || bracket == "[")
-            {
-                tokens = this.Text.Tokenize(TokenizeType.Block);
-                inBlock = true;
-            }
-            else
-            {
-                tokens = this.Text.Tokenize(TokenizeType.Command);
-                inBlock = false;
-            }
+            var tokens = this.Text.Tokenize(TokenizeType.All);
 
             var next = this.NextChar;
             var prev = (this.CaretOffset > 1)
@@ -381,6 +397,7 @@ namespace Cafemoca.CommandEditor
                 .Where(x => !x.IsMatchType(TokenType.Blank, TokenType.Comment));
 
             var current = before.LastOrDefault();
+            var prevToken = before.SkipLast(1).LastOrDefault();
 
             if (before.IsEmpty() ||
                 (current.Index + current.Value.Length > index &&
@@ -405,11 +422,11 @@ namespace Cafemoca.CommandEditor
                         case "@":
                             return MinecraftCompletions.GetTargetCompletion();
                         case "_":
-                            return (current.IsMatchLiteral("score_"))
+                            return (inBlock == TokenType.ArrayBlock && current.IsMatchLiteral("score_"))
                                 ? this.ExtendedOptions.ScoreNames.ToCompletionData()
                                 : null;
                         case "!":
-                            if (inBlock &&
+                            if (inBlock == TokenType.ArrayBlock &&
                                 reader.CheckNext(x => x.IsMatchType(TokenType.Equal)))
                             {
                                 reader.MoveNext();
@@ -417,7 +434,7 @@ namespace Cafemoca.CommandEditor
                             }
                             return null;
                         case "=":
-                            if (inBlock && reader.IsRemainToken)
+                            if (inBlock == TokenType.ArrayBlock && reader.IsRemainToken)
                             {
                                 reader.MoveNext();
                                 if (reader.CheckNext(x => x.IsMatchLiteral("team")))
@@ -432,10 +449,19 @@ namespace Cafemoca.CommandEditor
                             return null;
                     }
 
-                    var command = reader.SkipGet(x => x.IsMatchType(TokenType.Command));
-                    if (!inBlock && command.IsEmpty())
+                    if (!before.Any(x => x.IsMatchType(TokenType.Command)))
                     {
                         return null;
+                    }
+
+                    var command = reader.SkipGet(x => x.IsMatchType(TokenType.Command));
+                    if (inBlock != TokenType.StringBlock && command.IsEmpty())
+                    {
+                        return null;
+                    }
+                    if (inBlock == TokenType.ArrayBlock)
+                    {
+
                     }
 
                     switch (input.ToLower())
@@ -443,13 +469,13 @@ namespace Cafemoca.CommandEditor
                         case ":":
                             if (!command.IsEmpty())
                             {
-                                reader.Reverse();
-                                switch (command.Value)
+                                if (reader.CheckAt(1, x => x.IsMatchLiteral("minecraft")))
                                 {
-                                    case "/give":
-                                        break;
+                                    goto case " ";
                                 }
                             }
+                            break;
+                        case ",":
                             break;
                         case "\r\n":
                         case "\r":
@@ -458,55 +484,102 @@ namespace Cafemoca.CommandEditor
                         case " ":
                             if (!command.IsEmpty())
                             {
-                                using (var comp = new CommandCompletions(this.ExtendedOptions))
+                                reader.Reverse();
+                                var args = this.RemainTokensToArgs(reader);
+                                var def = this._commandDefinition.Root.Elements("Command").Where(x => x.Attribute("name").Value == command.Value);
+
+                                if (def == null || def.Count() != 1)
                                 {
-                                    reader.Reverse();
-                                    switch (command.Value)
+                                    return null;
+                                }
+
+                                var elements = def.Elements("Arg");
+                                var element = null as XElement;
+
+                                foreach (var arg in args)
+                                {
+                                    if (elements.IsEmpty())
                                     {
-                                        case "/achievement":
-                                            return comp.AchievementCompletion(reader);
-                                        case "/clear":
-                                            return comp.ClearCompletion(reader);
-                                        case "/clone":
-                                            return comp.CloneCompletion(reader);
-                                        case "/debug":
-                                        case "/defaultgamemode":
-                                        case "/difficulty":
-                                        case "effect":
-                                        case "/enchant":
-                                        case "/entitydata":
-                                        case "/execute":
-                                        case "/fill":
-                                        case "/gamemode":
-                                        case "/gamerule":
-                                            break;
-                                        case "/give":
-                                            return comp.GiveCompletion(reader);
-                                        case "/kill":
-                                        case "/particle":
-                                        case "/playsound":
-                                        case "/replaceitem":
-                                            break;
-                                        case "/scoreboard":
-                                            return comp.ScoreboardCompletion(reader);
-                                        case "/setblock":
-                                            return comp.SetblockCompletion(reader);
-                                        case "/setworldspawn":
-                                        case "/spawnpoint":
-                                        case "/spreadplayers":
-                                        case "/stats":
-                                        case "/summon":
-                                        case "/testfor":
-                                        case "/testforblock":
-                                        case "/time":
-                                        case "/title":
-                                        case "/tp":
-                                        case "/trigger":
-                                        case "/weather":
-                                        case "/worldborder":
-                                        case "/xp":
-                                            break;
+                                        return null;
                                     }
+                                    if (elements.Count() > 1)
+                                    {
+                                        Console.WriteLine(arg.Value);
+                                        if (elements.Any(x => x.Attribute("type").Value == "key" && arg.IsMatchLiteral(x.Attribute("key").Value)))
+                                        {
+                                            elements = elements.Where(x => arg.IsMatchLiteral(x.Attribute("key").Value)).Elements("Arg");
+                                        }
+                                        else if (elements.Any(x => x.Attributes().Any(a => a.Name == "default" && a.Value == "true")))
+                                        {
+                                            elements = elements.Where(x => x.Attributes().Any(a => a.Name == "default" && a.Value == "true")).Elements("Arg");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        elements = elements.Elements("Arg");
+                                    }
+                                }
+
+                                if (elements.Count() > 1)
+                                {
+                                    if (elements.Any(x => x.Attributes().Any(a => a.Name == "default" && a.Value == "true")))
+                                    {
+                                        elements = elements.Where(x => x.Attributes().Any(a => a.Name == "default" && a.Value == "true"));
+                                    }
+                                    else
+                                    {
+                                        return elements.Attributes()
+                                            .Where(x => x.Name == "key")
+                                            .Select(x => new CompletionData(x.Value));
+                                    }
+                                }
+
+                                element = elements.SingleOrDefault();
+                                if (element == null)
+                                {
+                                    return null;
+                                }
+
+                                var type = element.Attribute("type").Value;
+
+                                switch (type)
+                                {
+                                    case "key":
+                                        return new[] { new CompletionData(element.Attribute("key").Value) };
+                                    case "keywords":
+                                        return element.Elements("Word")
+                                            .Select(x =>
+                                            new
+                                            {
+                                                Name = x.Value.Trim(),
+                                                Tip = x.Attribute("tip") != null ? x.Attribute("tip").Value : null
+                                            })
+                                            .Select(x => new CompletionData(x.Name, x.Tip));
+                                    case "target":
+                                        return this.ExtendedOptions.PlayerNames.ToCompletionData();
+                                    case "score":
+                                        return this.ExtendedOptions.ScoreNames.ToCompletionData();
+                                    case "team":
+                                        return this.ExtendedOptions.TeamNames.ToCompletionData();
+                                    case "item":
+                                        return MinecraftCompletions.GetItemCompletion();
+                                    case "block":
+                                        return MinecraftCompletions.GetBlockCompletion();
+                                    case "entity":
+                                        return MinecraftCompletions.GetEntityCompletion();
+                                    case "effect":
+                                        return prevToken.IsMatchLiteral("minecraft")
+                                            ? MinecraftCompletions.GetEffectCompletion()
+                                            : MinecraftCompletions.GetEffectCompletion()
+                                                .Concat(new[] { new CompletionData("clear", "すべてのエフェクトを消去します。") });
+                                    case "enchant":
+                                        return MinecraftCompletions.GetEnchantCompletion();
+                                    case "boolean":
+                                        return MinecraftCompletions.GetBooleanCompletion();
+                                    case "color":
+                                        return MinecraftCompletions.GetColorCompletion();
+                                    default:
+                                        return null;
                                 }
                             }
                             break;
@@ -526,6 +599,44 @@ namespace Cafemoca.CommandEditor
             }
 
             return null;
+        }
+
+        private List<Token> RemainTokensToArgs(TokenReader reader)
+        {
+            var result = new List<Token>();
+
+            while (reader.IsRemainToken)
+            {
+                var current = reader.Get();
+
+                if (current.IsMatchType(TokenType.TargetSelector))
+                {
+                    if (reader.CheckNext(x => x.IsMatchType(TokenType.OpenSquareBracket)))
+                    {
+                        reader.Skip(x => x.IsMatchType(TokenType.CloseSquareBracket));
+                        reader.MoveNext();
+                    }
+                }
+                else if (current.IsMatchLiteral("minecraft"))
+                {
+                    if (reader.CheckNext(x => x.IsMatchType(TokenType.Colon)))
+                    {
+                        reader.MoveNext();
+                        if (reader.CheckNext(x => x.IsMatchType(TokenType.Literal)))
+                        {
+                            current = reader.Get();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+
+                result.Add(current);
+            }
+
+            return result;
         }
 
         private bool CheckBothSide(char prev, char next)

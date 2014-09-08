@@ -65,7 +65,6 @@
     <Compile Include="CommandEditorCompletion.cs" />
     <Compile Include="CommandEditorHighlight.cs" />
     <Compile Include="CommandEditorFolding.cs" />
-    <Compile Include="Completions\CommandCompletions.cs" />
     <Compile Include="ExtendedOptions.cs" />
     <Compile Include="CommandEditorProperty.cs" />
     <Compile Include="Completions\CompletionData.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Utils\BracketSearchResult.cs" />
     <Compile Include="Renderings\HighlightCurrentLineBackgroundRenderer.cs" />
     <Compile Include="Utils\CharReader.cs" />
+    <Compile Include="Utils\Commands.cs" />
     <Compile Include="Utils\Compiler.cs" />
     <Compile Include="Utils\Escaping.cs" />
     <Compile Include="Utils\Reformatter.cs" />
@@ -107,9 +107,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Command.xml">
+    <EmbeddedResource Include="Resources\Command.xml">
       <SubType>Designer</SubType>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

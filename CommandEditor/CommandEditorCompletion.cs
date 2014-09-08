@@ -513,6 +513,10 @@ namespace Cafemoca.CommandEditor
                                         {
                                             elements = elements.Where(x => x.Attributes().Any(a => a.Name == "default" && a.Value == "true")).Elements("Arg");
                                         }
+                                        else
+                                        {
+                                            return null;
+                                        }
                                     }
                                     else
                                     {

@@ -69,7 +69,7 @@ namespace Cafemoca.McCommandStudio.Settings
                     EnableTextDragDrop = true,
                     EnableVirtualSpace = false,
                     HideCursorWhileTyping = false,
-                    HighlightCurrentLine = true,
+                    //HighlightCurrentLine = false,
                     IndentationSize = 4,
                     //InheritWordWrapIndentation = false,
                     //RequireControlModifierForHyperlinkClick = false,

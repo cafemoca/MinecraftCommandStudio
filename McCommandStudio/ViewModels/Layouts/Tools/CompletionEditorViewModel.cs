@@ -59,8 +59,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
         {
             this.ContentId.Value = ToolContentId;
 
-            this.PlayerName = new ReactiveProperty<string>();
-            this.SelectedPlayer = new ReactiveProperty<string>();
+            this.PlayerName = new ReactiveProperty<string>("");
+            this.SelectedPlayer = new ReactiveProperty<string>("");
 
             this.AddPlayerCommand = new ReactiveCommand();
             this.AddPlayerCommand.Subscribe(_ =>
@@ -70,8 +70,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
             this.DelPlayerCommand.Subscribe(_ =>
                 this.RemoveCollection(this.PlayerNames, this.SelectedPlayer));
 
-            this.ScoreName = new ReactiveProperty<string>();
-            this.SelectedScore = new ReactiveProperty<string>();
+            this.ScoreName = new ReactiveProperty<string>("");
+            this.SelectedScore = new ReactiveProperty<string>("");
 
             this.AddScoreCommand = new ReactiveCommand();
             this.AddScoreCommand.Subscribe(_ =>
@@ -81,8 +81,8 @@ namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Tools
             this.DelScoreCommand.Subscribe(_ =>
                 this.RemoveCollection(this.ScoreNames, this.SelectedScore));
 
-            this.TeamName = new ReactiveProperty<string>();
-            this.SelectedTeam = new ReactiveProperty<string>();
+            this.TeamName = new ReactiveProperty<string>("");
+            this.SelectedTeam = new ReactiveProperty<string>("");
 
             this.AddTeamCommand = new ReactiveCommand();
             this.AddTeamCommand.Subscribe(_ =>

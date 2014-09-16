@@ -11,6 +11,22 @@ namespace Cafemoca.CommandEditor.Utils
         private IEnumerable<char> openBrackets = "({[";
         private IEnumerable<char> closeBrackets = ")}]";
 
+        public BracketSearchResult SearchCurrentBlock(TextDocument document, int offset)
+        {
+            if (offset <= 0 || offset > document.TextLength)
+            {
+                return null;
+            }
+
+            var others = new List<int>(openBrackets.Count());
+            for (var i = 0; i < openBrackets.Count(); i++)
+            {
+                others.Add(SearchBracketBackward(document, offset, openBrackets.ElementAt(i), closeBrackets.ElementAt(i)));
+            }
+
+            return SearchBrackets(document, others.Max() + 1);
+        }
+
         public BracketSearchResult SearchBrackets(TextDocument document, int offset)
         {
             if (offset <= 0 || offset > document.TextLength)

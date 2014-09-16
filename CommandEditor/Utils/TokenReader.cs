@@ -49,7 +49,9 @@ namespace Cafemoca.CommandEditor.Utils
         public Token SkipGet(Func<Token, bool> predicate)
         {
             this.Skip(predicate);
-            return this._current = this._tokens[this._cursor++];
+            return this.IsRemainToken
+                ? this._current = this._tokens[this._cursor++]
+                : this._current = default(Token);
         }
 
         public bool CheckNext(Func<Token, bool> predicate)

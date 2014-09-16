@@ -8,6 +8,7 @@
   <Color name="Null" foreground="MediumAquamarine" />
   <Color name="Boolean" foreground="DeepSkyBlue" />
   <Color name="Numeric" foreground="Aquamarine" />
+  <Color name="XpLevel" foreground="OrangeRed" />
   <Color name="Comment" foreground="Green" />
   <Color name="Target" foreground="Orange" />
   <Color name="Location" foreground="DarkSalmon" fontWeight="bold" />
@@ -27,30 +28,15 @@
   <Color name="TAG_Boolean" foreground="PeachPuff" />
 
   <Color name="Color" foreground="Aquamarine" />
-  <!--
-  <Color name="ColorBlack" foreground="Gray" />
-  <Color name="ColorDarkBlue" foreground="RoyalBlue" />
-  <Color name="ColorDarkGreen" foreground="DarkGreen" />
-  <Color name="ColorDarkAqua" foreground="CadetBlue" />
-  <Color name="ColorDarkRed" foreground="DarkRed" />
-  <Color name="ColorDarkPurple" foreground="DarkOrchid" />
-  <Color name="ColorGold" foreground="DarkOrange" />
-  <Color name="ColorGray" foreground="Silver" />
-  <Color name="ColorDarkGray" foreground="LightSlateGray" />
-  <Color name="ColorBlue" foreground="DeepSkyBlue" />
-  <Color name="ColorGreen" foreground="Green" />
-  <Color name="ColorAqua" foreground="Aqua" />
-  <Color name="ColorRed" foreground="Red" />
-  <Color name="ColorLightPurple" foreground="MediumPurple" />
-  <Color name="ColorYellow" foreground="Yellow" />
-  <Color name="ColorWhite" foreground="White" />
-  -->
 
   <Color name="Command" foreground="Yellow" fontWeight="bold" />
+  <Color name="Effect" foreground="DarkSeaGreen" />
+  <Color name="Enchant" foreground="CadetBlue" />
   <Color name="Entity" foreground="Lime" />
   <Color name="Item" foreground="Cyan" />
 
-  <Color name="Attribute" foreground="LemonChiffon" />
+  <Color name="Temp" foreground="PowderBlue"/>
+  <Color name="Attribute" foreground="DarkKhaki" />
   <Color name="Args" foreground="Khaki" />
 
   <RuleSet>
@@ -76,7 +62,7 @@
       <Word>]</Word>
     </Keywords>
     
-    <!-- bool -->
+    <!-- null -->
     <Keywords color="Null">
       <Word>null</Word>
     </Keywords>
@@ -87,12 +73,17 @@
       <Word>false</Word>
     </Keywords>
 
+    <!-- numeric (xp level) -->
+    <Rule color="XpLevel">
+      \b\d+L
+    </Rule>
+
     <!-- numeric -->
     <Rule color="Numeric">
       -?\.\d+[df]? |
       -?\d+\.\d*[df]? |
       -?\b\d+[bdfils]? |
-      -?\b\d
+      -?\b\d+
     </Rule>
 
     <!-- comment -->
@@ -597,10 +588,10 @@
 
     <!-- attribute -->
     <Keywords color="Attribute">
-      <Word>keep</Word>
-      <Word>replace</Word>
+      <Word>give</Word>
       <Word>filterd</Word>
       <Word>masked</Word>
+      <Word>replace</Word>
       <Word>force</Word>
       <Word>move</Word>
       <Word>normal</Word>
@@ -610,18 +601,19 @@
       <Word>peaceful</Word>
       <Word>easy</Word>
       <Word>hard</Word>
+      <Word>p</Word>
+      <Word>e</Word>
+      <Word>n</Word>
+      <Word>h</Word>
       <Word>break</Word>
       <Word>survival</Word>
       <Word>creative</Word>
       <Word>adventure</Word>
       <Word>spectator</Word>
-      <Word>run_command</Word>
-      <Word>suggest_command</Word>
-      <Word>open_url</Word>
-      <Word>show_text</Word>
-      <Word>show_item</Word>
-      <Word>show_entity</Word>
-      <Word>show_achievement</Word>
+      <Word>s</Word>
+      <Word>c</Word>
+      <Word>a</Word>
+      <Word>sp</Word>
       <Word>title</Word>
       <Word>subtitle</Word>
       <Word>fadeIn</Word>
@@ -644,11 +636,15 @@
       <Word>join</Word>
       <Word>leave</Word>
       <Word>option</Word>
-      <!--<Word>color</Word>-->
+      <!--<Word>color</Word>--> <!-- TAG_Int -->
       <Word>friendlyfire</Word>
       <Word>seeFriendlyInvisibles</Word>
       <Word>nametagVisibility</Word>
       <Word>deathMessageVisibility</Word>
+      <Word>never</Word>
+      <Word>hideForOtherTeams</Word>
+      <Word>hideForOwnTeam</Word>
+      <Word>always</Word>
       <Word>destroy</Word>
       <Word>hollow</Word>
       <Word>keep</Word>
@@ -668,13 +664,35 @@
       <Word>sendCommandFeedback</Word>
       <Word>showDeathMessages</Word>
       <Word>query</Word>
+      <Word>block</Word>
+      <Word>entity</Word>
+      <Word>set</Word>
+      <Word>all</Word>
+      <Word>rain</Word>
+      <Word>thunder</Word>
+      <Word>detect</Word>
+      <Word>ips</Word>
+      <Word>on</Word>
+      <Word>off</Word>
+      <Word>reload</Word>
+      <Word>center</Word>
+      <Word>damage</Word>
+      <Word>amount</Word>
+      <Word>buffer</Word>
+      <Word>get</Word>
+      <Word>warning</Word>
+      <Word>distance</Word>
+      <Word>time</Word>
     </Keywords>
 
     <Keywords color="Args">
-      <Word>never</Word>
-      <Word>hideForOtherTeams</Word>
-      <Word>hideForOwnTeam</Word>
-      <Word>always</Word>
+      <Word>run_command</Word>
+      <Word>suggest_command</Word>
+      <Word>open_url</Word>
+      <Word>show_text</Word>
+      <Word>show_item</Word>
+      <Word>show_entity</Word>
+      <Word>show_achievement</Word>
       <Word>bri</Word>
       <Word>mc</Word>
       <Word>cre</Word>
@@ -710,13 +728,204 @@
       <Word>bo</Word>
       <Word>cbo</Word>
       <Word>moj</Word>
+      <Word>AffectedBlocks</Word>
+      <Word>AffectedEntities</Word>
+      <Word>AffectedItems</Word>
+      <Word>QueryResult</Word>
+      <Word>SuccessCount</Word>
     </Keywords>
+    
+    <!-- temp -->
+    <!--
+    <Keywords color="Attribute">
+      <Word>slot</Word>
+      <Word>sidebar</Word>
+      <Word>belowName</Word>
+      <Word>achievement</Word>
+      <Word>stat</Word>
+      <Word>teamkill</Word>
+      <Word>killedByTeam</Word>
+    </Keywords>
+    -->
+    <Span>
+      <Begin color="Temp">achievement\.</Begin>
+      <End>\W</End>
+      <RuleSet>
+        <Keywords color="Temp">
+          <Word>openInventory</Word>
+          <Word>mineWood</Word>
+          <Word>buildWorkBench</Word>
+          <Word>buildPickaxe</Word>
+          <Word>buildFurnace</Word>
+          <Word>acquireIron</Word>
+          <Word>buildHoe</Word>
+          <Word>makeBread</Word>
+          <Word>bakeCake</Word>
+          <Word>buildBetterPickaxe</Word>
+          <Word>cookFish</Word>
+          <Word>onARail</Word>
+          <Word>buildSword</Word>
+          <Word>killEnemy</Word>
+          <Word>killCow</Word>
+          <Word>flyPig</Word>
+          <Word>snipeSkeleton</Word>
+          <Word>diamonds</Word>
+          <Word>portal</Word>
+          <Word>ghast</Word>
+          <Word>blazeRod</Word>
+          <Word>potion</Word>
+          <Word>theEnd</Word>
+          <Word>theEnd2</Word>
+          <Word>enchantments</Word>
+          <Word>overkill</Word>
+          <Word>bookcase</Word>
+          <Word>exploreAllBiomes</Word>
+          <Word>spawnWither</Word>
+          <Word>killWither</Word>
+          <Word>fullBeacon</Word>
+          <Word>breedCow</Word>
+          <Word>diamondsToYou</Word>
+          <Word>overpowered</Word>
+        </Keywords>
+      </RuleSet>
+    </Span>
+    <Span>
+      <Begin color="Temp">stat\.</Begin>
+      <End>\W</End>
+      <RuleSet>
+        <Keywords color="Temp">
+          <Word>leaveGame</Word>
+          <Word>playOneMinute</Word>
+          <Word>timeSinceDeath</Word>
+          <Word>walkOneCm</Word>
+          <Word>crouchOneCm</Word>
+          <Word>sprintOneCm</Word>
+          <Word>swimOneCm</Word>
+          <Word>fallOneCm</Word>
+          <Word>climbOneCm</Word>
+          <Word>flyOneCm</Word>
+          <Word>diveOneCm</Word>
+          <Word>minecartOneCm</Word>
+          <Word>boatOneCm</Word>
+          <Word>pigOneCm</Word>
+          <Word>horseOneCm</Word>
+          <Word>jump</Word>
+          <Word>drop</Word>
+          <Word>damageDealt</Word>
+          <Word>damageTaken</Word>
+          <Word>deaths</Word>
+          <Word>mobKills</Word>
+          <Word>animalsBred</Word>
+          <Word>playerKills</Word>
+          <Word>fishCaught</Word>
+          <Word>junkFished</Word>
+          <Word>treasureFished</Word>
+          <Word>talkedToVillager</Word>
+          <Word>tradedWithVillager</Word>
+        </Keywords>
+      </RuleSet>
+    </Span>
+    <Span>
+      <Begin color="Temp">slot\.</Begin>
+      <End>\W</End>
+      <RuleSet>
+        <Keywords color="Temp">
+          <Word>armor</Word>
+          <Word>weapon</Word>
+          <Word>enderchest</Word>
+          <Word>hotbar</Word>
+          <Word>inventory</Word>
+          <Word>horse</Word>
+          <Word>villager</Word>
+        </Keywords>
+      </RuleSet>
+    </Span>
+    <Span>
+      <Begin color="Temp">armor\.</Begin>
+      <End>\W</End>
+      <RuleSet>
+        <Keywords color="Temp">
+          <Word>chest</Word>
+          <Word>feet</Word>
+          <Word>head</Word>
+          <Word>legs</Word>
+        </Keywords>
+      </RuleSet>
+    </Span>
+    <Span>
+      <Begin color="Temp">horse\.</Begin>
+      <End>\W</End>
+      <RuleSet>
+        <Keywords color="Temp">
+          <Word>saddle</Word>
+          <Word>armor</Word>
+          <Word>chest</Word>
+        </Keywords>
+      </RuleSet>
+    </Span>
 
+    <!-- minecraft effects -->
+    <Keywords color="Effect">
+      <Word>speed</Word>
+      <Word>slowness</Word>
+      <Word>haste</Word>
+      <Word>mining_fatigue</Word>
+      <Word>strength</Word>
+      <Word>instant_health</Word>
+      <Word>instant_damage</Word>
+      <Word>jump_boost</Word>
+      <Word>nausea</Word>
+      <Word>regeneration</Word>
+      <Word>resistance</Word>
+      <Word>fire_resistance</Word>
+      <Word>water_breathing</Word>
+      <Word>invisibility</Word>
+      <Word>blindness</Word>
+      <Word>night_vision</Word>
+      <Word>hunger</Word>
+      <Word>weakness</Word>
+      <Word>poison</Word>
+      <Word>wither</Word>
+      <Word>health_boost</Word>
+      <Word>absorption</Word>
+      <Word>saturation</Word>
+    </Keywords>
+    
+    <!-- minecraft enchants -->
+    <Keywords color="Enchant">
+      <Word>protection</Word>
+      <Word>fire_protection</Word>
+      <Word>feather_falling</Word>
+      <Word>blast_protection</Word>
+      <Word>projectile_protection</Word>
+      <Word>respiration</Word>
+      <Word>aqua_affinity</Word>
+      <Word>thorns</Word>
+      <Word>depth_strider</Word>
+      <Word>sharpness</Word>
+      <Word>smite</Word>
+      <Word>bane_of_arthropods</Word>
+      <Word>knockback</Word>
+      <Word>fire_aspect</Word>
+      <Word>looting</Word>
+      <Word>efficiency</Word>
+      <Word>silk_touch</Word>
+      <Word>unbreaking</Word>
+      <Word>fortune</Word>
+      <Word>power</Word>
+      <Word>punch</Word>
+      <Word>flame</Word>
+      <Word>infinity</Word>
+      <Word>luck_of_the_sea</Word>
+      <Word>lure</Word>
+    </Keywords>
+    
     <!-- minecraft entities -->
     <Keywords color="Entity">
       <Word>Item</Word>
       <Word>XPOrb</Word>
       <Word>ArmorStand</Word>
+      <Word>LightningBolt</Word>
       <Word>LeashKnot</Word>
       <Word>Painting</Word>
       <Word>ItemFrame</Word>
@@ -775,7 +984,6 @@
       <Word>EntityHorse</Word>
       <Word>Rabbit</Word>
       <Word>Villager</Word>
-      <Word>LightningBolt</Word>
     </Keywords>
 
     <!-- minecraft items -->
@@ -942,6 +1150,9 @@
       <Word>coal_block</Word>
       <Word>packed_ice</Word>
       <Word>double_plant</Word>
+      <Word>red_sandstone</Word>
+      <Word>double_stone_slab2</Word>
+      <Word>stone_slab2</Word>
       <Word>iron_shovel</Word>
       <Word>iron_pickaxe</Word>
       <Word>iron_axe</Word>
@@ -1097,12 +1308,28 @@
       <Word>hopper_minecart</Word>
       <Word>prismarine_shard</Word>
       <Word>prismarine_crystals</Word>
+      <Word>rabbit</Word>
+      <Word>cooked_rabbit</Word>
+      <Word>rabbit_stew</Word>
+      <Word>rabbit_foot</Word>
+      <Word>rabbit_hide</Word>
+      <Word>armor_stand</Word>
       <Word>iron_horse_armor</Word>
       <Word>golden_horse_armor</Word>
       <Word>diamond_horse_armor</Word>
       <Word>lead</Word>
       <Word>name_tag</Word>
       <Word>command_block_minecart</Word>
+      <Word>mutton</Word>
+      <Word>cooked_mutton</Word>
+      <Word>banner</Word>
+      <Word>standing_banner</Word>
+      <Word>wall_banner</Word>
+      <Word>spruce_door</Word>
+      <Word>birch_door</Word>
+      <Word>jungle_door</Word>
+      <Word>acacia_door</Word>
+      <Word>dark_oak_door</Word>
       <Word>record_13</Word>
       <Word>record_cat</Word>
       <Word>record_blocks</Word>
@@ -1115,20 +1342,11 @@
       <Word>record_ward</Word>
       <Word>record_11</Word>
       <Word>record_wait</Word>
-      <Word>banner</Word>
-      <Word>standing_banner</Word>
-      <Word>wall_banner</Word>
     </Keywords>
 
     <!-- minecraft commands -->
     <Keywords color="Command">
-      <Word>/help</Word>
       <Word>/?</Word>
-      <Word>/me</Word>
-      <Word>/tell</Word>
-      <Word>/msg</Word>
-      <Word>/w</Word>
-      <Word>/trigger</Word>
       <Word>/achievement</Word>
       <Word>/blockdata</Word>
       <Word>/clear</Word>
@@ -1143,7 +1361,10 @@
       <Word>/gamemode</Word>
       <Word>/gamerule</Word>
       <Word>/give</Word>
+      <Word>/help</Word>
       <Word>/kill</Word>
+      <Word>/me</Word>
+      <Word>/msg</Word>
       <Word>/particle</Word>
       <Word>/playsound</Word>
       <Word>/publish</Word>
@@ -1157,6 +1378,7 @@
       <Word>/spreadplayers</Word>
       <Word>/stats</Word>
       <Word>/summon</Word>
+      <Word>/tell</Word>
       <Word>/tellraw</Word>
       <Word>/testfor</Word>
       <Word>/testforblock</Word>
@@ -1165,6 +1387,8 @@
       <Word>/title</Word>
       <Word>/toggledownfall</Word>
       <Word>/tp</Word>
+      <Word>/trigger</Word>
+      <Word>/w</Word>
       <Word>/weather</Word>
       <Word>/worldborder</Word>
       <Word>/xp</Word>

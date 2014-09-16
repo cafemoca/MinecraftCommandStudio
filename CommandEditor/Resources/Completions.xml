@@ -1,0 +1,5553 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Completions>
+
+  <Commands>
+    <!-- ********************************************************************************************** -->
+    <Command name="achievement">
+      <Desc>
+        対象のプレイヤーに指定した実績を与えます
+
+        /achievement &lt;give|take&gt; &lt;実績名|*&gt; [プレイヤー]
+      </Desc>
+      <Arg type="keywords">
+        <Word>give</Word>
+        <Word>take</Word>
+        <Arg type="keywords">
+          <Word>achievement</Word>
+          <Word>stat</Word>
+          <Arg type="target" />
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="blockdata">
+      <Desc>
+        指定した座標に存在するブロックのデータタグを変更します
+        
+        /blockdata &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;データタグ&gt;
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="tag" />
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="clear">
+      <Desc>
+        対象のプレイヤーのインベントリからアイテムを削除します
+
+        /clear [プレイヤー] [アイテム] [データ値] [最大個数] [データタグ]
+      </Desc>
+      <Arg type="target">
+        <Arg type="item">
+          <Arg type="numeric">
+            <Arg type="numeric">
+              <Arg type="tag" />
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="clone">
+      <Desc>
+        指定した座標範囲内のブロックを、別の指定した座標にコピーします
+        一度にコピー出来るのは 4096 ブロックまでです
+        
+        /clone &lt;x1&gt; &lt;y1&gt; &lt;z1&gt; &lt;x2&gt; &lt;y2&gt; &lt;z2&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; [モード1] [モード2] [ブロック]
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="location">
+                <Arg type="location">
+                  <Arg type="location">
+                    <Arg type="location">
+                      <Arg type="location">
+                        <Arg type="keywords">
+                          <Word>filtered</Word>
+                          <Word>masked</Word>
+                          <Word>replace</Word>
+                          <Arg type="keywords">
+                            <Word>force</Word>
+                            <Word>move</Word>
+                            <Word>normal</Word>
+                            <Arg type="block" />
+                          </Arg>
+                        </Arg>
+                      </Arg>
+                    </Arg>
+                  </Arg>
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="defaultgamemode">
+      <Desc>
+        ワールドの既定のゲームモードを設定します
+        新たにワールドに入るプレイヤーに適用されます
+
+        /defaultgamemode &lt;モード&gt;
+      </Desc>
+      <Arg type="keywords">
+        <Word>survival</Word>
+        <Word>creative</Word>
+        <Word>adventure</Word>
+        <Word>spectator</Word>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="difficulty">
+      <Desc>
+        ワールドの難易度を設定します
+        
+        /difficulty &lt;新しい難易度&gt;
+      </Desc>
+      <Arg type="keywords">
+        <Word>peaceful</Word>
+        <Word>easy</Word>
+        <Word>normal</Word>
+        <Word>hard</Word>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="effect">
+      <Desc>
+        指定したプレイヤーにエフェクト (ステータス効果) を付与します
+        
+        /effect &lt;プレイヤー&gt; clear
+        /effect &lt;プレイヤー&gt; &lt;効果&gt; [秒数] [強さ] [パーティクル表示]
+      </Desc>
+      <Arg type="target">
+        <Arg type="effect"
+             default="true">
+          <Arg type="numeric">
+            <Arg type="numeric">
+              <Arg type="boolean" />
+            </Arg>
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="clear" />
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="enchant">
+      <Desc>
+        指定したプレイヤーが所持しているアイテムにエンチャントを付与します
+        
+        /enchant &lt;プレイヤー&gt; &lt;エンチャントID&gt; [レベル]
+      </Desc>
+      <Arg type="target">
+        <Arg type="enchant">
+          <Arg type="numeric" />
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="entitydata">
+      <Desc>
+        対象のエンティティのデータタグを変更します
+        
+        /entitydata &lt;エンティティ&gt; &lt;データタグ&gt;
+      </Desc>
+      <Arg type="target_entity">
+        <Arg type="tag" />
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="execute">
+      <Desc>
+        指定したエンティティにコマンドを実行させます
+        
+        /execute &lt;エンティティ&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;コマンド&gt;
+        /execute &lt;エンティティ&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; detect &lt;x2&gt; &lt;y2&gt; &lt;z2&gt; &lt;ブロック&gt; &lt;データ&gt; &lt;コマンド&gt;
+      </Desc>
+      <Arg type="target">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="command"
+                   default="true" />
+              <Arg type="key"
+                   key="detect">
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="fill">
+      <Desc>
+        指定した範囲内を指定したブロックで埋めます
+        
+        /fill &lt;x1&gt; &lt;y1&gt; &lt;z1&gt; &lt;x2&gt; &lt;y2&gt; &lt;z2&gt; &lt;ブロック&gt; [データ値] [元のブロックの処理] [データタグ]
+        /fill &lt;x1&gt; &lt;y1&gt; &lt;z1&gt; &lt;x2&gt; &lt;y2&gt; &lt;z2&gt; &lt;ブロック&gt; [データ値] replace [置換対象のブロック] [置換対象のデータタグ]
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="location">
+                <Arg type="location">
+                  <Arg type="block">
+                    <Arg type="numeric">
+                      <Arg type="key"
+                           key="destroy">
+                        <Arg type="tag" />
+                      </Arg>
+                      <Arg type="key"
+                           key="hollow">
+                        <Arg type="tag" />
+                      </Arg>
+                      <Arg type="key"
+                           key="keep">
+                        <Arg type="tag" />
+                      </Arg>
+                      <Arg type="key"
+                           key="outline">
+                        <Arg type="tag" />
+                      </Arg>
+                      <Arg type="key"
+                           key="replace">
+                        <Arg type="block">
+                          <Arg type="numeric" />
+                        </Arg>
+                      </Arg>
+                    </Arg>
+                  </Arg>
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="gamemode">
+      <Desc>
+        対象のプレイヤーのゲームモードを設定します
+        
+        /gamemode &lt;モード&gt; [プレイヤー]
+      </Desc>
+      <Arg type="keywords">
+        <Word>survival</Word>
+        <Word>creative</Word>
+        <Word>adventure</Word>
+        <Word>spectator</Word>
+        <Arg type="target" />
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="gamerule">
+      <Desc>
+        ワールドのゲームルールを設定もしくは表示します
+        
+        /gamerule &lt;ルール名&gt; [値]
+      </Desc>
+      <Arg type="keywords"
+           default="true">
+        <Word>commandBlockOutput</Word>
+        <Word>doDaylightCycle</Word>
+        <Word>doFireTick</Word>
+        <Word>doMobLoot</Word>
+        <Word>doMobSpawning</Word>
+        <Word>doTileDrops</Word>
+        <Word>keepInventory</Word>
+        <Word>logAdminCommands</Word>
+        <Word>mobGriefing</Word>
+        <Word>naturalRegeneration</Word>
+        <Word>randomTickSpeed</Word>
+        <Word>reducedDebugInfo</Word>
+        <Word>sendCommandFeedback</Word>
+        <Word>showDeathMessages</Word>
+        <Arg type="boolean" />
+      </Arg>
+      <Arg type="key"
+           key="randomTickSpeed">
+        <Arg type="numeric" />
+      </Arg>
+    </Command>
+      <!-- ********************************************************************************************** -->
+    <Command name="give">
+      <Desc>
+        対象のプレイヤーに指定したアイテムを与えます
+        
+        /give &lt;プレイヤー&gt; &lt;アイテム&gt; [量] [データ値] [データタグ]
+      </Desc>
+      <Arg type="target">
+        <Arg type="item">
+          <Arg type="numeric">
+            <Arg type="numeric">
+              <Arg type="tag" />
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="kill">
+      <Desc>
+        対象のエンティティを殺します
+        
+        /kill [プレイヤー|エンティティ]
+      </Desc>
+      <Arg type="target" />
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="particle">
+      <Desc>
+        指定した位置にパーティクルを生成・表示します
+        
+        /particle &lt;パーティクル名&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;xd&gt; &lt;yd&gt; &lt;zd&gt; &lt;速さ&gt; [回数] [モード]
+      </Desc>
+      <Arg type="particle">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="numeric">
+                <Arg type="numeric">
+                  <Arg type="numeric">
+                    <Arg type="numeric">
+                      <Arg type="numeric">
+                        <Arg type="keywords">
+                          <Word>force</Word>
+                        </Arg>
+                      </Arg>
+                    </Arg>
+                  </Arg>
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="playsound">
+      <Desc>
+        指定した対象に対してサウンドを再生させます
+        
+        /playsound &lt;サウンド名&gt; &lt;プレイヤー&gt; [x] [y] [z] [音量] [ピッチ] [最小音量]
+      </Desc>
+      <Arg type="sound">
+        <Arg type="target">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="location">
+                <Arg type="numeric">
+                  <Arg type="numeric">
+                    <Arg type="numeric" />
+                  </Arg>
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="replaceitem">
+      <Desc>
+        ブロックやエンティティの指定したスロットを、指定したアイテムに置き換えます
+        
+        /replaceitem block &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;スロット&gt; &lt;アイテム&gt; [個数] [データ値] [データタグ]
+        /replaceitem entity &lt;エンティティ&gt; &lt;アイテム&gt; [個数] [データ値] [データタグ]
+      </Desc>
+      <Arg type="key"
+           key="block">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="slot">
+                <Arg type="item">
+                  <Arg type="numeric">
+                    <Arg type="numeric">
+                      <Arg type="tag" />
+                    </Arg>
+                  </Arg>
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="entity">
+        <Arg type="target">
+          <Arg type="slot">
+            <Arg type="item">
+              <Arg type="numeric">
+                <Arg type="numeric">
+                  <Arg type="tag" />
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="say">
+      <Desc>
+        指定したプレイヤーにプライベートメッセージを送信します
+
+        /tell &lt;プレイヤー&gt; &lt;メッセージ&gt;
+      </Desc>
+      <Arg type="text" />
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="scoreboard">
+      <Desc>
+        スコアボードに関する様々な設定や操作を行います
+        
+        /scoreboard &lt;objectives|players|teams&gt; ...
+
+        ※このコマンドに関する詳細は wiki 等をご覧ください
+      </Desc>
+      <Arg type="key"
+           key="objectives">
+        <Arg type="key"
+             key="list" />
+        <Arg type="key"
+             key="add">
+          <Arg type="score">
+            <Arg type="keywords">
+              <Word>dummy</Word>
+              <Word>trigger</Word>
+              <Word>deathCount</Word>
+              <Word>playerKillCount</Word>
+              <Word>totalKillCount</Word>
+              <Word>health</Word>
+              <Arg type="text" />
+            </Arg>
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="remove">
+          <Arg type="score" />
+        </Arg>
+        <Arg type="key"
+             key="setdisplay">
+          <Arg type="keywords">
+            <Word>list</Word>
+            <Word>sidebar</Word>
+            <Word>belowName</Word>
+            <Arg type="score" />
+          </Arg>
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="players">
+        <Arg type="key"
+             key="list">
+          <Arg type="target" />
+        </Arg>
+        <Arg type="key"
+             key="set">
+          <Arg type="target">
+            <Arg type="score">
+              <Arg type="numeric">
+                <Arg type="tag" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="add">
+          <Arg type="target">
+            <Arg type="score">
+              <Arg type="numeric">
+                <Arg type="tag" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="remove">
+          <Arg type="target">
+            <Arg type="score">
+              <Arg type="numeric">
+                <Arg type="tag" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="reset">
+          <Arg type="target">
+            <Arg type="score" />
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="enable">
+          <Arg type="target">
+            <Arg type="score" />
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="test">
+          <Arg type="target">
+            <Arg type="score">
+              <Arg type="numeric">
+                <Arg type="numeric" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="operation">
+          <Arg type="target">
+            <Arg type="score">
+              <Arg type="keywords">
+                <Word tip="+=\n加算">
+                  +=
+                </Word>
+                <Word tip="">
+                  -=
+                </Word>
+                <Word tip="">
+                  *=
+                </Word>
+                <Word tip="">
+                  /=
+                </Word>
+                <Word tip="">
+                  %=
+                </Word>
+                <Word tip="">
+                  =
+                </Word>
+                <Word tip="">
+                  &lt;
+                </Word>
+                <Word tip="">
+                  &gt;
+                </Word>
+                <Word tip="">
+                  &gt;&lt;
+                </Word>
+                <Arg type="target">
+                  <Arg type="score" />
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="teams">
+        <Arg type="key"
+             key="list">
+          <Arg type="team" />
+        </Arg>
+        <Arg type="key"
+             key="add">
+          <Arg type="team">
+            <Arg type="text" />
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="remove">
+          <Arg type="team" />
+        </Arg>
+        <Arg type="key"
+             key="empty">
+          <Arg type="team" />
+        </Arg>
+        <Arg type="key"
+             key="join">
+          <Arg type="team" />
+        </Arg>
+        <Arg type="key"
+             key="leave">
+          <Arg type="team" />
+        </Arg>
+        <Arg type="key"
+             key="option">
+          <Arg type="team">
+            <Arg type="key"
+                 key="color">
+              <Arg type="color">
+              </Arg>
+            </Arg>
+            <Arg type="key"
+                 key="friendlyfire">
+              <Arg type="boolean" />
+            </Arg>
+            <Arg type="key"
+                 key="seeFriendlyInvisibles">
+              <Arg type="boolean" />
+            </Arg>
+            <Arg type="key"
+                 key="nametagVisibility">
+              <Arg type="keywords">
+                <Word>never</Word>
+                <Word>hideForOtherTeams</Word>
+                <Word>hideForOwnTeam</Word>
+                <Word>always</Word>
+              </Arg>
+            </Arg>
+            <Arg type="key"
+                 key="deathMessageVisibility">
+              <Arg type="keywords">
+                <Word>never</Word>
+                <Word>hideForOtherTeams</Word>
+                <Word>hideForOwnTeam</Word>
+                <Word>always</Word>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="setblock">
+      <Desc>
+        指定した座標に指定したブロックを設置します
+        
+        /setblock &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;ブロック&gt; [データ値] [元のブロックの処理] [データタグ]
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="block">
+              <Arg type="numeric">
+                <Arg type="keywords">
+                  <Word>destroy</Word>
+                  <Word>keep</Word>
+                  <Word>replace</Word>
+                  <Arg type="tag" />
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="setworldspawn">
+      <Desc>
+        ワールドの初期スポーン地点を設定します
+        
+        /setworldspawn [&lt;x&gt; &lt;y&gt; &lt;z&gt;]
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location" />
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="spawnpoint">
+      <Desc>
+        プレイヤーのスポーン地点を設定します
+
+        /spawnpoint
+        /spawnpoint &lt;プレイヤー&gt; [&lt;x&gt; &lt;y&gt; &lt;z&gt;]
+      </Desc>
+      <Arg type="target">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location" />
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="spreadplayers">
+      <Desc>
+        対象のプレイヤーを指定範囲内でランダムに散開させます
+        
+        /spreadplayers &lt;x&gt; &lt;z&gt; &lt;散開距離&gt; &lt;最大範囲&gt; &lt;チーム全体への適用&gt; &lt;プレイヤー ...&gt;
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="numeric">
+            <Arg type="numeric">
+              <Arg type="boolean">
+                <Arg type="target" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+      <!-- ********************************************************************************************** -->
+    <Command name="stats">
+      <Desc>
+        ブロックやエンティティのコマンド実行時の返り値と代入するスコアを設定します
+        ブロックとプレイヤーはコマンドを実行することができます
+        /execute を用いることでプレイヤー以外のエンティティもコマンドを実行することができます
+        
+        このコマンドで返り値が設定されたブロックやエンティティがコマンドを実行する際
+        コマンドによって影響されたブロック数やコマンドを実行した・検知したエンティティの数をスコアに代入します
+        
+        /stats block &lt;x&gt; &lt;y&gt; &lt;z&gt; clear &lt;統計&gt;
+        /stats block &lt;x&gt; &lt;y&gt; &lt;z&gt; set &lt;統計&gt; &lt;ターゲット&gt; &lt;スコアボードのオブジェクト名&gt;
+        /stats entity &lt;ターゲット2&gt; clear &lt;統計&gt;
+        /stats entity &lt;ターゲット2&gt; set &lt;統計&gt; &lt;ターゲット&gt; &lt;スコアボードのオブジェクト名&gt;
+        
+        ※このコマンドに関する詳細は wiki 等をご覧ください
+      </Desc>
+      <Arg type="key"
+           key="block">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="key"
+                   key="clear">
+                <Arg type="keywords">
+                  <Word>AffectedBlocks</Word>
+                  <Word>AffectedEntities</Word>
+                  <Word>AffectedItems</Word>
+                  <Word>QueryResult</Word>
+                  <Word>SuccessCount</Word>
+                </Arg>
+              </Arg>
+              <Arg type="key"
+                   key="set">
+                <Arg type="keywords">
+                  <Word>AffectedBlocks</Word>
+                  <Word>AffectedEntities</Word>
+                  <Word>AffectedItems</Word>
+                  <Word>QueryResult</Word>
+                  <Word>SuccessCount</Word>
+                  <Arg type="target">
+                    <Arg type="score" />
+                  </Arg>
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="entity">
+        <Arg type="target">
+          <Arg type="key"
+               key="clear">
+            <Arg type="keywords">
+              <Word>AffectedBlocks</Word>
+              <Word>AffectedEntities</Word>
+              <Word>AffectedItems</Word>
+              <Word>QueryResult</Word>
+              <Word>SuccessCount</Word>
+            </Arg>
+          </Arg>
+          <Arg type="key"
+               key="set">
+            <Arg type="keywords">
+              <Word>AffectedBlocks</Word>
+              <Word>AffectedEntities</Word>
+              <Word>AffectedItems</Word>
+              <Word>QueryResult</Word>
+              <Word>SuccessCount</Word>
+              <Arg type="target">
+                <Arg type="score" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="summon">
+      <Desc>
+        指定した座標にエンティティを召喚します
+        
+        /summon &lt;エンティティ&gt; [x] [y] [z] [データタグ]
+      </Desc>
+      <Arg type="entity">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="tag" />
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="tell">
+      <Desc>
+        指定したプレイヤーにプライベートメッセージを送信します
+
+        /tell &lt;プレイヤー&gt; &lt;メッセージ&gt;
+      </Desc>
+      <Arg type="target">
+        <Arg type="text" />
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="tellraw">
+      <Desc>
+        チャットログに文字列を表示します
+        
+        /tellraw &lt;プレイヤー&gt; &lt;メッセージ&gt;
+      </Desc>
+      <Arg type="target">
+        <Arg type="rawjson" />
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="testfor">
+      <Desc>
+        対象のプレイヤーがオンラインかどうか、またセレクタで指定した条件に合致するプレイヤーが何名かを検知します
+        
+        /testfor &lt;プレイヤー&gt; [データタグ]
+      </Desc>
+      <Arg type="target">
+        <Arg type="tag" />
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="testforblock">
+      <Desc>
+        指定した座標に特定のブロックが存在するかどうかを検知します
+        
+        /testforblock &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;タイル名&gt; [データ値] [データタグ]
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="block">
+              <Arg type="numeric">
+                <Arg type="tag" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="testforblocks">
+      <Desc>
+        2 つの指定した範囲のブロックが一致しているかを検知します
+        似た名前の /testforblock コマンドとは関係ありません
+        
+        /testforblocks &lt;x1&gt; &lt;y1&gt; &lt;z1&gt; &lt;x2&gt; &lt;y2&gt; &lt;z2&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt; [モード]
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="location">
+                <Arg type="location">
+                  <Arg type="location">
+                    <Arg type="location">
+                      <Arg type="location">
+                        <Arg type="keywords">
+                          <Word>all</Word>
+                          <Word>masked</Word>
+                        </Arg>
+                      </Arg>
+                    </Arg>
+                  </Arg>
+                </Arg>
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="time">
+      <Desc>
+        ワールドの時刻を設定します
+        
+        /time &lt;add|query|set&gt; &lt;value&gt;
+      </Desc>
+      <Arg type="key"
+           key="add">
+        <Arg type="numeric" />
+      </Arg>
+      <Arg type="key"
+           key="query">
+        <Arg type="keywords">
+          <Word>daytime</Word>
+          <Word>gametime</Word>
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="set">
+        <Arg type="keywords">
+          <Word desc="1,000">day</Word>
+          <Word desc="13,000">night</Word>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="title">
+      <Desc>
+        画面上にタイトルを表示します
+        
+        /title &lt;プレイヤー&gt; clear
+        /title &lt;プレイヤー&gt; reset
+        /title &lt;プレイヤー&gt; subtitle &lt;サブタイトル&gt;
+        /title &lt;プレイヤー&gt; times &lt;フェードイン時間&gt; &lt;表示時間&gt; &lt;フェードアウト時間&gt;
+        /title &lt;プレイヤー&gt; title &lt;タイトル&gt;
+      </Desc>
+      <Arg type="target">
+        <Arg type="key"
+             key="clear" />
+        <Arg type="key"
+             key="reset" />
+        <Arg type="key"
+             key="subtitle">
+          <Arg type="rawjson" />
+        </Arg>
+        <Arg type="key"
+             key="times">
+          <Arg type="numeric">
+            <Arg type="numeric">
+              <Arg type="numeric" />
+            </Arg>
+          </Arg>
+        </Arg>
+        <Arg type="key"
+             key="title">
+          <Arg type="rawjson" />
+        </Arg>
+      </Arg>
+    </Command>
+    <Command name="tp">
+      <Desc>
+        対象のプレイヤーを指定座標または特定のプレイヤーの元へテレポートします
+        
+        /tp [対象プレイヤー] &lt;移動先プレイヤー&gt;
+        /tp [対象プレイヤー] &lt;x&gt; &lt;y&gt; &lt;z&gt; [&lt;y-rot&gt; &lt;x-rot&gt;]
+      </Desc>
+      <Arg type="target">
+        <Arg type="target"
+             default="true" />
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="location">
+              <Arg type="numeric">
+                <Arg type="numeric" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="trigger">
+      <Desc>
+        権限がないプレイヤーのスコアを変更します
+        あらかじめ "/scoreboard players enable &lt;player&gt; &lt;objective&gt;" コマンドにより
+        スコアを変更する権限を付与する必要があります
+        このコマンドで変更するたびに権限を付与しなければなりません
+        
+        /trigger &lt;objective&gt; &lt;add|set&gt; &lt;値&gt;
+    </Desc>
+      <Arg type="score">
+        <Arg type="keywords">
+          <Word>add</Word>
+          <Word>set</Word>
+          <Arg type="numeric" />
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="weather">
+      <Desc>
+        天候を設定します
+        
+        /weather &lt;clear|rain|thunder&gt; [持続時間(秒)]
+      </Desc>
+      <Arg type="keywords">
+        <Word>clear</Word>
+        <Word>rain</Word>
+        <Word>thunder</Word>
+        <Arg type="numeric" />
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="worldborder">
+      <Desc>
+        ワールドの境界に関する様々な設定をします
+        
+        /worldborder &lt;set|center|damage|warning|get&gt; ...
+        
+        ※このコマンドに関する詳細は wiki 等をご覧ください
+      </Desc>
+      <Arg type="key"
+           key="add">
+        <Arg type="numeric">
+          <Arg type="numeric" />
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="center">
+        <Arg type="location">
+          <Arg type="location" />
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="damage">
+        <Arg type="key"
+             key="amount">
+          <Arg type="numeric" />
+        </Arg>
+        <Arg type="key"
+             key="buffer">
+          <Arg type="numeric" />
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="get" />
+      <Arg type="key"
+           key="set">
+        <Arg type="numeric">
+          <Arg type="numeric" />
+        </Arg>
+      </Arg>
+      <Arg type="key"
+           key="warning">
+        <Arg type="key"
+             key="distance">
+          <Arg type="block" />
+        </Arg>
+        <Arg type="key"
+             key="time">
+          <Arg type="numeric" />
+        </Arg>
+      </Arg>
+    </Command>
+    <!-- ********************************************************************************************** -->
+    <Command name="xp">
+      <Desc>
+        対象のプレイヤーに経験値を与えます
+        
+        /xp &lt;amount&gt; [プレイヤー]
+        /xp &lt;amount&gt;L [プレイヤー]
+      </Desc>
+      <Arg type="numeric">
+        <Arg type="target" />
+      </Arg>
+    </Command>
+  </Commands>
+
+  <ExCommands>
+    <!-- ********************************************************************************************** -->
+    <Command name="detect">
+      <Desc>
+        (/execute コマンド用のモード)
+        
+        直後に指定する座標に、指定したブロックが存在するかどうか検知します
+        ブロックが検知された場合に、次のコマンドを実行します
+
+        ... detect &lt;x2&gt; &lt;y2&gt; &lt;z2&gt; &lt;ブロック&gt; &lt;データ値&gt; &lt;コマンド&gt;
+      </Desc>
+      <Arg type="location">
+        <Arg type="location">
+          <Arg type="location">
+            <Arg type="block">
+              <Arg type="numeric">
+                <Arg type="command" />
+              </Arg>
+            </Arg>
+          </Arg>
+        </Arg>
+      </Arg>
+    </Command>
+  </ExCommands>
+
+  <Items>
+    <Item name="stone">
+      <Desc>
+        石 (#0001)
+
+        データ値
+        　0: 石
+        　1: 花崗岩
+        　2: 磨かれた花崗岩
+        　3: 閃緑岩
+        　4: 磨かれた閃緑岩
+        　5: 安山岩
+        　6: 磨かれた安山岩
+      </Desc>
+    </Item>
+    <Item name="grass">
+      <Desc>
+        草ブロック (#0002)
+      </Desc>
+    </Item>
+    <Item name="dirt">
+      <Desc>
+        土 (#0003)
+
+        データ値
+        　0: 土
+        　1: 荒れた土
+        　2: ポドゾル
+      </Desc>
+    </Item>
+    <Item name="cobblestone">
+      <Desc>
+        丸石 (#0004)
+      </Desc>
+    </Item>
+    <Item name="planks">
+      <Desc>
+        木材 (#0005)
+
+        データ値
+        　0: オークの木材
+        　1: マツの木材
+        　2: シラカバの木材
+        　3: 熱帯樹の木材
+        　4: アカシアの木材
+        　5: ダークオークの木材
+      </Desc>
+    </Item>
+    <Item name="sapling">
+      <Desc>
+        苗木 (#0006)
+
+        データ値
+        　0: オークの苗木
+        　1: マツの苗木
+        　2: シラカバの苗木
+        　3: 熱帯樹の苗木
+        　4: アカシアの苗木
+        　5: ダークオークの木材
+      </Desc>
+    </Item>
+    <Item name="bedrock">
+      <Desc>
+        岩盤 (#0007)
+      </Desc>
+    </Item>
+    <Item name="sand">
+      <Desc>
+        砂 (#0012)
+
+        データ値
+        　0: 砂
+        　1: 赤砂
+      </Desc>
+    </Item>
+    <Item name="gravel">
+      <Desc>
+        砂利 (#0013)
+      </Desc>
+    </Item>
+    <Item name="gold_ore">
+      <Desc>
+        金鉱石 (#0014)
+      </Desc>
+    </Item>
+    <Item name="iron_ore">
+      <Desc>
+        鉄鉱石 (#0015)
+      </Desc>
+    </Item>
+    <Item name="coal_ore">
+      <Desc>
+        石炭鉱石 (#0016)
+      </Desc>
+    </Item>
+    <Item name="log">
+      <Desc>
+        原木 (#0017)
+
+        データ値
+        　0: オークの原木
+        　1: マツの原木
+        　2: シラカバの原木
+        　3: 熱帯樹の原木
+      </Desc>
+    </Item>
+    <Item name="leaves">
+      <Desc>
+        葉ブロック (#0018)
+
+        データ値
+        　0: オークの葉
+        　1: マツの葉
+        　2: シラカバの葉
+        　3: 熱帯樹の葉
+      </Desc>
+    </Item>
+    <Item name="sponge">
+      <Desc>
+        スポンジ (#0019)
+
+        データ値:
+        　0: スポンジ
+        　1: ぬれたスポンジ
+      </Desc>
+    </Item>
+    <Item name="glass">
+      <Desc>
+        ガラス (#0020)
+      </Desc>
+    </Item>
+    <Item name="lapis_ore">
+      <Desc>
+        ラピスラズリ鉱石 (#0021)
+      </Desc>
+    </Item>
+    <Item name="lapis_block">
+      <Desc>
+        ラピスラズリブロック (#0022)
+      </Desc>
+    </Item>
+    <Item name="dispenser">
+      <Desc>
+        ディスペンサー (#0023)
+      </Desc>
+    </Item>
+    <Item name="sandstone">
+      <Desc>
+        砂岩 (#0024)
+
+        データ値
+        　0: 砂岩
+        　1: 模様入り砂岩
+        　2: 滑らかな砂岩
+      </Desc>
+    </Item>
+    <Item name="noteblock">
+      <Desc>
+        音符ブロック (#0025)
+      </Desc>
+    </Item>
+    <Item name="golden_rail">
+      <Desc>
+        パワードレール (#0027)
+      </Desc>
+    </Item>
+    <Item name="detector_rail">
+      <Desc>
+        ディテクターレール (#0028)
+      </Desc>
+    </Item>
+    <Item name="sticky_piston">
+      <Desc>
+        粘着ピストン (#0029)
+      </Desc>
+    </Item>
+    <Item name="web">
+      <Desc>
+        クモの巣 (#0030)
+      </Desc>
+    </Item>
+    <Item name="tallgrass">
+      <Desc>
+        草 (#0031)
+
+        データ値
+        　0: 草
+        　1:
+        　2: シダ
+      </Desc>
+    </Item>
+    <Item name="deadbush">
+      <Desc>
+        枯れ木 (#0032)
+      </Desc>
+    </Item>
+    <Item name="piston">
+      <Desc>
+        ピストン (#0033)
+      </Desc>
+    </Item>
+    <Item name="wool">
+      <Desc>
+        羊毛 (#0035)
+
+        データ値
+        　0: 羊毛 (白色)
+        　1: 橙色の羊毛
+        　2: 赤紫色の羊毛
+        　3: 空色の羊毛
+        　4: 黄色の羊毛
+        　5: 黄緑色の羊毛
+        　6: 桃色の羊毛
+        　7: 灰色の羊毛
+        　8: 薄灰色の羊毛
+        　9: 水色の羊毛
+        　10: 紫色の羊毛
+        　11: 青色の羊毛
+        　12: 茶色の羊毛
+        　13: 緑色の羊毛
+        　14: 赤色の羊毛
+        　15: 黒色の羊毛
+      </Desc>
+    </Item>
+    <Item name="yellow_flower">
+      <Desc>
+        タンポポ (#0037)
+      </Desc>
+    </Item>
+    <Item name="red_flower">
+      <Desc>
+        ポピー (#0038)
+
+        データ値
+        　0: ポピー
+        　1: ヒスイラン
+        　2: アリウム
+        　3: ヒナソウ
+        　4: 赤色のチューリップ
+        　5: 橙色のチューリップ
+        　6: 白色のチューリップ
+        　7: 桃色のチューリップ
+        　8: フランスギク
+      </Desc>
+    </Item>
+    <Item name="brown_mushroom">
+      <Desc>
+        キノコ (#0039)
+
+        茶色のキノコ
+      </Desc>
+    </Item>
+    <Item name="red_mushroom">
+      <Desc>
+        キノコ (#0040)
+
+        赤色のキノコ
+      </Desc>
+    </Item>
+    <Item name="gold_block">
+      <Desc>
+        金ブロック (#0041)
+      </Desc>
+    </Item>
+    <Item name="iron_block">
+      <Desc>
+        鉄ブロック (#0042)
+      </Desc>
+    </Item>
+    <Item name="stone_slab">
+      <Desc>
+        石ハーフブロック (#0044)
+
+        データ値
+        　0: 石ハーフブロック
+        　1: 砂岩ハーフブロック
+        　2: 木材ハーフブロック (石扱い)
+        　3: 丸石ハーフブロック
+        　4: レンガハーフブロック
+        　5: 石レンガハーフブロック
+        　6: ネザーレンガハーフブロック
+        　7: ネザー水晶ハーフブロック
+      </Desc>
+    </Item>
+    <Item name="brick_block">
+      <Desc>
+        レンガ (#0045)
+      </Desc>
+    </Item>
+    <Item name="tnt">
+      <Desc>
+        TNT (#0046)
+      </Desc>
+    </Item>
+    <Item name="bookshelf">
+      <Desc>
+        本棚 (#0047)
+      </Desc>
+    </Item>
+    <Item name="mossy_cobblestone">
+      <Desc>
+        苔石 (#0048)
+      </Desc>
+    </Item>
+    <Item name="obsidian">
+      <Desc>
+        黒曜石 (#0049)
+      </Desc>
+    </Item>
+    <Item name="torch">
+      <Desc>
+        松明 (#0050)
+      </Desc>
+    </Item>
+    <Item name="mob_spawner">
+      <Desc>
+        モンスタースポナー (#0052)
+      </Desc>
+    </Item>
+    <Item name="oak_stairs">
+      <Desc>
+        オークの木の階段 (#0053)
+      </Desc>
+    </Item>
+    <Item name="chest">
+      <Desc>
+        チェスト (#0054)
+      </Desc>
+    </Item>
+    <Item name="diamond_ore">
+      <Desc>
+        ダイヤモンド鉱石 (#0056)
+      </Desc>
+    </Item>
+    <Item name="diamond_block">
+      <Desc>
+        ダイヤモンドブロック (#0057)
+      </Desc>
+    </Item>
+    <Item name="crafting_table">
+      <Desc>
+        作業台 (#0058)
+      </Desc>
+    </Item>
+    <Item name="farmland">
+      <Desc>
+        耕地 (#0060)
+      </Desc>
+    </Item>
+    <Item name="furnace">
+      <Desc>
+        かまど (#0061)
+      </Desc>
+    </Item>
+    <Item name="lit_furnace">
+      <Desc>
+        かまど (#0062)
+
+        燃焼しているかまど
+      </Desc>
+    </Item>
+    <Item name="ladder">
+      <Desc>
+        はしご (#0065)
+      </Desc>
+    </Item>
+    <Item name="rail">
+      <Desc>
+        レール (#0066)
+      </Desc>
+    </Item>
+    <Item name="stone_stairs">
+      <Desc>
+        石の階段 (#0067)
+      </Desc>
+    </Item>
+    <Item name="lever">
+      <Desc>
+        レバー (#0069)
+      </Desc>
+    </Item>
+    <Item name="stone_pressure_plate">
+      <Desc>
+        石の感圧板 (#0070)
+      </Desc>
+    </Item>
+    <Item name="wooden_pressure_plate">
+      <Desc>
+        木の感圧板 (#0072)
+      </Desc>
+    </Item>
+    <Item name="redstone_ore">
+      <Desc>
+        レッドストーン鉱石 (#0073)
+      </Desc>
+    </Item>
+    <Item name="redstone_torch">
+      <Desc>
+        レッドストーントーチ (#0076)
+      </Desc>
+    </Item>
+    <Item name="stone_button">
+      <Desc>
+        ボタン (#0077)
+
+        石のボタン
+      </Desc>
+    </Item>
+    <Item name="snow_layer">
+      <Desc>
+        雪 (#0078)
+
+        データ値
+        　0: 雪 (通常)
+      </Desc>
+    </Item>
+    <Item name="ice">
+      <Desc>
+        氷 (#0079)
+      </Desc>
+    </Item>
+    <Item name="snow">
+      <Desc>
+        雪 (#0080)
+
+        建築ブロック
+      </Desc>
+    </Item>
+    <Item name="cactus">
+      <Desc>
+        サボテン (#0081)
+      </Desc>
+    </Item>
+    <Item name="clay">
+      <Desc>
+        粘土 (#0082)
+      </Desc>
+    </Item>
+    <Item name="jukebox">
+      <Desc>
+        ジュークボックス (#0084)
+      </Desc>
+    </Item>
+    <Item name="fence">
+      <Desc>
+        オークのフェンス (#0085)
+      </Desc>
+    </Item>
+    <Item name="pumpkin">
+      <Desc>
+        カボチャ (#0086)
+      </Desc>
+    </Item>
+    <Item name="netherrack">
+      <Desc>
+        ネザーラック (#0087)
+      </Desc>
+    </Item>
+    <Item name="soul_sand">
+      <Desc>
+        ソウルサンド (#0088)
+      </Desc>
+    </Item>
+    <Item name="glowstone">
+      <Desc>
+        グロウストーン (#0089)
+      </Desc>
+    </Item>
+    <Item name="lit_pumpkin">
+      <Desc>
+        ジャック・オ・ランタン (#0091)
+      </Desc>
+    </Item>
+    <Item name="stained_glass">
+      <Desc>
+        色付きガラス (#0095)
+
+        データ値
+        　0: 白色の色付きガラス
+        　1: 橙色の色付きガラス
+        　2: 赤紫色の色付きガラス
+        　3: 空色の色付きガラス
+        　4: 黄色の色付きガラス
+        　5: 黄緑色の色付きガラス
+        　6: 桃色の色付きガラス
+        　7: 灰色の色付きガラス
+        　8: 薄灰色の色付きガラス
+        　9: 水色の色付きガラス
+        　10: 紫色の色付きガラス
+        　11: 青色の色付きガラス
+        　12: 茶色の色付きガラス
+        　13: 緑色の色付きガラス
+        　14: 赤色の色付きガラス
+        　15: 黒色の色付きガラス
+      </Desc>
+    </Item>
+    <Item name="trapdoor">
+      <Desc>
+        トラップドア (#0096)
+      </Desc>
+    </Item>
+    <Item name="monster_egg">
+      <Desc>
+        シルバーフィッシュ入りの石 (#0097)
+
+        データ値
+        　0: シルバーフィッシュ入りの石
+        　1: シルバーフィッシュ入りの丸石
+        　2: シルバーフィッシュ入りの石レンガ
+        　3: 苔石レンガモンスターエッグ
+        　4: ひびの入った石レンガモンスターエッグ
+        　5: 模様入り石レンガモンスターエッグ
+      </Desc>
+    </Item>
+    <Item name="stonebrick">
+      <Desc>
+        石レンガ (#0098)
+
+        データ値
+        　0: 石レンガ
+        　1: 苔石レンガ
+        　2: ひびの入った石レンガ
+        　3: 模様入り石レンガ
+      </Desc>
+    </Item>
+    <Item name="brown_mushroom_block">
+      <Desc>
+        キノコブロック (#0099)
+
+        茶色のキノコブロック
+      </Desc>
+    </Item>
+    <Item name="red_mushroom_block">
+      <Desc>
+        キノコブロック (#0100)
+
+        赤色のキノコブロック
+      </Desc>
+    </Item>
+    <Item name="iron_bars">
+      <Desc>
+        鉄格子 (#0101)
+      </Desc>
+    </Item>
+    <Item name="glass_pane">
+      <Desc>
+        板ガラス (#0102)
+      </Desc>
+    </Item>
+    <Item name="melon_block">
+      <Desc>
+        スイカ (#0103)
+      </Desc>
+    </Item>
+    <Item name="vine">
+      <Desc>
+        つる (#0106)
+      </Desc>
+    </Item>
+    <Item name="fence_gate">
+      <Desc>
+        フェンスゲート (#0107)
+      </Desc>
+    </Item>
+    <Item name="brick_stairs">
+      <Desc>
+        レンガの階段 (#0108)
+      </Desc>
+    </Item>
+    <Item name="stone_brick_stairs">
+      <Desc>
+        石レンガの階段 (#0109)
+      </Desc>
+    </Item>
+    <Item name="mycelium">
+      <Desc>
+        菌糸 (#0110)
+      </Desc>
+    </Item>
+    <Item name="waterlily">
+      <Desc>
+        スイレンの葉 (#0111)
+      </Desc>
+    </Item>
+    <Item name="nether_brick">
+      <Desc>
+        ネザーレンガ (#0112)
+      </Desc>
+    </Item>
+    <Item name="nether_brick_fence">
+      <Desc>
+        ネザーレンガフェンス (#0113)
+      </Desc>
+    </Item>
+    <Item name="nether_brick_stairs">
+      <Desc>
+        ネザーレンガの階段 (#0114)
+      </Desc>
+    </Item>
+    <Item name="enchanting_table">
+      <Desc>
+        エンチャントテーブル (#0116)
+      </Desc>
+    </Item>
+    <Item name="end_portal_frame">
+      <Desc>
+        エンドポータル (#0120)
+      </Desc>
+    </Item>
+    <Item name="end_stone">
+      <Desc>
+        エンドストーン (#0121)
+      </Desc>
+    </Item>
+    <Item name="dragon_egg">
+      <Desc>
+        ドラゴンの卵 (#0122)
+      </Desc>
+    </Item>
+    <Item name="redstone_lamp">
+      <Desc>
+        レッドストーンランプ (#0123)
+      </Desc>
+    </Item>
+    <Item name="wooden_slab">
+      <Desc>
+        木材ハーフブロック (#0126)
+
+        データ値
+        　0: オークの木材ハーフブロック
+        　1: マツの木材ハーフブロック
+        　2: シラカバの木材ハーフブロック
+        　3: 熱帯樹の木材ハーフブロック
+        　4: アカシアの木材ハーフブロック
+        　5: ダークオークの木材ハーフブロック
+      </Desc>
+    </Item>
+    <Item name="sandstone_stairs">
+      <Desc>
+        砂岩の階段 (#0128)
+      </Desc>
+    </Item>
+    <Item name="emerald_ore">
+      <Desc>
+        エメラルド鉱石 (#0129)
+      </Desc>
+    </Item>
+    <Item name="ender_chest">
+      <Desc>
+        エンダーチェスト (#0130)
+      </Desc>
+    </Item>
+    <Item name="tripwire_hook">
+      <Desc>
+        トリップワイヤーフック (#0131)
+      </Desc>
+    </Item>
+    <Item name="emerald_block">
+      <Desc>
+        エメラルドブロック (#0133)
+      </Desc>
+    </Item>
+    <Item name="spruce_stairs">
+      <Desc>
+        マツの木の階段 (#0134)
+      </Desc>
+    </Item>
+    <Item name="birch_stairs">
+      <Desc>
+        シラカバの木の階段 (#0135)
+      </Desc>
+    </Item>
+    <Item name="jungle_stairs">
+      <Desc>
+        熱帯樹の木の階段 (#0136)
+      </Desc>
+    </Item>
+    <Item name="command_block">
+      <Desc>
+        コマンドブロック (#0137)
+      </Desc>
+    </Item>
+    <Item name="beacon">
+      <Desc>
+        ビーコン (#0138)
+      </Desc>
+    </Item>
+    <Item name="cobblestone_wall">
+      <Desc>
+        石の壁 (#0139)
+
+        データ値
+        　0: 丸石の壁
+        　1: 苔石の壁
+      </Desc>
+    </Item>
+    <Item name="wooden_button">
+      <Desc>
+        ボタン (#0143)
+
+        木のボタン
+      </Desc>
+    </Item>
+    <Item name="anvil">
+      <Desc>
+        金床 (#0145)
+
+        データ値
+        　0: 金床
+        　1: 少し壊れた金床
+        　2: かなり壊れた金床
+      </Desc>
+    </Item>
+    <Item name="trapped_chest">
+      <Desc>
+        トラップチェスト (#0146)
+      </Desc>
+    </Item>
+    <Item name="light_weighted_pressure_plate">
+      <Desc>
+        重量感圧板 (軽) (#0147)
+      </Desc>
+    </Item>
+    <Item name="heavy_weighted_pressure_plate">
+      <Desc>
+        重量感圧板 (重) (#0148)
+      </Desc>
+    </Item>
+    <Item name="daylight_detector">
+      <Desc>
+        日照センサー (#0151)
+      </Desc>
+    </Item>
+    <Item name="redstone_block">
+      <Desc>
+        レッドストーンブロック (#0152)
+      </Desc>
+    </Item>
+    <Item name="quartz_ore">
+      <Desc>
+        ネザー水晶鉱石 (#0153)
+      </Desc>
+    </Item>
+    <Item name="hopper">
+      <Desc>
+        ホッパー (#0154)
+      </Desc>
+    </Item>
+    <Item name="quartz_block">
+      <Desc>
+        ネザー水晶ブロック (#0155)
+
+        データ値
+        　0: ネザー水晶ブロック
+        　1: 模様入りネザー水晶ブロック
+        　2: 柱状ネザー水晶ブロック
+      </Desc>
+    </Item>
+    <Item name="quartz_stairs">
+      <Desc>
+        ネザー水晶の階段 (#0156)
+      </Desc>
+    </Item>
+    <Item name="activator_rail">
+      <Desc>
+        アクティベーターレール (#0157)
+      </Desc>
+    </Item>
+    <Item name="dropper">
+      <Desc>
+        ドロッパー (#0158)
+      </Desc>
+    </Item>
+    <Item name="stained_hardened_clay">
+      <Desc>
+        色付き粘土 (#0159)
+
+        データ値
+        　0: 白色の色付き粘土
+        　1: 橙色の色付き粘土
+        　2: 赤紫色の色付き粘土
+        　3: 空色の色付き粘土
+        　4: 黄色の色付き粘土
+        　5: 黄緑色の色付き粘土
+        　6: 桃色の色付き粘土
+        　7: 灰色の色付き粘土
+        　8: 薄灰色の色付き粘土
+        　9: 水色の色付き粘土
+        　10: 紫色の色付き粘土
+        　11: 青色の色付き粘土
+        　12: 茶色の色付き粘土
+        　13: 緑色の色付き粘土
+        　14: 赤色の色付き粘土
+        　15: 黒色の色付き粘土
+      </Desc>
+    </Item>
+    <Item name="stained_glass_pane">
+      <Desc>
+        色付きガラス板 (#0160)
+
+        データ値
+        　0: 白色のガラス板
+        　1: 橙色のガラス板
+        　2: 赤紫色のガラス板
+        　3: 空色のガラス板
+        　4: 黄色のガラス板
+        　5: 黄緑色のガラス板
+        　6: 桃色のガラス板
+        　7: 灰色のガラス板
+        　8: 薄灰色のガラス板
+        　9: 水色のガラス板
+        　10: 紫色のガラス板
+        　11: 青色のガラス板
+        　12: 茶色のガラス板
+        　13: 緑色のガラス板
+        　14: 赤色のガラス板
+        　15: 黒色のガラス板
+      </Desc>
+    </Item>
+    <Item name="leave2">
+      <Desc>
+        葉 (#0161)
+
+        データ値
+        　0: アカシアの葉
+        　1: ダークオークの葉
+      </Desc>
+    </Item>
+    <Item name="log2">
+      <Desc>
+        原木 (#0162)
+
+        データ値
+        　0: アカシアの原木
+        　1: ダークオークの原木
+      </Desc>
+    </Item>
+    <Item name="acacia_stairs">
+      <Desc>
+        アカシアの木の階段 (#0163)
+      </Desc>
+    </Item>
+    <Item name="dark_oak_stairs">
+      <Desc>
+        ダークオークの木の階段 (#0164)
+      </Desc>
+    </Item>
+    <Item name="slime">
+      <Desc>
+        スライムブロック (#0165)
+      </Desc>
+    </Item>
+    <Item name="barrier">
+      <Desc>
+        バリアブロック (#0166)
+      </Desc>
+    </Item>
+    <Item name="iron_trapdoor">
+      <Desc>
+        鉄のトラップドア (#0167)
+      </Desc>
+    </Item>
+    <Item name="prismarine">
+      <Desc>
+        海晶ブロック (#0168)
+
+        データ値
+        　0: 海晶ブロック
+        　1: 海晶レンガ
+        　2: 暗海晶ブロック
+      </Desc>
+    </Item>
+    <Item name="sea_lantern">
+      <Desc>
+        海のランタン (#0169)
+      </Desc>
+    </Item>
+    <Item name="hay_block">
+      <Desc>
+        干草の俵 (#0170)
+      </Desc>
+    </Item>
+    <Item name="carpet">
+      <Desc>
+        カーペット (#0171)
+
+        データ値
+        　0: カーペット (白色)
+        　1: 橙色のカーペット
+        　2: 赤紫色のカーペット
+        　3: 空色のカーペット
+        　4: 黄色のカーペット
+        　5: 黄緑色のカーペット
+        　6: 桃色のカーペット
+        　7: 灰色のカーペット
+        　8: 薄灰色のカーペット
+        　9: 水色のカーペット
+        　10: 紫色のカーペット
+        　11: 青色のカーペット
+        　12: 茶色のカーペット
+        　13: 緑色のカーペット
+        　14: 赤色のカーペット
+        　15: 黒色のカーペット
+      </Desc>
+    </Item>
+    <Item name="hardened_clay">
+      <Desc>
+        堅焼き粘土 (#0172)
+      </Desc>
+    </Item>
+    <Item name="coal_block">
+      <Desc>
+        石炭ブロック (#0173)
+      </Desc>
+    </Item>
+    <Item name="packed_ice">
+      <Desc>
+        氷塊 (#0174)
+      </Desc>
+    </Item>
+    <Item name="double_plant">
+      <Desc>
+        ヒマワリ (#0175)
+
+        データ値
+        　0: ヒマワリ
+        　1: ライラック
+        　2: 高い草
+        　3: 大きなシダ
+        　4: バラの低木
+        　5: ボタン
+      </Desc>
+    </Item>
+    <Item name="red_sandstone">
+      <Desc>
+        赤砂岩 (#0179)
+
+        データ値
+        　0: 赤砂岩
+        　1: 模様入りの赤砂岩
+        　2: 滑らかな赤砂岩
+      </Desc>
+    </Item>
+    <Item name="red_sandstone_stairs">
+      <Desc>
+        赤砂岩の階段 (#0180)
+      </Desc>
+    </Item>
+    <Item name="stone_slab2">
+      <Desc>
+        赤砂岩のハーフブロック (#0182)
+
+        データ値
+        　0: 赤砂岩のハーフブロック
+      </Desc>
+    </Item>
+    <Item name="spruce_fence_gate">
+      <Desc>
+        マツのフェンスゲート (#0183)
+      </Desc>
+    </Item>
+    <Item name="birch_fence_gate">
+      <Desc>
+        シラカバのフェンスゲート (#0184)
+      </Desc>
+    </Item>
+    <Item name="jungle_fence_gate">
+      <Desc>
+        熱帯樹のフェンスゲート (#0185)
+      </Desc>
+    </Item>
+    <Item name="dark_oak_fence_gate">
+      <Desc>
+        ダークオークのフェンスゲート (#0186)
+      </Desc>
+    </Item>
+    <Item name="acacia_fence_gate">
+      <Desc>
+        アカシアのフェンスゲート (#0187)
+      </Desc>
+    </Item>
+    <Item name="spruce_fence">
+      <Desc>
+        マツのフェンス (#0188)
+      </Desc>
+    </Item>
+    <Item name="birch_fence">
+      <Desc>
+        シラカバのフェンス (#0189)
+      </Desc>
+    </Item>
+    <Item name="jungle_fence">
+      <Desc>
+        熱帯樹のフェンス (#0190)
+      </Desc>
+    </Item>
+    <Item name="dark_oak_fence">
+      <Desc>
+        ダークオークのフェンス (#0191)
+      </Desc>
+    </Item>
+    <Item name="acacia_fence">
+      <Desc>
+        アカシアのフェンス (#0192)
+      </Desc>
+    </Item>
+    <Item name="iron_shovel">
+      <Desc>
+        鉄のシャベル (#0256)
+
+        攻撃力 +3
+      </Desc>
+    </Item>
+    <Item name="iron_pickaxe">
+      <Desc>
+        鉄のツルハシ (#0257)
+
+        攻撃力 +4
+      </Desc>
+    </Item>
+    <Item name="iron_axe">
+      <Desc>
+        鉄の斧 (#0258)
+
+        攻撃力 +5
+      </Desc>
+    </Item>
+    <Item name="flint_and_steel">
+      <Desc>
+        火打石と打ち金 (#0259)
+      </Desc>
+    </Item>
+    <Item name="apple">
+      <Desc>
+        リンゴ (#0260)
+      </Desc>
+    </Item>
+    <Item name="bow">
+      <Desc>
+        弓 (#0261)
+      </Desc>
+    </Item>
+    <Item name="arrow">
+      <Desc>
+        矢 (#0262)
+      </Desc>
+    </Item>
+    <Item name="coal">
+      <Desc>
+        石炭 (#0263)
+
+        データ値
+        　0: 石炭
+        　1: 木炭
+      </Desc>
+    </Item>
+    <Item name="diamond">
+      <Desc>
+        ダイヤモンド (#0264)
+      </Desc>
+    </Item>
+    <Item name="iron_ingot">
+      <Desc>
+        鉄インゴット (#0265)
+      </Desc>
+    </Item>
+    <Item name="gold_ingot">
+      <Desc>
+        金インゴット (#0266)
+      </Desc>
+    </Item>
+    <Item name="iron_sword">
+      <Desc>
+        鉄の剣 (#0267)
+
+        攻撃力 +6
+      </Desc>
+    </Item>
+    <Item name="wooden_sword">
+      <Desc>
+        木の剣 (#0268)
+
+        攻撃力 +4
+      </Desc>
+    </Item>
+    <Item name="wooden_shovel">
+      <Desc>
+        木のシャベル (#0269)
+
+        攻撃力 +1
+      </Desc>
+    </Item>
+    <Item name="wooden_pickaxe">
+      <Desc>
+        木のツルハシ (#0270)
+
+        攻撃力 +2
+      </Desc>
+    </Item>
+    <Item name="wooden_axe">
+      <Desc>
+        木の斧 (#0271)
+
+        攻撃力 +3
+      </Desc>
+    </Item>
+    <Item name="stone_sword">
+      <Desc>
+        石の剣 (#0272)
+
+        攻撃力 +5
+      </Desc>
+    </Item>
+    <Item name="stone_shovel">
+      <Desc>
+        石のシャベル (#0273)
+
+        攻撃力 +2
+      </Desc>
+    </Item>
+    <Item name="stone_pickaxe">
+      <Desc>
+        石のツルハシ (#0274)
+
+        攻撃力 +3
+      </Desc>
+    </Item>
+    <Item name="stone_axe">
+      <Desc>
+        石の斧 (#0275)
+
+        攻撃力 +4
+      </Desc>
+    </Item>
+    <Item name="diamond_sword">
+      <Desc>
+        ダイヤの剣 (#0276)
+
+        攻撃力 +7
+      </Desc>
+    </Item>
+    <Item name="diamond_shovel">
+      <Desc>
+        ダイヤのシャベル (#0277)
+
+        攻撃力 +4
+      </Desc>
+    </Item>
+    <Item name="diamond_pickaxe">
+      <Desc>
+        ダイヤのツルハシ (#0278)
+
+        攻撃力 +5
+      </Desc>
+    </Item>
+    <Item name="diamond_axe">
+      <Desc>
+        ダイヤの斧 (#0279)
+
+        攻撃力 +6
+      </Desc>
+    </Item>
+    <Item name="stick">
+      <Desc>
+        木の棒 (#0280)
+      </Desc>
+    </Item>
+    <Item name="bowl">
+      <Desc>
+        ボウル (#0281)
+      </Desc>
+    </Item>
+    <Item name="mushroom_stew">
+      <Desc>
+        キノコシチュー (#0282)
+      </Desc>
+    </Item>
+    <Item name="golden_sword">
+      <Desc>
+        金の剣 (#0283)
+
+        攻撃力 +4
+      </Desc>
+    </Item>
+    <Item name="golden_shovel">
+      <Desc>
+        金のシャベル (#0284)
+
+        攻撃力 +1
+      </Desc>
+    </Item>
+    <Item name="golden_pickaxe">
+      <Desc>
+        金のツルハシ (#0285)
+
+        攻撃力 +2
+      </Desc>
+    </Item>
+    <Item name="golden_axe">
+      <Desc>
+        金の斧 (#0286)
+
+        攻撃力 +3
+      </Desc>
+    </Item>
+    <Item name="string">
+      <Desc>
+        糸 (#0287)
+      </Desc>
+    </Item>
+    <Item name="feather">
+      <Desc>
+        羽 (#0288)
+      </Desc>
+    </Item>
+    <Item name="gunpowder">
+      <Desc>
+        火薬 (#0289)
+      </Desc>
+    </Item>
+    <Item name="wooden_hoe">
+      <Desc>
+        木のクワ (#0290)
+      </Desc>
+    </Item>
+    <Item name="stone_hoe">
+      <Desc>
+        石のクワ (#0291)
+      </Desc>
+    </Item>
+    <Item name="iron_hoe">
+      <Desc>
+        鉄のクワ (#0292)
+      </Desc>
+    </Item>
+    <Item name="diamond_hoe">
+      <Desc>
+        ダイヤのクワ (#0293)
+      </Desc>
+    </Item>
+    <Item name="golden_hoe">
+      <Desc>
+        金のクワ (#0294)
+      </Desc>
+    </Item>
+    <Item name="wheat_seeds">
+      <Desc>
+        種 (#0295)
+      </Desc>
+    </Item>
+    <Item name="wheat">
+      <Desc>
+        小麦 (#0296)
+      </Desc>
+    </Item>
+    <Item name="bread">
+      <Desc>
+        パン (#0297)
+      </Desc>
+    </Item>
+    <Item name="leather_helmet">
+      <Desc>
+        革の帽子 (#0298)
+      </Desc>
+    </Item>
+    <Item name="leather_chestplate">
+      <Desc>
+        革の上着 (#0299)
+      </Desc>
+    </Item>
+    <Item name="leather_leggings">
+      <Desc>
+        革のズボン (#0300)
+      </Desc>
+    </Item>
+    <Item name="leather_boots">
+      <Desc>
+        革のブーツ (#0301)
+      </Desc>
+    </Item>
+    <Item name="chainmail_helmet">
+      <Desc>
+        チェーンヘルメット (#0302)
+      </Desc>
+    </Item>
+    <Item name="chainmail_chestplate">
+      <Desc>
+        チェーンのチェストプレート (#0303)
+      </Desc>
+    </Item>
+    <Item name="chainmail_leggings">
+      <Desc>
+        チェーンレギンス (#0304)
+      </Desc>
+    </Item>
+    <Item name="chainmail_boots">
+      <Desc>
+        チェーンブーツ (#0305)
+      </Desc>
+    </Item>
+    <Item name="iron_helmet">
+      <Desc>
+        鉄のヘルメット (#0306)
+      </Desc>
+    </Item>
+    <Item name="iron_chestplate">
+      <Desc>
+        鉄のチェストプレート (#0307)
+      </Desc>
+    </Item>
+    <Item name="iron_leggings">
+      <Desc>
+        鉄のレギンス (#0308)
+      </Desc>
+    </Item>
+    <Item name="iron_boots">
+      <Desc>
+        鉄のブーツ (#0309)
+      </Desc>
+    </Item>
+    <Item name="diamond_helmet">
+      <Desc>
+        ダイヤのヘルメット (#0310)
+      </Desc>
+    </Item>
+    <Item name="diamond_chestplate">
+      <Desc>
+        ダイヤのチェストプレート (#0311)
+      </Desc>
+    </Item>
+    <Item name="diamond_leggings">
+      <Desc>
+        ダイヤのレギンス (#0312)
+      </Desc>
+    </Item>
+    <Item name="diamond_boots">
+      <Desc>
+        ダイヤのブーツ (#0313)
+      </Desc>
+    </Item>
+    <Item name="golden_helmet">
+      <Desc>
+        金のヘルメット (#0314)
+      </Desc>
+    </Item>
+    <Item name="golden_chestplate">
+      <Desc>
+        金のチェストプレート (#0315)
+      </Desc>
+    </Item>
+    <Item name="golden_leggings">
+      <Desc>
+        金のレギンス (#0316)
+      </Desc>
+    </Item>
+    <Item name="golden_boots">
+      <Desc>
+        金のブーツ (#0317)
+      </Desc>
+    </Item>
+    <Item name="flint">
+      <Desc>
+        火打ち石 (#0318)
+      </Desc>
+    </Item>
+    <Item name="porkchop">
+      <Desc>
+        生の豚肉 (#0319)
+      </Desc>
+    </Item>
+    <Item name="cooked_porkchop">
+      <Desc>
+        焼き豚 (#0320)
+      </Desc>
+    </Item>
+    <Item name="painting">
+      <Desc>
+        絵画 (#0321)
+      </Desc>
+    </Item>
+    <Item name="golden_apple">
+      <Desc>
+        金のリンゴ (#0322)
+
+        データ値
+        　0: 金のリンゴ
+        　1: 金のリンゴ (きらめく)
+      </Desc>
+    </Item>
+    <Item name="sign">
+      <Desc>
+        看板 (#0323)
+      </Desc>
+    </Item>
+    <Item name="wooden_door">
+      <Desc>
+        オークのドア (#0324)
+      </Desc>
+    </Item>
+    <Item name="bucket">
+      <Desc>
+        バケツ (#0325)
+      </Desc>
+    </Item>
+    <Item name="water_bucket">
+      <Desc>
+        水入りバケツ (#0326)
+      </Desc>
+    </Item>
+    <Item name="lava_bucket">
+      <Desc>
+        溶岩入りバケツ (#0327)
+      </Desc>
+    </Item>
+    <Item name="minecart">
+      <Desc>
+        トロッコ (#0328)
+      </Desc>
+    </Item>
+    <Item name="saddle">
+      <Desc>
+        サドル (#0329)
+      </Desc>
+    </Item>
+    <Item name="iron_door">
+      <Desc>
+        鉄のドア (#0330)
+      </Desc>
+    </Item>
+    <Item name="redstone">
+      <Desc>
+        レッドストーン (#0331)
+      </Desc>
+    </Item>
+    <Item name="snowball">
+      <Desc>
+        雪玉 (#0332)
+      </Desc>
+    </Item>
+    <Item name="boat">
+      <Desc>
+        ボート (#0333)
+      </Desc>
+    </Item>
+    <Item name="leather">
+      <Desc>
+        革 (#0334)
+      </Desc>
+    </Item>
+    <Item name="milk_bucket">
+      <Desc>
+        牛乳 (#0335)
+      </Desc>
+    </Item>
+    <Item name="brick">
+      <Desc>
+        レンガ (#0336)
+      </Desc>
+    </Item>
+    <Item name="clay_ball">
+      <Desc>
+        粘土 (#0337)
+      </Desc>
+    </Item>
+    <Item name="reeds">
+      <Desc>
+        サトウキビ (#0338)
+      </Desc>
+    </Item>
+    <Item name="paper">
+      <Desc>
+        紙 (#0339)
+      </Desc>
+    </Item>
+    <Item name="book">
+      <Desc>
+        本 (#0340)
+      </Desc>
+    </Item>
+    <Item name="slimeball">
+      <Desc>
+        スライムボール (#0341)
+      </Desc>
+    </Item>
+    <Item name="chest_minecart">
+      <Desc>
+        チェスト付きトロッコ (#0342)
+      </Desc>
+    </Item>
+    <Item name="furnace_minecart">
+      <Desc>
+        かまど付きトロッコ (#0343)
+      </Desc>
+    </Item>
+    <Item name="egg">
+      <Desc>
+        卵 (#0344)
+      </Desc>
+    </Item>
+    <Item name="compass">
+      <Desc>
+        コンパス (#0345)
+      </Desc>
+    </Item>
+    <Item name="fishing_rod">
+      <Desc>
+        釣竿 (#0346)
+      </Desc>
+    </Item>
+    <Item name="clock">
+      <Desc>
+        時計 (#0347)
+      </Desc>
+    </Item>
+    <Item name="glowstone_dust">
+      <Desc>
+        グロウストーンダスト (#0348)
+      </Desc>
+    </Item>
+    <Item name="fish">
+      <Desc>
+        生魚 (#0349)
+
+        データ値
+        　0: 生魚
+        　1: 生鮭
+        　2: クマノミ
+        　3: フグ
+      </Desc>
+    </Item>
+    <Item name="cooked_fish">
+      <Desc>
+        焼き魚 (#0350)
+
+        データ値
+        　0: 焼き魚
+        　1: 焼き鮭
+      </Desc>
+    </Item>
+    <Item name="dye">
+      <Desc>
+        染料 (#0351)
+
+        データ値
+        　0: イカスミ
+        　1: 赤色の染料
+        　2: 緑色の染料
+        　3: カカオ豆
+        　4: ラピスラズリ
+        　5: 紫色の染料
+        　6: 水色の染料
+        　7: 薄灰色の染料
+        　8: 灰色の染料
+        　9: 桃色の染料
+        　10: 黄緑色の染料
+        　11: 黄色の染料
+        　12: 空色の染料
+        　13: 赤紫色の染料
+        　14: 橙色の染料
+        　15: 骨粉
+      </Desc>
+    </Item>
+    <Item name="bone">
+      <Desc>
+        骨 (#0352)
+      </Desc>
+    </Item>
+    <Item name="sugar">
+      <Desc>
+        砂糖 (#0353)
+      </Desc>
+    </Item>
+    <Item name="cake">
+      <Desc>
+        ケーキ (#0354)
+      </Desc>
+    </Item>
+    <Item name="bed">
+      <Desc>
+        ベッド (#0355)
+      </Desc>
+    </Item>
+    <Item name="repeater">
+      <Desc>
+        レッドストーンリピーター (#0356)
+      </Desc>
+    </Item>
+    <Item name="cookie">
+      <Desc>
+        クッキー (#0357)
+      </Desc>
+    </Item>
+    <Item name="filled_map">
+      <Desc>
+        地図 (#0358)
+
+        埋まった地図
+      </Desc>
+    </Item>
+    <Item name="shears">
+      <Desc>
+        ハサミ (#0359)
+      </Desc>
+    </Item>
+    <Item name="melon">
+      <Desc>
+        スイカ (#0360)
+      </Desc>
+    </Item>
+    <Item name="pumpkin_seeds">
+      <Desc>
+        カボチャの種 (#0361)
+      </Desc>
+    </Item>
+    <Item name="melon_seeds">
+      <Desc>
+        スイカの種 (#0362)
+      </Desc>
+    </Item>
+    <Item name="beef">
+      <Desc>
+        生の牛肉 (#0363)
+      </Desc>
+    </Item>
+    <Item name="cooked_beef">
+      <Desc>
+        ステーキ (#0364)
+      </Desc>
+    </Item>
+    <Item name="chicken">
+      <Desc>
+        生の鶏肉 (#0365)
+      </Desc>
+    </Item>
+    <Item name="cooked_chicken">
+      <Desc>
+        焼き鳥 (#0366)
+      </Desc>
+    </Item>
+    <Item name="rotten_flesh">
+      <Desc>
+        腐った肉 (#0367)
+      </Desc>
+    </Item>
+    <Item name="ender_pearl">
+      <Desc>
+        エンダーパール (#0368)
+      </Desc>
+    </Item>
+    <Item name="blaze_rod">
+      <Desc>
+        ブレイズロッド (#0369)
+      </Desc>
+    </Item>
+    <Item name="ghast_tear">
+      <Desc>
+        ガストの涙 (#0370)
+      </Desc>
+    </Item>
+    <Item name="gold_nugget">
+      <Desc>
+        金塊 (#0371)
+      </Desc>
+    </Item>
+    <Item name="nether_wart">
+      <Desc>
+        ネザーウォート (#0372)
+      </Desc>
+    </Item>
+    <Item name="potion">
+      <Desc>
+        ポーション (#0373)
+
+        データ値
+        　0: 水入り便
+      </Desc>
+    </Item>
+    <Item name="glass_bottle">
+      <Desc>
+        ガラス瓶 (#0374)
+      </Desc>
+    </Item>
+    <Item name="spider_eye">
+      <Desc>
+        クモの目 (#0375)
+      </Desc>
+    </Item>
+    <Item name="fermented_spider_eye">
+      <Desc>
+        発酵したクモの目 (#0376)
+      </Desc>
+    </Item>
+    <Item name="blaze_powder">
+      <Desc>
+        ブレイズパウダー (#0377)
+      </Desc>
+    </Item>
+    <Item name="magma_cream">
+      <Desc>
+        マグマクリーム (#0378)
+      </Desc>
+    </Item>
+    <Item name="brewing_stand">
+      <Desc>
+        醸造台 (#0379)
+      </Desc>
+    </Item>
+    <Item name="cauldron">
+      <Desc>
+        大釜 (#0380)
+      </Desc>
+    </Item>
+    <Item name="ender_eye">
+      <Desc>
+        エンダーアイ (#0381)
+      </Desc>
+    </Item>
+    <Item name="speckled_melon">
+      <Desc>
+        きらめくスイカ (#0382)
+      </Desc>
+    </Item>
+    <Item name="spawn_egg">
+      <Desc>
+        スポーンエッグ (#0383)
+
+        データ値 (対応するエンティティID)
+        　50: クリーパー
+        　...
+      </Desc>
+    </Item>
+    <Item name="experience_bottle">
+      <Desc>
+        エンチャントの瓶 (#0384)
+      </Desc>
+    </Item>
+    <Item name="fire_charge">
+      <Desc>
+        ファイヤーチャージ (#0385)
+      </Desc>
+    </Item>
+    <Item name="writable_book">
+      <Desc>
+        本と羽ペン (#0386)
+      </Desc>
+    </Item>
+    <Item name="written_book">
+      <Desc>
+        記入済みの本 (#0387)
+      </Desc>
+    </Item>
+    <Item name="emerald">
+      <Desc>
+        エメラルド (#0388)
+      </Desc>
+    </Item>
+    <Item name="item_frame">
+      <Desc>
+        額縁 (#0389)
+      </Desc>
+    </Item>
+    <Item name="flower_pot">
+      <Desc>
+        植木鉢 (#0390)
+      </Desc>
+    </Item>
+    <Item name="carrot">
+      <Desc>
+        ニンジン (#0391)
+      </Desc>
+    </Item>
+    <Item name="potato">
+      <Desc>
+        ジャガイモ (#0392)
+      </Desc>
+    </Item>
+    <Item name="baked_potato">
+      <Desc>
+        ベークドポテト (#0393)
+      </Desc>
+    </Item>
+    <Item name="poisonous_potato">
+      <Desc>
+        青くなったジャガイモ (#0394)
+      </Desc>
+    </Item>
+    <Item name="map">
+      <Desc>
+        白紙の地図 (#0395)
+      </Desc>
+    </Item>
+    <Item name="golden_carrot">
+      <Desc>
+        金のニンジン (#0396)
+      </Desc>
+    </Item>
+    <Item name="skull">
+      <Desc>
+        頭蓋骨 (#0397)
+
+        データ値
+        　0: スケルトンの頭蓋骨
+        　1: ウィザースケルトンの頭
+        　2: ゾンビの頭
+        　3: 頭 (プレイヤー)
+        　4: クリーパーの頭
+      </Desc>
+    </Item>
+    <Item name="carrot_on_a_stick">
+      <Desc>
+        ニンジン付きの棒 (#0398)
+      </Desc>
+    </Item>
+    <Item name="nether_star">
+      <Desc>
+        ネザースター (#0399)
+      </Desc>
+    </Item>
+    <Item name="pumpkin_pie">
+      <Desc>
+        パンプキンパイ (#0400)
+      </Desc>
+    </Item>
+    <Item name="fireworks">
+      <Desc>
+        ロケット花火 (#0401)
+      </Desc>
+    </Item>
+    <Item name="firework_charge">
+      <Desc>
+        花火の星 (#0402)
+      </Desc>
+    </Item>
+    <Item name="enchanted_book">
+      <Desc>
+        エンチャントの本 (#0403)
+      </Desc>
+    </Item>
+    <Item name="comparator">
+      <Desc>
+        レッドストーンコンパレーター (#0404)
+      </Desc>
+    </Item>
+    <Item name="netherbrick">
+      <Desc>
+        ネザーレンガ (#0405)
+      </Desc>
+    </Item>
+    <Item name="quartz">
+      <Desc>
+        ネザー水晶 (#0406)
+      </Desc>
+    </Item>
+    <Item name="tnt_minecart">
+      <Desc>
+        TNT付きトロッコ (#0407)
+      </Desc>
+    </Item>
+    <Item name="hopper_minecart">
+      <Desc>
+        ホッパー付きトロッコ (#0408)
+      </Desc>
+    </Item>
+    <Item name="prismarine_shard">
+      <Desc>
+        暗海晶の破片 (#0409)
+      </Desc>
+    </Item>
+    <Item name="prismarine_crystals">
+      <Desc>
+        海結晶 (#0410)
+      </Desc>
+    </Item>
+    <Item name="rabbit">
+      <Desc>
+        生の兎肉 (#0411)
+      </Desc>
+    </Item>
+    <Item name="cooked_rabbit">
+      <Desc>
+        焼き兎肉 (#0412)
+      </Desc>
+    </Item>
+    <Item name="rabbit_stew">
+      <Desc>
+        ウサギシチュー (#0413)
+      </Desc>
+    </Item>
+    <Item name="rabbit_foot">
+      <Desc>
+        ウサギの足 (#0414)
+      </Desc>
+    </Item>
+    <Item name="rabbit_hide">
+      <Desc>
+        ウサギの皮 (#0415)
+      </Desc>
+    </Item>
+    <Item name="armor_stand">
+      <Desc>
+        防具立て (#0416)
+      </Desc>
+    </Item>
+    <Item name="iron_horse_armor">
+      <Desc>
+        鉄の馬鎧 (#0417)
+      </Desc>
+    </Item>
+    <Item name="golden_horse_armor">
+      <Desc>
+        金の馬鎧 (#0418)
+      </Desc>
+    </Item>
+    <Item name="diamond_horse_armor">
+      <Desc>
+        ダイヤの馬鎧 (#0419)
+      </Desc>
+    </Item>
+    <Item name="lead">
+      <Desc>
+        リード (#0420)
+      </Desc>
+    </Item>
+    <Item name="name_tag">
+      <Desc>
+        名札 (#0421)
+      </Desc>
+    </Item>
+    <Item name="command_block_minecart">
+      <Desc>
+        コマンドブロック付きトロッコ (#0422)
+      </Desc>
+    </Item>
+    <Item name="mutton">
+      <Desc>
+        生の羊肉 (#0423)
+      </Desc>
+    </Item>
+    <Item name="cooked_mutton">
+      <Desc>
+        ジンギスカン (#0424)
+      </Desc>
+    </Item>
+    <Item name="banner">
+      <Desc>
+        旗 (#0425)
+
+        データ値
+        　0: 黒色の旗
+        　1: 赤色の旗
+        　2: 緑色の旗
+        　3: 茶色の旗
+        　4: 青色の旗
+        　5: 紫色の旗
+        　6: 水色の旗
+        　7: 薄灰色の旗
+        　8: 灰色の旗
+        　9: 桃色の旗
+        　10: 黄緑色の旗
+        　11: 黄色の旗
+        　12: 空色の旗
+        　13: 赤紫色の旗
+        　14: 橙色の旗
+        　15: 白色の旗
+      </Desc>
+    </Item>
+    <Item name="spruce_door">
+      <Desc>
+        マツのドア (#0427)
+      </Desc>
+    </Item>
+    <Item name="birch_door">
+      <Desc>
+        シラカバのドア (#0428)
+      </Desc>
+    </Item>
+    <Item name="jungle_door">
+      <Desc>
+        熱帯樹のドア (#0429)
+      </Desc>
+    </Item>
+    <Item name="acacia_door">
+      <Desc>
+        アカシアのドア (#0430)
+      </Desc>
+    </Item>
+    <Item name="dark_oak_door">
+      <Desc>
+        ダークオークのドア (#0431)
+      </Desc>
+    </Item>
+    <Item name="record_13">
+      <Desc>
+        レコード (#2256)
+
+        C418 - 13
+      </Desc>
+    </Item>
+    <Item name="record_cat">
+      <Desc>
+        レコード (#2257)
+
+        C418 - cat
+      </Desc>
+    </Item>
+    <Item name="record_blocks">
+      <Desc>
+        レコード (#2258)
+
+        C418 - blocks
+      </Desc>
+    </Item>
+    <Item name="record_chirp">
+      <Desc>
+        レコード (#2259)
+
+        C418 - chirp
+      </Desc>
+    </Item>
+    <Item name="record_far">
+      <Desc>
+        レコード (#2260)
+
+        C418 - far
+      </Desc>
+    </Item>
+    <Item name="record_mall">
+      <Desc>
+        レコード (#2261)
+
+        C418 - mall
+      </Desc>
+    </Item>
+    <Item name="record_mellohi">
+      <Desc>
+        レコード (#2262)
+
+        C418 - mellohi
+      </Desc>
+    </Item>
+    <Item name="record_stal">
+      <Desc>
+        レコード (#2263)
+
+        C418 - stal
+      </Desc>
+    </Item>
+    <Item name="record_strad">
+      <Desc>
+        レコード (#2264)
+
+        C418 - strad
+      </Desc>
+    </Item>
+    <Item name="record_ward">
+      <Desc>
+        レコード (#2265)
+
+        C418 - ward
+      </Desc>
+    </Item>
+    <Item name="record_11">
+      <Desc>
+        レコード (#2266)
+
+        C418 - 11
+      </Desc>
+    </Item>
+    <Item name="record_wait">
+      <Desc>
+        レコード (#2267)
+
+        C418 - wait
+      </Desc>
+    </Item>
+  </Items>
+
+  <Blocks>
+    <Block name="stone">
+      <Desc>
+        石 (#0001)
+
+        データ値
+        　0: 石
+        　1: 花崗岩
+        　2: 磨かれた花崗岩
+        　3: 閃緑岩
+        　4: 磨かれた閃緑岩
+        　5: 安山岩
+        　6: 磨かれた安山岩
+      </Desc>
+    </Block>
+    <Block name="grass">
+      <Desc>
+        草ブロック (#0002)
+      </Desc>
+    </Block>
+    <Block name="dirt">
+      <Desc>
+        土 (#0003)
+
+        データ値
+        　0: 土
+        　1: 荒れた土
+        　2: ポドゾル
+      </Desc>
+    </Block>
+    <Block name="cobblestone">
+      <Desc>
+        丸石 (#0004)
+      </Desc>
+    </Block>
+    <Block name="planks">
+      <Desc>
+        木材 (#0005)
+
+        データ値
+        　0: オークの木材
+        　1: マツの木材
+        　2: シラカバの木材
+        　3: 熱帯樹の木材
+        　4: アカシアの木材
+        　5: ダークオークの木材
+      </Desc>
+    </Block>
+    <Block name="sapling">
+      <Desc>
+        苗木 (#0006)
+
+        データ値
+        　0: オークの苗木
+        　1: マツの苗木
+        　2: シラカバの苗木
+        　3: 熱帯樹の苗木
+        　4: アカシアの苗木
+        　5: ダークオークの木材
+      </Desc>
+    </Block>
+    <Block name="bedrock">
+      <Desc>
+        岩盤 (#0007)
+      </Desc>
+    </Block>
+    <Block name="flowing_water">
+      <Desc>
+        水流 (#0008)
+      </Desc>
+    </Block>
+    <Block name="water">
+      <Desc>
+        水源 (#0009)
+      </Desc>
+    </Block>
+    <Block name="flowing_lava">
+      <Desc>
+        溶岩流 (#0010)
+      </Desc>
+    </Block>
+    <Block name="lava">
+      <Desc>
+        溶岩源 (#0011)
+      </Desc>
+    </Block>
+    <Block name="sand">
+      <Desc>
+        砂 (#0012)
+
+        データ値
+        　0: 砂
+        　1: 赤砂
+      </Desc>
+    </Block>
+    <Block name="gravel">
+      <Desc>
+        砂利 (#0013)
+      </Desc>
+    </Block>
+    <Block name="gold_ore">
+      <Desc>
+        金鉱石 (#0014)
+      </Desc>
+    </Block>
+    <Block name="iron_ore">
+      <Desc>
+        鉄鉱石 (#0015)
+      </Desc>
+    </Block>
+    <Block name="coal_ore">
+      <Desc>
+        石炭鉱石 (#0016)
+      </Desc>
+    </Block>
+    <Block name="log">
+      <Desc>
+        原木 (#0017)
+
+        データ値
+        　0: オークの原木
+        　1: マツの原木
+        　2: シラカバの原木
+        　3: 熱帯樹の原木
+      </Desc>
+    </Block>
+    <Block name="leaves">
+      <Desc>
+        葉ブロック (#0018)
+
+        データ値
+        　0: オークの葉
+        　1: マツの葉
+        　2: シラカバの葉
+        　3: 熱帯樹の葉
+      </Desc>
+    </Block>
+    <Block name="sponge">
+      <Desc>
+        スポンジ (#0019)
+
+        データ値:
+        　0: スポンジ
+        　1: ぬれたスポンジ
+      </Desc>
+    </Block>
+    <Block name="glass">
+      <Desc>
+        ガラス (#0020)
+      </Desc>
+    </Block>
+    <Block name="lapis_ore">
+      <Desc>
+        ラピスラズリ鉱石 (#0021)
+      </Desc>
+    </Block>
+    <Block name="lapis_block">
+      <Desc>
+        ラピスラズリブロック (#0022)
+      </Desc>
+    </Block>
+    <Block name="dispenser">
+      <Desc>
+        ディスペンサー (#0023)
+      </Desc>
+    </Block>
+    <Block name="sandstone">
+      <Desc>
+        砂岩 (#0024)
+
+        データ値
+        　0: 砂岩
+        　1: 模様入り砂岩
+        　2: 滑らかな砂岩
+      </Desc>
+    </Block>
+    <Block name="noteblock">
+      <Desc>
+        音符ブロック (#0025)
+      </Desc>
+    </Block>
+    <Block name="bed">
+      <Desc>
+        ベッド (#0026)
+      </Desc>
+    </Block>
+    <Block name="golden_rail">
+      <Desc>
+        パワードレール (#0027)
+      </Desc>
+    </Block>
+    <Block name="detector_rail">
+      <Desc>
+        ディテクターレール (#0028)
+      </Desc>
+    </Block>
+    <Block name="sticky_piston">
+      <Desc>
+        粘着ピストン (#0029)
+      </Desc>
+    </Block>
+    <Block name="web">
+      <Desc>
+        クモの巣 (#0030)
+      </Desc>
+    </Block>
+    <Block name="tallgrass">
+      <Desc>
+        草 (#0031)
+
+        データ値
+        　0: 草
+        　1:
+        　2: シダ
+      </Desc>
+    </Block>
+    <Block name="deadbush">
+      <Desc>
+        枯れ木 (#0032)
+      </Desc>
+    </Block>
+    <Block name="piston">
+      <Desc>
+        ピストン (#0033)
+      </Desc>
+    </Block>
+    <Block name="piston_head">
+      <Desc>
+        ピストン (#0034)
+
+        ピストン (ヘッド)
+      </Desc>
+    </Block>
+    <Block name="wool">
+      <Desc>
+        羊毛 (#0035)
+
+        データ値
+        　0: 羊毛 (白色)
+        　1: 橙色の羊毛
+        　2: 赤紫色の羊毛
+        　3: 空色の羊毛
+        　4: 黄色の羊毛
+        　5: 黄緑色の羊毛
+        　6: 桃色の羊毛
+        　7: 灰色の羊毛
+        　8: 薄灰色の羊毛
+        　9: 水色の羊毛
+        　10: 紫色の羊毛
+        　11: 青色の羊毛
+        　12: 茶色の羊毛
+        　13: 緑色の羊毛
+        　14: 赤色の羊毛
+        　15: 黒色の羊毛
+      </Desc>
+    </Block>
+    <Block name="piston_extension">
+      <Desc>
+        ピストン (#0036)
+
+        ピストン (特殊)
+      </Desc>
+    </Block>
+    <Block name="yellow_flower">
+      <Desc>
+        タンポポ (#0037)
+      </Desc>
+    </Block>
+    <Block name="red_flower">
+      <Desc>
+        ポピー (#0038)
+
+        データ値
+        　0: ポピー
+        　1: ヒスイラン
+        　2: アリウム
+        　3: ヒナソウ
+        　4: 赤色のチューリップ
+        　5: 橙色のチューリップ
+        　6: 白色のチューリップ
+        　7: 桃色のチューリップ
+        　8: フランスギク
+      </Desc>
+    </Block>
+    <Block name="brown_mushroom">
+      <Desc>
+        キノコ (#0039)
+
+        茶色のキノコ
+      </Desc>
+    </Block>
+    <Block name="red_mushroom">
+      <Desc>
+        キノコ (#0040)
+
+        赤色のキノコ
+      </Desc>
+    </Block>
+    <Block name="gold_block">
+      <Desc>
+        金ブロック (#0041)
+      </Desc>
+    </Block>
+    <Block name="iron_block">
+      <Desc>
+        鉄ブロック (#0042)
+      </Desc>
+    </Block>
+    <Block name="double_stone_slab">
+      <Desc>
+        石ハーフブロック (#0043)
+
+        重なった状態の石ハーフブロック
+
+        データ値
+        　0: 石ハーフブロック
+        　1: 砂岩ハーフブロック
+        　2: 木材ハーフブロック (石扱い)
+        　3: 丸石ハーフブロック
+        　4: レンガハーフブロック
+        　5: 石レンガハーフブロック
+        　6: ネザーレンガハーフブロック
+        　7: ネザー水晶ハーフブロック
+      </Desc>
+    </Block>
+    <Block name="stone_slab">
+      <Desc>
+        石ハーフブロック (#0044)
+
+        データ値
+        　0: 石ハーフブロック
+        　1: 砂岩ハーフブロック
+        　2: 木材ハーフブロック (石扱い)
+        　3: 丸石ハーフブロック
+        　4: レンガハーフブロック
+        　5: 石レンガハーフブロック
+        　6: ネザーレンガハーフブロック
+        　7: ネザー水晶ハーフブロック
+      </Desc>
+    </Block>
+    <Block name="brick_block">
+      <Desc>
+        レンガ (#0045)
+      </Desc>
+    </Block>
+    <Block name="tnt">
+      <Desc>
+        TNT (#0046)
+      </Desc>
+    </Block>
+    <Block name="bookshelf">
+      <Desc>
+        本棚 (#0047)
+      </Desc>
+    </Block>
+    <Block name="mossy_cobblestone">
+      <Desc>
+        苔石 (#0048)
+      </Desc>
+    </Block>
+    <Block name="obsidian">
+      <Desc>
+        黒曜石 (#0049)
+      </Desc>
+    </Block>
+    <Block name="torch">
+      <Desc>
+        松明 (#0050)
+      </Desc>
+    </Block>
+    <Block name="fire">
+      <Desc>
+        炎 (#0051)
+      </Desc>
+    </Block>
+    <Block name="mob_spawner">
+      <Desc>
+        モンスタースポナー (#0052)
+      </Desc>
+    </Block>
+    <Block name="oak_stairs">
+      <Desc>
+        オークの木の階段 (#0053)
+      </Desc>
+    </Block>
+    <Block name="chest">
+      <Desc>
+        チェスト (#0054)
+      </Desc>
+    </Block>
+    <Block name="redstone_wire">
+      <Desc>
+        レッドストーン (#0055)
+
+        設置されたレッドストーンワイヤー
+      </Desc>
+    </Block>
+    <Block name="diamond_ore">
+      <Desc>
+        ダイヤモンド鉱石 (#0056)
+      </Desc>
+    </Block>
+    <Block name="diamond_block">
+      <Desc>
+        ダイヤモンドブロック (#0057)
+      </Desc>
+    </Block>
+    <Block name="crafting_table">
+      <Desc>
+        作業台 (#0058)
+      </Desc>
+    </Block>
+    <Block name="wheat">
+      <Desc>
+        小麦 (#0059)
+
+        植えられた小麦
+      </Desc>
+    </Block>
+    <Block name="farmland">
+      <Desc>
+        耕地 (#0060)
+      </Desc>
+    </Block>
+    <Block name="furnace">
+      <Desc>
+        かまど (#0061)
+      </Desc>
+    </Block>
+    <Block name="lit_furnace">
+      <Desc>
+        かまど (#0062)
+
+        燃焼しているかまど
+      </Desc>
+    </Block>
+    <Block name="standing_sign">
+      <Desc>
+        看板 (#0063)
+
+        地面に設置された看板
+      </Desc>
+    </Block>
+    <Block name="wooden_door">
+      <Desc>
+        木のドア (#0064)
+      </Desc>
+    </Block>
+    <Block name="ladder">
+      <Desc>
+        はしご (#0065)
+      </Desc>
+    </Block>
+    <Block name="rail">
+      <Desc>
+        レール (#0066)
+      </Desc>
+    </Block>
+    <Block name="stone_stairs">
+      <Desc>
+        石の階段 (#0067)
+      </Desc>
+    </Block>
+    <Block name="wall_sign">
+      <Desc>
+        看板 (#0068)
+
+        壁に設置された看板
+      </Desc>
+    </Block>
+    <Block name="lever">
+      <Desc>
+        レバー (#0069)
+      </Desc>
+    </Block>
+    <Block name="stone_pressure_plate">
+      <Desc>
+        石の感圧板 (#0070)
+      </Desc>
+    </Block>
+    <Block name="iron_door">
+      <Desc>
+        鉄のドア (#0071)
+      </Desc>
+    </Block>
+    <Block name="wooden_pressure_plate">
+      <Desc>
+        木の感圧板 (#0072)
+      </Desc>
+    </Block>
+    <Block name="redstone_ore">
+      <Desc>
+        レッドストーン鉱石 (#0073)
+      </Desc>
+    </Block>
+    <Block name="lit_redstone_ore">
+      <Desc>
+        レッドストーン鉱石 (#0074)
+
+        光っているレッドストーン鉱石
+      </Desc>
+    </Block>
+    <Block name="unlit_redstone_torch">
+      <Desc>
+        レッドストーントーチ (#0075)
+
+        消えているレッドストーントーチ
+      </Desc>
+    </Block>
+    <Block name="redstone_torch">
+      <Desc>
+        レッドストーントーチ (#0076)
+      </Desc>
+    </Block>
+    <Block name="stone_button">
+      <Desc>
+        ボタン (#0077)
+
+        石のボタン
+      </Desc>
+    </Block>
+    <Block name="snow_layer">
+      <Desc>
+        雪 (#0078)
+
+        データ値
+        　0: 雪 (通常)
+      </Desc>
+    </Block>
+    <Block name="ice">
+      <Desc>
+        氷 (#0079)
+      </Desc>
+    </Block>
+    <Block name="snow">
+      <Desc>
+        雪 (#0080)
+
+        建築ブロック
+      </Desc>
+    </Block>
+    <Block name="cactus">
+      <Desc>
+        サボテン (#0081)
+      </Desc>
+    </Block>
+    <Block name="clay">
+      <Desc>
+        粘土 (#0082)
+      </Desc>
+    </Block>
+    <Block name="reeds">
+      <Desc>
+        サトウキビ (#0083)
+      </Desc>
+    </Block>
+    <Block name="jukebox">
+      <Desc>
+        ジュークボックス (#0084)
+      </Desc>
+    </Block>
+    <Block name="fence">
+      <Desc>
+        オークのフェンス (#0085)
+      </Desc>
+    </Block>
+    <Block name="pumpkin">
+      <Desc>
+        カボチャ (#0086)
+      </Desc>
+    </Block>
+    <Block name="netherrack">
+      <Desc>
+        ネザーラック (#0087)
+      </Desc>
+    </Block>
+    <Block name="soul_sand">
+      <Desc>
+        ソウルサンド (#0088)
+      </Desc>
+    </Block>
+    <Block name="glowstone">
+      <Desc>
+        グロウストーン (#0089)
+      </Desc>
+    </Block>
+    <Block name="portal">
+      <Desc>
+        ポータル (#0090)
+
+        ネザーゲート
+      </Desc>
+    </Block>
+    <Block name="lit_pumpkin">
+      <Desc>
+        ジャック・オ・ランタン (#0091)
+      </Desc>
+    </Block>
+    <Block name="cake">
+      <Desc>
+        ケーキ (#0092)
+      </Desc>
+    </Block>
+    <Block name="unpowered_repeater">
+      <Desc>
+        レッドストーンリピーター (#0093)
+
+        動力がオフの状態のレッドストーンリピーター
+      </Desc>
+    </Block>
+    <Block name="powered_repeater">
+      <Desc>
+        レッドストーンリピーター (#0094)
+
+        動力がオンの状態のレッドストーンリピーター
+      </Desc>
+    </Block>
+    <Block name="stained_glass">
+      <Desc>
+        色付きガラス (#0095)
+
+        データ値
+        　0: 白色の色付きガラス
+        　1: 橙色の色付きガラス
+        　2: 赤紫色の色付きガラス
+        　3: 空色の色付きガラス
+        　4: 黄色の色付きガラス
+        　5: 黄緑色の色付きガラス
+        　6: 桃色の色付きガラス
+        　7: 灰色の色付きガラス
+        　8: 薄灰色の色付きガラス
+        　9: 水色の色付きガラス
+        　10: 紫色の色付きガラス
+        　11: 青色の色付きガラス
+        　12: 茶色の色付きガラス
+        　13: 緑色の色付きガラス
+        　14: 赤色の色付きガラス
+        　15: 黒色の色付きガラス
+      </Desc>
+    </Block>
+    <Block name="trapdoor">
+      <Desc>
+        トラップドア (#0096)
+      </Desc>
+    </Block>
+    <Block name="monster_egg">
+      <Desc>
+        シルバーフィッシュ入りの石 (#0097)
+
+        データ値
+        　0: シルバーフィッシュ入りの石
+        　1: シルバーフィッシュ入りの丸石
+        　2: シルバーフィッシュ入りの石レンガ
+        　3: 苔石レンガモンスターエッグ
+        　4: ひびの入った石レンガモンスターエッグ
+        　5: 模様入り石レンガモンスターエッグ
+      </Desc>
+    </Block>
+    <Block name="stonebrick">
+      <Desc>
+        石レンガ (#0098)
+
+        データ値
+        　0: 石レンガ
+        　1: 苔石レンガ
+        　2: ひびの入った石レンガ
+        　3: 模様入り石レンガ
+      </Desc>
+    </Block>
+    <Block name="brown_mushroom_block">
+      <Desc>
+        キノコブロック (#0099)
+
+        茶色のキノコブロック
+      </Desc>
+    </Block>
+    <Block name="red_mushroom_block">
+      <Desc>
+        キノコブロック (#0100)
+
+        赤色のキノコブロック
+      </Desc>
+    </Block>
+    <Block name="iron_bars">
+      <Desc>
+        鉄格子 (#0101)
+      </Desc>
+    </Block>
+    <Block name="glass_pane">
+      <Desc>
+        板ガラス (#0102)
+      </Desc>
+    </Block>
+    <Block name="melon_block">
+      <Desc>
+        スイカ (#0103)
+      </Desc>
+    </Block>
+    <Block name="pumpkin_stem">
+      <Desc>
+        カボチャの苗 (#0104)
+
+        植えられたカボチャの苗
+      </Desc>
+    </Block>
+    <Block name="melon_stem">
+      <Desc>
+        スイカの苗 (#0105)
+
+        植えられたスイカの苗
+      </Desc>
+    </Block>
+    <Block name="vine">
+      <Desc>
+        つる (#0106)
+      </Desc>
+    </Block>
+    <Block name="fence_gate">
+      <Desc>
+        フェンスゲート (#0107)
+      </Desc>
+    </Block>
+    <Block name="brick_stairs">
+      <Desc>
+        レンガの階段 (#0108)
+      </Desc>
+    </Block>
+    <Block name="stone_brick_stairs">
+      <Desc>
+        石レンガの階段 (#0109)
+      </Desc>
+    </Block>
+    <Block name="mycelium">
+      <Desc>
+        菌糸 (#0110)
+      </Desc>
+    </Block>
+    <Block name="waterlily">
+      <Desc>
+        スイレンの葉 (#0111)
+      </Desc>
+    </Block>
+    <Block name="nether_brick">
+      <Desc>
+        ネザーレンガ (#0112)
+      </Desc>
+    </Block>
+    <Block name="nether_brick_fence">
+      <Desc>
+        ネザーレンガフェンス (#0113)
+      </Desc>
+    </Block>
+    <Block name="nether_brick_stairs">
+      <Desc>
+        ネザーレンガの階段 (#0114)
+      </Desc>
+    </Block>
+    <Block name="nether_wart">
+      <Desc>
+        ネザーウォート (#0115)
+      </Desc>
+    </Block>
+    <Block name="enchanting_table">
+      <Desc>
+        エンチャントテーブル (#0116)
+      </Desc>
+    </Block>
+    <Block name="brewing_stand">
+      <Desc>
+        醸造台 (#0117)
+
+        醸造中の醸造台
+      </Desc>
+    </Block>
+    <Block name="cauldron">
+      <Desc>
+        大釜 (#0118)
+      </Desc>
+    </Block>
+    <Block name="end_portal">
+      <Desc>
+        エンドポータル (#0119)
+      </Desc>
+    </Block>
+    <Block name="end_portal_frame">
+      <Desc>
+        エンドポータル (#0120)
+
+        エンドポータルフレーム
+      </Desc>
+    </Block>
+    <Block name="end_stone">
+      <Desc>
+        エンドストーン (#0121)
+      </Desc>
+    </Block>
+    <Block name="dragon_egg">
+      <Desc>
+        ドラゴンの卵 (#0122)
+      </Desc>
+    </Block>
+    <Block name="redstone_lamp">
+      <Desc>
+        レッドストーンランプ (#0123)
+      </Desc>
+    </Block>
+    <Block name="lit_redstone_lamp">
+      <Desc>
+        レッドストーンランプ (#0124)
+
+        光っているレッドストーンランプ
+      </Desc>
+    </Block>
+    <Block name="double_wooden_slab">
+      <Desc>
+        木材ハーフブロック (#0125)
+
+        重なった状態の木材ハーフブロック
+
+        データ値
+        　0: オークの木材ハーフブロック
+        　1: マツの木材ハーフブロック
+        　2: シラカバの木材ハーフブロック
+        　3: 熱帯樹の木材ハーフブロック
+        　4: アカシアの木材ハーフブロック
+        　5: ダークオークの木材ハーフブロック
+      </Desc>
+    </Block>
+    <Block name="wooden_slab">
+      <Desc>
+        木材ハーフブロック (#0126)
+
+        データ値
+        　0: オークの木材ハーフブロック
+        　1: マツの木材ハーフブロック
+        　2: シラカバの木材ハーフブロック
+        　3: 熱帯樹の木材ハーフブロック
+        　4: アカシアの木材ハーフブロック
+        　5: ダークオークの木材ハーフブロック
+      </Desc>
+    </Block>
+    <Block name="cacao">
+      <Desc>
+        カカオ豆 (#0127)
+      </Desc>
+    </Block>
+    <Block name="sandstone_stairs">
+      <Desc>
+        砂岩の階段 (#0128)
+      </Desc>
+    </Block>
+    <Block name="emerald_ore">
+      <Desc>
+        エメラルド鉱石 (#0129)
+      </Desc>
+    </Block>
+    <Block name="ender_chest">
+      <Desc>
+        エンダーチェスト (#0130)
+      </Desc>
+    </Block>
+    <Block name="tripwire_hook">
+      <Desc>
+        トリップワイヤーフック (#0131)
+      </Desc>
+    </Block>
+    <Block name="tripwire">
+      <Desc>
+        トリップワイヤー (#0132)
+      </Desc>
+    </Block>
+    <Block name="emerald_block">
+      <Desc>
+        エメラルドブロック (#0133)
+      </Desc>
+    </Block>
+    <Block name="spruce_stairs">
+      <Desc>
+        マツの木の階段 (#0134)
+      </Desc>
+    </Block>
+    <Block name="birch_stairs">
+      <Desc>
+        シラカバの木の階段 (#0135)
+      </Desc>
+    </Block>
+    <Block name="jungle_stairs">
+      <Desc>
+        熱帯樹の木の階段 (#0136)
+      </Desc>
+    </Block>
+    <Block name="command_block">
+      <Desc>
+        コマンドブロック (#0137)
+      </Desc>
+    </Block>
+    <Block name="beacon">
+      <Desc>
+        ビーコン (#0138)
+      </Desc>
+    </Block>
+    <Block name="cobblestone_wall">
+      <Desc>
+        石の壁 (#0139)
+
+        データ値
+        　0: 丸石の壁
+        　1: 苔石の壁
+      </Desc>
+    </Block>
+    <Block name="flower_pot">
+      <Desc>
+        植木鉢 (#0140)
+      </Desc>
+    </Block>
+    <Block name="carrots">
+      <Desc>
+        ニンジン (#0141)
+
+        植えられたニンジン
+      </Desc>
+    </Block>
+    <Block name="potatoes">
+      <Desc>
+        ジャガイモ (#0142)
+
+        植えられたジャガイモ
+      </Desc>
+    </Block>
+    <Block name="wooden_button">
+      <Desc>
+        ボタン (#0143)
+
+        木のボタン
+      </Desc>
+    </Block>
+    <Block name="skull">
+      <Desc>
+        頭 (#0144)
+      </Desc>
+    </Block>
+    <Block name="anvil">
+      <Desc>
+        金床 (#0145)
+
+        データ値
+        　0: 金床
+        　1: 少し壊れた金床
+        　2: かなり壊れた金床
+      </Desc>
+    </Block>
+    <Block name="trapped_chest">
+      <Desc>
+        トラップチェスト (#0146)
+      </Desc>
+    </Block>
+    <Block name="light_weighted_pressure_plate">
+      <Desc>
+        重量感圧板 (軽) (#0147)
+      </Desc>
+    </Block>
+    <Block name="heavy_weighted_pressure_plate">
+      <Desc>
+        重量感圧板 (重) (#0148)
+      </Desc>
+    </Block>
+    <Block name="unpowered_comparator">
+      <Desc>
+        レッドストーンコンパレーター (#0149)
+
+        動力がオフの状態のレッドストーンコンパレーター
+      </Desc>
+    </Block>
+    <Block name="powered_comparator">
+      <Desc>
+        レッドストーンコンパレーター (#0150)
+
+        動力がオンの状態のレッドストーンコンパレーター
+      </Desc>
+    </Block>
+    <Block name="daylight_detector">
+      <Desc>
+        日照センサー (#0151)
+      </Desc>
+    </Block>
+    <Block name="redstone_block">
+      <Desc>
+        レッドストーンブロック (#0152)
+      </Desc>
+    </Block>
+    <Block name="quartz_ore">
+      <Desc>
+        ネザー水晶鉱石 (#0153)
+      </Desc>
+    </Block>
+    <Block name="hopper">
+      <Desc>
+        ホッパー (#0154)
+      </Desc>
+    </Block>
+    <Block name="quartz_block">
+      <Desc>
+        ネザー水晶ブロック (#0155)
+
+        データ値
+        　0: ネザー水晶ブロック
+        　1: 模様入りネザー水晶ブロック
+        　2: 柱状ネザー水晶ブロック
+      </Desc>
+    </Block>
+    <Block name="quartz_stairs">
+      <Desc>
+        ネザー水晶の階段 (#0156)
+      </Desc>
+    </Block>
+    <Block name="activator_rail">
+      <Desc>
+        アクティベーターレール (#0157)
+      </Desc>
+    </Block>
+    <Block name="dropper">
+      <Desc>
+        ドロッパー (#0158)
+      </Desc>
+    </Block>
+    <Block name="stained_hardened_clay">
+      <Desc>
+        色付き粘土 (#0159)
+
+        データ値
+        　0: 白色の色付き粘土
+        　1: 橙色の色付き粘土
+        　2: 赤紫色の色付き粘土
+        　3: 空色の色付き粘土
+        　4: 黄色の色付き粘土
+        　5: 黄緑色の色付き粘土
+        　6: 桃色の色付き粘土
+        　7: 灰色の色付き粘土
+        　8: 薄灰色の色付き粘土
+        　9: 水色の色付き粘土
+        　10: 紫色の色付き粘土
+        　11: 青色の色付き粘土
+        　12: 茶色の色付き粘土
+        　13: 緑色の色付き粘土
+        　14: 赤色の色付き粘土
+        　15: 黒色の色付き粘土
+      </Desc>
+    </Block>
+    <Block name="stained_glass_pane">
+      <Desc>
+        色付きガラス板 (#0160)
+
+        データ値
+        　0: 白色のガラス板
+        　1: 橙色のガラス板
+        　2: 赤紫色のガラス板
+        　3: 空色のガラス板
+        　4: 黄色のガラス板
+        　5: 黄緑色のガラス板
+        　6: 桃色のガラス板
+        　7: 灰色のガラス板
+        　8: 薄灰色のガラス板
+        　9: 水色のガラス板
+        　10: 紫色のガラス板
+        　11: 青色のガラス板
+        　12: 茶色のガラス板
+        　13: 緑色のガラス板
+        　14: 赤色のガラス板
+        　15: 黒色のガラス板
+      </Desc>
+    </Block>
+    <Block name="leave2">
+      <Desc>
+        葉 (#0161)
+
+        データ値
+        　0: アカシアの葉
+        　1: ダークオークの葉
+      </Desc>
+    </Block>
+    <Block name="log2">
+      <Desc>
+        原木 (#0162)
+
+        データ値
+        　0: アカシアの原木
+        　1: ダークオークの原木
+      </Desc>
+    </Block>
+    <Block name="acacia_stairs">
+      <Desc>
+        アカシアの木の階段 (#0163)
+      </Desc>
+    </Block>
+    <Block name="dark_oak_stairs">
+      <Desc>
+        ダークオークの木の階段 (#0164)
+      </Desc>
+    </Block>
+    <Block name="slime">
+      <Desc>
+        スライムブロック (#0165)
+      </Desc>
+    </Block>
+    <Block name="barrier">
+      <Desc>
+        バリアブロック (#0166)
+      </Desc>
+    </Block>
+    <Block name="iron_trapdoor">
+      <Desc>
+        鉄のトラップドア (#0167)
+      </Desc>
+    </Block>
+    <Block name="prismarine">
+      <Desc>
+        海晶ブロック (#0168)
+
+        データ値
+        　0: 海晶ブロック
+        　1: 海晶レンガ
+        　2: 暗海晶ブロック
+      </Desc>
+    </Block>
+    <Block name="sea_lantern">
+      <Desc>
+        海のランタン (#0169)
+      </Desc>
+    </Block>
+    <Block name="hay_block">
+      <Desc>
+        干草の俵 (#0170)
+      </Desc>
+    </Block>
+    <Block name="carpet">
+      <Desc>
+        カーペット (#0171)
+
+        データ値
+        　0: カーペット (白色)
+        　1: 橙色のカーペット
+        　2: 赤紫色のカーペット
+        　3: 空色のカーペット
+        　4: 黄色のカーペット
+        　5: 黄緑色のカーペット
+        　6: 桃色のカーペット
+        　7: 灰色のカーペット
+        　8: 薄灰色のカーペット
+        　9: 水色のカーペット
+        　10: 紫色のカーペット
+        　11: 青色のカーペット
+        　12: 茶色のカーペット
+        　13: 緑色のカーペット
+        　14: 赤色のカーペット
+        　15: 黒色のカーペット
+      </Desc>
+    </Block>
+    <Block name="hardened_clay">
+      <Desc>
+        堅焼き粘土 (#0172)
+      </Desc>
+    </Block>
+    <Block name="coal_block">
+      <Desc>
+        石炭ブロック (#0173)
+      </Desc>
+    </Block>
+    <Block name="packed_ice">
+      <Desc>
+        氷塊 (#0174)
+      </Desc>
+    </Block>
+    <Block name="double_plant">
+      <Desc>
+        ヒマワリ (#0175)
+
+        データ値
+        　0: ヒマワリ
+        　1: ライラック
+        　2: 高い草
+        　3: 大きなシダ
+        　4: バラの低木
+        　5: ボタン
+      </Desc>
+    </Block>
+    <Block name="red_sandstone">
+      <Desc>
+        赤砂岩 (#0179)
+
+        データ値
+        　0: 赤砂岩
+        　1: 模様入りの赤砂岩
+        　2: 滑らかな赤砂岩
+      </Desc>
+    </Block>
+    <Block name="red_sandstone_stairs">
+      <Desc>
+        赤砂岩の階段 (#0180)
+      </Desc>
+    </Block>
+    <Block name="double_stone_slab2">
+      <Desc>
+        赤砂岩のハーフブロック (#0181)
+
+        重なった状態の赤砂岩のハーフブロック
+
+        データ値
+        　0: 赤砂岩のハーフブロック
+      </Desc>
+    </Block>
+    <Block name="stone_slab2">
+      <Desc>
+        赤砂岩のハーフブロック (#0182)
+
+        データ値
+        　0: 赤砂岩のハーフブロック
+      </Desc>
+    </Block>
+    <Block name="spruce_fence_gate">
+      <Desc>
+        マツのフェンスゲート (#0183)
+      </Desc>
+    </Block>
+    <Block name="birch_fence_gate">
+      <Desc>
+        シラカバのフェンスゲート (#0184)
+      </Desc>
+    </Block>
+    <Block name="jungle_fence_gate">
+      <Desc>
+        熱帯樹のフェンスゲート (#0185)
+      </Desc>
+    </Block>
+    <Block name="dark_oak_fence_gate">
+      <Desc>
+        ダークオークのフェンスゲート (#0186)
+      </Desc>
+    </Block>
+    <Block name="acacia_fence_gate">
+      <Desc>
+        アカシアのフェンスゲート (#0187)
+      </Desc>
+    </Block>
+    <Block name="spruce_fence">
+      <Desc>
+        マツのフェンス (#0188)
+      </Desc>
+    </Block>
+    <Block name="birch_fence">
+      <Desc>
+        シラカバのフェンス (#0189)
+      </Desc>
+    </Block>
+    <Block name="jungle_fence">
+      <Desc>
+        熱帯樹のフェンス (#0190)
+      </Desc>
+    </Block>
+    <Block name="dark_oak_fence">
+      <Desc>
+        ダークオークのフェンス (#0191)
+      </Desc>
+    </Block>
+    <Block name="acacia_fence">
+      <Desc>
+        アカシアのフェンス (#0192)
+      </Desc>
+    </Block>
+  </Blocks>
+
+  <Entities>
+    <Entity name="Item">
+      <Desc>
+        アイテム (#001)
+      </Desc>
+    </Entity>
+    <Entity name="XPOrb">
+      <Desc>
+        経験値オーブ (#002)
+      </Desc>
+    </Entity>
+    <Entity name="LeashKnot">
+      <Desc>
+        リード (#008)
+      </Desc>
+    </Entity>
+    <Entity name="Painting">
+      <Desc>
+        絵画 (#009)
+      </Desc>
+    </Entity>
+    <Entity name="ItemFrame">
+      <Desc>
+        額縁 (#018)
+      </Desc>
+    </Entity>
+    <Entity name="ArmorStand">
+      <Desc>
+        防具立て (#030)
+      </Desc>
+    </Entity>
+    <Entity name="EnderCrystal">
+      <Desc>
+        エンダークリスタル (#200)
+      </Desc>
+    </Entity>
+    <Entity name="ThunderBolt">
+      <Desc>
+        稲妻 (# ? )
+      </Desc>
+    </Entity>
+    <Entity name="Arrow">
+      <Desc>
+        放たれた矢 (#010)
+      </Desc>
+    </Entity>
+    <Entity name="Snowball">
+      <Desc>
+        投げられた雪玉 (#011)
+      </Desc>
+    </Entity>
+    <Entity name="Fireball">
+      <Desc>
+        火の玉 (#012)
+
+        ガストの弾
+      </Desc>
+    </Entity>
+    <Entity name="SmallFireball">
+      <Desc>
+        小さな火の玉 (#013)
+
+        ブレイズの弾
+      </Desc>
+    </Entity>
+    <Entity name="ThrownEnderpearl">
+      <Desc>
+        投げられたエンダーパール (#014)
+      </Desc>
+    </Entity>
+    <Entity name="EyeOfEnderSignal">
+      <Desc>
+        投げられたエンダーアイ (#015)
+      </Desc>
+    </Entity>
+    <Entity name="ThrownPotion">
+      <Desc>
+        投げられたスプラッシュポーション (#016)
+      </Desc>
+    </Entity>
+    <Entity name="ThrownExpBottle">
+      <Desc>
+        投げられた経験値ボトル (#017)
+      </Desc>
+    </Entity>
+    <Entity name="WitherSkull">
+      <Desc>
+        ウィザーの頭 (#019)
+      </Desc>
+    </Entity>
+    <Entity name="FireworksRocketEntity">
+      <Desc>
+        ロケット花火 (#022)
+      </Desc>
+    </Entity>
+    <Entity name="PrimedTnt">
+      <Desc>
+        着火されたTNT (#020)
+      </Desc>
+    </Entity>
+    <Entity name="FallingSand">
+      <Desc>
+        落下中のブロック (#021)
+      </Desc>
+    </Entity>
+    <Entity name="MinecartCommandBlock">
+      <Desc>
+        コマンドブロック付きトロッコ (#040)
+      </Desc>
+    </Entity>
+    <Entity name="Boat">
+      <Desc>
+        ボート (#041)
+      </Desc>
+    </Entity>
+    <Entity name="MinecartRideable">
+      <Desc>
+        トロッコ (#042)
+      </Desc>
+    </Entity>
+    <Entity name="MinecartChest">
+      <Desc>
+        チェスト付きトロッコ (#043)
+      </Desc>
+    </Entity>
+    <Entity name="MinecartFurnace">
+      <Desc>
+        かまど付きトロッコ (#044)
+      </Desc>
+    </Entity>
+    <Entity name="MinecartTNT">
+      <Desc>
+        TNT付きトロッコ (#045)
+      </Desc>
+    </Entity>
+    <Entity name="MinecartHopper">
+      <Desc>
+        ホッパー付きトロッコ (#046)
+      </Desc>
+    </Entity>
+    <Entity name="MinecartSpawner">
+      <Desc>
+        スポナー付きトロッコ (#047)
+      </Desc>
+    </Entity>
+    <Entity name="Mob">
+      <Desc>
+        モンスター (#048)
+      </Desc>
+    </Entity>
+    <Entity name="Monster">
+      <Desc>
+        モンスター (#049)
+      </Desc>
+    </Entity>
+    <Entity name="Creeper">
+      <Desc>
+        クリーパー (#050)
+      </Desc>
+    </Entity>
+    <Entity name="Skeleton">
+      <Desc>
+        スケルトン (#051)
+
+        スケルトン
+        ウィザースケルトン
+      </Desc>
+    </Entity>
+    <Entity name="Spider">
+      <Desc>
+        スパイダー (#052)
+      </Desc>
+    </Entity>
+    <Entity name="Giant">
+      <Desc>
+        ジャイアント (#053)
+
+        ジャイアント ゾンビ
+      </Desc>
+    </Entity>
+    <Entity name="Zombie">
+      <Desc>
+        ゾンビ (#054)
+      </Desc>
+    </Entity>
+    <Entity name="Slime">
+      <Desc>
+        スライム (#055)
+      </Desc>
+    </Entity>
+    <Entity name="Ghast">
+      <Desc>
+        ガスト (#056)
+      </Desc>
+    </Entity>
+    <Entity name="PigZombie">
+      <Desc>
+        ゾンビピッグマン (#057)
+      </Desc>
+    </Entity>
+    <Entity name="Enderman">
+      <Desc>
+        エンダーマン (#058)
+      </Desc>
+    </Entity>
+    <Entity name="CaveSpider">
+      <Desc>
+        毒蜘蛛 (#059)
+      </Desc>
+    </Entity>
+    <Entity name="Silverfish">
+      <Desc>
+        シルバーフィッシュ (#060)
+      </Desc>
+    </Entity>
+    <Entity name="Blaze">
+      <Desc>
+        ブレイズ (#061)
+      </Desc>
+    </Entity>
+    <Entity name="LavaSlime">
+      <Desc>
+        マグマキューブ (#062)
+      </Desc>
+    </Entity>
+    <Entity name="EnderDragon">
+      <Desc>
+        エンダードラゴン (#063)
+      </Desc>
+    </Entity>
+    <Entity name="WitherBoss">
+      <Desc>
+        ウィザー (#064)
+      </Desc>
+    </Entity>
+    <Entity name="Witch">
+      <Desc>
+        ウィッチ (#066)
+      </Desc>
+    </Entity>
+    <Entity name="Endermite">
+      <Desc>
+        エンダーマイト (#067)
+      </Desc>
+    </Entity>
+    <Entity name="Guardian">
+      <Desc>
+        ガーディアン (#068)
+      </Desc>
+    </Entity>
+    <Entity name="Bat">
+      <Desc>
+        コウモリ (#065)
+      </Desc>
+    </Entity>
+    <Entity name="Pig">
+      <Desc>
+        ブタ (#090)
+      </Desc>
+    </Entity>
+    <Entity name="Sheep">
+      <Desc>
+        ヒツジ (#091)
+      </Desc>
+    </Entity>
+    <Entity name="Cow">
+      <Desc>
+        ウシ (#092)
+      </Desc>
+    </Entity>
+    <Entity name="Chicken">
+      <Desc>
+        ニワトリ (#093)
+      </Desc>
+    </Entity>
+    <Entity name="Squid">
+      <Desc>
+        イカ (#094)
+      </Desc>
+    </Entity>
+    <Entity name="Wolf">
+      <Desc>
+        オオカミ (#095)
+      </Desc>
+    </Entity>
+    <Entity name="MushroomCow">
+      <Desc>
+        ムーシュルーム (#096)
+      </Desc>
+    </Entity>
+    <Entity name="SnowMan">
+      <Desc>
+        スノーゴーレム (#097)
+      </Desc>
+    </Entity>
+    <Entity name="Ozelot">
+      <Desc>
+        ヤマネコ (#098)
+      </Desc>
+    </Entity>
+    <Entity name="VillagerGolem">
+      <Desc>
+        アイアンゴーレム (#099)
+      </Desc>
+    </Entity>
+    <Entity name="EntityHorse">
+      <Desc>
+        ウマ (#100)
+      </Desc>
+    </Entity>
+    <Entity name="Rabbit">
+      <Desc>
+        ウサギ (#101)
+      </Desc>
+    </Entity>
+    <Entity name="Villager">
+      <Desc>
+        村人 (#120)
+      </Desc>
+    </Entity>
+  </Entities>
+
+  <Effects>
+    <Effect name="speed">
+      <Desc>
+        移動速度上昇 (#01)
+      </Desc>
+    </Effect>
+    <Effect name="slowness">
+      <Desc>
+        移動速度低下 (#02)
+      </Desc>
+    </Effect>
+    <Effect name="haste">
+      <Desc>
+        採掘速度上昇 (#03)
+      </Desc>
+    </Effect>
+    <Effect name="mining_fatigue">
+      <Desc>
+        採掘速度低下 (#04)
+      </Desc>
+    </Effect>
+    <Effect name="strength">
+      <Desc>
+        攻撃力上昇 (#05)
+      </Desc>
+    </Effect>
+    <Effect name="instant_health">
+      <Desc>
+        即時回復 (#06)
+      </Desc>
+    </Effect>
+    <Effect name="instant_damage">
+      <Desc>
+        ダメージ (#07)
+      </Desc>
+    </Effect>
+    <Effect name="jump_boost">
+      <Desc>
+        跳躍力上昇 (#08)
+      </Desc>
+    </Effect>
+    <Effect name="nausea">
+      <Desc>
+        吐き気 (#09)
+      </Desc>
+    </Effect>
+    <Effect name="regeneration">
+      <Desc>
+        再生能力 (#10)
+      </Desc>
+    </Effect>
+    <Effect name="resistance">
+      <Desc>
+        耐性 (#11)
+      </Desc>
+    </Effect>
+    <Effect name="fire_resistance">
+      <Desc>
+        火炎耐性 (#12)
+      </Desc>
+    </Effect>
+    <Effect name="water_breathing">
+      <Desc>
+        水中呼吸 (#13)
+      </Desc>
+    </Effect>
+    <Effect name="invisibility">
+      <Desc>
+        透明化 (#14)
+      </Desc>
+    </Effect>
+    <Effect name="blindness">
+      <Desc>
+        盲目 (#15)
+      </Desc>
+    </Effect>
+    <Effect name="night_vision">
+      <Desc>
+        暗視 (#16)
+      </Desc>
+    </Effect>
+    <Effect name="hunger">
+      <Desc>
+        空腹 (#17)
+      </Desc>
+    </Effect>
+    <Effect name="weakness">
+      <Desc>
+        弱体化 (#18)
+      </Desc>
+    </Effect>
+    <Effect name="poison">
+      <Desc>
+        毒 (#19)
+      </Desc>
+    </Effect>
+    <Effect name="wither">
+      <Desc>
+        ウィザー (#20)
+      </Desc>
+    </Effect>
+    <Effect name="health_boost">
+      <Desc>
+        体力補強 (#21)
+      </Desc>
+    </Effect>
+    <Effect name="absorption">
+      <Desc>
+        緩衝体力 (#22)
+      </Desc>
+    </Effect>
+    <Effect name="saturation">
+      <Desc>
+        満腹度回復 (#23)
+      </Desc>
+    </Effect>
+  </Effects>
+
+  <Enchants>
+    <Enchant name="protection">
+      <Desc>
+        ダメージ軽減
+        Protection
+
+        受けるダメージを軽減します
+      </Desc>
+    </Enchant>
+    <Enchant name="fire_protection">
+      <Desc>
+        火炎耐性
+        Fire Protection
+
+        炎・雷・溶岩によって受けるダメージを軽減します
+      </Desc>
+    </Enchant>
+    <Enchant name="feather_falling">
+      <Desc>
+        落下耐性
+        Feather Falling
+
+        高いところから落ちた際の落下ダメージを軽減します
+      </Desc>
+    </Enchant>
+    <Enchant name="blast_protection">
+      <Desc>
+        爆発耐性
+        Blast Protection
+
+        爆発によって受けるダメージを軽減します
+      </Desc>
+    </Enchant>
+    <Enchant name="projectile_protection">
+      <Desc>
+        飛び道具耐性
+        Projectile Protection
+
+        弓矢によって受けるダメージを軽減します
+      </Desc>
+    </Enchant>
+    <Enchant name="respiration">
+      <Desc>
+        水中呼吸
+        Respiration
+
+        水中で息の続く時間が上昇します
+        窒息中のダメージ発生間隔が長くなります
+        水中で視界が暗くならなくなります
+      </Desc>
+    </Enchant>
+    <Enchant name="aqua_affinity">
+      <Desc>
+        水中採掘
+        Aqua Affinity
+
+        水中での採掘速度が地上と変わらなくなります
+      </Desc>
+    </Enchant>
+    <Enchant name="thorns">
+      <Desc>
+        棘の鎧
+        Thorns
+
+        着用者がモンスターまたはプレイヤーから攻撃を受けた際に、受けたダメージの一部を返します
+      </Desc>
+    </Enchant>
+    <Enchant name="depth_strider">
+      <Desc>
+        水中歩行
+        Depth Strider
+
+        水中でも素早く歩行できるようになります
+      </Desc>
+    </Enchant>
+    <Enchant name="sharpness">
+      <Desc>
+        ダメージ増加
+        Sharpness
+
+        与えるダメージが上昇します
+      </Desc>
+    </Enchant>
+    <Enchant name="smite">
+      <Desc>
+        アンデッド特効
+        Smite
+
+        特定のモンスターに対して与えるダメージが上昇します
+        ゾンビ、スケルトン、ゾンビピッグマン、ウィザースケルトン、ウィザーにのみ有効です
+      </Desc>
+    </Enchant>
+    <Enchant name="bane_of_arthropods">
+      <Desc>
+        虫特効
+        Bane of Arthropods
+
+        特定のモンスターに対して与えるダメージが上昇します
+        スパイダー、ケイブスパイダー、シルバーフィッシュにのみ有効
+      </Desc>
+    </Enchant>
+    <Enchant name="knockback">
+      <Desc>
+        ノックバック
+        Knockback
+
+        攻撃命中時に対象を吹き飛ばす力を強化します
+      </Desc>
+    </Enchant>
+    <Enchant name="fire_aspect">
+      <Desc>
+        火属性
+        Fire Aspect
+
+        攻撃命中後に対象を炎上状態にします
+      </Desc>
+    </Enchant>
+    <Enchant name="looting">
+      <Desc>
+        ドロップ増加
+        Looting
+
+        モブを倒した際のドロップアイテムの最大数が増加します
+      </Desc>
+    </Enchant>
+    <Enchant name="efficiency">
+      <Desc>
+        効率強化
+        Efficiency
+
+        採掘速度が上昇します
+      </Desc>
+    </Enchant>
+    <Enchant name="silk_touch">
+      <Desc>
+        シルクタッチ
+        Silk Touch
+
+        通常は回収できない特定のブロックが回収可能になります
+      </Desc>
+    </Enchant>
+    <Enchant name="unbreaking">
+      <Desc>
+        耐久力
+        Unbreaking
+
+        道具の耐久値減少の発生確率を抑制します
+      </Desc>
+    </Enchant>
+    <Enchant name="fortune">
+      <Desc>
+        幸運
+        Fortune
+
+        特定のブロック破壊時に出るアイテムの数が増加します
+      </Desc>
+    </Enchant>
+    <Enchant name="power">
+      <Desc>
+        射撃ダメージ増加
+        Power
+
+        矢で与えるダメージが上昇します
+      </Desc>
+    </Enchant>
+    <Enchant name="punch">
+      <Desc>
+        パンチ
+        Punch
+
+        矢の命中時に対象を吹き飛ばす力を強化します
+      </Desc>
+    </Enchant>
+    <Enchant name="flame">
+      <Desc>
+        炎の矢
+        Flame
+
+        矢が火矢に変わり、命中と同時にモブや一部の物を炎上状態にします
+      </Desc>
+    </Enchant>
+    <Enchant name="infinity">
+      <Desc>
+        無限
+        Infinity
+
+        インベントリに矢が1本でもあれば、矢を消費せずに無限に撃てるようになります
+      </Desc>
+    </Enchant>
+    <Enchant name="luck_of_the_sea">
+      <Desc>
+        宝釣り
+        Luck of the Sea
+
+        釣りの際、「宝」の獲得率を増加させ、「ゴミ」の獲得率を下げます
+      </Desc>
+    </Enchant>
+    <Enchant name="lure">
+      <Desc>
+        入れ食い
+        Lure
+
+        釣りの際、キャスティングからアタリまでの時間を短くし、魚以外の獲得率を下げます
+      </Desc>
+    </Enchant>
+  </Enchants>
+
+  <Selectors>
+    <Selector name="@p"
+              value="p">
+      <Desc>
+        最寄りのプレイヤー 1名
+
+        同じ距離に複数のプレイヤーが存在する場合、
+        最後にログインしたプレイヤーが対象となります
+      </Desc>
+    </Selector>
+    <Selector name="@r"
+              value="r">
+      <Desc>
+        ランダムなプレイヤー 1名
+      </Desc>
+    </Selector>
+    <Selector name="@a"
+              value="a">
+      <Desc>
+        すべてのプレイヤー
+      </Desc>
+    </Selector>
+    <Selector name="@e"
+              value="e">
+      <Desc>
+        すべてのエンティティ
+
+        プレイヤーを含む全てのエンティティが対象となります
+      </Desc>
+    </Selector>
+  </Selectors>
+
+  <SelectorArgs>
+    <Arg name="x">
+      <Desc>
+        検索する場所の中央の X 座標
+      </Desc>
+    </Arg>
+    <Arg name="y">
+      <Desc>
+        検索する場所の中央の Y 座標
+      </Desc>
+    </Arg>
+    <Arg name="z">
+      <Desc>
+        検索する場所の中央の Z 座標
+      </Desc>
+    </Arg>
+    <Arg name="r">
+      <Desc>
+        検索する最大半径
+        
+        指定した数値の範囲よりも内側にいる対象が指定されます
+      </Desc>
+    </Arg>
+    <Arg name="rm">
+      <Desc>
+        検索する最小半径
+        
+        指定した数値の範囲よりも外側にいる対象が指定されます
+      </Desc>
+    </Arg>
+    <Arg name="m">
+      <Desc>
+        プレイヤーのゲームモード
+
+        引数
+        　0: survival
+        　1: creative
+        　2: adventure
+        　3: spectator
+      </Desc>
+    </Arg>
+    <Arg name="c">
+      <Desc>
+        指定する最大数
+        
+        負の値を指定した場合、該当した対象のうち最も遠い対象から指定されます
+      </Desc>
+    </Arg>
+    <Arg name="l">
+      <Desc>
+        プレイヤーの最大経験値レベル
+        
+        指定した数値以下の経験値レベルを持つプレイヤーが指定されます
+      </Desc>
+    </Arg>
+    <Arg name="lm">
+      <Desc>
+        プレイヤーの最小経験値レベル
+        
+        指定した数値以上の経験値レベルを持つプレイヤーに反映される
+      </Desc>
+    </Arg>
+    <Arg name="score_name"
+         value="score">
+      <Desc>
+        score_???
+        
+        指定した数値以下のスコアを持つプレイヤー名を選択します
+
+        name には、スコアボードの objective の名前が入ります
+        例: score_ScoreName
+      </Desc>
+    </Arg>
+    <Arg name="score_name_min"
+         value="score">
+      <Desc>
+        score_???_min
+        
+        指定した数値以上のスコアを持つプレイヤー名を選択します
+
+        name には、スコアボードの objective の名前が入ります
+        例: score_ScoreName_min
+      </Desc>
+    </Arg>
+    <Arg name="team">
+      <Desc>
+        特定のチームに属しているプレイヤーを選択します
+        例: team=TeamRed
+
+        チーム名の前に ! を付けることで、そのチームに属していないプレイヤーを選択できます
+        例: team=!TeamRed
+      </Desc>
+    </Arg>
+    <Arg name="name">
+      <Desc>
+        特定の名前のプレイヤー・エンティティを選択します
+        例: name=PlayerName
+
+        名前の前に ! を付けることで、その名前以外のプレイヤーを選択できます
+        例: name=!PlayerName
+      </Desc>
+    </Arg>
+    <Arg name="dx">
+      <Desc>
+        
+      </Desc>
+    </Arg>
+    <Arg name="dy">
+      <Desc>
+        
+      </Desc>
+    </Arg>
+    <Arg name="dz">
+      <Desc>
+        
+      </Desc>
+    </Arg>
+    <Arg name="rx">
+      <Desc>
+        
+      </Desc>
+    </Arg>
+    <Arg name="rxm">
+      <Desc>
+        
+      </Desc>
+    </Arg>
+    <Arg name="ry">
+      <Desc>
+        
+      </Desc>
+    </Arg>
+    <Arg name="rym">
+      <Desc>
+        
+      </Desc>
+    </Arg>
+    <Arg name="type">
+      <Desc>
+        特定のエンティティタイプの対象を選択します
+        例: type=Creeper
+
+        名前の前に ! を付けることで、そのエンティティタイプ以外の対象を選択できます
+        例: type=!Creeper
+      </Desc>
+    </Arg>
+  </SelectorArgs>
+
+  <Patterns>
+    <Pattern name="br">
+      <Desc>
+        四角形 (右下)
+        Square Bottom Right
+      </Desc>
+    </Pattern>
+    <Pattern name="tl">
+      <Desc>
+        四角形 (左上)
+        Square Bottom Left
+      </Desc>
+    </Pattern>
+    <Pattern name="tr">
+      <Desc>
+        四角形 (右上)
+        Square Bottom Right
+      </Desc>
+    </Pattern>
+    <Pattern name="bt">
+      <Desc>
+        三角形 (下部)
+        Triangle Bottom
+      </Desc>
+    </Pattern>
+    <Pattern name="tt">
+      <Desc>
+        三角形 (上部)
+        Triangle Top
+      </Desc>
+    </Pattern>
+    <Pattern name="bts">
+      <Desc>
+        3つ並んだ三角形 (下部)
+        Triangles Bottom
+      </Desc>
+    </Pattern>
+    <Pattern name="tts">
+      <Desc>
+        3つ並んだ三角形 (上部)
+        Triangles Top
+      </Desc>
+    </Pattern>
+    <Pattern name="hh">
+      <Desc>
+        水平 (上半分塗りつぶし)
+        Half Horizontal
+      </Desc>
+    </Pattern>
+    <Pattern name="hhb">
+      <Desc>
+        水平 (下半分塗りつぶし)
+        Half Horizontal Bottom
+      </Desc>
+    </Pattern>
+    <Pattern name="vh">
+      <Desc>
+        垂直 (左半分塗りつぶし)
+        Half Vertical
+      </Desc>
+    </Pattern>
+    <Pattern name="vhr">
+      <Desc>
+        垂直 (右半分塗りつぶし)
+        Half Vertical Right
+      </Desc>
+    </Pattern>
+    <Pattern name="ld">
+      <Desc>
+        対角 (左上塗りつぶし)
+        DiagnalLeft
+      </Desc>
+    </Pattern>
+    <Pattern name="rd">
+      <Desc>
+        対角 (右下塗りつぶし)
+        Diagnal Right
+      </Desc>
+    </Pattern>
+    <Pattern name="mc">
+      <Desc>
+        円
+        Middle Circle
+      </Desc>
+    </Pattern>
+    <Pattern name="mr">
+      <Desc>
+        ひし形 (中央)
+        Middle Rhombus
+      </Desc>
+    </Pattern>
+    <Pattern name="ls">
+      <Desc>
+        線 (左側)
+        Stripe Left
+      </Desc>
+    </Pattern>
+    <Pattern name="rs">
+      <Desc>
+        線 (右側)
+        Stripe Right
+      </Desc>
+    </Pattern>
+    <Pattern name="ts">
+      <Desc>
+        線 (上部)
+        Stripe Top
+      </Desc>
+    </Pattern>
+    <Pattern name="bs">
+      <Desc>
+        線 (下部)
+        Stripe Bottom
+      </Desc>
+    </Pattern>
+    <Pattern name="cs">
+      <Desc>
+        線 (中央 / 横向き)
+        Stripe Center
+      </Desc>
+    </Pattern>
+    <Pattern name="ms">
+      <Desc>
+        線 (中央 / 縦向き)
+        Stripe Middle
+      </Desc>
+    </Pattern>
+    <Pattern name="dls">
+      <Desc>
+        線 (左下がり)
+        Stripe Down-Left
+      </Desc>
+    </Pattern>
+    <Pattern name="drs">
+      <Desc>
+        線 (右下がり)
+        Stripe Down-Right
+      </Desc>
+    </Pattern>
+    <Pattern name="cr">
+      <Desc>
+        クロス\nCross
+      </Desc>
+    </Pattern>
+    <Pattern name="ss">
+      <Desc>
+        小さな網模様 (縦)
+        Small Stripes
+      </Desc>
+    </Pattern>
+    <Pattern name="gra">
+      <Desc>
+        グラデーション(下方向)
+        Gradiate
+      </Desc>
+    </Pattern>
+    <Pattern name="gru">
+      <Desc>
+        グラデーション(上方向)
+        Gradiate Up
+      </Desc>
+    </Pattern>
+    <Pattern name="bri">
+      <Desc>
+        レンガ模様
+        Brick
+      </Desc>
+    </Pattern>
+    <Pattern name="bo">
+      <Desc>
+        枠線
+        Border
+      </Desc>
+    </Pattern>
+    <Pattern name="cbo">
+      <Desc>
+        波模様のボーダー
+        Curly Border
+      </Desc>
+    </Pattern>
+    <Pattern name="flo">
+      <Desc>
+        花模様
+        Flower
+      </Desc>
+    </Pattern>
+    <Pattern name="cre">
+      <Desc>
+        クリーパー模様
+        Creeper
+      </Desc>
+    </Pattern>
+    <Pattern name="sku">
+      <Desc>
+        ガイコツ模様
+        Skull
+      </Desc>
+    </Pattern>
+    <Pattern name="moj">
+      <Desc>
+        Mojang ロゴ
+        Mojang
+      </Desc>
+    </Pattern>
+  </Patterns>
+
+  <Colors>
+    <Color name="black">
+      <Desc>
+        黒
+        Black
+      </Desc>
+    </Color>
+    <Color name="dark_blue">
+      <Desc>
+        濃い青
+        DarkBlue
+      </Desc>
+    </Color>
+    <Color name="dark_green">
+      <Desc>
+        濃い緑
+        DarkGreen
+      </Desc>
+    </Color>
+    <Color name="dark_aqua">
+      <Desc>
+        濃い水
+        DarkAqua
+      </Desc>
+    </Color>
+    <Color name="dark_red">
+      <Desc>
+        濃い赤
+        DarkRed
+      </Desc>
+    </Color>
+    <Color name="dark_purple">
+      <Desc>
+        濃い紫
+        DarkPurple
+      </Desc>
+    </Color>
+    <Color name="gray">
+      <Desc>
+        灰
+        Gray
+      </Desc>
+    </Color>
+    <Color name="dark_gray">
+      <Desc>
+        濃い灰
+        DarkGray
+      </Desc>
+    </Color>
+    <Color name="blue">
+      <Desc>
+        青
+        Blue
+      </Desc>
+    </Color>
+    <Color name="green">
+      <Desc>
+        緑
+        Green
+      </Desc>
+    </Color>
+    <Color name="aqua">
+      <Desc>
+        水
+        Aqua
+      </Desc>
+    </Color>
+    <Color name="red">
+      <Desc>
+        赤
+        Red
+      </Desc>
+    </Color>
+    <Color name="light_purple">
+      <Desc>
+        薄い紫
+        LightPurple
+      </Desc>
+    </Color>
+    <Color name="yellow">
+      <Desc>
+        黄
+        Yellow
+      </Desc>
+    </Color>
+    <Color name="white">
+      <Desc>
+        白
+        White
+      </Desc>
+    </Color>
+  </Colors>
+
+  <Booleans>
+    <Boolean name="true">
+      <Desc>
+        もしくは 1b
+      </Desc>
+    </Boolean>
+    <Boolean name="false">
+      <Desc>
+        もしくは 0b
+      </Desc>
+    </Boolean>
+  </Booleans>
+
+</Completions>

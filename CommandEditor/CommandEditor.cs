@@ -1,8 +1,12 @@
-﻿using Cafemoca.CommandEditor.Indentations;
+﻿using Cafemoca.CommandEditor.Completions;
+using Cafemoca.CommandEditor.Indentations;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Search;
 using System;
+using System.Linq;
+using System.Reactive.Concurrency;
+using System.Reactive.Linq;
 using System.Windows.Input;
 
 namespace Cafemoca.CommandEditor
@@ -13,7 +17,6 @@ namespace Cafemoca.CommandEditor
             : base()
         {
             this.LoadSyntaxHighlight();
-            this.LoadCommandDefinition();
             this.SetDefaultFoldings();
             this.BracketHighlightInitialize();
 
@@ -25,6 +28,8 @@ namespace Cafemoca.CommandEditor
             this.TextArea.TextEntered += this.TextArea_TextEntered;
 
             this._searchPanel = SearchPanel.Install(this.TextArea);
+
+            Minecraft.LoadMinecraftDefinition();
         }
 
         private SearchPanel _searchPanel;

@@ -31,11 +31,13 @@ namespace Cafemoca.CommandEditor.Utils
 
     public static class TokenExtensions
     {
-        public static bool IsMatchCommand(this Token token, string value)
+        public static bool IsMatchCommand(this Token token, string value, bool inExecute = false)
         {
             return (token.Type == TokenType.Command)
                 ? token.Value == "/" + value
-                : false;
+                : inExecute
+                    ? token.IsMatchLiteral("detect")
+                    : false;
         }
 
         public static bool IsMatchLiteral(this Token token, string value, bool ignoreCase = false)
@@ -65,13 +67,6 @@ namespace Cafemoca.CommandEditor.Utils
         public static bool IsMatchLiteral(this Token token, bool ignoreCase, params string[] value)
         {
             return token.IsMatchLiteral(value, ignoreCase);
-        }
-
-        public static bool ContainsLiteral(this Token token, string value)
-        {
-            return (token.Type == TokenType.Literal)
-                ? token.Value.Contains(value)
-                : false;
         }
 
         public static bool IsMatchType(this Token token, TokenType type)

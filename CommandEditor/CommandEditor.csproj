@@ -68,7 +68,7 @@
     <Compile Include="ExtendedOptions.cs" />
     <Compile Include="CommandEditorProperty.cs" />
     <Compile Include="Completions\CompletionData.cs" />
-    <Compile Include="Completions\MinecraftCompletions.cs" />
+    <Compile Include="Completions\Minecraft.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\IndentationExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -107,7 +107,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Command.xml">
+    <EmbeddedResource Include="Resources\Completions.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

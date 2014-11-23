@@ -42,6 +42,9 @@
     <Reference Include="Livet">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Livet.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.0.14.0.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Controls" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
@@ -88,7 +91,7 @@
       <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\LivetCask.1.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.0.14.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -171,7 +174,6 @@
     <Compile Include="ViewModels\Layouts\Documents\DocumentViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Documents\StartPageViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Tools\CompletionEditorViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Tools\FileExplorerViewModel.cs" />
     <Compile Include="ViewModels\Layouts\Tools\RecentFilesViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel_Commands.cs" />
     <Compile Include="ViewModels\MainWindowViewModel_Exit.cs" />
@@ -219,9 +221,6 @@
     <Compile Include="Views\Layouts\Tools\CompletionEditor.xaml.cs">
       <DependentUpon>CompletionEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Layouts\Tools\FileExplorer.xaml.cs">
-      <DependentUpon>FileExplorer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Layouts\Tools\RecentFiles.xaml.cs">
       <DependentUpon>RecentFiles.xaml</DependentUpon>
     </Compile>
@@ -262,6 +261,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -274,22 +274,6 @@
     <ProjectReference Include="..\CommandEditor\CommandEditor.csproj">
       <Project>{162b4cd3-9388-4444-887d-81022ca0ed67}</Project>
       <Name>CommandEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileSystemControls\FileListView\FileListView.csproj">
-      <Project>{735cf8ec-a4ef-49a2-bc72-ec360a0185a4}</Project>
-      <Name>FileListView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileSystemControls\FileSystemModels\FileSystemModels.csproj">
-      <Project>{c3eb23fd-78e7-4298-922c-48c254551cc9}</Project>
-      <Name>FileSystemModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MahApps.Metro\MahApps.Metro.Resources\MahApps.Metro.Resources.csproj">
-      <Project>{e708ac99-605b-42a0-8d20-abca8fe42dd2}</Project>
-      <Name>MahApps.Metro.Resources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MahApps.Metro\MahApps.Metro\MahApps.Metro.NET45.csproj">
-      <Project>{942d11c4-29f5-46c4-8c14-4b976d56c637}</Project>
-      <Name>MahApps.Metro.NET45</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +289,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Internals\AvalonDock\Themes\MahAppsMetroTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -420,10 +408,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\Tools\FileExplorer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Layouts\Tools\RecentFiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -481,6 +465,12 @@
     <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore_Black.png" />
     <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore_Dark.png" />
     <Resource Include="Internals\AvalonDock\Themes\Images\VTabGroup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

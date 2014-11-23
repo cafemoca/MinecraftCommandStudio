@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
 
                 <!--  MahApps.Metro.Resources (Icons)  -->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml" />
+                <ResourceDictionary Source="/McCommandStudio;component/Resources/Icons.xaml" />
 
                 <!--  Cafemoca.McCommandStudio -->
                 <ResourceDictionary Source="/McCommandStudio;component/Themes/Generic.xaml" />

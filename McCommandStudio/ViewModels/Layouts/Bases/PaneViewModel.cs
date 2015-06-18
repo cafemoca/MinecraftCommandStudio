@@ -1,6 +1,6 @@
-﻿using Reactive.Bindings;
+﻿using System.Windows.Media;
 using Livet;
-using System.Windows.Media;
+using Reactive.Bindings;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
 {

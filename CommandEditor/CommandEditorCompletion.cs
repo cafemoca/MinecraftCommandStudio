@@ -1,14 +1,14 @@
-﻿using Cafemoca.CommandEditor.Completions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
+using System.Xml.Linq;
+using Cafemoca.CommandEditor.Completions;
 using Cafemoca.CommandEditor.Extensions;
 using Cafemoca.CommandEditor.Utils;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace Cafemoca.CommandEditor
 {

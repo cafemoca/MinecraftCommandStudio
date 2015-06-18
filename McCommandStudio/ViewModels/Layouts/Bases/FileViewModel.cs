@@ -1,12 +1,12 @@
-﻿using Cafemoca.McCommandStudio.Models;
-using Cafemoca.McCommandStudio.Settings;
-using Reactive.Bindings;
-using Reactive.Bindings.Extensions;
-using System;
+﻿using System;
 using System.IO;
 using System.Reactive.Linq;
 using System.Text;
 using System.Windows.Media;
+using Cafemoca.McCommandStudio.Models;
+using Cafemoca.McCommandStudio.Settings;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
 {

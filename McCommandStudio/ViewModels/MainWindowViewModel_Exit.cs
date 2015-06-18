@@ -1,10 +1,10 @@
-﻿using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
+﻿using System.Linq;
+using System.Windows.Input;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
 using Cafemoca.McCommandStudio.Views.Behaviors;
 using Cafemoca.McCommandStudio.Views.Behaviors.Actions;
-using Reactive.Bindings;
 using Livet;
-using System.Linq;
-using System.Windows.Input;
+using Reactive.Bindings;
 
 namespace Cafemoca.McCommandStudio.ViewModels
 {

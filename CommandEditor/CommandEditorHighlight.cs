@@ -1,14 +1,14 @@
-﻿using Cafemoca.CommandEditor.Renderings;
-using Cafemoca.CommandEditor.Utils;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.Highlighting.Xshd;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Media;
 using System.Xml;
+using Cafemoca.CommandEditor.Renderings;
+using Cafemoca.CommandEditor.Utils;
+using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
 namespace Cafemoca.CommandEditor
 {

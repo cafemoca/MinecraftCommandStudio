@@ -1,6 +1,6 @@
-﻿using Cafemoca.CommandEditor.Indentations;
+﻿using System;
+using Cafemoca.CommandEditor.Indentations;
 using ICSharpCode.AvalonEdit.Indentation;
-using System;
 
 namespace Cafemoca.CommandEditor.Extensions
 {

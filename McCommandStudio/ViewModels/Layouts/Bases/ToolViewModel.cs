@@ -1,5 +1,5 @@
-﻿using Reactive.Bindings;
-using System;
+﻿using System;
+using Reactive.Bindings;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases
 {

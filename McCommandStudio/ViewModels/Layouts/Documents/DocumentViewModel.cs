@@ -1,15 +1,15 @@
-﻿using Cafemoca.CommandEditor;
+﻿using System;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Windows;
+using Cafemoca.CommandEditor;
 using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Services;
 using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
+using ICSharpCode.AvalonEdit;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using ICSharpCode.AvalonEdit;
-using System;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Windows;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 {

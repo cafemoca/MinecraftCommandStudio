@@ -1,8 +1,8 @@
-﻿using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
-using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
 
 namespace Cafemoca.McCommandStudio.Internals.Converters
 {

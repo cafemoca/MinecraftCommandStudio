@@ -1,11 +1,8 @@
-﻿using Cafemoca.CommandEditor.Renderings;
-using Cafemoca.CommandEditor.Utils;
+﻿using System;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Indentation;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
-using System;
-using System.Linq;
 
 namespace Cafemoca.CommandEditor.Indentations
 {

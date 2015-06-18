@@ -1,7 +1,7 @@
 ﻿using Cafemoca.McCommandStudio.Services;
+using Livet;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using Livet;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Parts
 {

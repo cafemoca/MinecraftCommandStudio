@@ -1,6 +1,6 @@
-﻿using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
+﻿using System;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
 using Reactive.Bindings;
-using System;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Documents
 {

@@ -1,10 +1,4 @@
-﻿using Cafemoca.McCommandStudio.Services;
-using Cafemoca.McCommandStudio.Settings;
-using Cafemoca.McCommandStudio.ViewModels;
-using Cafemoca.McCommandStudio.Views;
-using Livet;
-using MahApps.Metro;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
@@ -12,6 +6,12 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Cafemoca.McCommandStudio.Services;
+using Cafemoca.McCommandStudio.Settings;
+using Cafemoca.McCommandStudio.ViewModels;
+using Cafemoca.McCommandStudio.Views;
+using Livet;
+using MahApps.Metro;
 
 namespace Cafemoca.McCommandStudio
 {

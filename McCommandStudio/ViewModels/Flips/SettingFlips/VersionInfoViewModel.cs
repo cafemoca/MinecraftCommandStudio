@@ -1,8 +1,8 @@
-﻿using Cafemoca.McCommandStudio.Services;
-using Reactive.Bindings;
-using Livet;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Cafemoca.McCommandStudio.Services;
+using Livet;
+using Reactive.Bindings;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
 {

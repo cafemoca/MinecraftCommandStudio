@@ -1,8 +1,8 @@
-﻿using Hnx8.ReadJEnc;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using Hnx8.ReadJEnc;
 
 namespace Cafemoca.McCommandStudio.Models
 {

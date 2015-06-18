@@ -1,16 +1,15 @@
-﻿using Cafemoca.CommandEditor;
-using Cafemoca.CommandEditor.Utils;
-using Cafemoca.McCommandStudio.Settings.Xml;
-using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
-using Reactive.Bindings;
-using ICSharpCode.AvalonEdit;
-using Livet;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using Cafemoca.CommandEditor;
+using Cafemoca.CommandEditor.Utils;
+using Cafemoca.McCommandStudio.Settings.Xml;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
+using ICSharpCode.AvalonEdit;
+using Livet;
 
 namespace Cafemoca.McCommandStudio.Settings
 {

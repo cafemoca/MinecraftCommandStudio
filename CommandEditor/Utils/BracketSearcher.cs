@@ -1,8 +1,8 @@
-﻿using Cafemoca.CommandEditor.Extensions;
-using ICSharpCode.AvalonEdit.Document;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cafemoca.CommandEditor.Extensions;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace Cafemoca.CommandEditor.Utils
 {

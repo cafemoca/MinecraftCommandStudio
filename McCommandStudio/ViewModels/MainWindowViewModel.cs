@@ -1,15 +1,15 @@
-﻿using Cafemoca.McCommandStudio.Services;
+﻿using System;
+using System.Linq;
+using Cafemoca.McCommandStudio.Services;
 using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels.Flips;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Tools;
 using Cafemoca.McCommandStudio.ViewModels.Parts;
+using Livet;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using Livet;
-using System;
-using System.Linq;
 
 namespace Cafemoca.McCommandStudio.ViewModels
 {

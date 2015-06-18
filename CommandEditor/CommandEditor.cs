@@ -1,13 +1,10 @@
-﻿using Cafemoca.CommandEditor.Completions;
+﻿using System;
+using System.Windows.Input;
+using Cafemoca.CommandEditor.Completions;
 using Cafemoca.CommandEditor.Indentations;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Search;
-using System;
-using System.Linq;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using System.Windows.Input;
 
 namespace Cafemoca.CommandEditor
 {

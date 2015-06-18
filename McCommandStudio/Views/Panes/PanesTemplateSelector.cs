@@ -1,7 +1,7 @@
-﻿using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
-using Cafemoca.McCommandStudio.ViewModels.Layouts.Tools;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Tools;
 
 namespace Cafemoca.McCommandStudio.Views.Panes
 {

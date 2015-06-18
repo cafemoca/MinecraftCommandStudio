@@ -1,12 +1,10 @@
-﻿using Cafemoca.CommandEditor.Utils;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
+using Cafemoca.CommandEditor.Utils;
 
 namespace Cafemoca.CommandEditor
 {

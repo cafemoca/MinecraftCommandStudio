@@ -1,19 +1,19 @@
-﻿using Cafemoca.McCommandStudio.Internals.Utils.Commands;
-using Cafemoca.McCommandStudio.Models;
-using Cafemoca.McCommandStudio.Services;
-using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
-using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
-using Reactive.Bindings;
-using Reactive.Bindings.Extensions;
-using Livet;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Cafemoca.McCommandStudio.Internals.Utils.Commands;
+using Cafemoca.McCommandStudio.Models;
+using Cafemoca.McCommandStudio.Services;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
+using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
+using Livet;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using TaskDialog = TaskDialogInterop;
 
 namespace Cafemoca.McCommandStudio.ViewModels

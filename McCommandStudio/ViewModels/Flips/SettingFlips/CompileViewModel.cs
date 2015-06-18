@@ -1,7 +1,7 @@
-﻿using Cafemoca.CommandEditor.Utils;
+﻿using System.Collections.Generic;
+using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Settings;
 using Livet;
-using System.Collections.Generic;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Flips.SettingFlips
 {

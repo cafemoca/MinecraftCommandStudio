@@ -1,7 +1,7 @@
-﻿using ICSharpCode.AvalonEdit;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using ICSharpCode.AvalonEdit;
 
 namespace Cafemoca.CommandEditor
 {

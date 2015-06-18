@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace McSlimUpdater
+namespace Cafemoca.McSlimUpdater
 {
     public class UpdateException : Exception
     {

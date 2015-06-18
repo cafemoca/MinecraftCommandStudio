@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Linq;
 
-namespace McSlimUpdater
+namespace Cafemoca.McSlimUpdater
 {
     public sealed class PackageAction : ActionBase
     {

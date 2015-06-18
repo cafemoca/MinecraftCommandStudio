@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace McSlimUpdater
+namespace Cafemoca.McSlimUpdater
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

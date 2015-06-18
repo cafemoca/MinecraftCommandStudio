@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Cafemoca.McSlimUpdater;
 
-namespace McSlimUpdater
+namespace Cafemoca.McSlimUpdater
 {
     /// <summary>
     /// App.xaml の相互作用ロジック

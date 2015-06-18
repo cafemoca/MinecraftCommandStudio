@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace McSlimUpdater
+namespace Cafemoca.McSlimUpdater
 {
     public class Releases
     {

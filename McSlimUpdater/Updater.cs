@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace McSlimUpdater
+namespace Cafemoca.McSlimUpdater
 {
     public class Updater
     {

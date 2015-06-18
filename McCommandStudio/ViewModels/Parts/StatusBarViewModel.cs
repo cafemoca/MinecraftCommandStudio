@@ -1,6 +1,6 @@
 ﻿using Cafemoca.McCommandStudio.Services;
-using Codeplex.Reactive;
-using Codeplex.Reactive.Extensions;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using Livet;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Parts

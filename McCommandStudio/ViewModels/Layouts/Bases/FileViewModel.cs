@@ -1,7 +1,7 @@
 ﻿using Cafemoca.McCommandStudio.Models;
 using Cafemoca.McCommandStudio.Settings;
-using Codeplex.Reactive;
-using Codeplex.Reactive.Extensions;
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using System;
 using System.IO;
 using System.Reactive.Linq;

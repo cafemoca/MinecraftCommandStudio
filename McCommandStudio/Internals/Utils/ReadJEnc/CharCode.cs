@@ -3,12 +3,12 @@
 namespace Hnx8.ReadJEnc
 {
     /// <summary>
-    /// ReadJEnc 文字コード種類定義(Rev.20140818)
+    /// ReadJEnc 文字コード種類定義(Rev.20150309)
     /// </summary>
     public class CharCode
     {   ////////////////////////////////////////////////////////////////////////
-        // <CharCode.cs> ReadJEnc 文字コード種類定義(Rev.20140818)
-        //  Copyright (C) 2014 hnx8(H.Takahashi)
+        // <CharCode.cs> ReadJEnc 文字コード種類定義(Rev.20150309)
+        //  Copyright (C) 2014-2015 hnx8(H.Takahashi)
         //  http://hp.vector.co.jp/authors/VA055804/
         //
         //  Released under the MIT license
@@ -28,9 +28,9 @@ namespace Hnx8.ReadJEnc
         /// <summary>UTF16(BOMありBigEndian)</summary>
         public static readonly Text UTF16B = new Text("UTF-16B", new UnicodeEncoding(true, true, true)); //BOM : 0xFE, 0xFF
 
-        /// <summary>UTF16(BOM無しLE)</summary>
+        /// <summary>UTF16(BOM無しLittleEndian)</summary>
         public static readonly Text UTF16LE = new Text("UTF-16LE", new UnicodeEncoding(false, false, true));
-        /// <summary>UTF16(BOM無しBE)</summary>
+        /// <summary>UTF16(BOM無しBigEndian)</summary>
         public static readonly Text UTF16BE = new Text("UTF-16BE", new UnicodeEncoding(true, false, true));
         /// <summary>UTF8(BOM無し)</summary>
         public static readonly Text UTF8N = new Text("UTF-8N", new UTF8Encoding(false, true));
@@ -45,13 +45,15 @@ namespace Hnx8.ReadJEnc
         //ISO-2022文字コード
 
         /// <summary>50221 iso-2022-jp 日本語 (JIS-Allow 1 byte Kana) ※MS版</summary>
-        public static readonly Text JIS = new Text("JIS50221", 50221);
-        /// <summary>50222 iso-2022-jp 日本語 (JIS-Allow 1 byte Kana - SO/SI) ※MS版</summary><remarks>SO/SIによるカナシフトのみのファイルもCP50222とみなす</remarks>
+        public static readonly Text JIS = new Text("JIS", 50221);
+        /// <summary>50222 iso-2022-jp 日本語 (JIS-Allow 1 byte Kana - SO/SI)</summary><remarks>SO/SIによるカナシフトのみのファイルもCP50222とみなす</remarks>
         public static readonly Text JIS50222 = new Text("JIS50222", 50222);
-        /// <summary>JISのように見えるがデコード不能な箇所あり、実質非テキストファイル</summary><remarks>エンコードするとファイルが壊れるので注意</remarks>
+        /// <summary>50221(MS版JIS) + 20932(JIS補助漢字を無理やりデコード)</summary><remarks>JIS補助漢字はデコードのみ対応、エンコードは未対応</remarks>
+        public static readonly Text JISH = new Text("JIS補漢", 0);
+        /// <summary>JISのように見えるがデコード不能な箇所あり、実質非テキストファイル</summary>
         public static readonly Text JISNG = new Text("JIS破損", -50221);
         /// <summary>50225 iso-2022-kr 韓国語(ISO)</summary><remarks>SO/SIカナシフトファイルの判定ロジックに流れ込まないようにするため定義</remarks>
-        public static readonly Text ISOKR = new Text("ISO(韓)", 50225);
+        public static readonly Text ISOKR = new Text("ISO-KR", 50225);
 
         //日本語文字コード
 
@@ -83,12 +85,12 @@ namespace Hnx8.ReadJEnc
         // 文字コード（ファイル種類）判定メソッド
 
         /// <summary>BOMありUTFファイルの文字コードを判定する</summary>
-        /// <param name="Bytes">判定対象のバイト配列</param>
+        /// <param name="bytes">判定対象のバイト配列</param>
         /// <param name="Read">バイト配列先頭の読み込み済バイト数（LEASTREADSIZEのバイト数以上読み込んでおくこと）</param>
         /// <returns>BOMから判定できた文字コード種類、合致なしの場合null</returns>
-        public static CharCode GetPreamble(byte[] Bytes, int Read)
+        public static CharCode GetPreamble(byte[] bytes, int Read)
         {   //BOM一致判定
-            return GetPreamble(Bytes, Read,
+            return GetPreamble(bytes, Read,
                 UTF8, UTF32, UTF32B, UTF16, UTF16B);
         }
 
@@ -138,16 +140,16 @@ namespace Hnx8.ReadJEnc
         }
 
         /// <summary>引数のバイト配列から文字列を取り出す。失敗時はnullを返す</summary>
-        /// <param name="Bytes">判定対象のバイト配列</param>
-        /// <param name="Length">ファイルサイズ(バイト配列先頭からの先頭からのデコード対象バイト数)</param>
-        public virtual string GetString(byte[] Bytes, int Length)
+        /// <param name="bytes">判定対象のバイト配列</param>
+        /// <param name="len">ファイルサイズ(バイト配列先頭からの先頭からのデコード対象バイト数)</param>
+        public virtual string GetString(byte[] bytes, int len)
         {
             Encoding enc = GetEncoding();
             if (enc == null) { return null; }
             try
             {   //BOMサイズを把握し、BOMを除いた部分を文字列として取り出す
                 int bomBytes = (this.Bytes == null ? 0 : this.Bytes.Length);
-                return enc.GetString(Bytes, bomBytes, Length - bomBytes);
+                return enc.GetString(bytes, bomBytes, len - bomBytes);
             }
             catch (DecoderFallbackException)
             {   //読み出し失敗(マッピングされていない文字があった場合など)
@@ -162,11 +164,11 @@ namespace Hnx8.ReadJEnc
         }
 
         /// <summary>判定対象のファイル文字コード種類一覧から、BOM/マジックナンバーが一致するものを探索して返す</summary>
-        /// <param name="Bytes">判定対象のバイト配列</param>
+        /// <param name="bytes">判定対象のバイト配列</param>
         /// <param name="Read">バイト配列先頭の読み込み済バイト数（LEASTREADSIZEのバイト数以上読み込んでおくこと）</param>
         /// <param name="Array">判定対象とするファイル文字コード種類の一覧</param>
         /// <returns>先頭バイトが一致したファイル文字コード種類、合致なしの場合null</returns>
-        protected static CharCode GetPreamble(byte[] Bytes, int Read, params CharCode[] Array)
+        protected static CharCode GetPreamble(byte[] bytes, int Read, params CharCode[] Array)
         {
             foreach (CharCode c in Array)
             {   //読み込み済バイト配列内容をもとにファイル種類の一致を確認
@@ -177,7 +179,7 @@ namespace Hnx8.ReadJEnc
                 {   //全バイト一致ならその文字コードとみなす
                     if (i == 0) { return c; }
                     i--;
-                } while (Bytes[i] == bom[i]); //BOM・マジックナンバー不一致箇所ありならdo脱出
+                } while (bytes[i] == bom[i]); //BOM・マジックナンバー不一致箇所ありならdo脱出
             }
             return null; //ファイル種類決定できず
         }
@@ -190,27 +192,27 @@ namespace Hnx8.ReadJEnc
         public class Text : CharCode
         {
             internal Text(string Name, Encoding Encoding) : base(Name, Encoding, Encoding.GetPreamble()) { }
-            internal Text(string Name, int Encoding) : base(Name, Encoding, null) { }
+            internal Text(string Name, int enc) : base(Name, enc, null) { }
         }
         #endregion
 
-        #region EUC補助漢字専用デコーダ-----------------------------------------
+        #region JIS補助漢字対応デコーダ-----------------------------------------
         /// <summary>
-        /// EUC補助漢字特殊処理(MS版CP20932の特異な仕様に合わせる)
+        /// EUC補助漢字特殊処理(MS版CP20932の特異なコード体系によりデコードする)
         /// </summary>
         private class EucH : Text
         {
             internal EucH(string Name) : base(Name, 20932) { }
 
-            public override string GetString(byte[] Bytes, int Length)
+            public override string GetString(byte[] bytes, int len)
             {
-                byte[] bytesForCP20932 = new byte[Length]; //CP20932でのデコード用にバイト配列を補正
+                byte[] bytesForCP20932 = new byte[len]; //CP20932でのデコード用にバイト配列を補正
                 int cp20932Len = 0;
                 int shiftPos = int.MinValue;
                 byte b;
-                for (int i = 0; i < Length; i++)
+                for (int i = 0; i < len; i++)
                 {
-                    if ((b = Bytes[i]) == 0x8F)
+                    if ((b = bytes[i]) == 0x8F)
                     {   //3byteの補助漢字を検出、補正箇所を把握(0x8Fは読み捨て、補正後配列には設定しない)
                         shiftPos = i + 2;
                     }

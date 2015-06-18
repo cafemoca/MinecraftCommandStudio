@@ -1,4 +1,4 @@
-﻿using Codeplex.Reactive;
+﻿using Reactive.Bindings;
 using System;
 
 namespace Cafemoca.McCommandStudio.ViewModels.Layouts.Bases

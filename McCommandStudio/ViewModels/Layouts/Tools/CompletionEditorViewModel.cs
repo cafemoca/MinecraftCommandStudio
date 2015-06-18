@@ -1,7 +1,7 @@
 ﻿using Cafemoca.McCommandStudio.Services;
 using Cafemoca.McCommandStudio.Settings;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Bases;
-using Codeplex.Reactive;
+using Reactive.Bindings;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;

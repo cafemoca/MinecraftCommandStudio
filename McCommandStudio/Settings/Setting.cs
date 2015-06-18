@@ -2,7 +2,7 @@
 using Cafemoca.CommandEditor.Utils;
 using Cafemoca.McCommandStudio.Settings.Xml;
 using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
-using Codeplex.Reactive;
+using Reactive.Bindings;
 using ICSharpCode.AvalonEdit;
 using Livet;
 using System;

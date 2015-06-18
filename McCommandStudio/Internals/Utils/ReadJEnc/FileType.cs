@@ -2,12 +2,12 @@
 namespace Hnx8.ReadJEnc
 {
     /// <summary>
-    /// ReadJEnc ファイル種類定義(Rev.20140818)
+    /// ReadJEnc ファイル種類定義(Rev.20150309)
     /// </summary>
     public class FileType : CharCode
     {   ////////////////////////////////////////////////////////////////////////
-        // <FileType.cs> ReadJEnc ファイル種類定義(Rev.20140818)
-        //  Copyright (C) 2014 hnx8(H.Takahashi)
+        // <FileType.cs> ReadJEnc ファイル種類定義(Rev.20150309)
+        //  Copyright (C) 2014-2015 hnx8(H.Takahashi)
         //  http://hp.vector.co.jp/authors/VA055804/
         //
         //  Released under the MIT license
@@ -70,16 +70,16 @@ namespace Hnx8.ReadJEnc
         public const int GetBinaryType_LEASTREADSIZE = 32;
 
         /// <summary>バイト配列先頭のマジックナンバーよりバイナリファイル種類を判定する</summary>
-        /// <param name="Bytes">判定対象のバイト配列</param>
+        /// <param name="bytes">判定対象のバイト配列</param>
         /// <param name="Read">バイト配列先頭の読み込み済バイト数（LEASTREADSIZEのバイト数以上読み込んでおくこと）</param>
         /// <returns>バイナリファイル種類判定結果（どれにも該当しなければ一般バイナリと判定）</returns>
-        public static CharCode GetBinaryType(byte[] Bytes, int Read)
+        public static CharCode GetBinaryType(byte[] bytes, int Read)
         {   //定義済みマジックナンバーすべてを対象に一致判定
-            CharCode ret = GetPreamble(Bytes, Read,
+            CharCode ret = GetPreamble(bytes, Read,
                 BMP, GIF, JPEG, PNG, TIFF, IMGICON,
                 JAVABIN, WINBIN, SHORTCUT, PDF, ZIP, GZIP, SEVENZIP, RAR, CABINET);
             //ファイル種類に応じた追加判定
-            if (ret == IMGICON && (Read < 23 || Bytes[4] == 0 || Bytes[5] != 0)) { ret = null; } //ICONの誤判別防止用（アイコン個数チェック）            
+            if (ret == IMGICON && (Read < 23 || bytes[4] == 0 || bytes[5] != 0)) { ret = null; } //ICONの誤判別防止用（アイコン個数チェック）            
             //判定できたファイル種類を返す（どれにも該当しなければ一般バイナリと判定）
             return (ret != null ? ret : BINARY);
         }
@@ -91,20 +91,20 @@ namespace Hnx8.ReadJEnc
         /// </summary>
         public class Bin : CharCode
         {
-            internal Bin(string Name, params byte[] Bytes) : base(Name, 0, Bytes) { }
-            internal Bin(int Encoding, string Name, params byte[] Bytes) : base(Name, Encoding, Bytes) { }
+            internal Bin(string Name, params byte[] bytes) : base(Name, 0, bytes) { }
+            internal Bin(int Encoding, string Name, params byte[] bytes) : base(Name, Encoding, bytes) { }
         }
         /// <summary>ファイル文字コード種類：Zipバイナリ
         /// </summary>
         public class ZipBinary : Bin
         {
-            internal ZipBinary(string Name, params byte[] Bytes) : base(Name, Bytes) { }
+            internal ZipBinary(string Name, params byte[] bytes) : base(Name, bytes) { }
         }
         /// <summary>ファイル文字コード種類：画像
         /// </summary>
         public class Image : CharCode
         {
-            internal Image(string Name, params byte[] Bytes) : base(Name, 0, Bytes) { }
+            internal Image(string Name, params byte[] bytes) : base(Name, 0, bytes) { }
         }
         #endregion
     }

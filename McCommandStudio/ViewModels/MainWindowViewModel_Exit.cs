@@ -1,7 +1,7 @@
 ﻿using Cafemoca.McCommandStudio.ViewModels.Layouts.Documents;
 using Cafemoca.McCommandStudio.Views.Behaviors;
 using Cafemoca.McCommandStudio.Views.Behaviors.Actions;
-using Codeplex.Reactive;
+using Reactive.Bindings;
 using Livet;
 using System.Linq;
 using System.Windows.Input;

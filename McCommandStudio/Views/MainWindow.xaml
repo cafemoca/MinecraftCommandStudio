@@ -54,15 +54,31 @@
 
     <metro:MetroWindow.RightWindowCommands>
         <metro:WindowCommands>
-            <Button Command="{Binding SettingCommand}"
-                    Content="settings" />
+            <Button Width="28"
+                    Height="26"
+                    Command="{Binding SettingCommand}"
+                    Style="{StaticResource MetroBaseWindowButtonStyle}">
+                <Rectangle Width="17"
+                           Height="17"
+                           Fill="{DynamicResource AccentColorBrush}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_cog}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
         </metro:WindowCommands>
     </metro:MetroWindow.RightWindowCommands>
 
     <metro:MetroWindow.Flyouts>
         <metro:FlyoutsControl>
-            <metro:Flyout Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=metro:MetroWindow}, Mode=OneWay}"
-                          Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=metro:MetroWindow}, Mode=OneWay}"
+            <metro:Flyout Width="{Binding ActualWidth,
+                                          RelativeSource={RelativeSource FindAncestor,
+                                                                         AncestorType=metro:MetroWindow},
+                                          Mode=OneWay}"
+                          Height="{Binding ActualHeight,
+                                           RelativeSource={RelativeSource FindAncestor,
+                                                                          AncestorType=metro:MetroWindow},
+                                           Mode=OneWay}"
                           IsOpen="{Binding IsSettingFlipOpen.Value}"
                           Position="Right"
                           Style="{StaticResource NoneTitleFlyout}"
@@ -82,7 +98,9 @@
                         HorizontalAlignment="Left"
                         DataContext="{Binding MainMenuViewModel}" />
         <dock:DockingManager Grid.Row="1"
-                             ActiveContent="{Binding ActiveDocument.Value, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+                             ActiveContent="{Binding ActiveDocument.Value,
+                                                     Mode=TwoWay,
+                                                     Converter={StaticResource ActiveDocumentConverter}}"
                              AllowDrop="True"
                              AllowMixedOrientation="True"
                              AnchorablesSource="{Binding Tools}"
@@ -120,22 +138,22 @@
                 <panes:PanesStyleSelector>
                     <panes:PanesStyleSelector.FileStyle>
                         <Style TargetType="{x:Type dock:LayoutItem}">
-                            <Setter Property="Title" Value="{Binding Model.Title.Value}" />
-                            <Setter Property="IconSource" Value="{Binding Model.IconSource.Value}" />
-                            <Setter Property="ToolTip" Value="{Binding Model.FilePath.Value}" />
                             <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                             <Setter Property="ContentId" Value="{Binding Model.ContentId.Value}" />
+                            <Setter Property="IconSource" Value="{Binding Model.IconSource.Value}" />
+                            <Setter Property="Title" Value="{Binding Model.Title.Value}" />
+                            <Setter Property="ToolTip" Value="{Binding Model.FilePath.Value}" />
                         </Style>
                     </panes:PanesStyleSelector.FileStyle>
                     <panes:PanesStyleSelector.ToolStyle>
                         <Style TargetType="{x:Type dock:LayoutItem}">
-                            <Setter Property="Title" Value="{Binding Model.Title.Value}" />
-                            <Setter Property="IconSource" Value="{Binding Model.IconSource.Value}" />
                             <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                             <Setter Property="ContentId" Value="{Binding Model.ContentId.Value}" />
-                            <Setter Property="Visibility" Value="{Binding Model.IsVisible.Value, Mode=TwoWay, Converter={StaticResource DockBooleanToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
-                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected.Value, Mode=TwoWay}" />
+                            <Setter Property="IconSource" Value="{Binding Model.IconSource.Value}" />
                             <Setter Property="IsActive" Value="{Binding Model.IsActive.Value, Mode=TwoWay}" />
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected.Value, Mode=TwoWay}" />
+                            <Setter Property="Title" Value="{Binding Model.Title.Value}" />
+                            <Setter Property="Visibility" Value="{Binding Model.IsVisible.Value, Mode=TwoWay, Converter={StaticResource DockBooleanToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}" />
                         </Style>
                     </panes:PanesStyleSelector.ToolStyle>
                 </panes:PanesStyleSelector>
@@ -146,13 +164,11 @@
             <dock:LayoutRoot>
                 <dock:LayoutPanel Orientation="Horizontal">
                     <dock:LayoutDocumentPane />
-                    <dock:LayoutAnchorablePane DockMinWidth="150"
-                                               DockWidth="250" />
+                    <dock:LayoutAnchorablePane DockMinWidth="150" DockWidth="250" />
                 </dock:LayoutPanel>
             </dock:LayoutRoot>
         </dock:DockingManager>
-        <parts:StatusBar Grid.Row="2"
-                         DataContext="{Binding StatusBarViewModel}" />
+        <parts:StatusBar Grid.Row="2" DataContext="{Binding StatusBarViewModel}" />
     </Grid>
 
 </metro:MetroWindow>

@@ -1,5 +1,5 @@
-Mc Command Studio
-===
+Minecraft Command Studio
+========================
 
 Minecraft のコマンドの記述に特化した IDE ライクなテキストエディタです。  
 主にコマンドブロックなどで使用するような長く複雑なコマンドの記述を得意とします。  
@@ -68,7 +68,7 @@ clickEvent の value 値など、コマンド文の文字列を書く際 (特に
 * [.NET Framework 4.5](http://www.microsoft.com/ja-jp/download/details.aspx?id=30653)
 
 Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインストールされています。  
-開発者は Windows 8.1 で動作確認を行っています。  
+開発者は Windows 10 で動作確認を行っています。  
 何らかの不具合が起きた場合、お使いの環境を添えてご報告いただけると嬉しいです。  
 
 使用ライブラリ
@@ -86,14 +86,12 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 * [WPF TaskDialog](http://www.codeproject.com/Articles/137552/WPF-TaskDialog-Wrapper-and-Emulator)
 * [WPF Toolkit](https://www.nuget.org/packages/WPFToolkit/)
 * [Extended WPF Toolkit](https://wpftoolkit.codeplex.com/)
-* [WPF File System Controls](http://fsc.codeplex.com/)
 * [ReadJEnc](http://www.vector.co.jp/soft/winnt/util/se506899.html)
 
 また下記のアプリケーションの一部ソースコードを参考にさせていただきました。
 
 * [Krile StaryEyes](http://krile.starwing.net/) (Tokenizer, QueryEditor, SweetMagic, etc)
 * [提督業も忙しい！](http://grabacr.net/kancolleviewer) (Settings, Xml-related)
-* [Edi](http://edi.codeplex.com/) (AppCommands, how to use AvalonEdit and AvalonDock)
 
 この場を借りて様々な有益なライブラリやソースコードを公開してくださっている方々に感謝いたします。
 
@@ -101,4 +99,4 @@ Windows 8 以降をお使いの場合 .NET Framework 4.5 は標準でインス�
 --
 [MIT License](http://opensource.org/licenses/mit-license.php) の下で公開しています。  
 
-Copyright © 2014 [yuri (Cafemoca)](https://twitter.com/yuri_v3v)  
+Copyright © 2014-2015 [yuri (cafemoca)](https://twitter.com/yuri_v3v)  

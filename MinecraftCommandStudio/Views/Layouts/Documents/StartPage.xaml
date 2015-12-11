@@ -27,7 +27,7 @@
                            FontSize="24"
                            Foreground="{DynamicResource GrayBrush1}"
                            Padding="0,0,0,4"
-                           Text="McCommandStudio" />
+                           Text="MinecraftCommandStudio" />
             </StackPanel>
             <StackPanel Margin="30">
                 <TextBlock Margin="0,8"

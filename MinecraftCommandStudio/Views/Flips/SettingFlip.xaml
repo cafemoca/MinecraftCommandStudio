@@ -67,7 +67,7 @@
                         All rights reserved.
                         <LineBreak />
                         This application is licensed under
-                        <controls:HyperlinkText Uri="https://raw.githubusercontent.com/cafemoca/McCommandStudio/master/LICENSE.txt">The MIT License</controls:HyperlinkText>
+                        <controls:HyperlinkText Uri="https://raw.githubusercontent.com/cafemoca/MinecraftCommandStudio/master/LICENSE.txt">The MIT License</controls:HyperlinkText>
                         .
                     </TextBlock>
                 </Grid>

@@ -20,13 +20,19 @@
     <converters:LayoutItemFromLayoutModelConverter x:Key="LayoutItemFromLayoutModelConverter" />
     <converters:ActivateCommandLayoutItemFromLayoutModelConverter x:Key="ActivateCommandLayoutItemFromLayoutModelConverter" />
 
-    <Style x:Key="AvalonDockTabItemStyle" TargetType="{x:Type TabItem}">
-        <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-        <Setter Property="ToolTip" Value="{Binding ToolTip}" />
-        <Setter Property="Padding" Value="3,0,0,0" />
+    <Style x:Key="AvalonDockTabItemStyle"
+           TargetType="{x:Type TabItem}">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource BlackBrush}" />
+        <Setter Property="IsSelected"
+                Value="{Binding IsSelected,
+                                Mode=TwoWay}" />
+        <Setter Property="Padding"
+                Value="3,0,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -37,70 +43,110 @@
                                 BorderThickness="1,1,1,0"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="Content"
-                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              HorizontalAlignment="{Binding HorizontalContentAlignment,
+                                                                            RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              VerticalAlignment="{Binding VerticalContentAlignment,
+                                                                          RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                               ContentSource="Header"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Selector.IsSelected" Value="True">
-                            <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush7}" />
-                            <Setter Property="Background" Value="{DynamicResource GrayBrush7}" />
-                            <Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}" />
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <Setter TargetName="Content" Property="Margin" Value="0,0,0,0" />
+                        <Trigger Property="Selector.IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource GrayBrush7}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush7}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource IdealForegroundColorBrush}" />
+                            <Setter Property="Panel.ZIndex"
+                                    Value="1" />
+                            <Setter TargetName="Content"
+                                    Property="Margin"
+                                    Value="0,0,0,0" />
                         </Trigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsActive}" Value="True" />
-                                <Condition Binding="{Binding IsLastFocusedDocument}" Value="True" />
+                                <Condition Binding="{Binding IsActive}"
+                                           Value="True" />
+                                <Condition Binding="{Binding IsLastFocusedDocument}"
+                                           Value="True" />
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}" />
-                            <Setter Property="Panel.ZIndex" Value="1" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource WhiteBrush}" />
+                            <Setter Property="Panel.ZIndex"
+                                    Value="1" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsActive}" Value="False" />
-                                <Condition Binding="{Binding IsLastFocusedDocument}" Value="True" />
+                                <Condition Binding="{Binding IsActive}"
+                                           Value="False" />
+                                <Condition Binding="{Binding IsLastFocusedDocument}"
+                                           Value="True" />
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush7}" />
-                            <Setter Property="Background" Value="{DynamicResource GrayBrush7}" />
-                            <Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}" />
-                            <Setter Property="Panel.ZIndex" Value="1" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource GrayBrush7}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush7}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource IdealForegroundColorBrush}" />
+                            <Setter Property="Panel.ZIndex"
+                                    Value="1" />
                         </MultiDataTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="True" />
-                                <Condition Property="Selector.IsSelected" Value="False" />
+                                <Condition Property="IsMouseOver"
+                                           Value="True" />
+                                <Condition Property="Selector.IsSelected"
+                                           Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
-                            <Setter Property="Background" Value="{DynamicResource GrayBrush8}" />
-                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-                            <Setter Property="Panel.ZIndex" Value="0" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource GrayBrush8}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush8}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource BlackBrush}" />
+                            <Setter Property="Panel.ZIndex"
+                                    Value="0" />
                         </MultiTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="BorderBrush" Value="{DynamicResource WhiteBrush}" />
-                            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource GrayBrush7}" />
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource WhiteBrush}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource WhiteBrush}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource GrayBrush7}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="ToolTip"
+                Value="{Binding ToolTip}" />
     </Style>
 
-    <Style x:Key="AnchorableTabItemStyle" TargetType="{x:Type TabItem}">
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
-        <Setter Property="BorderThickness" Value="1,0,1,1" />
-        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-        <Setter Property="ToolTip" Value="{Binding ToolTip}" />
-        <Setter Property="Padding" Value="4,3,3,3" />
-        <Setter Property="Margin" Value="0" />
+    <Style x:Key="AnchorableTabItemStyle"
+           TargetType="{x:Type TabItem}">
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource GrayBrush8}" />
+        <Setter Property="BorderThickness"
+                Value="1,0,1,1" />
+        <Setter Property="IsSelected"
+                Value="{Binding IsSelected,
+                                Mode=TwoWay}" />
+        <Setter Property="Margin"
+                Value="0" />
+        <Setter Property="Padding"
+                Value="4,3,3,3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -112,40 +158,58 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="Content"
-                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              HorizontalAlignment="{Binding HorizontalContentAlignment,
+                                                                            RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              VerticalAlignment="{Binding VerticalContentAlignment,
+                                                                          RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                               ContentSource="Header"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Selector.IsSelected" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource ExtremeWhiteBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
+                        <Trigger Property="Selector.IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource ExtremeWhiteBrush}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush8}" />
                         </Trigger>
-                        <Trigger Property="Selector.IsSelected" Value="False">
-                            <Setter Property="BorderThickness" Value="0,1,0,0" />
-                            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+                        <Trigger Property="Selector.IsSelected"
+                                 Value="False">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource WhiteBrush}" />
+                            <Setter Property="BorderThickness"
+                                    Value="0,1,0,0" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="True" />
-                                <Condition Property="Selector.IsSelected" Value="False" />
+                                <Condition Property="IsMouseOver"
+                                           Value="True" />
+                                <Condition Property="Selector.IsSelected"
+                                           Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource GrayBrush7}" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource GrayBrush7}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="ToolTip"
+                Value="{Binding ToolTip}" />
     </Style>
 
-    <Style x:Key="MetroToolButtonStyle" TargetType="ToggleButton">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Padding" Value="0" />
+    <Style x:Key="MetroToolButtonStyle"
+           TargetType="ToggleButton">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Padding"
+                Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -159,23 +223,35 @@
         </Setter>
 
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush2}" />
-                <Setter Property="Background" Value="{DynamicResource AccentColorBrush2}" />
-                <Setter Property="Foreground" Value="Transparent" />
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource AccentColorBrush2}" />
+                <Setter Property="BorderBrush"
+                        Value="{DynamicResource AccentColorBrush2}" />
+                <Setter Property="Foreground"
+                        Value="Transparent" />
             </Trigger>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush2}" />
-                <Setter Property="Background" Value="{DynamicResource AccentColorBrush2}" />
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource AccentColorBrush2}" />
+                <Setter Property="BorderBrush"
+                        Value="{DynamicResource AccentColorBrush2}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MetroButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Padding" Value="0" />
+    <Style x:Key="MetroButtonStyle"
+           TargetType="Button">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Padding"
+                Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -189,16 +265,38 @@
         </Setter>
 
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush2}" />
-                <Setter Property="Background" Value="{DynamicResource AccentColorBrush2}" />
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource AccentColorBrush2}" />
+                <Setter Property="BorderBrush"
+                        Value="{DynamicResource AccentColorBrush2}" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="MetroDocumentPaneControlStyle" TargetType="{x:Type controls:LayoutDocumentPaneControl}">
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
+    <Style x:Key="MetroDocumentPaneControlStyle"
+           TargetType="{x:Type controls:LayoutDocumentPaneControl}">
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource AccentColorBrush}" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <controls:LayoutDocumentControl Model="{Binding}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource AvalonDockTabItemStyle}" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <controls:LayoutDocumentTabItem Model="{Binding}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutDocumentPaneControl}">
@@ -216,33 +314,41 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <controls:DocumentPaneTabPanel x:Name="HeaderPanel"
-                                                           Grid.Row="0"
-                                                           Grid.Column="0"
-                                                           Margin="0,0,2,0"
-                                                           IsItemsHost="True"
-                                                           KeyboardNavigation.TabIndex="1" />
                             <controls:DropDownButton x:Name="MenuDropDownButton"
                                                      Grid.Column="1"
                                                      VerticalAlignment="Center"
                                                      Focusable="False"
                                                      Style="{StaticResource MetroToolButtonStyle}">
                                 <controls:DropDownButton.DropDownContextMenu>
-                                    <controls:ContextMenuEx ItemsSource="{Binding Model.ChildrenSorted, RelativeSource={RelativeSource TemplatedParent}}"
+                                    <controls:ContextMenuEx ItemsSource="{Binding Model.ChildrenSorted,
+                                                                                  RelativeSource={RelativeSource TemplatedParent}}"
                                                             Style="{StaticResource MetroContextMenu}">
                                         <controls:ContextMenuEx.ItemContainerStyle>
-                                            <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type controls:MenuItemEx}">
-                                                <Setter Property="HeaderTemplate" Value="{Binding Root.Manager.DocumentPaneMenuItemHeaderTemplate}" />
-                                                <Setter Property="HeaderTemplateSelector" Value="{Binding Root.Manager.DocumentPaneMenuItemHeaderTemplateSelector}" />
-                                                <Setter Property="IconTemplate" Value="{Binding Root.Manager.IconContentTemplate}" />
-                                                <Setter Property="IconTemplateSelector" Value="{Binding Root.Manager.IconContentTemplateSelector}" />
-                                                <Setter Property="Command" Value="{Binding ., Converter={StaticResource ActivateCommandLayoutItemFromLayoutModelConverter}}" />
+                                            <Style BasedOn="{StaticResource {x:Type MenuItem}}"
+                                                   TargetType="{x:Type controls:MenuItemEx}">
+                                                <Setter Property="Command"
+                                                        Value="{Binding .,
+                                                                        Converter={StaticResource ActivateCommandLayoutItemFromLayoutModelConverter}}" />
+                                                <Setter Property="HeaderTemplate"
+                                                        Value="{Binding Root.Manager.DocumentPaneMenuItemHeaderTemplate}" />
+                                                <Setter Property="HeaderTemplateSelector"
+                                                        Value="{Binding Root.Manager.DocumentPaneMenuItemHeaderTemplateSelector}" />
+                                                <Setter Property="IconTemplate"
+                                                        Value="{Binding Root.Manager.IconContentTemplate}" />
+                                                <Setter Property="IconTemplateSelector"
+                                                        Value="{Binding Root.Manager.IconContentTemplateSelector}" />
                                             </Style>
                                         </controls:ContextMenuEx.ItemContainerStyle>
                                     </controls:ContextMenuEx>
                                 </controls:DropDownButton.DropDownContextMenu>
-                                <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu.png" />
+                                <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu.png" />
                             </controls:DropDownButton>
+                            <controls:DocumentPaneTabPanel x:Name="HeaderPanel"
+                                                           Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           Margin="0,0,2,0"
+                                                           IsItemsHost="True"
+                                                           KeyboardNavigation.TabIndex="1" />
                         </Grid>
                         <Border x:Name="ContentPanel"
                                 Grid.Row="1"
@@ -262,77 +368,115 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger SourceName="MenuDropDownButton" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="MenuDropDownButton" Property="Content">
+                        <Trigger SourceName="MenuDropDownButton"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="MenuDropDownButton"
+                                    Property="Content">
                                 <Setter.Value>
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu_Black.png" />
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu_Black.png" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <Trigger SourceName="MenuDropDownButton" Property="IsChecked" Value="True">
-                            <Setter TargetName="MenuDropDownButton" Property="Content">
+                        <Trigger SourceName="MenuDropDownButton"
+                                 Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="MenuDropDownButton"
+                                    Property="Content">
                                 <Setter.Value>
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu_Black.png" />
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu_Black.png" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Model.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="True" />
-                                <Condition Binding="{Binding Model.SelectedContent.IsLastFocusedDocument, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Model.SelectedContent.IsActive,
+                                                             RelativeSource={RelativeSource Self}}"
+                                           Value="True" />
+                                <Condition Binding="{Binding Model.SelectedContent.IsLastFocusedDocument,
+                                                             RelativeSource={RelativeSource Self}}"
+                                           Value="True" />
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush2}" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource AccentColorBrush2}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Model.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding Model.SelectedContent.IsLastFocusedDocument, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Model.SelectedContent.IsActive,
+                                                             RelativeSource={RelativeSource Self}}"
+                                           Value="False" />
+                                <Condition Binding="{Binding Model.SelectedContent.IsLastFocusedDocument,
+                                                             RelativeSource={RelativeSource Self}}"
+                                           Value="True" />
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush4}" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource AccentColorBrush4}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Model.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding Model.SelectedContent.IsLastFocusedDocument, RelativeSource={RelativeSource Self}}" Value="False" />
+                                <Condition Binding="{Binding Model.SelectedContent.IsActive,
+                                                             RelativeSource={RelativeSource Self}}"
+                                           Value="False" />
+                                <Condition Binding="{Binding Model.SelectedContent.IsLastFocusedDocument,
+                                                             RelativeSource={RelativeSource Self}}"
+                                           Value="False" />
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush4}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush7}" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource AccentColorBrush4}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush7}" />
                         </MultiDataTrigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding Model.ChildrenCount, RelativeSource={RelativeSource Mode=Self}}" Value="0">
-                            <Setter TargetName="MenuDropDownButton" Property="Visibility" Value="Collapsed" />
-                            <Setter Property="BorderBrush" Value="{x:Null}" />
+                        <DataTrigger Binding="{Binding Model.ChildrenCount,
+                                                       RelativeSource={RelativeSource Mode=Self}}"
+                                     Value="0">
+                            <Setter Property="BorderBrush"
+                                    Value="{x:Null}" />
+                            <Setter TargetName="MenuDropDownButton"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource AvalonDockTabItemStyle}" />
-        <Setter Property="ItemTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <controls:LayoutDocumentTabItem Model="{Binding}" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
+    </Style>
+
+    <Style x:Key="MetroAnchorablePaneControlStyle"
+           TargetType="{x:Type controls:LayoutAnchorablePaneControl}">
+        <Setter Property="Background"
+                Value="{DynamicResource ExtremeWhiteBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource GrayBrush8}" />
+        <Setter Property="BorderThickness"
+                Value="1,1,1,0" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <controls:LayoutDocumentControl Model="{Binding}" />
+                    <controls:LayoutAnchorableControl Model="{Binding}" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <Style x:Key="MetroAnchorablePaneControlStyle" TargetType="{x:Type controls:LayoutAnchorablePaneControl}">
-        <Setter Property="TabStripPlacement" Value="Bottom" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
-        <Setter Property="BorderThickness" Value="1,1,1,0" />
-        <Setter Property="Foreground" Value="{Binding Model.Root.Manager.Foreground, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="Background" Value="{DynamicResource ExtremeWhiteBrush}" />
+        <Setter Property="Foreground"
+                Value="{Binding Model.Root.Manager.Foreground,
+                                RelativeSource={RelativeSource Self}}" />
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource AnchorableTabItemStyle}" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <controls:LayoutAnchorableTabItem Model="{Binding}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding"
+                Value="0" />
+        <Setter Property="TabStripPlacement"
+                Value="Bottom" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutAnchorablePaneControl}">
@@ -371,37 +515,31 @@
                                 BorderThickness="1" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Self}}" Value="1">
-                            <Setter TargetName="HeaderPanel" Property="Margin" Value="0" />
+                        <DataTrigger Binding="{Binding Items.Count,
+                                                       RelativeSource={RelativeSource Self}}"
+                                     Value="1">
+                            <Setter TargetName="HeaderPanel"
+                                    Property="Margin"
+                                    Value="0" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource AnchorableTabItemStyle}" />
-        <Setter Property="ItemTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <controls:LayoutAnchorableTabItem Model="{Binding}" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <controls:LayoutAnchorableControl Model="{Binding}" />
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 
     <Style TargetType="controls:AnchorablePaneTitle">
-        <Setter Property="Padding" Value="2,3" />
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource GrayBrush6}" />
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource GrayBrush6}" />
+        <Setter Property="Padding"
+                Value="2,3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -417,17 +555,23 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <controls:DropDownControlArea DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                          DropDownContextMenuDataContext="{Binding LayoutItem, RelativeSource={RelativeSource TemplatedParent}}">
+                            <controls:DropDownControlArea DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu,
+                                                                                        RelativeSource={RelativeSource TemplatedParent}}"
+                                                          DropDownContextMenuDataContext="{Binding LayoutItem,
+                                                                                                   RelativeSource={RelativeSource TemplatedParent}}">
                                 <StackPanel Orientation="Horizontal">
                                     <ContentPresenter x:Name="Header"
                                                       Margin="2,0,0,0"
-                                                      Content="{Binding Model, RelativeSource={RelativeSource TemplatedParent}}"
-                                                      ContentTemplate="{Binding Model.Root.Manager.AnchorableTitleTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                      ContentTemplateSelector="{Binding Model.Root.Manager.AnchorableTitleTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
+                                                      Content="{Binding Model,
+                                                                        RelativeSource={RelativeSource TemplatedParent}}"
+                                                      ContentTemplate="{Binding Model.Root.Manager.AnchorableTitleTemplate,
+                                                                                RelativeSource={RelativeSource TemplatedParent}}"
+                                                      ContentTemplateSelector="{Binding Model.Root.Manager.AnchorableTitleTemplateSelector,
+                                                                                        RelativeSource={RelativeSource TemplatedParent}}"
                                                       TextElement.Foreground="{TemplateBinding Foreground}" />
                                     <Rectangle x:Name="Pattern"
-                                               Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                               Width="{Binding ActualWidth,
+                                                               RelativeSource={RelativeSource TemplatedParent}}"
                                                Height="5"
                                                Margin="10,0,0,0"
                                                Fill="{DynamicResource DragUnselectedPattern}" />
@@ -438,71 +582,115 @@
                                                      Grid.Column="1"
                                                      Margin="5,0,0,0"
                                                      VerticalAlignment="Center"
-                                                     DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                     DropDownContextMenuDataContext="{Binding LayoutItem, RelativeSource={RelativeSource TemplatedParent}}"
+                                                     DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu,
+                                                                                   RelativeSource={RelativeSource TemplatedParent}}"
+                                                     DropDownContextMenuDataContext="{Binding LayoutItem,
+                                                                                              RelativeSource={RelativeSource TemplatedParent}}"
                                                      Focusable="False"
                                                      Style="{StaticResource MetroToolButtonStyle}"
                                                      ToolTip="ウィンドウ位置">
                                 <Image x:Name="PART_ImgMenuPin"
-                                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu.png" />
+                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu.png" />
                             </controls:DropDownButton>
 
                             <Button x:Name="PART_AutoHidePin"
                                     Grid.Column="2"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Command="{Binding LayoutItem.AutoHideCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding LayoutItem.AutoHideCommand,
+                                                      RelativeSource={RelativeSource TemplatedParent}}"
                                     Focusable="False"
                                     Style="{StaticResource MetroButtonStyle}"
                                     ToolTip="自動的に隠す"
-                                    Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                    Visibility="{Binding IsEnabled,
+                                                         RelativeSource={RelativeSource Self},
+                                                         Mode=OneWay,
+                                                         Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Image x:Name="PART_ImgAutoHidePin"
-                                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide.png" />
+                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide.png" />
                             </Button>
                             <Button x:Name="PART_HidePin"
                                     Grid.Column="3"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Command="{Binding LayoutItem.HideCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Command="{Binding LayoutItem.HideCommand,
+                                                      RelativeSource={RelativeSource TemplatedParent}}"
                                     Focusable="False"
                                     Style="{StaticResource MetroButtonStyle}"
                                     ToolTip="非表示"
-                                    Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                    Visibility="{Binding IsEnabled,
+                                                         RelativeSource={RelativeSource Self},
+                                                         Mode=OneWay,
+                                                         Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Image x:Name="PART_ImgHidePin"
-                                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
+                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
                             </Button>
 
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Model.IsAutoHidden, RelativeSource={RelativeSource Mode=Self}}" Value="True">
-                            <Setter TargetName="PART_AutoHidePin" Property="LayoutTransform">
+                        <DataTrigger Binding="{Binding Model.IsAutoHidden,
+                                                       RelativeSource={RelativeSource Mode=Self}}"
+                                     Value="True">
+                            <Setter TargetName="PART_AutoHidePin"
+                                    Property="LayoutTransform">
                                 <Setter.Value>
                                     <RotateTransform Angle="90" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Model.IsActive, RelativeSource={RelativeSource Mode=Self}}" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
-                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource IdealForegroundColorBrush}" />
-                            <Setter TargetName="Pattern" Property="Fill" Value="{DynamicResource DragSelectedPattern}" />
+                        <DataTrigger Binding="{Binding Model.IsActive,
+                                                       RelativeSource={RelativeSource Mode=Self}}"
+                                     Value="True">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource AccentColorBrush}" />
+                            <Setter TargetName="Header"
+                                    Property="TextElement.Foreground"
+                                    Value="{DynamicResource IdealForegroundColorBrush}" />
+                            <Setter TargetName="Pattern"
+                                    Property="Fill"
+                                    Value="{DynamicResource DragSelectedPattern}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Model.IsActive, RelativeSource={RelativeSource Mode=Self}}" Value="True">
-                            <Setter TargetName="PART_ImgAutoHidePin" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide_Dark.png" />
-                            <Setter TargetName="PART_ImgHidePin" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
-                            <Setter TargetName="PART_ImgMenuPin" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
+                        <DataTrigger Binding="{Binding Model.IsActive,
+                                                       RelativeSource={RelativeSource Mode=Self}}"
+                                     Value="True">
+                            <Setter TargetName="PART_ImgAutoHidePin"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide_Dark.png" />
+                            <Setter TargetName="PART_ImgHidePin"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                            <Setter TargetName="PART_ImgMenuPin"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
                         </DataTrigger>
-                        <Trigger SourceName="MenuDropDownButton" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgMenuPin" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                        <Trigger SourceName="MenuDropDownButton"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgMenuPin"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="MenuDropDownButton" Property="IsChecked" Value="True">
-                            <Setter TargetName="PART_ImgMenuPin" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                        <Trigger SourceName="MenuDropDownButton"
+                                 Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgMenuPin"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_AutoHidePin" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgAutoHidePin" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide_Black.png" />
+                        <Trigger SourceName="PART_AutoHidePin"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgAutoHidePin"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_HidePin" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgHidePin" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                        <Trigger SourceName="PART_HidePin"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgHidePin"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -517,7 +705,10 @@
                 <ItemsPanelTemplate>
                     <StackPanel MinWidth="4"
                                 MinHeight="4"
-                                Orientation="{Binding Model.Side, RelativeSource={RelativeSource AncestorType={x:Type controls:LayoutAnchorSideControl}, Mode=FindAncestor}, Converter={StaticResource AnchorSideToOrientationConverter}}" />
+                                Orientation="{Binding Model.Side,
+                                                      RelativeSource={RelativeSource AncestorType={x:Type controls:LayoutAnchorSideControl},
+                                                                                     Mode=FindAncestor},
+                                                      Converter={StaticResource AnchorSideToOrientationConverter}}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
@@ -551,9 +742,16 @@
                            Fill="{DynamicResource GrayBrush8}"
                            Visibility="Hidden" />
                 <ContentPresenter x:Name="TheContent"
-                                  Content="{Binding Model, RelativeSource={RelativeSource TemplatedParent}}"
-                                  ContentTemplate="{Binding AnchorableHeaderTemplate, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
-                                  ContentTemplateSelector="{Binding AnchorableHeaderTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
+                                  Content="{Binding Model,
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                  ContentTemplate="{Binding AnchorableHeaderTemplate,
+                                                            Mode=OneWay,
+                                                            RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager},
+                                                                                           Mode=FindAncestor}}"
+                                  ContentTemplateSelector="{Binding AnchorableHeaderTemplateSelector,
+                                                                    Mode=OneWay,
+                                                                    RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager},
+                                                                                                   Mode=FindAncestor}}"
                                   TextElement.Foreground="{DynamicResource GrayBrush6}" />
                 <Rectangle x:Name="Bottom"
                            Width="Auto"
@@ -563,32 +761,57 @@
             </StackPanel>
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="Side" Value="Right">
-                <Setter TargetName="Bottom" Property="Visibility" Value="Hidden" />
-                <Setter TargetName="Top" Property="Visibility" Value="Visible" />
+            <Trigger Property="Side"
+                     Value="Right">
+                <Setter TargetName="Bottom"
+                        Property="Visibility"
+                        Value="Hidden" />
+                <Setter TargetName="Top"
+                        Property="Visibility"
+                        Value="Visible" />
             </Trigger>
-            <Trigger Property="Side" Value="Bottom">
-                <Setter TargetName="Bottom" Property="Visibility" Value="Visible" />
-                <Setter TargetName="Top" Property="Visibility" Value="Hidden" />
+            <Trigger Property="Side"
+                     Value="Bottom">
+                <Setter TargetName="Bottom"
+                        Property="Visibility"
+                        Value="Visible" />
+                <Setter TargetName="Top"
+                        Property="Visibility"
+                        Value="Hidden" />
             </Trigger>
-            <Trigger Property="Side" Value="Top">
-                <Setter TargetName="Bottom" Property="Visibility" Value="Visible" />
-                <Setter TargetName="Top" Property="Visibility" Value="Hidden" />
+            <Trigger Property="Side"
+                     Value="Top">
+                <Setter TargetName="Bottom"
+                        Property="Visibility"
+                        Value="Visible" />
+                <Setter TargetName="Top"
+                        Property="Visibility"
+                        Value="Hidden" />
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="Selector.IsSelected" Value="False" />
+                    <Condition Property="IsMouseOver"
+                               Value="True" />
+                    <Condition Property="Selector.IsSelected"
+                               Value="False" />
                 </MultiTrigger.Conditions>
-                <Setter TargetName="Bottom" Property="Fill" Value="{DynamicResource AccentColorBrush}" />
-                <Setter TargetName="Top" Property="Fill" Value="{DynamicResource AccentColorBrush}" />
-                <Setter TargetName="TheContent" Property="TextElement.Foreground" Value="{DynamicResource AccentColorBrush}" />
+                <Setter TargetName="Bottom"
+                        Property="Fill"
+                        Value="{DynamicResource AccentColorBrush}" />
+                <Setter TargetName="TheContent"
+                        Property="TextElement.Foreground"
+                        Value="{DynamicResource AccentColorBrush}" />
+                <Setter TargetName="Top"
+                        Property="Fill"
+                        Value="{DynamicResource AccentColorBrush}" />
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="{x:Type controls:OverlayWindow}" TargetType="{x:Type controls:OverlayWindow}">
-        <Setter Property="Background" Value="Transparent" />
+    <Style x:Key="{x:Type controls:OverlayWindow}"
+           TargetType="{x:Type controls:OverlayWindow}">
+        <Setter Property="Background"
+                Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:OverlayWindow}">
@@ -602,22 +825,22 @@
                             <Image x:Name="PART_DockingManagerDropTargetLeft"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
-                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableLeft.png"
+                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableLeft.png"
                                    Stretch="None" />
                             <Image x:Name="PART_DockingManagerDropTargetRight"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
-                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableRight.png"
+                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableRight.png"
                                    Stretch="None" />
                             <Image x:Name="PART_DockingManagerDropTargetBottom"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Bottom"
-                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableBottom.png"
+                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableBottom.png"
                                    Stretch="None" />
                             <Image x:Name="PART_DockingManagerDropTargetTop"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Top"
-                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableTop.png"
+                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableTop.png"
                                    Stretch="None" />
                         </Grid>
                         <Grid x:Name="PART_AnchorablePaneDropTargets">
@@ -638,41 +861,41 @@
                                 <Image Grid.RowSpan="3"
                                        Grid.ColumnSpan="3"
                                        Margin="0,0.5,0,-0.5"
-                                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneEmpty.png"
+                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneEmpty.png"
                                        Stretch="None" />
                                 <Border Name="PART_AnchorablePaneDropTargetTop"
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="0,3.5,0, 0">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetLeft"
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetInto"
                                         Grid.Row="1"
                                         Grid.Column="1"
                                         Margin="0,0.5,0,0">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetRight"
                                         Grid.Row="1"
                                         Grid.Column="2"
                                         Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetBottom"
                                         Grid.Row="2"
                                         Grid.Column="1"
                                         Margin="0,-0.5,0,0">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -694,40 +917,40 @@
                                 </Grid.RowDefinitions>
                                 <Image Grid.RowSpan="3"
                                        Grid.ColumnSpan="3"
-                                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneEmpty.png"
+                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneEmpty.png"
                                        Stretch="None" />
                                 <Border Name="PART_DocumentPaneDropTargetTop"
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetLeft"
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetInto"
                                         Grid.Row="1"
                                         Grid.Column="1">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetRight"
                                         Grid.Row="1"
                                         Grid.Column="2"
                                         Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetBottom"
                                         Grid.Row="2"
                                         Grid.Column="1"
                                         Margin="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -754,27 +977,27 @@
                                 </Grid.RowDefinitions>
                                 <Image Grid.RowSpan="5"
                                        Grid.ColumnSpan="5"
-                                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneLargeEmpty.png"
+                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneLargeEmpty.png"
                                        Stretch="None" />
                                 <Border Name="PART_DocumentPaneDropTargetTopAsAnchorablePane"
                                         Grid.Row="0"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneFullDropTargetTop"
                                         Grid.Row="1"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetLeftAsAnchorablePane"
                                         Grid.Row="2"
                                         Grid.Column="0">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
                                            Stretch="None" />
                                 </Border>
 
@@ -782,13 +1005,13 @@
                                         Grid.Row="2"
                                         Grid.Column="1">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneFullDropTargetInto"
                                         Grid.Row="2"
                                         Grid.Column="2">
-                                    <Image Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
                                            Stretch="None" />
                                 </Border>
 
@@ -796,28 +1019,28 @@
                                         Grid.Row="2"
                                         Grid.Column="3">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetRightAsAnchorablePane"
                                         Grid.Row="2"
                                         Grid.Column="4">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneFullDropTargetBottom"
                                         Grid.Row="3"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetBottomAsAnchorablePane"
                                         Grid.Row="4"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -841,7 +1064,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Image x:Name="icon"
-                   Source="{Binding IconSource, Converter={StaticResource NullToDoNothingConverter}}"
+                   Source="{Binding IconSource,
+                                    Converter={StaticResource NullToDoNothingConverter}}"
                    Stretch="Uniform" />
             <TextBlock x:Name="title"
                        Grid.Column="1"
@@ -850,8 +1074,11 @@
                        TextTrimming="CharacterEllipsis" />
         </Grid>
         <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding IconSource}" Value="{x:Null}">
-                <Setter TargetName="title" Property="Margin" Value="0" />
+            <DataTrigger Binding="{Binding IconSource}"
+                         Value="{x:Null}">
+                <Setter TargetName="title"
+                        Property="Margin"
+                        Value="0" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -867,7 +1094,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="MetroIconContentTemplate">
-        <Image Source="{Binding IconSource, Converter={StaticResource NullToDoNothingConverter}}"
+        <Image Source="{Binding IconSource,
+                                Converter={StaticResource NullToDoNothingConverter}}"
                Stretch="Uniform" />
     </DataTemplate>
 
@@ -882,13 +1110,19 @@
                   Header="自動的に隠す (_A)" />
         <MenuItem Command="{Binding HideCommand}"
                   Header="非表示 (_H)"
-                  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                  Visibility="{Binding IsEnabled,
+                                       RelativeSource={RelativeSource Self},
+                                       Mode=OneWay,
+                                       Converter={StaticResource BoolToVisibilityConverter}}" />
     </ContextMenu>
 
     <ContextMenu x:Key="MetroDocumentContextMenu">
         <MenuItem Command="{Binding CloseCommand}"
                   Header="閉じる (_C)"
-                  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                  Visibility="{Binding IsEnabled,
+                                       RelativeSource={RelativeSource Self},
+                                       Mode=OneWay,
+                                       Converter={StaticResource BoolToVisibilityConverter}}" />
         <MenuItem Command="{Binding CloseAllButThisCommand}"
                   Header="このウィンドウ以外すべて閉じる (_A)" />
         <MenuItem Command="{Binding FloatCommand}"
@@ -897,47 +1131,76 @@
                   Header="ドッキング (_D)" />
         <MenuItem Command="{Binding NewHorizontalTabGroupCommand}"
                   Header="水平タブ グループの新規作成 (_Z)"
-                  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                  Visibility="{Binding IsEnabled,
+                                       RelativeSource={RelativeSource Self},
+                                       Mode=OneWay,
+                                       Converter={StaticResource BoolToVisibilityConverter}}">
             <MenuItem.Icon>
                 <Image Width="14"
-                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/HTabGroup.png"
+                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/HTabGroup.png"
                        Stretch="Uniform" />
             </MenuItem.Icon>
         </MenuItem>
         <MenuItem Command="{Binding NewVerticalTabGroupCommand}"
                   Header="垂直タブ グループの新規作成 (_V)"
-                  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                  Visibility="{Binding IsEnabled,
+                                       RelativeSource={RelativeSource Self},
+                                       Mode=OneWay,
+                                       Converter={StaticResource BoolToVisibilityConverter}}">
             <MenuItem.Icon>
                 <Image Width="14"
-                       Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/VTabGroup.png"
+                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/VTabGroup.png"
                        Stretch="Uniform" />
             </MenuItem.Icon>
         </MenuItem>
         <MenuItem Command="{Binding MoveToNextTabGroupCommand}"
                   Header="次のタブ グループへ移動 (_X)"
-                  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                  Visibility="{Binding IsEnabled,
+                                       RelativeSource={RelativeSource Self},
+                                       Mode=OneWay,
+                                       Converter={StaticResource BoolToVisibilityConverter}}" />
         <MenuItem Command="{Binding MoveToPreviousTabGroupCommand}"
                   Header="前のタブ グループへ移動 (_R)"
-                  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                  Visibility="{Binding IsEnabled,
+                                       RelativeSource={RelativeSource Self},
+                                       Mode=OneWay,
+                                       Converter={StaticResource BoolToVisibilityConverter}}" />
     </ContextMenu>
 
-    <Style x:Key="{x:Type dock:DockingManager}" TargetType="{x:Type dock:DockingManager}">
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-        <Setter Property="DocumentPaneControlStyle" Value="{StaticResource MetroDocumentPaneControlStyle}" />
-        <Setter Property="AnchorablePaneControlStyle" Value="{StaticResource MetroAnchorablePaneControlStyle}" />
-        <Setter Property="AnchorSideTemplate" Value="{StaticResource MetroAnchorSideTemplate}" />
-        <Setter Property="AnchorGroupTemplate" Value="{StaticResource MetroAnchorGroupTemplate}" />
-        <Setter Property="AnchorTemplate" Value="{StaticResource MetroAnchorTemplate}" />
-        <Setter Property="DocumentHeaderTemplate" Value="{StaticResource MetroDocumentHeaderTemplate}" />
-        <Setter Property="AnchorableHeaderTemplate" Value="{StaticResource MetroAnchorableHeaderTemplate}" />
-        <Setter Property="DocumentTitleTemplate" Value="{StaticResource MetroDocumentTitleTemplate}" />
-        <Setter Property="AnchorableTitleTemplate" Value="{StaticResource MetroAnchorableTitleTemplate}" />
-        <Setter Property="AnchorableContextMenu" Value="{StaticResource MetroAnchorableContextMenu}" />
-        <Setter Property="DocumentContextMenu" Value="{StaticResource MetroDocumentContextMenu}" />
-        <Setter Property="DocumentPaneMenuItemHeaderTemplate" Value="{StaticResource MetroDocumentHeaderTemplate}" />
-        <Setter Property="IconContentTemplate" Value="{StaticResource MetroIconContentTemplate}" />
-        <Setter Property="GridSplitterWidth" Value="4" />
-        <Setter Property="GridSplitterHeight" Value="4" />
+    <Style x:Key="{x:Type dock:DockingManager}"
+           TargetType="{x:Type dock:DockingManager}">
+        <Setter Property="AnchorGroupTemplate"
+                Value="{StaticResource MetroAnchorGroupTemplate}" />
+        <Setter Property="AnchorSideTemplate"
+                Value="{StaticResource MetroAnchorSideTemplate}" />
+        <Setter Property="AnchorTemplate"
+                Value="{StaticResource MetroAnchorTemplate}" />
+        <Setter Property="AnchorableContextMenu"
+                Value="{StaticResource MetroAnchorableContextMenu}" />
+        <Setter Property="AnchorableHeaderTemplate"
+                Value="{StaticResource MetroAnchorableHeaderTemplate}" />
+        <Setter Property="AnchorablePaneControlStyle"
+                Value="{StaticResource MetroAnchorablePaneControlStyle}" />
+        <Setter Property="AnchorableTitleTemplate"
+                Value="{StaticResource MetroAnchorableTitleTemplate}" />
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="DocumentContextMenu"
+                Value="{StaticResource MetroDocumentContextMenu}" />
+        <Setter Property="DocumentHeaderTemplate"
+                Value="{StaticResource MetroDocumentHeaderTemplate}" />
+        <Setter Property="DocumentPaneControlStyle"
+                Value="{StaticResource MetroDocumentPaneControlStyle}" />
+        <Setter Property="DocumentPaneMenuItemHeaderTemplate"
+                Value="{StaticResource MetroDocumentHeaderTemplate}" />
+        <Setter Property="DocumentTitleTemplate"
+                Value="{StaticResource MetroDocumentTitleTemplate}" />
+        <Setter Property="GridSplitterHeight"
+                Value="4" />
+        <Setter Property="GridSplitterWidth"
+                Value="4" />
+        <Setter Property="IconContentTemplate"
+                Value="{StaticResource MetroIconContentTemplate}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type dock:DockingManager}">
@@ -983,8 +1246,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="{x:Type controls:LayoutGridResizerControl}" TargetType="{x:Type controls:LayoutGridResizerControl}">
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+    <Style x:Key="{x:Type controls:LayoutGridResizerControl}"
+           TargetType="{x:Type controls:LayoutGridResizerControl}">
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutGridResizerControl}">
@@ -995,9 +1260,12 @@
     </Style>
 
     <Style TargetType="{x:Type controls:LayoutDocumentControl}">
-        <Setter Property="BorderThickness" Value="1,0,1,1" />
-        <Setter Property="BorderBrush" Value="{DynamicResource GrayBrush8}" />
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource GrayBrush8}" />
+        <Setter Property="BorderThickness"
+                Value="1,0,1,1" />
     </Style>
 
     <Style TargetType="{x:Type controls:LayoutDocumentTabItem}">
@@ -1005,7 +1273,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutDocumentTabItem}">
                     <controls:DropDownControlArea DropDownContextMenu="{Binding Root.Manager.DocumentContextMenu}"
-                                                  DropDownContextMenuDataContext="{Binding LayoutItem, RelativeSource={RelativeSource TemplatedParent}}">
+                                                  DropDownContextMenuDataContext="{Binding LayoutItem,
+                                                                                           RelativeSource={RelativeSource TemplatedParent}}">
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -1017,44 +1286,75 @@
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.ColumnSpan="2"
                                         Background="Transparent" />
-                                <ContentPresenter Content="{Binding Model, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  ContentTemplate="{Binding DocumentHeaderTemplate, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
-                                                  ContentTemplateSelector="{Binding DocumentHeaderTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}" />
+                                <ContentPresenter Content="{Binding Model,
+                                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                                  ContentTemplate="{Binding DocumentHeaderTemplate,
+                                                                            Mode=OneWay,
+                                                                            RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager},
+                                                                                                           Mode=FindAncestor}}"
+                                                  ContentTemplateSelector="{Binding DocumentHeaderTemplateSelector,
+                                                                                    Mode=OneWay,
+                                                                                    RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager},
+                                                                                                                   Mode=FindAncestor}}" />
                                 <Button x:Name="DocumentCloseButton"
                                         Grid.Column="1"
                                         Margin="5,1,0,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Command="{Binding LayoutItem.CloseCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Command="{Binding LayoutItem.CloseCommand,
+                                                          RelativeSource={RelativeSource TemplatedParent}}"
                                         Style="{StaticResource MetroButtonStyle}"
                                         ToolTip="閉じる"
                                         Visibility="Hidden">
                                     <Image x:Name="PART_ImgPinClose"
-                                           Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
+                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
                                 </Button>
                             </Grid>
                         </Border>
                     </controls:DropDownControlArea>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                            <Setter TargetName="DocumentCloseButton" Property="Visibility" Value="Visible" />
+                        <DataTrigger Binding="{Binding IsSelected}"
+                                     Value="True">
+                            <Setter TargetName="DocumentCloseButton"
+                                    Property="Visibility"
+                                    Value="Visible" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding IsLastFocusedDocument}" Value="True">
-                            <Setter TargetName="DocumentCloseButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                        <DataTrigger Binding="{Binding IsLastFocusedDocument}"
+                                     Value="True">
+                            <Setter TargetName="DocumentCloseButton"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="PART_ImgPinClose"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding IsActive}" Value="True">
-                            <Setter TargetName="DocumentCloseButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                        <DataTrigger Binding="{Binding IsActive}"
+                                     Value="True">
+                            <Setter TargetName="DocumentCloseButton"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            <Setter TargetName="PART_ImgPinClose"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
                         </DataTrigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="DocumentCloseButton" Property="Visibility" Value="Visible" />
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="DocumentCloseButton"
+                                    Property="Visibility"
+                                    Value="Visible" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding CanClose}" Value="False">
-                            <Setter TargetName="DocumentCloseButton" Property="Visibility" Value="Collapsed" />
+                        <DataTrigger Binding="{Binding CanClose}"
+                                     Value="False">
+                            <Setter TargetName="DocumentCloseButton"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
                         </DataTrigger>
-                        <Trigger SourceName="DocumentCloseButton" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                        <Trigger SourceName="DocumentCloseButton"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinClose"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
@@ -1064,36 +1364,52 @@
     </Style>
 
     <Style TargetType="{x:Type controls:LayoutAnchorableTabItem}">
-        <Setter Property="Foreground" Value="{DynamicResource GrayBrush6}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource GrayBrush6}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutAnchorableTabItem}">
                     <controls:DropDownControlArea DropDownContextMenu="{Binding Root.Manager.AnchorableContextMenu}"
-                                                  DropDownContextMenuDataContext="{Binding LayoutItem, RelativeSource={RelativeSource TemplatedParent}}">
+                                                  DropDownContextMenuDataContext="{Binding LayoutItem,
+                                                                                           RelativeSource={RelativeSource TemplatedParent}}">
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
-                                <ContentPresenter Content="{Binding Model, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  ContentTemplate="{Binding AnchorableHeaderTemplate, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
-                                                  ContentTemplateSelector="{Binding AnchorableHeaderTemplateSelector, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager}, Mode=FindAncestor}}"
+                                <ContentPresenter Content="{Binding Model,
+                                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                                  ContentTemplate="{Binding AnchorableHeaderTemplate,
+                                                                            Mode=OneWay,
+                                                                            RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager},
+                                                                                                           Mode=FindAncestor}}"
+                                                  ContentTemplateSelector="{Binding AnchorableHeaderTemplateSelector,
+                                                                                    Mode=OneWay,
+                                                                                    RelativeSource={RelativeSource AncestorType={x:Type dock:DockingManager},
+                                                                                                                   Mode=FindAncestor}}"
                                                   TextElement.Foreground="{TemplateBinding Foreground}" />
                                 <controls:DropDownControlArea Grid.Column="0"
-                                                              DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                              DropDownContextMenuDataContext="{Binding Model, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                              DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu,
+                                                                                            RelativeSource={RelativeSource TemplatedParent}}"
+                                                              DropDownContextMenuDataContext="{Binding Model,
+                                                                                                       RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
                         </Border>
                     </controls:DropDownControlArea>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="True" />
-                                <Condition Property="Selector.IsSelected" Value="False" />
+                                <Condition Property="IsMouseOver"
+                                           Value="True" />
+                                <Condition Property="Selector.IsSelected"
+                                           Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource AccentColorBrush}" />
                         </MultiTrigger>
-                        <Trigger Property="Selector.IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
+                        <Trigger Property="Selector.IsSelected"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource AccentColorBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1101,22 +1417,16 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:LayoutAnchorableControl}">
-    </Style>
+    <Style TargetType="{x:Type controls:LayoutAnchorableControl}" />
 
-    <Style x:Key="{x:Type controls:LayoutDocumentFloatingWindowControl}" TargetType="{x:Type controls:LayoutDocumentFloatingWindowControl}">
-        <Setter Property="Foreground" Value="{DynamicResource IdealForegroundColorBrush}" />
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
-        <Setter Property="shell:WindowChrome.WindowChrome">
-            <Setter.Value>
-                <shell:WindowChrome CaptionHeight="20"
-                                    CornerRadius="0"
-                                    GlassFrameThickness="0"
-                                    ResizeBorderThickness="10"
-                                    ShowSystemMenu="False" />
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="{x:Type controls:LayoutDocumentFloatingWindowControl}"
+           TargetType="{x:Type controls:LayoutDocumentFloatingWindowControl}">
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource AccentColorBrush}" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource IdealForegroundColorBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutDocumentFloatingWindowControl}">
@@ -1142,11 +1452,15 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Orientation="Horizontal">
-                                            <ContentPresenter Content="{Binding Model.RootDocument, RelativeSource={RelativeSource TemplatedParent}}"
-                                                              ContentTemplate="{Binding Model.Root.Manager.DocumentTitleTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                              ContentTemplateSelector="{Binding Model.Root.Manager.DocumentTitleTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            <ContentPresenter Content="{Binding Model.RootDocument,
+                                                                                RelativeSource={RelativeSource TemplatedParent}}"
+                                                              ContentTemplate="{Binding Model.Root.Manager.DocumentTitleTemplate,
+                                                                                        RelativeSource={RelativeSource TemplatedParent}}"
+                                                              ContentTemplateSelector="{Binding Model.Root.Manager.DocumentTitleTemplateSelector,
+                                                                                                RelativeSource={RelativeSource TemplatedParent}}" />
                                             <Rectangle x:Name="Pattern"
-                                                       Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                                       Width="{Binding ActualWidth,
+                                                                       RelativeSource={RelativeSource TemplatedParent}}"
                                                        Height="5"
                                                        Margin="10,0,0,0"
                                                        Fill="{DynamicResource DragUnselectedPattern}" />
@@ -1158,15 +1472,17 @@
                                                                  VerticalAlignment="Center"
                                                                  HorizontalContentAlignment="Center"
                                                                  VerticalContentAlignment="Center"
-                                                                 DropDownContextMenu="{Binding Model.Root.Manager.DocumentContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                 DropDownContextMenuDataContext="{Binding RootDocumentLayoutItem, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                 DropDownContextMenu="{Binding Model.Root.Manager.DocumentContextMenu,
+                                                                                               RelativeSource={RelativeSource TemplatedParent}}"
+                                                                 DropDownContextMenuDataContext="{Binding RootDocumentLayoutItem,
+                                                                                                          RelativeSource={RelativeSource TemplatedParent}}"
                                                                  Focusable="False"
                                                                  Style="{StaticResource MetroToolButtonStyle}"
                                                                  ToolTip="ウィンドウ位置"
                                                                  shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMenu"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png"
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png"
                                                    Stretch="None" />
                                         </controls:DropDownButton>
 
@@ -1177,11 +1493,13 @@
                                                 Focusable="False"
                                                 Style="{StaticResource MetroButtonStyle}"
                                                 ToolTip="最大化"
-                                                Visibility="{Binding IsMaximized, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+                                                Visibility="{Binding IsMaximized,
+                                                                     RelativeSource={RelativeSource TemplatedParent},
+                                                                     Converter={StaticResource InverseBoolToVisibilityConverter}}"
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMaximize"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinRestore"
@@ -1191,24 +1509,30 @@
                                                 Focusable="False"
                                                 Style="{StaticResource MetroButtonStyle}"
                                                 ToolTip="ピン ステータスを切り替える"
-                                                Visibility="{Binding IsMaximized, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                Visibility="{Binding IsMaximized,
+                                                                     RelativeSource={RelativeSource TemplatedParent},
+                                                                     Converter={StaticResource BoolToVisibilityConverter}}"
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinRestore"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinClose"
                                                 Grid.Column="3"
-                                                Command="{Binding RootDocumentLayoutItem.CloseCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Command="{Binding RootDocumentLayoutItem.CloseCommand,
+                                                                  RelativeSource={RelativeSource TemplatedParent}}"
                                                 Focusable="False"
                                                 Style="{StaticResource MetroButtonStyle}"
                                                 ToolTip="閉じる"
-                                                Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                Visibility="{Binding IsEnabled,
+                                                                     RelativeSource={RelativeSource Self},
+                                                                     Mode=OneWay,
+                                                                     Converter={StaticResource BoolToVisibilityConverter}}"
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinClose"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
                                         </Button>
                                     </Grid>
                                 </Border>
@@ -1218,29 +1542,62 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="WindowBorder" Property="Padding" Value="3" />
+                        <Trigger Property="WindowState"
+                                 Value="Maximized">
+                            <Setter TargetName="WindowBorder"
+                                    Property="Padding"
+                                    Value="3" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource GrayBrush10}" />
-                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource BlackBrush}" />
-                            <Setter TargetName="Pattern" Property="Fill" Value="{DynamicResource DragSelectedPattern}" />
-                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{DynamicResource GrayBrush10}" />
+                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive,
+                                                       RelativeSource={RelativeSource Self}}"
+                                     Value="False">
+                            <Setter TargetName="Header"
+                                    Property="Background"
+                                    Value="{DynamicResource GrayBrush10}" />
+                            <Setter TargetName="Header"
+                                    Property="TextElement.Foreground"
+                                    Value="{DynamicResource BlackBrush}" />
+                            <Setter TargetName="Pattern"
+                                    Property="Fill"
+                                    Value="{DynamicResource DragSelectedPattern}" />
+                            <Setter TargetName="WindowBorder"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush10}" />
                         </DataTrigger>
-                        <Trigger SourceName="ContextMenuDropdownButton" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                        <Trigger SourceName="ContextMenuDropdownButton"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinMenu"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="ContextMenuDropdownButton" Property="IsChecked" Value="True">
-                            <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                        <Trigger SourceName="ContextMenuDropdownButton"
+                                 Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinMenu"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_PinMaximize" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinMaximize" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Black.png" />
+                        <Trigger SourceName="PART_PinMaximize"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinMaximize"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_PinRestore" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinRestore" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Black.png" />
+                        <Trigger SourceName="PART_PinRestore"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinRestore"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_PinClose" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                        <Trigger SourceName="PART_PinClose"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinClose"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
@@ -1248,20 +1605,25 @@
 
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <Style x:Key="{x:Type controls:LayoutAnchorableFloatingWindowControl}" TargetType="{x:Type controls:LayoutAnchorableFloatingWindowControl}">
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
         <Setter Property="shell:WindowChrome.WindowChrome">
             <Setter.Value>
                 <shell:WindowChrome CaptionHeight="20"
                                     CornerRadius="0"
                                     GlassFrameThickness="0"
-                                    ResizeBorderThickness="10" />
+                                    ResizeBorderThickness="10"
+                                    ShowSystemMenu="False" />
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type controls:LayoutAnchorableFloatingWindowControl}"
+           TargetType="{x:Type controls:LayoutAnchorableFloatingWindowControl}">
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource AccentColorBrush}" />
+        <Setter Property="BorderThickness"
+                Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:LayoutAnchorableFloatingWindowControl}">
@@ -1287,14 +1649,20 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Border Visibility="{Binding Model.IsSinglePane, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}">
-                                            <controls:DropDownControlArea DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                          DropDownContextMenuDataContext="{Binding SingleContentLayoutItem, RelativeSource={RelativeSource TemplatedParent}}">
+                                            <controls:DropDownControlArea DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu,
+                                                                                                        RelativeSource={RelativeSource TemplatedParent}}"
+                                                                          DropDownContextMenuDataContext="{Binding SingleContentLayoutItem,
+                                                                                                                   RelativeSource={RelativeSource TemplatedParent}}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <ContentPresenter Content="{Binding Model.SinglePane.SelectedContent, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                      ContentTemplate="{Binding Model.Root.Manager.AnchorableTitleTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                      ContentTemplateSelector="{Binding Model.Root.Manager.AnchorableTitleTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                    <ContentPresenter Content="{Binding Model.SinglePane.SelectedContent,
+                                                                                        RelativeSource={RelativeSource TemplatedParent}}"
+                                                                      ContentTemplate="{Binding Model.Root.Manager.AnchorableTitleTemplate,
+                                                                                                RelativeSource={RelativeSource TemplatedParent}}"
+                                                                      ContentTemplateSelector="{Binding Model.Root.Manager.AnchorableTitleTemplateSelector,
+                                                                                                        RelativeSource={RelativeSource TemplatedParent}}" />
                                                     <Rectangle x:Name="Pattern"
-                                                               Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                                               Width="{Binding ActualWidth,
+                                                                               RelativeSource={RelativeSource TemplatedParent}}"
                                                                Height="5"
                                                                Margin="10,0,0,0"
                                                                Fill="{DynamicResource DragUnselectedPattern}" />
@@ -1308,16 +1676,20 @@
                                                                  VerticalAlignment="Center"
                                                                  HorizontalContentAlignment="Center"
                                                                  VerticalContentAlignment="Center"
-                                                                 DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                 DropDownContextMenuDataContext="{Binding SingleContentLayoutItem, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                 DropDownContextMenu="{Binding Model.Root.Manager.AnchorableContextMenu,
+                                                                                               RelativeSource={RelativeSource TemplatedParent}}"
+                                                                 DropDownContextMenuDataContext="{Binding SingleContentLayoutItem,
+                                                                                                          RelativeSource={RelativeSource TemplatedParent}}"
                                                                  Focusable="False"
                                                                  Style="{StaticResource MetroToolButtonStyle}"
                                                                  ToolTip="ウィンドウ位置"
-                                                                 Visibility="{Binding Model.IsSinglePane, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                                 Visibility="{Binding Model.IsSinglePane,
+                                                                                      RelativeSource={RelativeSource TemplatedParent},
+                                                                                      Converter={StaticResource BoolToVisibilityConverter}}"
                                                                  shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMenu"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu.png"
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu.png"
                                                    Stretch="None" />
                                         </controls:DropDownButton>
 
@@ -1332,11 +1704,13 @@
                                                 Focusable="False"
                                                 Style="{StaticResource MetroButtonStyle}"
                                                 ToolTip="最大化"
-                                                Visibility="{Binding IsMaximized, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+                                                Visibility="{Binding IsMaximized,
+                                                                     RelativeSource={RelativeSource TemplatedParent},
+                                                                     Converter={StaticResource InverseBoolToVisibilityConverter}}"
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMaximize"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize.png" />
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinRestore"
@@ -1348,26 +1722,32 @@
                                                 Focusable="False"
                                                 Style="{StaticResource MetroButtonStyle}"
                                                 ToolTip="元に戻す"
-                                                Visibility="{Binding IsMaximized, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                Visibility="{Binding IsMaximized,
+                                                                     RelativeSource={RelativeSource TemplatedParent},
+                                                                     Converter={StaticResource BoolToVisibilityConverter}}"
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinRestore"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore.png" />
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinClose"
                                                 Grid.Column="3"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Command="{Binding HideWindowCommand, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Command="{Binding HideWindowCommand,
+                                                                  RelativeSource={RelativeSource TemplatedParent}}"
                                                 Focusable="False"
                                                 Style="{StaticResource MetroButtonStyle}"
                                                 ToolTip="非表示"
-                                                Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                                                Visibility="{Binding IsEnabled,
+                                                                     RelativeSource={RelativeSource Self},
+                                                                     Mode=OneWay,
+                                                                     Converter={StaticResource BoolToVisibilityConverter}}"
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinClose"
                                                    Width="13"
-                                                   Source="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
+                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
                                         </Button>
                                     </Grid>
                                 </Border>
@@ -1378,47 +1758,106 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="WindowBorder" Property="Padding" Value="4" />
+                        <Trigger Property="WindowState"
+                                 Value="Maximized">
+                            <Setter TargetName="WindowBorder"
+                                    Property="Padding"
+                                    Value="4" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource AccentColorBrush}" />
-                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource WhiteBrush}" />
-                            <Setter TargetName="Pattern" Property="Fill" Value="{DynamicResource DragSelectedPattern}" />
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
-                            <Setter TargetName="PART_ImgPinRestore" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
-                            <Setter TargetName="PART_ImgPinMaximize" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
-                            <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
+                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive,
+                                                       RelativeSource={RelativeSource Self}}"
+                                     Value="True">
+                            <Setter TargetName="Header"
+                                    Property="Background"
+                                    Value="{DynamicResource AccentColorBrush}" />
+                            <Setter TargetName="Header"
+                                    Property="TextElement.Foreground"
+                                    Value="{DynamicResource WhiteBrush}" />
+                            <Setter TargetName="PART_ImgPinClose"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                            <Setter TargetName="PART_ImgPinMaximize"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
+                            <Setter TargetName="PART_ImgPinMenu"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
+                            <Setter TargetName="PART_ImgPinRestore"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
+                            <Setter TargetName="Pattern"
+                                    Property="Fill"
+                                    Value="{DynamicResource DragSelectedPattern}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter TargetName="Header" Property="Background" Value="{DynamicResource GrayBrush10}" />
-                            <Setter TargetName="Header" Property="TextElement.Foreground" Value="{DynamicResource BlackBrush}" />
-                            <Setter TargetName="Pattern" Property="Fill" Value="{DynamicResource DragSelectedPattern}" />
-                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{DynamicResource GrayBrush10}" />
+                        <DataTrigger Binding="{Binding Model.SinglePane.SelectedContent.IsActive,
+                                                       RelativeSource={RelativeSource Self}}"
+                                     Value="False">
+                            <Setter TargetName="Header"
+                                    Property="Background"
+                                    Value="{DynamicResource GrayBrush10}" />
+                            <Setter TargetName="Header"
+                                    Property="TextElement.Foreground"
+                                    Value="{DynamicResource BlackBrush}" />
+                            <Setter TargetName="Pattern"
+                                    Property="Fill"
+                                    Value="{DynamicResource DragSelectedPattern}" />
+                            <Setter TargetName="WindowBorder"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush10}" />
                         </DataTrigger>
-                        <Trigger SourceName="SinglePaneContextMenu" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                        <Trigger SourceName="SinglePaneContextMenu"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinMenu"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="SinglePaneContextMenu" Property="IsChecked" Value="True">
-                            <Setter TargetName="PART_ImgPinMenu" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                        <Trigger SourceName="SinglePaneContextMenu"
+                                 Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinMenu"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_PinMaximize" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinMaximize" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Black.png" />
+                        <Trigger SourceName="PART_PinMaximize"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinMaximize"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_PinRestore" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinRestore" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Black.png" />
+                        <Trigger SourceName="PART_PinRestore"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinRestore"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Black.png" />
                         </Trigger>
-                        <Trigger SourceName="PART_PinClose" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ImgPinClose" Property="Source" Value="/McCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                        <Trigger SourceName="PART_PinClose"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PART_ImgPinClose"
+                                    Property="Source"
+                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="shell:WindowChrome.WindowChrome">
+            <Setter.Value>
+                <shell:WindowChrome CaptionHeight="20"
+                                    CornerRadius="0"
+                                    GlassFrameThickness="0"
+                                    ResizeBorderThickness="10" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
-    <Style x:Key="{x:Type controls:LayoutAutoHideWindowControl}" TargetType="{x:Type controls:LayoutAutoHideWindowControl}">
-        <Setter Property="Background" Value="{DynamicResource ExtremeWhiteBrush}" />
+    <Style x:Key="{x:Type controls:LayoutAutoHideWindowControl}"
+           TargetType="{x:Type controls:LayoutAutoHideWindowControl}">
+        <Setter Property="Background"
+                Value="{DynamicResource ExtremeWhiteBrush}" />
     </Style>
 
     <Style x:Key="MetroNavigatorWindowListBoxItemFocusVisual">
@@ -1443,14 +1882,20 @@
     <SolidColorBrush x:Key="MetroNavigatorWindowListBoxItemSelectedHoverFill"
                      Color="{DynamicResource WhiteColor}" />
 
-    <Style x:Key="MetroNavigatorWindowListBoxItemStyle" TargetType="ListBoxItem">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource MetroNavigatorWindowListBoxItemFocusVisual}" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="5,0,5,0" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Cursor" Value="Hand" />
+    <Style x:Key="MetroNavigatorWindowListBoxItemStyle"
+           TargetType="ListBoxItem">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="FocusVisualStyle"
+                Value="{StaticResource MetroNavigatorWindowListBoxItemFocusVisual}" />
+        <Setter Property="Padding"
+                Value="5,0,5,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -1476,41 +1921,59 @@
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource MetroNavigatorWindowListBoxItemSelectedFill}" />
-                            <Setter Property="BorderBrush" Value="#FF98DDFB" />
-                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#80FFFFFF" />
-                            <Setter TargetName="UpperHighlight" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="UpperHighlight" Property="Fill" Value="#40FFFFFF" />
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{StaticResource MetroNavigatorWindowListBoxItemSelectedFill}" />
+                            <Setter Property="BorderBrush"
+                                    Value="#FF98DDFB" />
+                            <Setter TargetName="InnerBorder"
+                                    Property="BorderBrush"
+                                    Value="#80FFFFFF" />
+                            <Setter TargetName="UpperHighlight"
+                                    Property="Fill"
+                                    Value="#40FFFFFF" />
+                            <Setter TargetName="UpperHighlight"
+                                    Property="Visibility"
+                                    Value="Visible" />
                         </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{StaticResource MetroNavigatorWindowListBoxItemSelectedFill}" />
-                            <Setter Property="BorderBrush" Value="#FF98DDFB" />
-                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="#80FFFFFF" />
-                            <Setter TargetName="UpperHighlight" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="UpperHighlight" Property="Fill" Value="#40FFFFFF" />
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{StaticResource MetroNavigatorWindowListBoxItemSelectedFill}" />
+                            <Setter Property="BorderBrush"
+                                    Value="#FF98DDFB" />
+                            <Setter TargetName="InnerBorder"
+                                    Property="BorderBrush"
+                                    Value="#80FFFFFF" />
+                            <Setter TargetName="UpperHighlight"
+                                    Property="Fill"
+                                    Value="#40FFFFFF" />
+                            <Setter TargetName="UpperHighlight"
+                                    Property="Visibility"
+                                    Value="Visible" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
     </Style>
 
-    <Style x:Key="{x:Type controls:NavigatorWindow}" TargetType="{x:Type controls:NavigatorWindow}">
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-        <Setter Property="SizeToContent" Value="WidthAndHeight" />
-        <Setter Property="ResizeMode" Value="NoResize" />
-        <Setter Property="shell:WindowChrome.WindowChrome">
-            <Setter.Value>
-                <shell:WindowChrome CaptionHeight="16"
-                                    CornerRadius="3,3,3,3"
-                                    GlassFrameThickness="4"
-                                    ResizeBorderThickness="10" />
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="{x:Type controls:NavigatorWindow}"
+           TargetType="{x:Type controls:NavigatorWindow}">
+        <Setter Property="Background"
+                Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+        <Setter Property="ResizeMode"
+                Value="NoResize" />
+        <Setter Property="SizeToContent"
+                Value="WidthAndHeight" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NavigatorWindow}">
@@ -1537,9 +2000,11 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
-                                        <Image Source="{Binding SelectedDocument.LayoutElement.IconSource, Converter={StaticResource NullToDoNothingConverter}}"
+                                        <Image Source="{Binding SelectedDocument.LayoutElement.IconSource,
+                                                                Converter={StaticResource NullToDoNothingConverter}}"
                                                Stretch="None"
-                                               Visibility="{Binding SelectedDocument.LayoutElement.IconSource, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                               Visibility="{Binding SelectedDocument.LayoutElement.IconSource,
+                                                                    Converter={StaticResource BoolToVisibilityConverter}}" />
                                         <TextBlock Grid.Column="1"
                                                    Margin="4,0,0,0"
                                                    VerticalAlignment="Center"
@@ -1576,7 +2041,8 @@
                                                      BorderThickness="0"
                                                      ItemContainerStyle="{StaticResource MetroNavigatorWindowListBoxItemStyle}"
                                                      ItemsSource="{Binding Anchorables}"
-                                                     SelectedItem="{Binding SelectedAnchorable, Mode=TwoWay}">
+                                                     SelectedItem="{Binding SelectedAnchorable,
+                                                                            Mode=TwoWay}">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid>
@@ -1584,7 +2050,8 @@
                                                                 <ColumnDefinition Width="16" />
                                                                 <ColumnDefinition Width="150" />
                                                             </Grid.ColumnDefinitions>
-                                                            <Image Source="{Binding LayoutElement.IconSource, Converter={StaticResource NullToDoNothingConverter}}"
+                                                            <Image Source="{Binding LayoutElement.IconSource,
+                                                                                    Converter={StaticResource NullToDoNothingConverter}}"
                                                                    Stretch="None" />
                                                             <TextBlock Grid.Column="1"
                                                                        Margin="4,0,0,0"
@@ -1610,7 +2077,8 @@
                                                      BorderThickness="0"
                                                      ItemContainerStyle="{StaticResource MetroNavigatorWindowListBoxItemStyle}"
                                                      ItemsSource="{Binding Documents}"
-                                                     SelectedItem="{Binding SelectedDocument, Mode=TwoWay}">
+                                                     SelectedItem="{Binding SelectedDocument,
+                                                                            Mode=TwoWay}">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid>
@@ -1618,7 +2086,8 @@
                                                                 <ColumnDefinition Width="16" />
                                                                 <ColumnDefinition Width="150" />
                                                             </Grid.ColumnDefinitions>
-                                                            <Image Source="{Binding LayoutElement.IconSource, Converter={StaticResource NullToDoNothingConverter}}"
+                                                            <Image Source="{Binding LayoutElement.IconSource,
+                                                                                    Converter={StaticResource NullToDoNothingConverter}}"
                                                                    Stretch="None" />
                                                             <TextBlock Grid.Column="1"
                                                                        Margin="4,0,0,0"
@@ -1646,6 +2115,14 @@
                         </Border>
                     </Grid>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="shell:WindowChrome.WindowChrome">
+            <Setter.Value>
+                <shell:WindowChrome CaptionHeight="16"
+                                    CornerRadius="3,3,3,3"
+                                    GlassFrameThickness="4"
+                                    ResizeBorderThickness="10" />
             </Setter.Value>
         </Setter>
     </Style>

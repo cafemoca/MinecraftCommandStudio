@@ -65,8 +65,8 @@ namespace Cafemoca.MinecraftCommandStudio
             Setting.Save();
         }
 
-        private const string mcsDarkTheme = "/McCommandStudio;component/Themes/Colors/McsDark.xaml";
-        private const string mcsLightTheme = "/McCommandStudio;component/Themes/Colors/McsLight.xaml";
+        private const string mcsDarkTheme = "/MinecraftCommandStudio;component/Themes/Colors/McsDark.xaml";
+        private const string mcsLightTheme = "/MinecraftCommandStudio;component/Themes/Colors/McsLight.xaml";
 
         private static readonly Version _version = Assembly.GetEntryAssembly().GetName().Version;
         internal static Version Version

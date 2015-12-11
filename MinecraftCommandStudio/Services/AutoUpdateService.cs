@@ -14,7 +14,7 @@ namespace Cafemoca.MinecraftCommandStudio.Services
 {
     public static class AutoUpdateService
     {
-        private const string RemoteVersionXml = "https://raw.githubusercontent.com/cafemoca/McCommandStudio/update/version.xml";
+        private const string RemoteVersionXml = "https://raw.githubusercontent.com/cafemoca/MinecraftCommandStudio/update/version.xml";
 
         private static readonly string xmlPath = Path.Combine(App.BinDirectory, "version.xml");
         private static readonly string updaterPath = Path.Combine(App.BinDirectory, "McSlimUpdater.exe");

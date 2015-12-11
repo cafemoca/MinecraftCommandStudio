@@ -29,7 +29,7 @@ namespace Cafemoca.MinecraftCommandStudio.Internals.AvalonDock.Themes
     {
         public override Uri GetResourceUri()
         {
-            return new Uri("/McCommandStudio;component/Internals/AvalonDock/Themes/MahAppsMetroTheme.xaml", UriKind.Relative);  
+            return new Uri("/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/MahAppsMetroTheme.xaml", UriKind.Relative);  
         }
     }
 }

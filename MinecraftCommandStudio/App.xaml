@@ -16,7 +16,7 @@
                 <!--  MahApps.Metro.Resources (Icons)  -->
                 <ResourceDictionary Source="/MinecraftCommandStudio;component/Resources/Icons.xaml" />
 
-                <!--  Cafemoca.McCommandStudio  -->
+                <!--  Cafemoca.MinecraftCommandStudio  -->
                 <ResourceDictionary Source="/MinecraftCommandStudio;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="/MinecraftCommandStudio;component/Themes/Converters.xaml" />
                 <ResourceDictionary Source="/MinecraftCommandStudio;component/Themes/Colors/McsDark.xaml" />

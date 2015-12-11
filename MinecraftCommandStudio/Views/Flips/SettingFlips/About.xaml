@@ -41,7 +41,7 @@
                     <LineBreak />
                     <LineBreak />
                     ソースコードは
-                    <controls:HyperlinkText Uri="https://github.com/cafemoca/McCommandStudio">GitHub</controls:HyperlinkText>
+                    <controls:HyperlinkText Uri="https://github.com/cafemoca/MinecraftCommandStudio">GitHub</controls:HyperlinkText>
                     で管理されています。
                 </TextBlock>
             </StackPanel>
@@ -55,7 +55,8 @@
                            LineHeight="17">
                     <TextBlock.Resources>
                         <Style TargetType="controls:HyperlinkText">
-                            <Setter Property="Foreground" Value="{DynamicResource GrayBrush6}" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource GrayBrush6}" />
                         </Style>
                     </TextBlock.Resources>
                     <TextBlock Margin="0,0,0,5"

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Input;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Documents;
 using Cafemoca.MinecraftCommandStudio.Views.Behaviors;
 using Cafemoca.MinecraftCommandStudio.Views.Behaviors.Actions;
 using Livet;
@@ -15,7 +15,7 @@ namespace Cafemoca.MinecraftCommandStudio.ViewModels
         private Cursor _cursor = Cursors.Arrow;
         public Cursor Cursor
         {
-            get { return _cursor; }
+            get { return this._cursor; }
             set
             {
                 this._cursor = value;

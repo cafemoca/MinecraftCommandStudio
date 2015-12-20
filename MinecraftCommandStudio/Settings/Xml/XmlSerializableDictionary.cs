@@ -35,7 +35,7 @@ namespace Cafemoca.MinecraftCommandStudio.Settings.Xml
                 var lkvp = serializer.Deserialize(reader) as LocalKeyValuePair;
                 if (lkvp != null)
                 {
-                    base.Add(lkvp.Key, lkvp.Value);
+                    this.Add(lkvp.Key, lkvp.Value);
                 }
             }
             reader.Read();

@@ -14,7 +14,7 @@ namespace Cafemoca.MinecraftCommandStudio.Views.Behaviors.Actions
     {
         protected override void Invoke(object parameter)
         {
-            var window = Window.GetWindow(AssociatedObject);
+            var window = Window.GetWindow(this.AssociatedObject);
 
             //if (!Setting.DontAskExitDialog) { ...
 

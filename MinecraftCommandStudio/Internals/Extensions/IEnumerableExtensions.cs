@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace System.Linq
+namespace Cafemoca.MinecraftCommandStudio.Internals.Extensions
 {
     public static class IEnumerableExtensions
     {

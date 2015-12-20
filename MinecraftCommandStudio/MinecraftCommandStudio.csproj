@@ -156,7 +156,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Internals\AvalonDock\Themes\MahAppsMetroTheme.cs" />
+    <Compile Include="Themes\AvalonDock\VisualStudioTheme.cs" />
     <Compile Include="Internals\Controls\HyperlinkText.cs" />
     <Compile Include="Internals\Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Internals\Converters\BooleanToVisibilityConverter.cs" />
@@ -182,13 +182,12 @@
     <Compile Include="ViewModels\Flips\SettingFlips\ExtendedViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlips\VersionInfoViewModel.cs" />
     <Compile Include="ViewModels\Flips\SettingFlipViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Bases\FileViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Bases\PaneViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Bases\ToolViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Documents\DocumentViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Documents\StartPageViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Tools\CompletionEditorViewModel.cs" />
-    <Compile Include="ViewModels\Layouts\Tools\RecentFilesViewModel.cs" />
+    <Compile Include="ViewModels\Panes\Bases\DocumentPaneViewModel.cs" />
+    <Compile Include="ViewModels\Panes\Bases\PaneViewModel.cs" />
+    <Compile Include="ViewModels\Panes\Bases\AnchorablePaneViewModel.cs" />
+    <Compile Include="ViewModels\Panes\Documents\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\Panes\Documents\StartPageViewModel.cs" />
+    <Compile Include="ViewModels\Panes\Anchorables\KeywordSettingViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel_Commands.cs" />
     <Compile Include="ViewModels\MainWindowViewModel_Exit.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -199,12 +198,6 @@
     <Compile Include="Views\Behaviors\Actions\WindowClosingAction.cs" />
     <Compile Include="Views\Behaviors\DropFileBehavior.cs" />
     <Compile Include="Views\Behaviors\IStateQueryableViewModel.cs" />
-    <Compile Include="Views\Dialogs\AskExitDialog.xaml.cs">
-      <DependentUpon>AskExitDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\AskSaveDialog.xaml.cs">
-      <DependentUpon>AskSaveDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Flips\SettingFlip.xaml.cs">
       <DependentUpon>SettingFlip.xaml</DependentUpon>
     </Compile>
@@ -226,24 +219,21 @@
     <Compile Include="Views\Flips\SettingFlips\VersionInfo.xaml.cs">
       <DependentUpon>VersionInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Layouts\Documents\Document.xaml.cs">
+    <Compile Include="Views\Panes\Documents\Document.xaml.cs">
       <DependentUpon>Document.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Layouts\Documents\StartPage.xaml.cs">
+    <Compile Include="Views\Panes\Documents\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Layouts\Tools\CompletionEditor.xaml.cs">
-      <DependentUpon>CompletionEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Layouts\Tools\RecentFiles.xaml.cs">
-      <DependentUpon>RecentFiles.xaml</DependentUpon>
+    <Compile Include="Views\Panes\Anchorables\KeywordSetting.xaml.cs">
+      <DependentUpon>KeywordSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Panes\LayoutInitializer.cs" />
-    <Compile Include="Views\Panes\PanesStyleSelector.cs" />
-    <Compile Include="Views\Panes\PanesTemplateSelector.cs" />
+    <Compile Include="Views\Panes\Layouts\LayoutInitializer.cs" />
+    <Compile Include="Views\Panes\Layouts\PanesStyleSelector.cs" />
+    <Compile Include="Views\Panes\Layouts\PanesTemplateSelector.cs" />
     <Compile Include="Views\Parts\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -294,15 +284,15 @@
     <Folder Include="ViewModels\Dialogs\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Internals\AvalonDock\Themes\Brushes.xaml">
+    <Page Include="Themes\AvalonDock\Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Internals\AvalonDock\Themes\MetroColors.xaml">
+    <Page Include="Themes\AvalonDock\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Internals\AvalonDock\Themes\MahAppsMetroTheme.xaml">
+    <Page Include="Themes\AvalonDock\VisualStudioTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -374,14 +364,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dialogs\AskExitDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\AskSaveDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Flips\SettingFlip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -410,19 +392,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\Documents\Document.xaml">
+    <Page Include="Views\Panes\Documents\Document.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\Documents\StartPage.xaml">
+    <Page Include="Views\Panes\Documents\StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Layouts\Tools\CompletionEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Layouts\Tools\RecentFiles.xaml">
+    <Page Include="Views\Panes\Anchorables\KeywordSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -444,41 +422,41 @@
     <Resource Include="Resources\property-blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableBottom.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableLeft.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableRight.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockAnchorableTop.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableBottom.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableLeft.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableRight.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentAsAnchorableTop.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentBottom.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentInside.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentLeft.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentRight.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockDocumentTop.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockPaneEmpty.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\DockPaneLargeEmpty.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\HTabGroup.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\Locked.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinAutoHide.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinAutoHide_Black.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinAutoHide_Dark.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinClose.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinClose_Black.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinClose_Dark.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinDocMenu.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinDocMenu_Black.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinMaximize.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinMaximize_Black.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinMaximize_Dark.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinMenu.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinMenu_Black.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinMenu_Dark.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore_Black.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\PinRestore_Dark.png" />
-    <Resource Include="Internals\AvalonDock\Themes\Images\VTabGroup.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockAnchorableBottom.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockAnchorableLeft.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockAnchorableRight.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockAnchorableTop.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentAsAnchorableBottom.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentAsAnchorableLeft.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentAsAnchorableRight.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentAsAnchorableTop.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentBottom.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentInside.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentLeft.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentRight.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockDocumentTop.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockPaneEmpty.png" />
+    <Resource Include="Themes\AvalonDock\Images\DockPaneLargeEmpty.png" />
+    <Resource Include="Themes\AvalonDock\Images\HTabGroup.png" />
+    <Resource Include="Themes\AvalonDock\Images\Locked.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinAutoHide.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinAutoHide_Black.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinAutoHide_Dark.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinClose.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinClose_Black.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinClose_Dark.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinDocMenu.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinDocMenu_Black.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinMaximize.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinMaximize_Black.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinMaximize_Dark.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinMenu.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinMenu_Black.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinMenu_Dark.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinRestore.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinRestore_Black.png" />
+    <Resource Include="Themes\AvalonDock\Images\PinRestore_Dark.png" />
+    <Resource Include="Themes\AvalonDock\Images\VTabGroup.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />

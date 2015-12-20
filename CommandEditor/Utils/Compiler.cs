@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using Cafemoca.CommandEditor.Extensions;
 
 namespace Cafemoca.CommandEditor.Utils
 {

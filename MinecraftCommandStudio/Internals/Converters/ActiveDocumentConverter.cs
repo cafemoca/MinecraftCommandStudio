@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Documents;
 
 namespace Cafemoca.MinecraftCommandStudio.Internals.Converters
 {
@@ -10,7 +10,7 @@ namespace Cafemoca.MinecraftCommandStudio.Internals.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is FileViewModel ||
+            if (value is DocumentPaneViewModel ||
                 value is DocumentViewModel)
             {
                 return value;
@@ -20,7 +20,7 @@ namespace Cafemoca.MinecraftCommandStudio.Internals.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is FileViewModel ||
+            if (value is DocumentPaneViewModel ||
                 value is DocumentViewModel)
             {
                 return value;

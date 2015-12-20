@@ -9,7 +9,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Brushes.xaml" />
-        <ResourceDictionary Source="MetroColors.xaml" />
+        <ResourceDictionary Source="Colors.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -341,7 +341,7 @@
                                         </controls:ContextMenuEx.ItemContainerStyle>
                                     </controls:ContextMenuEx>
                                 </controls:DropDownButton.DropDownContextMenu>
-                                <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu.png" />
+                                <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinDocMenu.png" />
                             </controls:DropDownButton>
                             <controls:DocumentPaneTabPanel x:Name="HeaderPanel"
                                                            Grid.Row="0"
@@ -374,7 +374,7 @@
                             <Setter TargetName="MenuDropDownButton"
                                     Property="Content">
                                 <Setter.Value>
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu_Black.png" />
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinDocMenu_Black.png" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -384,7 +384,7 @@
                             <Setter TargetName="MenuDropDownButton"
                                     Property="Content">
                                 <Setter.Value>
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinDocMenu_Black.png" />
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinDocMenu_Black.png" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -590,7 +590,7 @@
                                                      Style="{StaticResource MetroToolButtonStyle}"
                                                      ToolTip="ウィンドウ位置">
                                 <Image x:Name="PART_ImgMenuPin"
-                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu.png" />
+                                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu.png" />
                             </controls:DropDownButton>
 
                             <Button x:Name="PART_AutoHidePin"
@@ -607,7 +607,7 @@
                                                          Mode=OneWay,
                                                          Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Image x:Name="PART_ImgAutoHidePin"
-                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide.png" />
+                                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinAutoHide.png" />
                             </Button>
                             <Button x:Name="PART_HidePin"
                                     Grid.Column="3"
@@ -623,7 +623,7 @@
                                                          Mode=OneWay,
                                                          Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Image x:Name="PART_ImgHidePin"
-                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
+                                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose.png" />
                             </Button>
 
                         </Grid>
@@ -656,41 +656,41 @@
                                      Value="True">
                             <Setter TargetName="PART_ImgAutoHidePin"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinAutoHide_Dark.png" />
                             <Setter TargetName="PART_ImgHidePin"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Dark.png" />
                             <Setter TargetName="PART_ImgMenuPin"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Dark.png" />
                         </DataTrigger>
                         <Trigger SourceName="MenuDropDownButton"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgMenuPin"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Black.png" />
                         </Trigger>
                         <Trigger SourceName="MenuDropDownButton"
                                  Property="IsChecked"
                                  Value="True">
                             <Setter TargetName="PART_ImgMenuPin"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_AutoHidePin"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgAutoHidePin"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinAutoHide_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinAutoHide_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_HidePin"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgHidePin"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Black.png" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -825,22 +825,22 @@
                             <Image x:Name="PART_DockingManagerDropTargetLeft"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
-                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableLeft.png"
+                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockAnchorableLeft.png"
                                    Stretch="None" />
                             <Image x:Name="PART_DockingManagerDropTargetRight"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
-                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableRight.png"
+                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockAnchorableRight.png"
                                    Stretch="None" />
                             <Image x:Name="PART_DockingManagerDropTargetBottom"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Bottom"
-                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableBottom.png"
+                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockAnchorableBottom.png"
                                    Stretch="None" />
                             <Image x:Name="PART_DockingManagerDropTargetTop"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Top"
-                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockAnchorableTop.png"
+                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockAnchorableTop.png"
                                    Stretch="None" />
                         </Grid>
                         <Grid x:Name="PART_AnchorablePaneDropTargets">
@@ -861,41 +861,41 @@
                                 <Image Grid.RowSpan="3"
                                        Grid.ColumnSpan="3"
                                        Margin="0,0.5,0,-0.5"
-                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneEmpty.png"
+                                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockPaneEmpty.png"
                                        Stretch="None" />
                                 <Border Name="PART_AnchorablePaneDropTargetTop"
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="0,3.5,0, 0">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetLeft"
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         Margin="2">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableLeft.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetInto"
                                         Grid.Row="1"
                                         Grid.Column="1"
                                         Margin="0,0.5,0,0">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentInside.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetRight"
                                         Grid.Row="1"
                                         Grid.Column="2"
                                         Margin="2">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_AnchorablePaneDropTargetBottom"
                                         Grid.Row="2"
                                         Grid.Column="1"
                                         Margin="0,-0.5,0,0">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableBottom.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -917,40 +917,40 @@
                                 </Grid.RowDefinitions>
                                 <Image Grid.RowSpan="3"
                                        Grid.ColumnSpan="3"
-                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneEmpty.png"
+                                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockPaneEmpty.png"
                                        Stretch="None" />
                                 <Border Name="PART_DocumentPaneDropTargetTop"
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         Margin="2">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetLeft"
                                         Grid.Row="1"
                                         Grid.Column="0"
                                         Margin="2">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentLeft.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetInto"
                                         Grid.Row="1"
                                         Grid.Column="1">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentInside.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetRight"
                                         Grid.Row="1"
                                         Grid.Column="2"
                                         Margin="2">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetBottom"
                                         Grid.Row="2"
                                         Grid.Column="1"
                                         Margin="2">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentBottom.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -977,27 +977,27 @@
                                 </Grid.RowDefinitions>
                                 <Image Grid.RowSpan="5"
                                        Grid.ColumnSpan="5"
-                                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockPaneLargeEmpty.png"
+                                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockPaneLargeEmpty.png"
                                        Stretch="None" />
                                 <Border Name="PART_DocumentPaneDropTargetTopAsAnchorablePane"
                                         Grid.Row="0"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableTop.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneFullDropTargetTop"
                                         Grid.Row="1"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentTop.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentTop.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetLeftAsAnchorablePane"
                                         Grid.Row="2"
                                         Grid.Column="0">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableLeft.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableLeft.png"
                                            Stretch="None" />
                                 </Border>
 
@@ -1005,13 +1005,13 @@
                                         Grid.Row="2"
                                         Grid.Column="1">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentLeft.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentLeft.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneFullDropTargetInto"
                                         Grid.Row="2"
                                         Grid.Column="2">
-                                    <Image Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentInside.png"
+                                    <Image Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentInside.png"
                                            Stretch="None" />
                                 </Border>
 
@@ -1019,28 +1019,28 @@
                                         Grid.Row="2"
                                         Grid.Column="3">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentRight.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetRightAsAnchorablePane"
                                         Grid.Row="2"
                                         Grid.Column="4">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableRight.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableRight.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneFullDropTargetBottom"
                                         Grid.Row="3"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentBottom.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentBottom.png"
                                            Stretch="None" />
                                 </Border>
                                 <Border Name="PART_DocumentPaneDropTargetBottomAsAnchorablePane"
                                         Grid.Row="4"
                                         Grid.Column="2">
                                     <Image Margin="2"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/DockDocumentAsAnchorableBottom.png"
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/DockDocumentAsAnchorableBottom.png"
                                            Stretch="None" />
                                 </Border>
                             </Grid>
@@ -1137,7 +1137,7 @@
                                        Converter={StaticResource BoolToVisibilityConverter}}">
             <MenuItem.Icon>
                 <Image Width="14"
-                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/HTabGroup.png"
+                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/HTabGroup.png"
                        Stretch="Uniform" />
             </MenuItem.Icon>
         </MenuItem>
@@ -1149,7 +1149,7 @@
                                        Converter={StaticResource BoolToVisibilityConverter}}">
             <MenuItem.Icon>
                 <Image Width="14"
-                       Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/VTabGroup.png"
+                       Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/VTabGroup.png"
                        Stretch="Uniform" />
             </MenuItem.Icon>
         </MenuItem>
@@ -1307,7 +1307,7 @@
                                         ToolTip="閉じる"
                                         Visibility="Hidden">
                                     <Image x:Name="PART_ImgPinClose"
-                                           Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
+                                           Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose.png" />
                                 </Button>
                             </Grid>
                         </Border>
@@ -1326,7 +1326,7 @@
                                     Value="Visible" />
                             <Setter TargetName="PART_ImgPinClose"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Dark.png" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsActive}"
                                      Value="True">
@@ -1335,7 +1335,7 @@
                                     Value="Visible" />
                             <Setter TargetName="PART_ImgPinClose"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Dark.png" />
                         </DataTrigger>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
@@ -1354,7 +1354,7 @@
                                  Value="True">
                             <Setter TargetName="PART_ImgPinClose"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Black.png" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
@@ -1482,7 +1482,7 @@
                                                                  shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMenu"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png"
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Dark.png"
                                                    Stretch="None" />
                                         </controls:DropDownButton>
 
@@ -1499,7 +1499,7 @@
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMaximize"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMaximize_Dark.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinRestore"
@@ -1515,7 +1515,7 @@
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinRestore"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinRestore_Dark.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinClose"
@@ -1532,7 +1532,7 @@
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinClose"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Dark.png" />
                                         </Button>
                                     </Grid>
                                 </Border>
@@ -1569,35 +1569,35 @@
                                  Value="True">
                             <Setter TargetName="PART_ImgPinMenu"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Black.png" />
                         </Trigger>
                         <Trigger SourceName="ContextMenuDropdownButton"
                                  Property="IsChecked"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinMenu"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_PinMaximize"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinMaximize"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMaximize_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_PinRestore"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinRestore"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinRestore_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_PinClose"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinClose"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Black.png" />
                         </Trigger>
 
                     </ControlTemplate.Triggers>
@@ -1689,7 +1689,7 @@
                                                                  shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMenu"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu.png"
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu.png"
                                                    Stretch="None" />
                                         </controls:DropDownButton>
 
@@ -1710,7 +1710,7 @@
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinMaximize"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize.png" />
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMaximize.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinRestore"
@@ -1728,7 +1728,7 @@
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinRestore"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore.png" />
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinRestore.png" />
                                         </Button>
 
                                         <Button x:Name="PART_PinClose"
@@ -1747,7 +1747,7 @@
                                                 shell:WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Image x:Name="PART_ImgPinClose"
                                                    Width="13"
-                                                   Source="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose.png" />
+                                                   Source="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose.png" />
                                         </Button>
                                     </Grid>
                                 </Border>
@@ -1775,16 +1775,16 @@
                                     Value="{DynamicResource WhiteBrush}" />
                             <Setter TargetName="PART_ImgPinClose"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Dark.png" />
                             <Setter TargetName="PART_ImgPinMaximize"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMaximize_Dark.png" />
                             <Setter TargetName="PART_ImgPinMenu"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Dark.png" />
                             <Setter TargetName="PART_ImgPinRestore"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Dark.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinRestore_Dark.png" />
                             <Setter TargetName="Pattern"
                                     Property="Fill"
                                     Value="{DynamicResource DragSelectedPattern}" />
@@ -1810,35 +1810,35 @@
                                  Value="True">
                             <Setter TargetName="PART_ImgPinMenu"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Black.png" />
                         </Trigger>
                         <Trigger SourceName="SinglePaneContextMenu"
                                  Property="IsChecked"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinMenu"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMenu_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMenu_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_PinMaximize"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinMaximize"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinMaximize_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinMaximize_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_PinRestore"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinRestore"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinRestore_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinRestore_Black.png" />
                         </Trigger>
                         <Trigger SourceName="PART_PinClose"
                                  Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="PART_ImgPinClose"
                                     Property="Source"
-                                    Value="/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/Images/PinClose_Black.png" />
+                                    Value="/MinecraftCommandStudio;component/Themes/AvalonDock/Images/PinClose_Black.png" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

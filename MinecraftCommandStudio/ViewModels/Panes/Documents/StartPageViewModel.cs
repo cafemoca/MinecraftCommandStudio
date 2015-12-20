@@ -1,10 +1,10 @@
 ﻿using System;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases;
 using Reactive.Bindings;
 
-namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents
+namespace Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Documents
 {
-    public class StartPageViewModel : FileViewModel
+    public class StartPageViewModel : DocumentPaneViewModel
     {
         public ReactiveCommand NewCommand { get; private set; }
         public ReactiveCommand OpenCommand { get; private set; }

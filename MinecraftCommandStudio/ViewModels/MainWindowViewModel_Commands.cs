@@ -8,8 +8,8 @@ using System.Windows.Input;
 using Cafemoca.MinecraftCommandStudio.Internals.Utils.Commands;
 using Cafemoca.MinecraftCommandStudio.Models;
 using Cafemoca.MinecraftCommandStudio.Services;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Documents;
 using Livet;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Reactive.Bindings;
@@ -149,7 +149,7 @@ namespace Cafemoca.MinecraftCommandStudio.ViewModels
                 this.Close(this.ActiveDocument.Value));
         }
 
-        public FileViewModel Open(string filePath)
+        public DocumentPaneViewModel Open(string filePath)
         {
             var fileViewModel = this.Files.FirstOrDefault(fm => fm.FilePath.Value == filePath);
             if (fileViewModel != null)
@@ -172,7 +172,7 @@ namespace Cafemoca.MinecraftCommandStudio.ViewModels
             return fileViewModel;
         }
 
-        public void Save(FileViewModel fileToSave, bool saveAsFlag = false)
+        public void Save(DocumentPaneViewModel fileToSave, bool saveAsFlag = false)
         {
             if (fileToSave is StartPageViewModel)
             {
@@ -213,7 +213,7 @@ namespace Cafemoca.MinecraftCommandStudio.ViewModels
             }
         }
 
-        public void Close(FileViewModel fileToClose)
+        public void Close(DocumentPaneViewModel fileToClose)
         {
             if (fileToClose.IsModified.Value)
             {
@@ -249,7 +249,7 @@ namespace Cafemoca.MinecraftCommandStudio.ViewModels
             }
         }
 
-        public void Close(ToolViewModel toolViewModel)
+        public void Close(AnchorablePaneViewModel toolViewModel)
         {
             if (this.Tools.Any(x => x == toolViewModel))
             {

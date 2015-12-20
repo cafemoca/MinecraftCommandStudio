@@ -1,21 +1,21 @@
 ﻿using System;
 using Reactive.Bindings;
 
-namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases
+namespace Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases
 {
-    public class ToolViewModel : PaneViewModel
+    public class AnchorablePaneViewModel : PaneViewModel
     {
         public ReactiveProperty<string> Name { get; private set; }
         public ReactiveProperty<bool> IsVisible { get; set; }
 
         public ReactiveCommand CloseCommand { get; private set; }
 
-        public ToolViewModel()
+        public AnchorablePaneViewModel()
             : this(string.Empty)
         {
         }
 
-        public ToolViewModel(string name)
+        public AnchorablePaneViewModel(string name)
             : base()
         {
             this.Title.Value = name;

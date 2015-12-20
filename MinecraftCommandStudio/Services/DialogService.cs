@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -9,7 +10,7 @@ namespace Cafemoca.MinecraftCommandStudio.Services
     {
         private static MetroWindow Window
         {
-            get { return (App.Current.MainWindow as MetroWindow); }
+            get { return (Application.Current.MainWindow as MetroWindow); }
         }
 
         public static async Task<MessageDialogResult> ShowMessageAsync

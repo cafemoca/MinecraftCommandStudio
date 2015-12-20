@@ -1,19 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Tools;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Anchorables;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Documents;
 
-namespace Cafemoca.MinecraftCommandStudio.Views.Panes
+namespace Cafemoca.MinecraftCommandStudio.Views.Panes.Layouts
 {
     public class PanesTemplateSelector : DataTemplateSelector
     {
-        public PanesTemplateSelector()
-        {
-        }
-
         public DataTemplate StartPageTemplate { get; set; }
         public DataTemplate DocumentTemplate { get; set; }
-        public DataTemplate RecentFilesTemplate { get; set; }
         public DataTemplate CompletionEditorTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -26,11 +21,7 @@ namespace Cafemoca.MinecraftCommandStudio.Views.Panes
             {
                 return this.DocumentTemplate;
             }
-            if (item is RecentFilesViewModel)
-            {
-                return this.RecentFilesTemplate;
-            }
-            if (item is CompletionEditorViewModel)
+            if (item is KeywordSettingViewModel)
             {
                 return this.CompletionEditorTemplate;
             }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Hnx8.ReadJEnc
+namespace Cafemoca.MinecraftCommandStudio.Internals.Utils.ReadJEnc
 {
     /// <summary>
     /// ReadJEnc 文字コード自動判別ライブラリ・処理本体(Rev.20150309)
@@ -99,8 +99,8 @@ namespace Hnx8.ReadJEnc
             byte b2;
             int cp1252Score = 0; //いずれも、可能性が否定されたらint.MinValueが設定される
             int utfScore = 0;
-            int eucScore = (EUC == null ? int.MinValue : 0);
-            int sjisScore = (CharCode == null ? int.MinValue : 0);
+            int eucScore = (this.EUC == null ? int.MinValue : 0);
+            int sjisScore = (this.CharCode == null ? int.MinValue : 0);
             bool existsEUC0x8F = false; //EUC補助漢字を見つけたらtrueを設定
 
             for (int cp1252Pos = asciiEndPos; cp1252Pos < len; ) //cp1252Posの加算はロジック途中で随時実施
@@ -205,7 +205,7 @@ namespace Hnx8.ReadJEnc
                             //検出OK,EUC文字数を加算（半角文字）
                             if (prevChar == PREV_KANA) { eucScore += 6; }
                             //漢字圏テキスト文字コードのうちEUC-TWに限り全角文字相当の扱いとする(0x8E,0xA2-0xB0,0xA1-0xFE,0xA1-0xFEの４バイト文字の判定に流用)
-                            else if (EUCTW) { if (prevChar == PREV_ZENKAKU) { eucScore += 6; } else { eucScore += 2; prevChar = PREV_ZENKAKU; } }
+                            else if (this.EUCTW) { if (prevChar == PREV_ZENKAKU) { eucScore += 6; } else { eucScore += 2; prevChar = PREV_ZENKAKU; } }
                             else { eucScore += 2; prevChar = PREV_KANA; }
                         }
                         else if (b1 == 0x8F
@@ -240,7 +240,7 @@ namespace Hnx8.ReadJEnc
             //【3】SJISなどの各国語文字コードチェック（非ASCII登場位置からチェック開始:ただしDEL検出時などは可能性なし）
             if (sjisScore != int.MinValue)
             {
-                sjisScore = GetEncoding(bytes, asciiEndPos, len);
+                sjisScore = this.GetEncoding(bytes, asciiEndPos, len);
             }
 
             //【4】ポイントに応じ文字コードを決定（実際にそのエンコーディングで読み出し成功すればOKとみなす）
@@ -256,7 +256,7 @@ namespace Hnx8.ReadJEnc
                     if ((text = CharCode.ANSI.GetString(bytes, len)) != null) { return CharCode.ANSI; } //■CP1252で読みこみ成功
                 }
                 if (existsEUC0x8F && (text = CharCode.EUCH.GetString(bytes, len)) != null) { return CharCode.EUCH; }//■EUC補助漢字読みこみ成功
-                if ((text = EUC.GetString(bytes, len)) != null) { return EUC; } //■EUCで読みこみ成功
+                if ((text = this.EUC.GetString(bytes, len)) != null) { return this.EUC; } //■EUCで読みこみ成功
             }
             if (utfScore > 0 && utfScore >= sjisScore)
             {   //UTF可能性高
@@ -265,7 +265,7 @@ namespace Hnx8.ReadJEnc
             if (sjisScore >= 0)
             {   //SJISなどの各国語指定に合致したなら、そのコードでの読み出しを試みる(ただしCP1252の可能性が高ければCP1252を先にチェック)
                 if (cp1252Score > sjisScore && (text = CharCode.ANSI.GetString(bytes, len)) != null) { return CharCode.ANSI; } //■CP1252で読みこみ成功
-                if ((text = CharCode.GetString(bytes, len)) != null) { return CharCode; } //■指定された文字コード(日本語の場合はSJIS、それ以外の場合はBig5/GB18030/UHC)で読みこみ成功
+                if ((text = this.CharCode.GetString(bytes, len)) != null) { return this.CharCode; } //■指定された文字コード(日本語の場合はSJIS、それ以外の場合はBig5/GB18030/UHC)で読みこみ成功
             }
             if (cp1252Score > 0)
             {   //CP1252の可能性のみ残っているのでチェック
@@ -393,29 +393,29 @@ namespace Hnx8.ReadJEnc
             /// <returns>エスケープシーケンスとして妥当ならpos加算値、そうでなければゼロ</returns>
             internal int GetEncoding(int pos)
             {
-                if (pos + 2 < len)
+                if (pos + 2 < this.len)
                 {   //ESC(0x1B):有効なエスケープシーケンスかチェック
-                    c++; //加算前提
-                    switch (bytes[pos + 1])
+                    this.c++; //加算前提
+                    switch (this.bytes[pos + 1])
                     {   //２バイト目で分岐
                         case 0x24: //ESC$
-                            switch (bytes[pos + 2])
+                            switch (this.bytes[pos + 2])
                             {   //３バイト目で分岐
                                 case 0x40: //<ESC>$@ : JISエスケープ(78JIS)     - ISO-2022-JP
                                 case 0x42: //<ESC>$B : JISエスケープ(83JIS)     - ISO-2022-JP
                                     return 2;
                                 case 0x28: //<ESC>$(D: JISエスケープ(90補助漢字)- ISO-2022-JP-1 
                                     //ただしCP5022Xではデコードできないため別途CP20932を用いてデコードすること
-                                    if (pos + 3 < len && bytes[pos + 3] == 0x44)
+                                    if (pos + 3 < this.len && this.bytes[pos + 3] == 0x44)
                                     {
-                                        JISH = true;
+                                        this.JISH = true;
                                         return 3;
                                     }
                                     break;
                             }
                             break;
                         case 0x28: //ESC(
-                            switch (bytes[pos + 2])
+                            switch (this.bytes[pos + 2])
                             {   //３バイト目で分岐
                                 case 0x42: //<ESC>(B : JISエスケープ(ASCII)    - ISO-2022-JP
                                 case 0x48: //<ESC>(H : JISエスケープ(swedish)  - (ISO-2022-JP規定外)
@@ -436,7 +436,7 @@ namespace Hnx8.ReadJEnc
                         // http://www.wdic.org/w/WDIC/Microsoft%20Windows%20Codepage%20%3A%2050221 なども参照
                     }
                 }
-                c -= 4; //非JIS：ペナルティ的に評価値を減算する
+                this.c -= 4; //非JIS：ペナルティ的に評価値を減算する
                 return 0;
             }
 
@@ -447,18 +447,18 @@ namespace Hnx8.ReadJEnc
             {
                 byte[] bytes = this.bytes;
                 int len = this.len;
-                if (ISOKR && hasSOSI(bytes, len))
+                if (this.ISOKR && hasSOSI(bytes, len))
                 {   //■KSエスケープシーケンスあり、ISO-2022-KRで確定(半角カナJISではない)
                     text = CharCode.ISOKR.GetString(bytes, len);
                     return (text != null ? CharCode.ISOKR : null);
                 }
-                if (c <= 0)
+                if (this.c <= 0)
                 {   //JIS評価値がマイナスないしゼロならばJISではないと判断
                     text = null;
                     return null;
                 }
 
-                if (JISH)
+                if (this.JISH)
                 {   //補助漢字のエスケープシーケンスあり、補助漢字を考慮してデコードする
                     try
                     {

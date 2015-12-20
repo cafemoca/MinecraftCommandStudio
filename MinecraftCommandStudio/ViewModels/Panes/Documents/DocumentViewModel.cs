@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using Cafemoca.CommandEditor;
 using Cafemoca.CommandEditor.Utils;
+using Cafemoca.MinecraftCommandStudio.Internals.Extensions;
 using Cafemoca.MinecraftCommandStudio.Services;
 using Cafemoca.MinecraftCommandStudio.Settings;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases;
 using ICSharpCode.AvalonEdit;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
-namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents
+namespace Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Documents
 {
-    public class DocumentViewModel : FileViewModel
+    public class DocumentViewModel : DocumentPaneViewModel
     {
         private ReactiveProperty<string> _compiledText;
         public ReactiveProperty<string> CompiledText

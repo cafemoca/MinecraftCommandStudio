@@ -12,23 +12,34 @@
         <StackPanel Orientation="Vertical">
             <CheckBox Margin="0,5"
                       Content="補完ウィンドウを表示する (不完全)"
-                      IsChecked="{Binding EnableCompletion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      IsChecked="{Binding EnableCompletion,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          Mode=TwoWay}"
                       ToolTip="入力中に、特定の条件にマッチした補完ウィンドウを表示します" />
             <CheckBox Margin="0,5"
                       Content="引用符・括弧入力時に自動的に閉じ括弧 (または引用符) を補完する"
-                      IsChecked="{Binding BracketCompletion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                      IsChecked="{Binding BracketCompletion,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          Mode=TwoWay}" />
             <CheckBox Margin="0,5"
                       Content="閉じ括弧入力時にインデントを自動的に整形する"
-                      IsChecked="{Binding AutoReformat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                      IsChecked="{Binding AutoReformat,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          Mode=TwoWay}" />
             <CheckBox x:Name="EncloseSelection"
                       Margin="0,5"
                       Content="引用符・括弧入力時に選択している文字列を囲む (単行選択のみ有効)"
-                      IsChecked="{Binding EncloseSelection, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      IsChecked="{Binding EncloseSelection,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          Mode=TwoWay}"
                       ToolTip="文字列を選択した状態で括弧や引用符を入力すると文字列を囲みます" />
             <CheckBox Margin="25,5,0,5"
                       Content="複数行選択時でも同様に囲む"
-                      IsChecked="{Binding EncloseMultiLine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                      IsEnabled="{Binding IsChecked, ElementName=EncloseSelection}"
+                      IsChecked="{Binding EncloseMultiLine,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          Mode=TwoWay}"
+                      IsEnabled="{Binding IsChecked,
+                                          ElementName=EncloseSelection}"
                       ToolTip="上記設定を複数行にも適用します" />
         </StackPanel>
     </Grid>

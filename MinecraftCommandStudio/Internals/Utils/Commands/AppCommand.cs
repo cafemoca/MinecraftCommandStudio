@@ -13,111 +13,111 @@ namespace Cafemoca.MinecraftCommandStudio.Internals.Utils.Commands
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.F4, ModifierKeys.Alt, "Alt+F4"));
-            AppCommand._exit = new RoutedUICommand("", "Exit", typeof(AppCommand), inputs);
+            _exit = new RoutedUICommand("", "Exit", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            AppCommand._loadFile = new RoutedUICommand("", "LoadFile", typeof(AppCommand), inputs);
+            _loadFile = new RoutedUICommand("", "LoadFile", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.N, ModifierKeys.Control, "Ctrl+N"));
-            AppCommand._new = new RoutedUICommand("", "NewFile", typeof(AppCommand), inputs);
+            _new = new RoutedUICommand("", "NewFile", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.O, ModifierKeys.Control, "Ctrl+O"));
-            AppCommand._open = new RoutedUICommand("", "Open", typeof(AppCommand), inputs);
+            _open = new RoutedUICommand("", "Open", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.S, ModifierKeys.Control, "Ctrl+S"));
-            AppCommand._save = new RoutedUICommand("", "Save", typeof(AppCommand), inputs);
+            _save = new RoutedUICommand("", "Save", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Alt, "Ctrl+Alt+S"));
-            AppCommand._saveAs = new RoutedUICommand("", "SaveAs", typeof(AppCommand), inputs);
+            _saveAs = new RoutedUICommand("", "SaveAs", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Shift, "Ctrl+Shift+S"));
-            AppCommand._saveAll = new RoutedUICommand("", "SaveAll", typeof(AppCommand), inputs);
+            _saveAll = new RoutedUICommand("", "SaveAll", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            AppCommand._pinUnpin = new RoutedUICommand("", "Pin", typeof(AppCommand), inputs);
+            _pinUnpin = new RoutedUICommand("", "Pin", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.F4, ModifierKeys.Control, "Ctrl+F4"));
             inputs.Add(new KeyGesture(Key.W, ModifierKeys.Control, "Ctrl+W"));
-            AppCommand._closeFile = new RoutedUICommand("", "Close", typeof(AppCommand), inputs);
+            _closeFile = new RoutedUICommand("", "Close", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.G, ModifierKeys.Control, "Ctrl+G"));
-            AppCommand._gotoLine = new RoutedUICommand("", "GotoLine", typeof(AppCommand), inputs);
+            _gotoLine = new RoutedUICommand("", "GotoLine", typeof(AppCommand), inputs);
 
             inputs = new InputGestureCollection();
-            AppCommand._openSettings = new RoutedUICommand("", "OpenSettings", typeof(AppCommand), inputs);
+            _openSettings = new RoutedUICommand("", "OpenSettings", typeof(AppCommand), inputs);
         }
 
         private static RoutedUICommand _exit;
         public static RoutedUICommand Exit
         {
-            get { return AppCommand._exit; }
+            get { return _exit; }
         }
 
         private static RoutedUICommand _loadFile;
         public static RoutedUICommand LoadFile
         {
-            get { return AppCommand._loadFile; }
+            get { return _loadFile; }
         }
 
         private static RoutedUICommand _new;
         public static RoutedUICommand New
         {
-            get { return AppCommand._new; }
+            get { return _new; }
         }
 
         private static RoutedUICommand _open;
         public static RoutedUICommand Open
         {
-            get { return AppCommand._open; }
+            get { return _open; }
         }
 
         private static RoutedUICommand _save;
         public static RoutedUICommand Save
         {
-            get { return AppCommand._save; }
+            get { return _save; }
         }
 
         private static RoutedUICommand _saveAs;
         public static RoutedUICommand SaveAs
         {
-            get { return AppCommand._saveAs; }
+            get { return _saveAs; }
         }
 
         private static RoutedUICommand _saveAll;
         public static RoutedUICommand SaveAll
         {
-            get { return AppCommand._saveAll; }
+            get { return _saveAll; }
         }
 
         private static RoutedUICommand _pinUnpin;
         public static RoutedUICommand PinUnpin
         {
-            get { return AppCommand._pinUnpin; }
+            get { return _pinUnpin; }
         }
 
         private static RoutedUICommand _closeFile;
         public static RoutedUICommand CloseFile
         {
-            get { return AppCommand._closeFile; }
+            get { return _closeFile; }
         }
 
         private static RoutedUICommand _gotoLine;
         public static RoutedUICommand GotoLine
         {
-            get { return AppCommand._gotoLine; }
+            get { return _gotoLine; }
         }
 
         private static RoutedUICommand _openSettings;
         public static RoutedUICommand OpenSettings
         {
-            get { return AppCommand._openSettings; }
+            get { return _openSettings; }
         }
     }
 }

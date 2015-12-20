@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 using Cafemoca.CommandEditor;
 using Cafemoca.CommandEditor.Utils;
 using Cafemoca.MinecraftCommandStudio.Settings.Xml;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Documents;
 using ICSharpCode.AvalonEdit;
 using Livet;
 

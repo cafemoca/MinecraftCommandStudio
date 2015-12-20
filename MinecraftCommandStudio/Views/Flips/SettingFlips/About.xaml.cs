@@ -1,15 +1,13 @@
-﻿using System.Windows.Controls;
-
-namespace Cafemoca.MinecraftCommandStudio.Views.Flips.SettingFlips
+﻿namespace Cafemoca.MinecraftCommandStudio.Views.Flips.SettingFlips
 {
     /// <summary>
     /// About.xaml の相互作用ロジック
     /// </summary>
-    public partial class About : UserControl
+    public partial class About
     {
         public About()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

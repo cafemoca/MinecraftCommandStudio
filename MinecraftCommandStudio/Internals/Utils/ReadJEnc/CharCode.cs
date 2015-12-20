@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Hnx8.ReadJEnc
+namespace Cafemoca.MinecraftCommandStudio.Internals.Utils.ReadJEnc
 {
     /// <summary>
     /// ReadJEnc 文字コード種類定義(Rev.20150309)
@@ -132,11 +132,11 @@ namespace Hnx8.ReadJEnc
             if (this.Encoding == null)
             {   //Encodingオブジェクトがまだ用意されていなければ初期化する
                 this.Encoding =
-                    (enc > 0 ? System.Text.Encoding.GetEncoding(enc, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback)
-                    : enc < 0 ? System.Text.Encoding.GetEncoding(-enc, EncoderFallback.ExceptionFallback, DecoderFallback.ReplacementFallback)
+                    (this.enc > 0 ? Encoding.GetEncoding(this.enc, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback)
+                    : this.enc < 0 ? Encoding.GetEncoding(-this.enc, EncoderFallback.ExceptionFallback, DecoderFallback.ReplacementFallback)
                     : null);
             }
-            return Encoding;
+            return this.Encoding;
         }
 
         /// <summary>引数のバイト配列から文字列を取り出す。失敗時はnullを返す</summary>
@@ -144,7 +144,7 @@ namespace Hnx8.ReadJEnc
         /// <param name="len">ファイルサイズ(バイト配列先頭からの先頭からのデコード対象バイト数)</param>
         public virtual string GetString(byte[] bytes, int len)
         {
-            Encoding enc = GetEncoding();
+            Encoding enc = this.GetEncoding();
             if (enc == null) { return null; }
             try
             {   //BOMサイズを把握し、BOMを除いた部分を文字列として取り出す
@@ -160,7 +160,7 @@ namespace Hnx8.ReadJEnc
         /// <summary>このファイル文字コード種類の名前を返す</summary>
         public override string ToString()
         {
-            return Name;
+            return this.Name;
         }
 
         /// <summary>判定対象のファイル文字コード種類一覧から、BOM/マジックナンバーが一致するものを探索して返す</summary>
@@ -224,7 +224,7 @@ namespace Hnx8.ReadJEnc
                 }
                 try
                 {   //補正後配列を用い、CP20932でのデコードを試みる
-                    return GetEncoding().GetString(bytesForCP20932, 0, cp20932Len);
+                    return this.GetEncoding().GetString(bytesForCP20932, 0, cp20932Len);
                 }
                 catch (DecoderFallbackException)
                 {   //読み出し失敗(マッピングされていない文字があった場合など)

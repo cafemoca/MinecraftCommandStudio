@@ -8,9 +8,9 @@ using Cafemoca.MinecraftCommandStudio.Settings;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
-namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases
+namespace Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases
 {
-    public class FileViewModel : PaneViewModel
+    public class DocumentPaneViewModel : PaneViewModel
     {
         private static ImageSourceConverter imageSourceConverter = new ImageSourceConverter();
         private static readonly string documentIcon = @"pack://application:,,/Resources/document.png";
@@ -32,22 +32,22 @@ namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases
             get { return Setting.Current.DefaultFileName; }
         }
 
-        public FileViewModel()
+        public DocumentPaneViewModel()
             : this(null, -1)
         {
         }
 
-        public FileViewModel(int count)
+        public DocumentPaneViewModel(int count)
             : this(null, count)
         {
         }
 
-        public FileViewModel(string filePath)
+        public DocumentPaneViewModel(string filePath)
             : this(filePath, -1)
         {
         }
 
-        public FileViewModel(string filePath, int count)
+        public DocumentPaneViewModel(string filePath, int count)
             : base()
         {
             this.Title = new ReactiveProperty<string>();

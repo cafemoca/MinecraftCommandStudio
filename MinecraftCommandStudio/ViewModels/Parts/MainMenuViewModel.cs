@@ -1,11 +1,11 @@
-﻿using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Tools;
+﻿using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Anchorables;
 using Livet;
 
 namespace Cafemoca.MinecraftCommandStudio.ViewModels.Parts
 {
     public class MainMenuViewModel : ViewModel
     {
-        public CompletionEditorViewModel CompletionEditor
+        public KeywordSettingViewModel CompletionEditor
         {
             get { return App.MainViewModel.CompletionEditorViewModel; }
             set { App.MainViewModel.CompletionEditorViewModel = value; }

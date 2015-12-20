@@ -1,15 +1,13 @@
-﻿using System.Windows.Controls;
-
-namespace Cafemoca.MinecraftCommandStudio.Views.Parts
+﻿namespace Cafemoca.MinecraftCommandStudio.Views.Parts
 {
     /// <summary>
     /// MainMenu.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainMenu : UserControl
+    public partial class MainMenu
     {
         public MainMenu()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

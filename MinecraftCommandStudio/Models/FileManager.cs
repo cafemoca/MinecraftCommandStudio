@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using Hnx8.ReadJEnc;
+using Cafemoca.MinecraftCommandStudio.Internals.Utils.ReadJEnc;
 
 namespace Cafemoca.MinecraftCommandStudio.Models
 {

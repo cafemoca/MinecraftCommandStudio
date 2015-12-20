@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace System
+namespace Cafemoca.CommandEditor.Extensions
 {
     public static class StringExtensions
     {

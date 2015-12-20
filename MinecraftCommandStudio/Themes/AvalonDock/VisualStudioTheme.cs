@@ -25,11 +25,11 @@ using Xceed.Wpf.AvalonDock.Themes;
 
 namespace Cafemoca.MinecraftCommandStudio.Internals.AvalonDock.Themes
 {
-    public class MahAppsMetroTheme : Theme
+    public class VisualStudioTheme : Theme
     {
         public override Uri GetResourceUri()
         {
-            return new Uri("/MinecraftCommandStudio;component/Internals/AvalonDock/Themes/MahAppsMetroTheme.xaml", UriKind.Relative);  
+            return new Uri("/MinecraftCommandStudio;component/Themes/AvalonDock/VisualStudioTheme.xaml", UriKind.Relative);  
         }
     }
 }

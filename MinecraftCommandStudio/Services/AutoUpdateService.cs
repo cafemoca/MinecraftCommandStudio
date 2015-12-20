@@ -7,7 +7,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
+using Cafemoca.MinecraftCommandStudio.Internals.Extensions;
 using TaskDialogInterop;
 
 namespace Cafemoca.MinecraftCommandStudio.Services
@@ -95,7 +97,7 @@ namespace Cafemoca.MinecraftCommandStudio.Services
                 };
 
                 Process.Start(startInfo);
-                App.Current.Shutdown();
+                Application.Current.Shutdown();
             }
             catch (Exception ex)
             {

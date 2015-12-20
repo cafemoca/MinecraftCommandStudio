@@ -2,26 +2,21 @@
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:actions="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Behaviors.Actions"
+                   xmlns:anchorables="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Panes.Anchorables"
                    xmlns:behaviors="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Behaviors"
                    xmlns:commands="clr-namespace:Cafemoca.MinecraftCommandStudio.Internals.Utils.Commands"
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
-                   xmlns:documents="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Layouts.Documents"
-                   xmlns:editor="clr-namespace:Cafemoca.CommandEditor;assembly=CommandEditor"
+                   xmlns:documents="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Panes.Documents"
                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                    xmlns:flips="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Flips"
                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                   xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+                   xmlns:layouts="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Panes.Layouts"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
-                   xmlns:metro_dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-                   xmlns:panes="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Panes"
                    xmlns:parts="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Parts"
                    xmlns:themes="clr-namespace:Cafemoca.MinecraftCommandStudio.Internals.AvalonDock.Themes"
-                   xmlns:tools="clr-namespace:Cafemoca.MinecraftCommandStudio.Views.Layouts.Tools"
                    xmlns:viewmodels="clr-namespace:Cafemoca.MinecraftCommandStudio.ViewModels"
-                   xmlns:views="clr-namespace:Cafemoca.MinecraftCommandStudio.Views"
-                   xmlns:vm_documents="clr-namespace:Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Documents"
                    Title="Minecraft Command Studio (ALPHA)"
                    Width="1024"
                    Height="768"
@@ -109,35 +104,30 @@
                              SnapsToDevicePixels="True"
                              behaviors:DropFileBehavior.DropFile="commands:AppCommand.LoadFile">
             <dock:DockingManager.Theme>
-                <themes:MahAppsMetroTheme />
+                <themes:VisualStudioTheme />
             </dock:DockingManager.Theme>
             <dock:DockingManager.LayoutItemTemplateSelector>
-                <panes:PanesTemplateSelector>
-                    <panes:PanesTemplateSelector.StartPageTemplate>
+                <layouts:PanesTemplateSelector>
+                    <layouts:PanesTemplateSelector.StartPageTemplate>
                         <DataTemplate>
                             <documents:StartPage />
                         </DataTemplate>
-                    </panes:PanesTemplateSelector.StartPageTemplate>
-                    <panes:PanesTemplateSelector.DocumentTemplate>
+                    </layouts:PanesTemplateSelector.StartPageTemplate>
+                    <layouts:PanesTemplateSelector.DocumentTemplate>
                         <DataTemplate>
                             <documents:Document />
                         </DataTemplate>
-                    </panes:PanesTemplateSelector.DocumentTemplate>
-                    <panes:PanesTemplateSelector.RecentFilesTemplate>
+                    </layouts:PanesTemplateSelector.DocumentTemplate>
+                    <layouts:PanesTemplateSelector.CompletionEditorTemplate>
                         <DataTemplate>
-                            <tools:RecentFiles />
+                            <anchorables:KeywordSetting />
                         </DataTemplate>
-                    </panes:PanesTemplateSelector.RecentFilesTemplate>
-                    <panes:PanesTemplateSelector.CompletionEditorTemplate>
-                        <DataTemplate>
-                            <tools:CompletionEditor />
-                        </DataTemplate>
-                    </panes:PanesTemplateSelector.CompletionEditorTemplate>
-                </panes:PanesTemplateSelector>
+                    </layouts:PanesTemplateSelector.CompletionEditorTemplate>
+                </layouts:PanesTemplateSelector>
             </dock:DockingManager.LayoutItemTemplateSelector>
             <dock:DockingManager.LayoutItemContainerStyleSelector>
-                <panes:PanesStyleSelector>
-                    <panes:PanesStyleSelector.FileStyle>
+                <layouts:PanesStyleSelector>
+                    <layouts:PanesStyleSelector.DocumentStyle>
                         <Style TargetType="{x:Type dock:LayoutItem}">
                             <Setter Property="CloseCommand"
                                     Value="{Binding Model.CloseCommand}" />
@@ -150,8 +140,8 @@
                             <Setter Property="ToolTip"
                                     Value="{Binding Model.FilePath.Value}" />
                         </Style>
-                    </panes:PanesStyleSelector.FileStyle>
-                    <panes:PanesStyleSelector.ToolStyle>
+                    </layouts:PanesStyleSelector.DocumentStyle>
+                    <layouts:PanesStyleSelector.AnchorableStyle>
                         <Style TargetType="{x:Type dock:LayoutItem}">
                             <Setter Property="CloseCommand"
                                     Value="{Binding Model.CloseCommand}" />
@@ -173,11 +163,11 @@
                                                     Converter={StaticResource DockBooleanToVisibilityConverter},
                                                     ConverterParameter={x:Static Visibility.Hidden}}" />
                         </Style>
-                    </panes:PanesStyleSelector.ToolStyle>
-                </panes:PanesStyleSelector>
+                    </layouts:PanesStyleSelector.AnchorableStyle>
+                </layouts:PanesStyleSelector>
             </dock:DockingManager.LayoutItemContainerStyleSelector>
             <dock:DockingManager.LayoutUpdateStrategy>
-                <panes:LayoutInitializer />
+                <layouts:LayoutInitializer />
             </dock:DockingManager.LayoutUpdateStrategy>
             <dock:LayoutRoot>
                 <dock:LayoutPanel Orientation="Horizontal">

@@ -2,7 +2,7 @@
 using Livet;
 using Reactive.Bindings;
 
-namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases
+namespace Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases
 {
     public class PaneViewModel : ViewModel
     {

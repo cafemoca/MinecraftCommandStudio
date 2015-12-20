@@ -26,14 +26,18 @@
                         Command="{Binding CheckUpdateCommand}"
                         Foreground="#FFF0F0F0"
                         Padding="0"
-                        Visibility="{Binding IsChecking.Value, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse}">
+                        Visibility="{Binding IsChecking.Value,
+                                             Converter={StaticResource BooleanToVisibilityConverter},
+                                             ConverterParameter=Inverse}">
                     <StackPanel HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
                         <Rectangle Width="13"
                                    Height="11"
                                    Margin="0,0,5,0"
-                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                                   Fill="{Binding Foreground,
+                                                  RelativeSource={RelativeSource AncestorType=Button},
+                                                  Mode=OneWay}">
                             <Rectangle.OpacityMask>
                                 <VisualBrush Stretch="Fill"
                                              Visual="{DynamicResource appbar_check}" />
@@ -46,7 +50,8 @@
                 </Button>
                 <Border Height="22"
                         Background="Green"
-                        Visibility="{Binding IsChecking.Value, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Visibility="{Binding IsChecking.Value,
+                                             Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
@@ -80,7 +85,9 @@
                         <Rectangle Width="11"
                                    Height="13"
                                    Margin="0,0,5,0"
-                                   Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, Mode=OneWay}">
+                                   Fill="{Binding Foreground,
+                                                  RelativeSource={RelativeSource AncestorType=Button},
+                                                  Mode=OneWay}">
                             <Rectangle.OpacityMask>
                                 <VisualBrush Stretch="Fill"
                                              Visual="{DynamicResource appbar_lightning}" />

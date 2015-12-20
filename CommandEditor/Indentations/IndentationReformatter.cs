@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cafemoca.CommandEditor.Extensions;
 using Cafemoca.CommandEditor.Utils;
 using ICSharpCode.AvalonEdit.Indentation.CSharp;
 

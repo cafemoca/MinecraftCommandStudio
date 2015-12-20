@@ -1,27 +1,24 @@
 ﻿using System.Linq;
 using Xceed.Wpf.AvalonDock.Layout;
 
-namespace Cafemoca.MinecraftCommandStudio.Views.Panes
+namespace Cafemoca.MinecraftCommandStudio.Views.Panes.Layouts
 {
     public class LayoutInitializer : ILayoutUpdateStrategy
     {
         public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
         {
-            var destPane = destinationContainer as LayoutAnchorablePane;
-            if ((destinationContainer != null) &&
-                (destinationContainer.FindParent<LayoutFloatingWindow>() != null))
+            if (destinationContainer?.FindParent<LayoutFloatingWindow>() != null)
             {
                 return false;
             }
 
-            var toolsPane = layout.Descendents().OfType<LayoutAnchorablePane>().FirstOrDefault(d => d.Name == "ToolsPane");
-            if (toolsPane != null)
+            var toolsPane = layout.Descendents().OfType<LayoutAnchorablePane>().FirstOrDefault(d => d.Name == "AnchorablePane");
+            if (toolsPane == null)
             {
-                toolsPane.Children.Add(anchorableToShow);
-                return true;
+                return false;
             }
-
-            return false;
+            toolsPane.Children.Add(anchorableToShow);
+            return true;
         }
 
         public void AfterInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableShown)

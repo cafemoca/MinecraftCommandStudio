@@ -40,7 +40,7 @@ namespace Cafemoca.MinecraftCommandStudio
             ThemeManager.AddAppTheme("McsLight", new Uri(mcsLightTheme, UriKind.Relative));
             var accent = ThemeManager.GetAccent("Yellow");
             var theme = ThemeManager.GetAppTheme("McsDark");
-            ThemeManager.ChangeAppStyle(App.Current, accent, theme);
+            ThemeManager.ChangeAppStyle(Current, accent, theme);
 
             MainViewModel = new MainWindowViewModel();
             this.MainWindow = new MainWindow() { DataContext = MainViewModel };

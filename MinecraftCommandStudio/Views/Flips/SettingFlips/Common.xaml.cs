@@ -1,15 +1,13 @@
-﻿using System.Windows.Controls;
-
-namespace Cafemoca.MinecraftCommandStudio.Views.Flips.SettingFlips
+﻿namespace Cafemoca.MinecraftCommandStudio.Views.Flips.SettingFlips
 {
     /// <summary>
     /// Common.xaml の相互作用ロジック
     /// </summary>
-    public partial class Common : UserControl
+    public partial class Common
     {
         public Common()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

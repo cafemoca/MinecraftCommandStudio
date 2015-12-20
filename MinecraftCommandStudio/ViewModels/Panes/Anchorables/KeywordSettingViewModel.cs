@@ -3,14 +3,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Cafemoca.MinecraftCommandStudio.Services;
 using Cafemoca.MinecraftCommandStudio.Settings;
-using Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Bases;
+using Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Bases;
 using Reactive.Bindings;
 
-namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Tools
+namespace Cafemoca.MinecraftCommandStudio.ViewModels.Panes.Anchorables
 {
-    public class CompletionEditorViewModel : ToolViewModel
+    public class KeywordSettingViewModel : AnchorablePaneViewModel
     {
-        public const string ToolContentId = "CompletionEditor";
+        public const string ToolContentId = "KeywordSetting";
 
         #region PlayerNames
 
@@ -54,7 +54,7 @@ namespace Cafemoca.MinecraftCommandStudio.ViewModels.Layouts.Tools
 
         #endregion
 
-        public CompletionEditorViewModel()
+        public KeywordSettingViewModel()
             : base("名前設定")
         {
             this.ContentId.Value = ToolContentId;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Hnx8.ReadJEnc
+namespace Cafemoca.MinecraftCommandStudio.Internals.Utils.ReadJEnc
 {
     /// <summary>
     /// ReadJEnc ファイル読み出し＆ファイル文字コード種類自動判別(Rev.20150309)
@@ -27,11 +27,11 @@ namespace Hnx8.ReadJEnc
         /// <param name="len">最大読み出しファイルサイズ（領域バッファ確保サイズ）</param>
         public FileReader(int len)
         {
-            Bytes = new byte[len];
+            this.Bytes = new byte[len];
         }
 
         /// <summary>リソース解放</summary>
-        public void Dispose() { Bytes = null; }
+        public void Dispose() { this.Bytes = null; }
 
         //設定カスタマイズ======================================================
 
@@ -46,50 +46,50 @@ namespace Hnx8.ReadJEnc
         public virtual CharCode Read(FileInfo file)
         {
             this.Length = 0;
-            text = null;
+            this.text = null;
             try
             {   //無用なDiskIOを極力行わないよう、オープン前にもファイルサイズチェック
                 if (file.Length == 0) { return FileType.EMPTYFILE; } //■空ファイル
-                if (file.Length > Bytes.Length) { return FileType.HUGEFILE; } //■巨大ファイル
+                if (file.Length > this.Bytes.Length) { return FileType.HUGEFILE; } //■巨大ファイル
                 CharCode c;
                 //ファイルを読み込み、ファイル文字コード種類を把握
                 using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {   //オープン後の実際のファイルサイズによるチェック
                     long filesize = stream.Length;
                     if (filesize == 0) { return FileType.EMPTYFILE; } //■空ファイル
-                    if (filesize > Bytes.Length) { return FileType.HUGEFILE; } //■巨大ファイル
+                    if (filesize > this.Bytes.Length) { return FileType.HUGEFILE; } //■巨大ファイル
                     if (filesize > 65536)
                     {   //一定サイズ以上の大きいファイルなら、BOM/マジックナンバー判定に必要な先頭バイトを読み込み、判断
-                        this.Length = stream.Read(Bytes, 0, FileType.GetBinaryType_LEASTREADSIZE);
-                        c = GetPreamble(filesize);
+                        this.Length = stream.Read(this.Bytes, 0, FileType.GetBinaryType_LEASTREADSIZE);
+                        c = this.GetPreamble(filesize);
                         if (c == null || c is CharCode.Text)
                         {   //残りの読みこみ（ただし非テキストと確定した場合は省略）
-                            this.Length += stream.Read(Bytes, this.Length, (int)filesize - this.Length);
+                            this.Length += stream.Read(this.Bytes, this.Length, (int)filesize - this.Length);
                         }
                     }
                     else
                     {   //大きくないファイルは一括で全バイト読み込み、判断
-                        this.Length = stream.Read(Bytes, 0, (int)filesize);
-                        c = GetPreamble(filesize);
+                        this.Length = stream.Read(this.Bytes, 0, (int)filesize);
+                        c = this.GetPreamble(filesize);
                     }
                 }
                 if (c is CharCode.Text)
                 {   //BOMありテキストなら文字列を取り出す（取り出せなかったら非テキスト扱い）
-                    if ((text = c.GetString(Bytes, Length)) == null) { c = null; }
+                    if ((this.text = c.GetString(this.Bytes, this.Length)) == null) { c = null; }
                 }
                 else if (c == null)
                 {   //ファイル文字コード種類不明なら、全バイト走査して文字コード確定
-                    c = ReadJEnc.GetEncoding(Bytes, Length, out text);
+                    c = this.ReadJEnc.GetEncoding(this.Bytes, this.Length, out this.text);
                 }
                 //ここまでで文字コードが決まらなかったらバイナリファイル扱い
-                return (c == null ? FileType.GetBinaryType(Bytes, Length) : c);
+                return (c == null ? FileType.GetBinaryType(this.Bytes, this.Length) : c);
             }
-            catch (System.IO.IOException) { return FileType.READERROR; } //■読み取りエラー
-            catch (System.UnauthorizedAccessException) { return FileType.READERROR; } //■読み取りエラー
+            catch (IOException) { return FileType.READERROR; } //■読み取りエラー
+            catch (UnauthorizedAccessException) { return FileType.READERROR; } //■読み取りエラー
         }
 
         /// <summary>ファイルから読み出したテキスト文字列（非テキストファイルなどの場合はnull）</summary>
-        public string Text { get { return text; } }
+        public string Text { get { return this.text; } }
 
         #region 非public処理----------------------------------------------------
         /// <summary>ファイル内容の読み出し先領域</summary>

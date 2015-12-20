@@ -13,15 +13,15 @@ namespace Cafemoca.MinecraftCommandStudio.Views.Behaviors.Actions
 
         public bool WindowClose
         {
-            get { return (bool)GetValue(WindowCloseProperty); }
-            set { SetValue(WindowCloseProperty, value); }
+            get { return (bool)this.GetValue(WindowCloseProperty); }
+            set { this.SetValue(WindowCloseProperty, value); }
         }
 
         protected override void Invoke(object parameter)
         {
-            if (WindowClose)
+            if (this.WindowClose)
             {
-                var window = Window.GetWindow(AssociatedObject);
+                var window = Window.GetWindow(this.AssociatedObject);
                 window.Close();
             }
         }

@@ -39,7 +39,7 @@ namespace Cafemoca.MinecraftCommandStudio.Views.Behaviors
                 return;
             }
 
-            var dropCommand = DropFileBehavior.GetDropFile(element);
+            var dropCommand = GetDropFile(element);
             if (dropCommand == null)
             {
                 return;

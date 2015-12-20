@@ -1,5 +1,5 @@
 ﻿
-namespace Hnx8.ReadJEnc
+namespace Cafemoca.MinecraftCommandStudio.Internals.Utils.ReadJEnc
 {
     /// <summary>
     /// ReadJEnc ファイル種類定義(Rev.20150309)
